@@ -8,8 +8,7 @@ const FooterSuperior = async () => {
   const STRAPI_URL = process.env.STRAPI_API_URL;
 
   const data = await useMenuFooterSuperior();
-  
-console.log("footer superior last", data)
+
   return(
     <div id="footer-superior" className="grid grid-cols-12 pl-8 pr-8 pt-4 pb-2 w-full gap-6 bg-gray-200">
     {/* Logo Escuela de Ingeniería UC */}

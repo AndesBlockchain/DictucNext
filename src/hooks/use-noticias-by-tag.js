@@ -35,7 +35,6 @@ const useNoticiasByTag = (documentId) => {
     noticia.etiqueta_noticias && 
     noticia.etiqueta_noticias.some(etiqueta => etiqueta.documentId === documentId)
   );
-console.log(documentId)
   return {
     nodes: noticiasFiltradas
   };

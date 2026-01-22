@@ -26,7 +26,6 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
   };
 
   React.useEffect(() => {
-    console.log(watchRut);
   }, [watchRut]);
 
   // Efecto para manejar cambios en el checkbox empresa extranjera
@@ -42,7 +41,6 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
   }, [watchEmpresaExtranjera, setValue, clearErrors]);
 
   const tiposDeContacto = useTipoDeContacto();
-  console.log(tiposDeContacto)
 
   const handleOnSubmit = async (data) => {
     
@@ -74,8 +72,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
       }
 
       const result = await response.json();
-      console.log('Respuesta del servidor:', result);
-      
+
       // Mostrar toast de éxito
       showToast('Formulario enviado correctamente', 'success');
       

@@ -49,17 +49,12 @@ const useNoticiasPorAgno = () => {
   // Ordenar los años de forma descendente (más reciente primero)
   const agnosOrdenados = Object.keys(noticiasPorAgno).sort((a, b) => parseInt(b) - parseInt(a));
   
-  console.log('Años ordenados:', agnosOrdenados);
-  console.log('Noticias por año:', noticiasPorAgno);
-
   // Crear objeto final con años ordenados
   const resultado = {};
   agnosOrdenados.forEach(agno => {
     resultado[agno] = noticiasPorAgno[agno];
   });
   
-  console.log('Resultado final:', resultado);
-
   return resultado;
 }
 

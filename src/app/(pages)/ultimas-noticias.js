@@ -9,8 +9,7 @@ import Instagram from "../components/Instagram";
 
 export default function HomeNoticiasPage({pageContext,data}) {
 
-    console.log("Data",data)
-    const noticias= data.allStrapiNoticia;
+    cons  t noticias= data.allStrapiNoticia;
 
   return (
     <PaginaInterior fallback={BannerNoticias}

@@ -9,9 +9,6 @@ import { graphql } from "gatsby";
 
 export default function PaginasContenido({pageContext,data}) {
 
-  console.log("context",pageContext)
-  console.log("data",data)
-
   const slug = pageContext.slug;
   const pagina = data.strapiPagina
 

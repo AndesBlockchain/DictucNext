@@ -2,9 +2,9 @@ import React from "react"
 import useTipoDeServicio from "../../hooks/use-tipo-de-servicios";
 import StrapiImage from "../StrapiImage";
 
-const BloqueTiposServicio = ({useIcono=false}) => {
+const BloqueTiposServicio = async ({useIcono=false}) => {
 
-    const tipos = useTipoDeServicio();
+    const tipos = await useTipoDeServicio();
 
   return (
     <div id="items-servicios" className="grid gap-2 mt-8 w-220 ml-auto mr-auto">

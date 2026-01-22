@@ -7,7 +7,6 @@ const BarraSuperior = async () => {
 
   const data = await useMenuSuperior();
   const siteMetadata = useSiteMetadata();
-  console.log(data.data);
 
   return (
     <header className="w-full items-start grid grid-cols-12 grid-row-1 z-100 uppercase relative">

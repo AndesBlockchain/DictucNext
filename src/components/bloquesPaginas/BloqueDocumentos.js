@@ -5,9 +5,6 @@ import Bloque from "./Bloque";
 
 const BloqueDocumentos = ({datosBloque}) => {
 
-
-console.log(datosBloque)
-
   const documentosSorted = datosBloque.etiqueta_documentos[0].documentos.sort((a, b) => a.sortOrder - b.sortOrder);
 
   return (

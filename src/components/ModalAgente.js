@@ -22,8 +22,7 @@ const ModalAgente = ({ onClose, pregunta }) => {
   }, [pregunta])
 
   useEffect(() => {
-    // Llamada a la API cuando se abre el modal
-    console.log("pregunta",pregunta)
+
     const llamarAPI = async () => {
       try {
         const response = await fetch(process.env.STRAPI_API_URL + '/api/chatgpt', {

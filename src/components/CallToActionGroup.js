@@ -3,8 +3,6 @@ import CallToAction from "./CallToAction";
 
 const CallToActionGroup = ({ buttons }) => {
 
-console.log("calltoactiongroup",buttons)
-
   return (
       <div className="flex justify-center">
       {buttons && buttons.length > 0 && (

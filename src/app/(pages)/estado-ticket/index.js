@@ -10,7 +10,7 @@ export default function EstadoTicketPage() {
   const [estadoTicket,setEstadoTicket] = useState("")
 
   const handleTicketChange= (e) => {
-    console.log(e.target.value)
+   
     setTicket(e.target.value)
   }
 

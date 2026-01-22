@@ -10,10 +10,6 @@ export default function HomeNoticiasPage() {
     
     // Forzar el orden de los años y agregar logs
     const noticiasOrdenadas = Object.entries(noticias).sort(([agnoA], [agnoB]) => parseInt(agnoB) - parseInt(agnoA));
-    
-    console.log('Noticias recibidas:', noticias);
-    console.log('Noticias ordenadas:', noticiasOrdenadas);
-
   return (
     <PaginaInterior fallback={BannerNoticias}
                     titulo="Noticias"

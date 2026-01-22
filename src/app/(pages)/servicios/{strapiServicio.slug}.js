@@ -13,7 +13,6 @@ import iconoPotenciales from "../../images/PotencialesClientes.png";
 export default function Servicio({ data, pageContext }) {
   const servicio = data.strapiServicio;
   const slug = pageContext.slug;
-console.log("banner",servicio.tipo_de_servicio.BannerBuscadorServicios)
 
   return (
     <PaginaInterior

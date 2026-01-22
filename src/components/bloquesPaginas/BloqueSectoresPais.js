@@ -7,9 +7,6 @@ const BloqueSectoresPais = ({datosBloque}) => {
 
     const sectores = useSectoresPais();
 
-    console.log("sectores pais",sectores)
-    console.log("bloque",datosBloque)
-
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
       <div id="items-servicios" className="grid gap-2 mt-8 w-220 ml-auto mr-auto">

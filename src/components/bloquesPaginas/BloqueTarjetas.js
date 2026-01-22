@@ -7,8 +7,6 @@ const BloqueTarjetas = ({ datosBloque }) => {
 
   const tarjetasPorFila = datosBloque.TarjetasPorFila
 
-  console.log("Bloque Tarjetas", datosBloque)
-
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
     <div id="tarjetas" className="flex flex-col gap-8">

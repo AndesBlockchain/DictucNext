@@ -6,8 +6,6 @@ import Titulo from "../Titulo";
 const Bloque = ({ children, datosBloque, sinBarrita=false }) => {
   const STRAPI_URL =  process.env.STRAPI_API_URL;
 
-  console.log("Datos del bloque:", datosBloque)
-  
   // Procesamiento de los datos para el fondo
   const colorFondo = datosBloque?.colorFondoBloque?.Codigo || "white";
   const fotoFondo = datosBloque?.FotoFondo?.url || false;

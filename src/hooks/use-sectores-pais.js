@@ -9,7 +9,6 @@ const useSectoresPais = async() => {
   if (!res.ok) throw new Error("Failed to fetch sectores pais");
 
   const data = await res.json();
-  console.log("sectores pais", data);
   return data;
 }
 

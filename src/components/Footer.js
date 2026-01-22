@@ -3,6 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXTwitter, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faLocationDot, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 import useMenuFooter from "@/hooks/use-menu-footer";
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+// Prevent Font Awesome from adding its CSS since we did it manually above:
+config.autoAddCss = false;
 
 const Footer = async () => {
   const data = await useMenuFooter();
@@ -25,15 +29,15 @@ const Footer = async () => {
             ))}
 
             <div className="flex flex-col basis-full lg:basis-1/4 mb-4 lg:mb-0">
-              <div>
+              <div className="mb-2">
                 <a href="https://x.com/Dictuc" target="_blank" rel="noopener noreferrer">
-                  <FontAwesomeIcon icon={faXTwitter} className="text-2xl mr-2" />
+                  <FontAwesomeIcon icon={faXTwitter} className="mr-2 w-4 h-4" />
                 </a>
                 <a href="https://www.instagram.com/dictuc.ingenieriaquetransforma/" target="_blank" rel="noopener noreferrer">
-                  <FontAwesomeIcon icon={faInstagram} className="text-2xl mr-2" />
+                  <FontAwesomeIcon icon={faInstagram} className="mr-2 w-4 h-4" />
                 </a>
                 <a href="https://www.linkedin.com/company/dictuc-sa/" target="_blank" rel="noopener noreferrer">
-                  <FontAwesomeIcon icon={faLinkedin} className="text-2xl mr-2" />
+                  <FontAwesomeIcon icon={faLinkedin} className="mr-2 w-[20px] h-4" />
                 </a>
               </div>
               <div>

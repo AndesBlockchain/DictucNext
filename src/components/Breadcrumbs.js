@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
+import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,7 +11,7 @@ const Breadcrumbs = ({ items = [] }) => {
         <React.Fragment key={index}>
           {item.link ? (
 
-            <Link to={item.link} className="hover:text-blue-600 transition-colors duration-200 flex items-center gap-1">
+            <Link href={item.link} className="hover:text-blue-600 transition-colors duration-200 flex items-center gap-1">
                 {item.label}
             </Link>
           ) : (

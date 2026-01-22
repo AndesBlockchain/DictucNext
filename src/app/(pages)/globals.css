@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+/* Configuración de DaisyUI */
+@plugin "daisyui" {
+  themes: light --default;
+  logs: false;
+}
+
+/* Tema personalizado con color primario de DICTUC */
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  color-scheme: light;
+  --color-primary: #307fe2;
+  --color-primary-content: #ffffff;
+}
+
+/* Colores personalizados de Tailwind */
+@theme {
+    --font-montserrat: "Montserrat", sans-serif;
+    --color-azul-dictuc: #307fe2;
+    --color-gris-dictuc: #53565A;
+    --color-rojo-sostenibilidad: #F3523E;
+    --color-amarillo-sostenibilidad: #f2b50a;
+    --color-verde-sostenibilidad: #02ac4e;
+    --color-azul-sostenibilidad: #0099d9;
+    --color-fucsia-sostenibilidad: #f02976;
+}
+
+/* Estilos personalizados para el timeline */
+.timeline-vertical > li:not(:last-child)::after {
+  background-color: #307fe2 !important;
+}
+
+.timeline-vertical > li:not(:last-child)::before {
+  background-color: #307fe2 !important;
+}
+
+/* Scroll suave para navegación interna */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Color de texto por defecto para toda la página */
+body {
+  color: #53565A;
+}
+
+/* Estilos globales para listas */
+ul {
+  list-style-position: inside;
+  list-style-type: disc;
+}
+
+ol {
+  list-style-position: inside;
+  list-style-type: decimal;
+}

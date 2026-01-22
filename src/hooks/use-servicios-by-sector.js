@@ -11,7 +11,7 @@ const useServiciosBySector = async (sectorSlug) => {
     throw new Error('STRAPI_API_URL environment variable is not defined');
   }
 
-  const path = `/api/servicios?filters[sectores_pais][slug][$eq]=${sectorSlug}&fields[0]=nombre&fields[1]=slug&pagination[limit]=1000&populate[0]=tipo_de_servicio`;
+  const path = `/api/servicios?filters[sectores_pais][slug][$eq]=${sectorSlug}&fields[0]=nombre&fields[1]=slug&fields[2]=contenido&pagination[limit]=1000&populate[0]=tipo_de_servicio&populate[1]=sectores_pais`;
 
   const res = await fetch(baseUrl + path);
   if (!res.ok) {

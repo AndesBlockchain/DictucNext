@@ -5,7 +5,7 @@ async function getCarrusel() {
   const baseUrl = process.env.STRAPI_API_URL;
   const path = "/api/carruseles?populate=*";
 
-  const res = await fetch("http://127.0.0.1:1337/api/carruseles?populate=*", { cache: 'no-store' });
+  const res = await fetch(baseUrl + path, { cache: 'no-store' });
 
   if (!res.ok) throw new Error("Failed to fetch carruseles");
 

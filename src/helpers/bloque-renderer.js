@@ -13,7 +13,8 @@ import BloqueAcordeon from "../components/bloquesPaginas/BloqueAcordeon";
 import BloqueSectoresPais from "../components/bloquesPaginas/BloqueSectoresPais";
 
 export const renderBloque = (bloque) => {
-  switch (bloque.strapi_component) {
+
+  switch (bloque.__component) {
     
     case "bloques.bloque-tabs":
     case "STRAPI__COMPONENT_BLOQUES_BLOQUE_TABS":

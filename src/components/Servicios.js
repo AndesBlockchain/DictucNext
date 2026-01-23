@@ -28,18 +28,24 @@ const Servicios = ({
 
   return (
     <div className="mb-4">
-      <FiltroServicios
-        sectoresPaisVisibles={sectores_pais_visibles}
-        tiposDeServicioVisibles={tipos_de_servicio_visibles}
-        sectores_pais={sectores_pais}
-        tipos_de_servicio={tipos_de_servicio}
-        servicios={servicios}
-        onFiltrosChange={handleFiltrosChange}
-      />
+      {/* Contenedor flex responsivo */}
+      <div className="flex flex-row gap-4 md:gap-6">
 
-      <div className="flex flex-row">
-        <div className="flex-3 pl-4 pr-4">
-          <div className="text-xl font-semibold mb-1 text-left">
+        {/* Filtros: 100% móvil, 1/3 desktop */}
+        <div className="md:flex-1">
+          <FiltroServicios
+            sectoresPaisVisibles={sectores_pais_visibles}
+            tiposDeServicioVisibles={tipos_de_servicio_visibles}
+            sectores_pais={sectores_pais}
+            tipos_de_servicio={tipos_de_servicio}
+            servicios={servicios}
+            onFiltrosChange={handleFiltrosChange}
+          />
+        </div>
+
+        {/* Listado: 100% móvil, 2/3 desktop */}
+        <div className="md:flex-2">
+          <div className="text-xl font-semibold mb-4 text-left">
             Servicios Encontrados ({serviciosFiltrados.length})
           </div>
 
@@ -60,6 +66,7 @@ const Servicios = ({
             </div>
           )}
         </div>
+
       </div>
     </div>
   );

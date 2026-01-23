@@ -1,5 +1,4 @@
 import React from "react";
-import { GatsbyImage } from "gatsby-plugin-image";
 import Bloque from "./Bloque";
 
 
@@ -15,8 +14,8 @@ const BloqueDocumentos = ({datosBloque}) => {
                     <div className="avatar">
                         <div className="w-24 rounded">
                             {documento.Foto?.localFile?.childImageSharp?.gatsbyImageData ? (
-                              <GatsbyImage 
-                                image={documento.Foto.localFile.childImageSharp.gatsbyImageData}
+                              <img 
+                                src={documento.Foto.localFile.childImageSharp.gatsbyImageData}
                                 alt={documento.Titulo}
                               />
                             ) : documento.Foto?.url ? (

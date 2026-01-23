@@ -4,7 +4,7 @@ import PaginaInterior from "../../components/PaginaInterior";
 import bannerNoticias from "../../images/BannerMicrofonos.webp";
 import FranjaAzul from "../../components/FranjaAzul";
 import StrapiImage from "../../components/StrapiImage";
-import FotoDefaultNoticias from '../../images/noticias.png'
+import FotoDefaultNoticias from '/images/noticias.png'
 
 export default function PaginasContenido({ data })
 {

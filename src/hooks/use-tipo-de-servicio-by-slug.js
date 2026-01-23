@@ -3,7 +3,7 @@
  * Retorna null si el sector no existe
  */
 
-const usePagina = async (slug) => {
+const useSectorBySlug = async (slug) => {
   const baseUrl = process.env.STRAPI_API_URL;
 
   // Validar que STRAPI_API_URL esté definida
@@ -11,7 +11,7 @@ const usePagina = async (slug) => {
     throw new Error('STRAPI_API_URL environment variable is not defined');
   }
 
-  const path = `/api/paginas?filters[slug][$eq]=${slug}&populate=all`;
+  const path = `/api/tipo-de-servicios?filters[slug][$eq]=${slug}&populate[0]=Icono&populate[1]=BannerBuscadorServicios`;
 
   const res = await fetch(baseUrl + path, {
     next: { revalidate: 3600 }, // Revalidar cada hora
@@ -19,7 +19,7 @@ const usePagina = async (slug) => {
   });
 
   if (!res.ok) {
-    throw new Error(`Failed to fetch pagina: ${slug} (Status: ${res.status})`);
+    throw new Error(`Failed to fetch sector: ${slug} (Status: ${res.status})`);
   }
 
   const data = await res.json();
@@ -29,7 +29,8 @@ const usePagina = async (slug) => {
     return null;
   }
 
-  return data.data[0];
+  const sector = data.data[0];
+  return sector;
 };
 
-export default usePagina;
+export default useSectorBySlug;

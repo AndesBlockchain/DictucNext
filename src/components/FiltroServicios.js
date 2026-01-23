@@ -168,7 +168,7 @@ const FiltroServicios = ({
   }
 
   return (
-    <div className="border-1 border-x-gray-500 rounded-md text-xs p-4 flex-1">
+    <div className="border-1 border-x-gray-500 rounded-md text-xs p-4 w-full">
       <div className="mb-1 font-semibold text-center font-md mb-2">Filtros de Búsqueda</div>
 
       <div className="mt-3 font-semibold">Búsqueda por palabra</div>

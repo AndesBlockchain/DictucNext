@@ -1,7 +1,8 @@
+"use client"
 import React from "react";
-import PaginaInterior from "../components/PaginaInterior";
-import FormularioDenuncia from "../components/FormularioDenuncia";
-import BannerTeclado from "../images/BannerTeclado.webp";
+import PaginaInterior from "@/components/PaginaInterior";
+import FormularioDenuncia from "@/components/FormularioDenuncia";
+const BannerTeclado = "/images/BannerTeclado.webp";
 
 export default function FormularioDenunciaPage() {
   return (

@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import Bloque from "./Bloque";
 import CallToActionGroup from "../CallToActionGroup";
@@ -14,7 +15,7 @@ const BloqueTabs = ({ datosBloque }) => {
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-6 text-sm" dangerouslySetInnerHTML={{__html: datosBloque.texto?.Texto.data.Texto || ""}} />
+        <div className="mb-6 text-sm" dangerouslySetInnerHTML={{__html: datosBloque.texto?.Texto || ""}} />
         <div className="mb-8">
           {/* Tab buttons */}
           <div role="tablist" className="tabs tabs-lifted justify-center">
@@ -48,7 +49,7 @@ const BloqueTabs = ({ datosBloque }) => {
                     className="rounded-xl"
                   />
                 </div>
-                <div className="mt-auto mb-auto w-3/5 pl-8 text-left text-sm" dangerouslySetInnerHTML={{__html: tab.Texto?.data.Texto || ""}} />
+                <div className="mt-auto mb-auto w-3/5 pl-8 text-left text-sm" dangerouslySetInnerHTML={{__html: tab.Texto || ""}} />
               </div>
               <CallToActionGroup buttons={tab.CallToAction}/>
             </div>

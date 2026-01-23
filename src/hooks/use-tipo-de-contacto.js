@@ -1,23 +1,35 @@
-import { useStaticQuery, graphql } from "gatsby"
+/**
+ * Hook async para obtener detalles de un sector por slug desde Strapi API
+ * Retorna null si el sector no existe
+ */
 
+const useTipoDeContacto = async () => {
+  const baseUrl = process.env.STRAPI_API_URL;
 
-const useTipoDeContacto = () => {
-   const data = useStaticQuery(graphql`
-     {
-        allStrapiTipoDeContacto(sort: {Tipo: ASC}) {
-          nodes {
-            id
-            Tipo
-            Destinatario
-            documentId
-          }
-        }
-      }
-  `);
-  return data.allStrapiTipoDeContacto.nodes; 
-}
+  // Validar que STRAPI_API_URL esté definida
+  if (!baseUrl) {
+    throw new Error('STRAPI_API_URL environment variable is not defined');
+  }
+
+  const path = `/api/tipos-de-contactos`;
+
+  const res = await fetch(baseUrl + path, {
+    next: { revalidate: 3600 }, // Revalidar cada hora
+    cache: 'force-cache'
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch tipos de contacto (Status: ${res.status})`);
+  }
+
+  const data = await res.json();
+
+  // Validar que la respuesta tenga datos
+  if (!data || !data.data || !Array.isArray(data.data) || data.data.length === 0) {
+    return null;
+  }
+
+  return data.data;
+};
 
 export default useTipoDeContacto;
-
-
-

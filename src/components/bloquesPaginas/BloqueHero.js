@@ -55,7 +55,7 @@ const contenedorPrincipalClasses = clsx(
 
   const contenidoTexto = (
     <div className={textoContainerClasses}>
-      <div dangerouslySetInnerHTML={{__html: datosBloque.texto.data.texto.replace("classname","class")}} />
+      <div dangerouslySetInnerHTML={{__html: datosBloque.texto.replace("classname","class")}} />
     </div>
   );
 

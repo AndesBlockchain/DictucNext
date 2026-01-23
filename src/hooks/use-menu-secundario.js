@@ -1,18 +1,34 @@
-import { useStaticQuery, graphql } from "gatsby"
+/**
+ * Hook async para obtener detalles de un sector por slug desde Strapi API
+ * Retorna null si el sector no existe
+ */
 
+const useMenuSecundario = async (slug) => {
+  const baseUrl = process.env.STRAPI_API_URL;
 
-const useMenuSecundario = () => {
-     const data = useStaticQuery(graphql`
-      {
-        allStrapiMenuSecundario {
-          nodes {
-            Link
-            Titulo
-          }
-        }
-      }
-      `); 
-  return data.allStrapiMenuSecundario.nodes;
-}
+  // Validar que STRAPI_API_URL esté definida
+  if (!baseUrl) {
+    throw new Error('STRAPI_API_URL environment variable is not defined');
+  }
+
+  const path = `/api/menu-secundarios`;
+
+  const res = await fetch(baseUrl + path, {
+    next: { revalidate: 3600 }, // Revalidar cada hora
+    cache: 'force-cache'
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch menu secundario: ${slug} (Status: ${res.status})`);
+  }
+
+  const data = await res.json();
+
+  // Validar que la respuesta tenga datos
+  if (!data || !data.data || !Array.isArray(data.data) || data.data.length === 0) {
+    return null;
+  }
+  return data.data;
+};
 
 export default useMenuSecundario;

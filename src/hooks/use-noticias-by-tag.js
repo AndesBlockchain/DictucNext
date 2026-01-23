@@ -1,53 +1,13 @@
-import { useStaticQuery, graphql } from "gatsby"
+const useNoticiasByTag = async (tag) => {
 
-const useNoticiasByTag = (documentId) => {
-  const data = useStaticQuery(graphql`
-    query {
-      allStrapiNoticia {
-        nodes {
-          slug
-          titulo
-          url_foto
-          galeria {
-            url
-          }
-          foto {
-            url
-          }
-          fecha
-          cuerpo {
-            data {
-              cuerpo 
-            }
-          }
-          etiqueta_noticias {
-            documentId
-            etiqueta
-          }
-        }
-      }
-    }
-  `);
-  
-  // Filtrar las noticias por documentId después de obtener todos los datos
-  
-  const noticiasFiltradas = data.allStrapiNoticia.nodes.filter(noticia => 
-    noticia.etiqueta_noticias && 
-    noticia.etiqueta_noticias.some(etiqueta => etiqueta.documentId === documentId)
-  );
-  return {
-    nodes: noticiasFiltradas
-  };
+  const baseUrl = process.env.STRAPI_API_URL;
+  const path = `/api/noticias?filters[etiqueta_noticias][$eq]=${tag}&status=published&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=6`;
+
+  const res = await fetch(baseUrl + path);
+
+  if (!res.ok) throw new Error("Failed to fetch ultimas noticias");
+  const data = await res.json();
+  return data;
 }
 
-// Función para determinar el fondo basado en fotoFondo y colorFondo
-const claseFondo = (fotoFondo, colorFondo) => {
-  if (fotoFondo && fotoFondo !== false) {
-    return `url(${fotoFondo})`;
-  } else {
-    return colorFondo;
-  }
-};
-
 export default useNoticiasByTag;
-export { claseFondo };

@@ -29,7 +29,8 @@ const usePagina = async (slug) => {
     return null;
   }
 
-  return data.data[0];
+  const pagina = data.data[0];
+  return pagina;
 };
 
 export default usePagina;

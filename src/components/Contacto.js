@@ -1,13 +1,15 @@
+"use client"
 import React from "react";
-import useTipoDeContacto from "../hooks/use-tipo-de-contacto";
 import FranjaAzul from "./FranjaAzul";
 import {useForm} from 'react-hook-form';
 import { formatearRut, validarRut } from "../helpers/rut-helpers";
 
-export default function Contacto({ titulo = "Formulario de Contacto", border = false, isCotizacion=false, servicio="" }) {
+export default function Contacto({ titulo = "Formulario de Contacto", border = false, isCotizacion=false, servicio="", tiposDeContacto }) {
   
   const STRAPI_API_URL = process.env.STRAPI_API_URL
   
+
+  console.log("tiposDeContacto", tiposDeContacto);
   const { register, formState: {errors}, handleSubmit, setValue, watch, setError, clearErrors } = useForm()
   
   const watchRut = watch("rut_empresa", false);
@@ -39,8 +41,6 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
       setValue("rut_empresa", "");
     }
   }, [watchEmpresaExtranjera, setValue, clearErrors]);
-
-  const tiposDeContacto = useTipoDeContacto();
 
   const handleOnSubmit = async (data) => {
     

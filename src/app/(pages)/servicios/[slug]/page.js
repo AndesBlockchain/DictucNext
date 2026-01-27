@@ -14,6 +14,7 @@ export default async function Servicio({ params }) {
 
   const {slug} = await params;
   const servicio = await useServicio(slug);
+  const strapiApiUrl = process.env.STRAPI_API_URL;
 
   console.log("servicio",servicio);
   return (
@@ -75,6 +76,7 @@ export default async function Servicio({ params }) {
           border={true}
           isCotizacion={true}
           servicio={slug}
+          strapiApiUrl={strapiApiUrl}
         />
       </div>
     </PaginaInterior>

@@ -4,31 +4,40 @@ import FranjaAzul from "./FranjaAzul";
 import {useForm} from 'react-hook-form';
 import { formatearRut, validarRut } from "../helpers/rut-helpers";
 
-export default function Contacto({ titulo = "Formulario de Contacto", border = false, isCotizacion=false, servicio="", tiposDeContacto }) {
-  
-  const STRAPI_API_URL = process.env.STRAPI_API_URL
-  
+export default function Contacto({ titulo = "Formulario de Contacto", border = false, isCotizacion=false, servicio="", tiposDeContacto, strapiApiUrl }) {
 
-  console.log("tiposDeContacto", tiposDeContacto);
-  const { register, formState: {errors}, handleSubmit, setValue, watch, setError, clearErrors } = useForm()
-  
+  const { register, formState: {errors}, handleSubmit, setValue, watch, setError, clearErrors, reset } = useForm()
+
   const watchRut = watch("rut_empresa", false);
   const watchEmpresaExtranjera = watch("empresa_extranjera", false);
 
   // Estado para manejar el toast
   const [toast, setToast] = React.useState({ show: false, message: '', type: 'success' });
 
+  // Estado para manejar el loading durante el envío
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  // Limpiar el timeout del toast al desmontar para evitar memory leaks
+  React.useEffect(() => {
+    let timeoutId;
+
+    if (toast.show) {
+      timeoutId = setTimeout(() => {
+        setToast({ show: false, message: '', type: 'success' });
+      }, 3000);
+    }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [toast.show]);
+
   // Función para mostrar toast
   const showToast = (message, type = 'success') => {
     setToast({ show: true, message, type });
-    // Auto-ocultar después de 3 segundos
-    setTimeout(() => {
-      setToast({ show: false, message: '', type: 'success' });
-    }, 3000);
   };
-
-  React.useEffect(() => {
-  }, [watchRut]);
 
   // Efecto para manejar cambios en el checkbox empresa extranjera
   React.useEffect(() => {
@@ -43,13 +52,17 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
   }, [watchEmpresaExtranjera, setValue, clearErrors]);
 
   const handleOnSubmit = async (data) => {
-    
+    // Prevenir múltiples envíos
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
     try {
-      
+
       // Determinar la URL del endpoint según si es cotización o contacto
       const endpoint = isCotizacion ? '/api/cotizador' : '/api/contacto';
-      
-      const response = await fetch(STRAPI_API_URL + endpoint, {
+
+      const response = await fetch(strapiApiUrl + endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,11 +88,16 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
 
       // Mostrar toast de éxito
       showToast('Formulario enviado correctamente', 'success');
-      
+
+      // Resetear el formulario después del envío exitoso
+      reset();
+
     } catch (error) {
       console.error('Error al enviar formulario:', error);
       // Mostrar toast de error
       showToast('Error al enviar el formulario. Por favor, inténtelo nuevamente.', 'error');
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -126,7 +144,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
 
   const obtenerNombrePorRut = async (rut) => {
     try {
-      const response = await fetch(STRAPI_API_URL + `/api/rutificador`, {
+      const response = await fetch(strapiApiUrl + `/api/rutificador`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -141,7 +159,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
       }
 
       const data = await response.json();
-  
+
       // Validar que la respuesta tenga la estructura esperada
       if (data.data?.message) {
         return {
@@ -277,9 +295,23 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
       <fieldset className="fieldset">
           <div className="join"><input type="checkbox" {...register("newsletter")} /> &nbsp;Deseo recibir información de Dictuc</div>
       </fieldset>  
-      
-        <button className="ml-auto mr-auto btn btn-primary mt-2 rounded-full" type="submit">Enviar</button>
-      
+
+
+        <button
+          className="ml-auto mr-auto btn btn-primary mt-2 rounded-full"
+          type="submit"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <span className="loading loading-spinner loading-sm"></span>
+              Enviando...
+            </>
+          ) : (
+            'Enviar'
+          )}
+        </button>
+
       </form>
     </div>
   );

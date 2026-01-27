@@ -7,6 +7,10 @@ const SectoresPais = async (titulo) => {
 
     const res = await useSectoresPais();
 
+    // Validar que res y res.data existan
+    const sectores = res?.data || [];
+    const totalCount = res?.totalCount || 0;
+
     const gridClassTop = (sectoresCount) => {
         if (sectoresCount <= 10) {
             return sectoresCount;
@@ -23,15 +27,20 @@ const SectoresPais = async (titulo) => {
         }
     }
 
+    // Si no hay sectores, no mostrar nada o mostrar mensaje
+    if (totalCount === 0) {
+        return null;
+    }
+
     return (
         <div id="sectores" className="relative mt-4 bg-white lg:-mt-8 p-2 pb-4 pt-5 max-w-4xl mx-auto rounded-3xl shadow-lg">
             <FranjaAzul />
             <div className="text-center mb-4 mt-4 font-semibold uppercase">
                 Encuentra soluciones y servicios según tu tipo de <span className="text-azul-dictuc">industria</span>
             </div>
-            {res.data.totalCount <= 10 ?
-                <div className={"flex flew-row justify-center" + res.data.totalCount + " gap-2"}>
-                    {res.data.map((item, index) =>
+            {totalCount <= 10 ?
+                <div className={"flex flew-row justify-center gap-2"}>
+                    {sectores.map((item, index) =>
                         <ItemSectoresPais
                             key={index}
                             url={"/sectores-pais/" + item.slug}
@@ -45,7 +54,7 @@ const SectoresPais = async (titulo) => {
                 :
                 <div>
                     <div className="flex flex-row justify-center gap-2">
-                        {res.data.slice(0, gridClassTop(res.data.totalCount)).map(item =>
+                        {sectores.slice(0, gridClassTop(totalCount)).map(item =>
                             <ItemSectoresPais
                                 key={item.slug}
                                 url={"/sectores-pais/" + item.slug}
@@ -57,7 +66,7 @@ const SectoresPais = async (titulo) => {
                         )}
                     </div>
                     <div className="flex flex-row gap-2 justify-center">
-                        {res.data.slice(gridClassBottom(res.data.totalCount) + 1).map(item =>
+                        {sectores.slice(gridClassBottom(totalCount) + 1).map(item =>
                             <ItemSectoresPais
                                 key={item.slug}
                                 url={"/sectores-pais/" + item.slug}

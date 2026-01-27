@@ -17,6 +17,20 @@ const IndexPage = async () => {
   const noticias = await useUltimasNoticias();
   const modals = await useModals();
 
+  // Filtrar modals por fecha vigente en el servidor para evitar problemas de hidratación
+  const modalsNodes = modals?.nodes || modals?.data || [];
+  const hoy = new Date();
+
+  const modalsFiltrados = modalsNodes.filter(modal => {
+    const publication = modal.Publicacion || modal.attributes?.Publicacion;
+    if (!publication) return false;
+
+    const desde = new Date(publication.fechaDesde);
+    const hasta = new Date(publication.fechaHasta);
+
+    return hoy >= desde && hoy <= hasta;
+  });
+
   return (
     <main className="container m-auto max-w-6xl mb-4 font-montserrat bg-white text-gris-dictuc">
       <BarraSuperior />
@@ -34,8 +48,8 @@ const IndexPage = async () => {
       <FooterSuperior />
       <Footer />
 
-      {/* Modal de Alerta */}
-      <ModalContainer modals={modals} />
+      {/* Modal de Alerta - Pasar solo modales filtrados */}
+      <ModalContainer modals={{ data: modalsFiltrados }} />
     </main>
   )
 }

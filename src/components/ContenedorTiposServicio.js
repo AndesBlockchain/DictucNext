@@ -6,11 +6,18 @@ const ContenedorTiposServicio = async ({ useIcono = false }) => {
 
   const tiposDeServicio = await useTipoDeServicio();
   const STRAPI_URL = process.env.STRAPI_API_URL;
-console.log(tiposDeServicio.data[0])
+
+  // Validar que tiposDeServicio y tiposDeServicio.data existan
+  const tiposArray = tiposDeServicio?.data || [];
+
+  if (tiposArray.length === 0) {
+    return null; // O mostrar un mensaje de "No hay servicios disponibles"
+  }
+
   return (
     <div id="items-servicios" className="grid gap-6 mt-8 pl-2 pr-2">
       <div className="grid grid-cols-3 lg:grid-cols-5 gap-6 justify-center">
-        {tiposDeServicio.data.map((item) => {
+        {tiposArray.map((item) => {
           // Obtener URL de imagen de forma segura
           const iconoUrl = item.Icono.url;
           const fotoPortadaUrl = item.fotoPortada.url;

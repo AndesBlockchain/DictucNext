@@ -1,22 +1,24 @@
 import React from "react";
-import { graphql } from "gatsby";
-import PaginaInterior from "../../components/PaginaInterior";
-import CardServicio from "../../components/CardServicio";
-import Badge from "../../components/Badge";
-import FranjaAzul from "../../components/FranjaAzul";
-import Contacto from "../../components/Contacto";
-import bannerLaboratorio from "../../images/BannerLaboratorioServicios.webp";
-import iconoUtilidad from "../../images/Utilidad.png";
-import iconoExperiencia from "../../images/Experiencia.png";
-import iconoPotenciales from "../../images/PotencialesClientes.png";
+import PaginaInterior from "@/components/PaginaInterior";
+import CardServicio from "@/components/CardServicio";
+import FranjaAzul from "@/components/FranjaAzul";
+import Contacto from "@/components/Contacto";
+const bannerLaboratorio = "/images/BannerLaboratorioServicios.webp";
+const  iconoUtilidad = "/images/Utilidad.png";
+const iconoExperiencia = "/images/Experiencia.png";
+const iconoPotenciales = "/images/PotencialesClientes.png";
 
-export default function Servicio({ data, pageContext }) {
-  const servicio = data.strapiServicio;
-  const slug = pageContext.slug;
+import useServicio from "@/hooks/use-servicio";
 
+export default async function Servicio({ params }) {
+
+  const {slug} = await params;
+  const servicio = await useServicio(slug);
+
+  console.log("servicio",servicio);
   return (
     <PaginaInterior
-      banner={servicio.tipo_de_servicio.BannerBuscadorServicios}
+      banner={servicio.tipo_de_servicio.BannerBuscadorServicios.url}
       fallback={bannerLaboratorio}
       breadcrum={[
         { label: "Home", link: "/" },
@@ -66,7 +68,7 @@ export default function Servicio({ data, pageContext }) {
       <div className="text-lg text-center mt-2 uppercase font-semibold">
         <span className="text-azul-dictuc">Descripción</span> del Servicio
       </div>
-      <div className="mt-6 mb-12" dangerouslySetInnerHTML={{ __html: servicio.contenido.data.contenido }} />
+      <div className="mt-6 mb-12" dangerouslySetInnerHTML={{ __html: servicio.contenido }} />
       <div id="cotizar" className="w-full md:w-1/2 flex justify-center mx-auto mb-6">
         <Contacto
           titulo="Solicitud de <span class='text-azul-dictuc'>Cotización</span>"
@@ -77,56 +79,4 @@ export default function Servicio({ data, pageContext }) {
       </div>
     </PaginaInterior>
   );
-}
-
-// Page query - solo obtiene el servicio específico basado en el slug
-export const query = graphql`
-  query($slug: String!) {
-    strapiServicio(slug: { eq: $slug }) {
-      nombre
-      slug
-      utilidad {
-        data {
-          utilidad
-        }
-      }
-      experiencia {
-        data {
-          experiencia
-        }
-      }
-      potenciales_clientes {
-        data {
-          potenciales_clientes
-        }
-      }
-      contenido {
-        data {
-          contenido
-        }
-      }
-      tipo_de_servicio {
-        nombre
-        slug      
-        BannerBuscadorServicios{
-          url
-        }
-      }
-      unidad {
-        nombre
-      }
-      sectores_pais {
-        nombre
-        slug
-      }
-    }
-  }
-`;
-
-export async function config() {
-  return ({ params }) => {
-    return {
-      defer: true,
-    }
-  }
 }

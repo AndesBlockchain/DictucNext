@@ -16,6 +16,12 @@ const nextConfig = {
         port: '1337',
         pathname: '/uploads/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'backend-dictuc.andesblockchain.com',
+      
+        pathname: '/uploads/**',
+      },
     ],
   },
 };

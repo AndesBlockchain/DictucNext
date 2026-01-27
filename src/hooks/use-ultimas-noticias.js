@@ -5,7 +5,7 @@ const useUltimasNoticias = async () => {
 
   const res = await fetch(baseUrl + path);
 
-  if (!res.ok) throw new Error("Failed to fetch ultimas noticias");
+  if (!res.ok) throw new Error("Failed to fetch ultimas noticias: " + res.status + " " + res.statusText);
   const data = await res.json();
   return data;
 }

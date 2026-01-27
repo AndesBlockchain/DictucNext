@@ -197,8 +197,8 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
       {!isCotizacion && (
         <fieldset className="fieldset">
         <legend className="fieldset-legend">Tipo de Consulta</legend>
-          <select className="select" {...register("tipo_consulta",{required: true})}>
-          <option disabled value="" selected>-- Seleccione --</option>
+          <select className="select" defaultValue="0" {...register("tipo_consulta",{required: true})}>
+          <option value="0">-- Seleccione --</option>
           {tiposDeContacto.map((tipo) =>(
             <option key={tipo.id} value={tipo.documentId}>{tipo.Tipo}</option>
           ))}

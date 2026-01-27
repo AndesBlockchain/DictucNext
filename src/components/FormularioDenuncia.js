@@ -1,10 +1,70 @@
+"use client"
 import React from "react";
 import FranjaAzul from "./FranjaAzul";
 import { useForm } from 'react-hook-form';
 
+// Opciones para los campos (movidas fuera del componente para evitar recreación)
+const RELACIONES_DICTUC = [
+  { value: 'trabajador', label: 'Trabajador' },
+  { value: 'cliente', label: 'Cliente' },
+  { value: 'proveedor', label: 'Proveedor' },
+  { value: 'comunidad', label: 'Comunidad' },
+  { value: 'otro', label: 'Otro' }
+];
+
+const LUGARES_INCIDENTE = [
+  'Gerencia General',
+  'Gerencia de Administración y Finanzas',
+  'Gerencia de Desarrollo Estratégico y Sustentabilidad',
+  'Gerencia de Servicios Técnicos',
+  'Unidad de Acreditación y Certificación',
+  'Laboratorio de Ensayos',
+  'Laboratorio de Análisis Químico',
+  'Laboratorio de Metrología',
+  'Otro'
+];
+
+const TIPOS_DENUNCIA = [
+  { value: 'fraude_corrupcion', label: 'Fraude y corrupción' },
+  { value: 'delitos_informaticos', label: 'Delitos informáticos' },
+  { value: 'competencia_desleal', label: 'Competencia desleal' },
+  { value: 'delitos_tributarios', label: 'Delitos tributarios' },
+  { value: 'infracciones_laborales', label: 'Infracciones a la legislación laboral' },
+  { value: 'delitos_ambientales', label: 'Delitos contra el medio ambiente' },
+  { value: 'propiedad_intelectual', label: 'Propiedad intelectual e industrial' },
+  { value: 'desigualdad_genero', label: 'Desigualdad de género' },
+  { value: 'abuso_poder', label: 'Abuso de poder' },
+  { value: 'acoso_laboral', label: 'Acoso laboral' },
+  { value: 'acoso_sexual', label: 'Acoso sexual' },
+  { value: 'otro', label: 'Otro' }
+];
+
+const COMO_SE_ENTERO = [
+  { value: 'experiencia_personal', label: 'Experiencia personal' },
+  { value: 'me_contaron', label: 'Me lo contaron' },
+  { value: 'lo_observe', label: 'Lo observé' },
+  { value: 'encontre_documentacion', label: 'Encontré documentación' },
+  { value: 'otro', label: 'Otro' }
+];
+
+const MESES = [
+  { value: '01', label: 'Enero' },
+  { value: '02', label: 'Febrero' },
+  { value: '03', label: 'Marzo' },
+  { value: '04', label: 'Abril' },
+  { value: '05', label: 'Mayo' },
+  { value: '06', label: 'Junio' },
+  { value: '07', label: 'Julio' },
+  { value: '08', label: 'Agosto' },
+  { value: '09', label: 'Septiembre' },
+  { value: '10', label: 'Octubre' },
+  { value: '11', label: 'Noviembre' },
+  { value: '12', label: 'Diciembre' }
+];
+
 export default function FormularioDenuncia() {
 
-  const { register, formState: { errors }, handleSubmit, watch } = useForm({
+  const { register, formState: { errors }, handleSubmit, watch, reset } = useForm({
     defaultValues: {
       anonimo: 'no',
       relacion_dictuc: '',
@@ -26,15 +86,37 @@ export default function FormularioDenuncia() {
   // Estado para manejar el toast
   const [toast, setToast] = React.useState({ show: false, message: '', type: 'success' });
 
+  // Estado para manejar el loading durante el envío
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  // Limpiar el timeout del toast al desmontar para evitar memory leaks
+  React.useEffect(() => {
+    let timeoutId;
+
+    if (toast.show) {
+      timeoutId = setTimeout(() => {
+        setToast({ show: false, message: '', type: 'success' });
+      }, 3000);
+    }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [toast.show]);
+
   // Función para mostrar toast
   const showToast = (message, type = 'success') => {
     setToast({ show: true, message, type });
-    setTimeout(() => {
-      setToast({ show: false, message: '', type: 'success' });
-    }, 3000);
   };
 
   const handleOnSubmit = async (data) => {
+    // Prevenir múltiples envíos
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
     try {
       // Preparar los datos en formato JSON
       const payload = {
@@ -59,7 +141,7 @@ export default function FormularioDenuncia() {
         };
       }
 
-      ('Datos preparados para envío:', JSON.stringify(payload, null, 2));
+      console.log('Datos preparados para envío:', JSON.stringify(payload, null, 2));
 
       // TODO: Aquí se enviará a la URL que indique el usuario
       // const response = await fetch(URL_A_CONFIGURAR, {
@@ -72,72 +154,19 @@ export default function FormularioDenuncia() {
 
       showToast('Formulario preparado correctamente (pendiente configurar URL de envío)', 'success');
 
+      // Resetear el formulario después del envío exitoso
+      reset();
+
     } catch (error) {
       console.error('Error al procesar formulario:', error);
       showToast('Error al procesar el formulario. Por favor, inténtelo nuevamente.', 'error');
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
-  // Opciones para los campos
-  const relacionesDictuc = [
-    { value: 'trabajador', label: 'Trabajador' },
-    { value: 'cliente', label: 'Cliente' },
-    { value: 'proveedor', label: 'Proveedor' },
-    { value: 'comunidad', label: 'Comunidad' },
-    { value: 'otro', label: 'Otro' }
-  ];
-
-  const lugaresIncidente = [
-    'Gerencia General',
-    'Gerencia de Administración y Finanzas',
-    'Gerencia de Desarrollo Estratégico y Sustentabilidad',
-    'Gerencia de Servicios Técnicos',
-    'Unidad de Acreditación y Certificación',
-    'Laboratorio de Ensayos',
-    'Laboratorio de Análisis Químico',
-    'Laboratorio de Metrología',
-    'Otro'
-  ];
-
-  const tiposDenuncia = [
-    { value: 'fraude_corrupcion', label: 'Fraude y corrupción' },
-    { value: 'delitos_informaticos', label: 'Delitos informáticos' },
-    { value: 'competencia_desleal', label: 'Competencia desleal' },
-    { value: 'delitos_tributarios', label: 'Delitos tributarios' },
-    { value: 'infracciones_laborales', label: 'Infracciones a la legislación laboral' },
-    { value: 'delitos_ambientales', label: 'Delitos contra el medio ambiente' },
-    { value: 'propiedad_intelectual', label: 'Propiedad intelectual e industrial' },
-    { value: 'desigualdad_genero', label: 'Desigualdad de género' },
-    { value: 'abuso_poder', label: 'Abuso de poder' },
-    { value: 'acoso_laboral', label: 'Acoso laboral' },
-    { value: 'acoso_sexual', label: 'Acoso sexual' },
-    { value: 'otro', label: 'Otro' }
-  ];
-
-  const comoSeEntero = [
-    { value: 'experiencia_personal', label: 'Experiencia personal' },
-    { value: 'me_contaron', label: 'Me lo contaron' },
-    { value: 'lo_observe', label: 'Lo observé' },
-    { value: 'encontre_documentacion', label: 'Encontré documentación' },
-    { value: 'otro', label: 'Otro' }
-  ];
-
-  const meses = [
-    { value: '01', label: 'Enero' },
-    { value: '02', label: 'Febrero' },
-    { value: '03', label: 'Marzo' },
-    { value: '04', label: 'Abril' },
-    { value: '05', label: 'Mayo' },
-    { value: '06', label: 'Junio' },
-    { value: '07', label: 'Julio' },
-    { value: '08', label: 'Agosto' },
-    { value: '09', label: 'Septiembre' },
-    { value: '10', label: 'Octubre' },
-    { value: '11', label: 'Noviembre' },
-    { value: '12', label: 'Diciembre' }
-  ];
-
-  const anios = Array.from({ length: 12 }, (_, i) => 2015 + i);
+  const currentYear = new Date().getFullYear();
+  const anios = Array.from({ length: 12 }, (_, i) => currentYear - 11 + i);
 
   return (
     <div className="max-w-4xl mx-auto mt-5 rounded-xl p-6 border border-gray-300">
@@ -231,7 +260,7 @@ export default function FormularioDenuncia() {
         <fieldset className="fieldset">
           <legend className="fieldset-legend">¿Cuál es su relación con Dictuc? *</legend>
           <div className="flex flex-col gap-2">
-            {relacionesDictuc.map((opcion) => (
+            {RELACIONES_DICTUC.map((opcion) => (
               <label key={opcion.value} className="flex items-center gap-2">
                 <input
                   type="radio"
@@ -253,7 +282,7 @@ export default function FormularioDenuncia() {
           <legend className="fieldset-legend">Lugar dónde sucedió el incidente *</legend>
           <select className="select" {...register("lugar_incidente", { required: true })}>
             <option value="">-- Seleccione --</option>
-            {lugaresIncidente.map((lugar, index) => (
+            {LUGARES_INCIDENTE.map((lugar, index) => (
               <option key={index} value={lugar}>{lugar}</option>
             ))}
           </select>
@@ -266,7 +295,7 @@ export default function FormularioDenuncia() {
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Identifique y seleccione el tipo de denuncia *</legend>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
-            {tiposDenuncia.map((tipo) => (
+            {TIPOS_DENUNCIA.map((tipo) => (
               <label key={tipo.value} className="flex items-center gap-2">
                 <input
                   type="checkbox"
@@ -289,7 +318,7 @@ export default function FormularioDenuncia() {
         <fieldset className="fieldset">
           <legend className="fieldset-legend">¿Cómo se enteró de este suceso? *</legend>
           <div className="flex flex-col gap-2">
-            {comoSeEntero.map((opcion) => (
+            {COMO_SE_ENTERO.map((opcion) => (
               <label key={opcion.value} className="flex items-center gap-2">
                 <input
                   type="radio"
@@ -314,7 +343,7 @@ export default function FormularioDenuncia() {
               <label className="label">Mes</label>
               <select className="select" {...register("mes_incidente", { required: true })}>
                 <option value="">-- Mes --</option>
-                {meses.map((mes) => (
+                {MESES.map((mes) => (
                   <option key={mes.value} value={mes.value}>{mes.label}</option>
                 ))}
               </select>
@@ -374,8 +403,19 @@ export default function FormularioDenuncia() {
           )}
         </fieldset>
 
-        <button className="ml-auto mr-auto btn btn-primary mt-2 rounded-full" type="submit">
-          Enviar Denuncia
+        <button
+          className="ml-auto mr-auto btn btn-primary mt-2 rounded-full"
+          type="submit"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <span className="loading loading-spinner loading-sm"></span>
+              Enviando...
+            </>
+          ) : (
+            'Enviar Denuncia'
+          )}
         </button>
       </form>
     </div>

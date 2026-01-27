@@ -1,8 +1,11 @@
-"use client"
 import React from "react";
 import PaginaInterior from "@/components/PaginaInterior";
 import FormularioDenuncia from "@/components/FormularioDenuncia";
 const BannerTeclado = "/images/BannerTeclado.webp";
+
+export const metadata = {
+  title: 'Dictuc | Canal de Denuncia'
+};
 
 export default function FormularioDenunciaPage() {
   return (
@@ -12,7 +15,7 @@ export default function FormularioDenunciaPage() {
       titulo="Canal de Denuncia"
       breadcrum={[
         { label: "Home", link: "/" },
-        { label: "Canal de Denuncia", link: "/formulario-denuncia" }
+        { label: "Canal de Denuncia", link: "/paginas/canal-denuncia" }
       ]}
     >
       <div className="ml-auto mr-auto xl:w-3/5 lg:w-4/5 md:w-4/5 sm:w-full px-4 justify-center items-center mb-6">
@@ -32,5 +35,3 @@ export default function FormularioDenunciaPage() {
     </PaginaInterior>
   );
 }
-
-export const Head = () => <title>Dictuc | Canal de Denuncia</title>

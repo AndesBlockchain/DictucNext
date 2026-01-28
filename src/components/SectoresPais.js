@@ -6,7 +6,6 @@ import useSectoresPais from "@/hooks/use-sectores-pais";
 const SectoresPais = async (titulo) => {
 
     const res = await useSectoresPais();
-
     // Validar que res y res.data existan
     const sectores = res?.data || [];
     const totalCount = res?.totalCount || 0;

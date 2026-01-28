@@ -11,7 +11,7 @@ const useServicios = async () => {
 
   const res = await fetch(baseUrl + path);
   if (!res.ok) {
-    throw new Error(`Failed to fetch servicios for sector: ${sectorSlug} (Status: ${res.status})`);
+    throw new Error(`Failed to fetch servicios (Status: ${res.status})`);
   }
 
   const data = await res.json();
@@ -19,4 +19,4 @@ const useServicios = async () => {
 
 };
 
-export default useServiciosBySector;
+export default useServicios;

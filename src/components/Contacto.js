@@ -3,8 +3,9 @@ import React from "react";
 import FranjaAzul from "./FranjaAzul";
 import {useForm} from 'react-hook-form';
 import { formatearRut, validarRut } from "../helpers/rut-helpers";
+const codigoUnidadDefault = "5401";
 
-export default function Contacto({ titulo = "Formulario de Contacto", border = false, isCotizacion=false, servicio="", tiposDeContacto, strapiApiUrl }) {
+export default function Contacto({ titulo = "Formulario de Contacto", border = false, isCotizacion=false, servicio="", tiposDeContacto, strapiApiUrl, codigoUnidad = codigoUnidadDefault}) {
 
   const { register, formState: {errors}, handleSubmit, setValue, watch, setError, clearErrors, reset } = useForm()
 
@@ -62,24 +63,27 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
       // Determinar la URL del endpoint según si es cotización o contacto
       const endpoint = isCotizacion ? '/api/cotizador' : '/api/contacto';
 
+      const body = {
+        tipo_contacto: data.tipo_consulta,
+        rut_empresa: data.rut_empresa.replaceAll(".",""),
+        empresa: data.empresa,
+        persona: data.persona,
+        cargo: data.cargo,
+        email: data.email,
+        telefono: data.telefono,
+        consulta: data.consulta,
+        servicio: servicio,
+        codigo_unidad: codigoUnidad 
+      }
+      console.log(JSON.stringify(body));
       const response = await fetch(strapiApiUrl + endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          tipo_contacto: data.tipo_consulta,
-          rut_empresa: data.rut_empresa,
-          empresa: data.empresa,
-          persona: data.persona,
-          cargo: data.cargo,
-          email: data.email,
-          telefono: data.telefono,
-          consulta: data.consulta,
-          servicio: servicio
-        })
+        body: JSON.stringify(body)
       });
-
+      console.log(response);
       if (!response.ok) {
         throw new Error(`Error HTTP: ${response.status}`);
       }
@@ -143,8 +147,10 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
   }
 
   const obtenerNombrePorRut = async (rut) => {
-    try {
-      const response = await fetch(strapiApiUrl + `/api/rutificador`, {
+/*     try {
+      const rutificador= process.env.STRAPI_API_URL + `/api/rutificador`
+      console.log(rutificador);
+      const response = await fetch(rutificador, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -177,7 +183,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
         data: null,
         error: error.message || 'Error al consultar el RUT'
       };
-    }
+    } */
   }
 
   return (

@@ -1,13 +1,16 @@
-
 import React from "react";
-import PaginaInterior from "../components/PaginaInterior";
-import BannerNoticias from "../images/BannerMicrofonos.webp"
-import useNoticiasPorAgno from "../hooks/use-noticias-por-agno";
+import PaginaInterior from "@/components/PaginaInterior";
+const BannerNoticias = "/images/BannerMicrofonos.webp"
+import useNoticiasPorAgno from "@/hooks/use-noticias-por-agno";
 
-export default function HomeNoticiasPage() {
+export const metadata = {
+  title: 'Dictuc | Noticias'
+};
 
-    const noticias = useNoticiasPorAgno()
-    
+export default async function HomeNoticiasPage() {
+
+    const noticias = await useNoticiasPorAgno()
+
     // Forzar el orden de los años y agregar logs
     const noticiasOrdenadas = Object.entries(noticias).sort(([agnoA], [agnoB]) => parseInt(agnoB) - parseInt(agnoA));
   return (
@@ -50,5 +53,3 @@ export default function HomeNoticiasPage() {
     </PaginaInterior>
   );
 }
-
-export const Head = () => <title>Dictuc | Noticias</title>

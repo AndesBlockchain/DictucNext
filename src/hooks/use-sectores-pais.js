@@ -8,7 +8,7 @@ const useSectoresPais = async() => {
     return { data: [], totalCount: 0 }; // Retornar estructura vacía válida
   }
 
-  const path = "/api/sectores?populate=all";
+  const path = "/api/sectores?populate=all&sort=nombre";
 
   try {
     const res = await fetch(baseUrl + path, {

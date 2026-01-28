@@ -1,14 +1,18 @@
-const useMenuSuperior = async() => {
+import { fetchFromStrapi, buildStrapiQuery, CACHE_PRESETS } from '@/lib/strapi-fetcher';
 
-  const baseUrl = process.env.STRAPI_API_URL;
+/**
+ * Hook para obtener las últimas noticias publicadas
+ * Versión refactorizada usando la utilidad centralizada
+ */
+const useMenuSuperior = async () => {
+  // Construir query con el helper
 
-  const res = await fetch(baseUrl + "/api/menu-superiors?sort=posicion");
-
-  if (!res.ok) throw new Error("Failed to fetch menu superior");
-
-  const data = await res.json();
-
-  return data;
+  return fetchFromStrapi({
+    endpoint: `/api/menu-superiors?sort=posicion`,
+    cache: CACHE_PRESETS.FREQUENT, // Revalidar cada 5 minutos
+    fallback: { data: [] },
+    errorContext: 'menu superior  '
+  });
 }
 
 export default useMenuSuperior;

@@ -1,12 +1,13 @@
 import React from "react";
 
 const ItemCarrusel =({index, foto}) => {
+
+  console.log("foto", foto)
   return(
     <div id={"item"+index} className="carousel-item w-full">
       <img
-        src={foto}
+        src={process.env.STRAPI_API_URL + foto.url}
         alt=""
-        className="w-full"
       />
     </div>
   )

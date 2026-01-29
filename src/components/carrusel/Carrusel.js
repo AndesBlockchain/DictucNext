@@ -10,14 +10,12 @@ async function getCarrusel() {
   if (!res.ok) throw new Error("Failed to fetch carruseles");
 
   const data = await res.json();
-  console.log(data.data[0].Imagen);
   return data;
 }
 
 const Carrusel = async () => {
 
   const carruselFetch = await getCarrusel();
-
   // Creamos el array carruselData con objetos itemCarrusel
   const carruselData = carruselFetch.data.map(item => {
     const imagen = item.Imagen && item.Imagen[0] ? item.Imagen[0] : (item.Imagen || {}); // Handle array or single object if Strapi structure varies

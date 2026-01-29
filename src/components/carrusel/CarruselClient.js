@@ -5,7 +5,7 @@ import StrapiImage from "../StrapiImage";
 
 const CarruselClient = ({ carruselData }) => {
     const [indiceCarrusel, setIndiceCarrusel] = useState(0);
-
+    console.log("carruselData", carruselData);
     const anteriorImagen = () => {
         setIndiceCarrusel(prev => prev === 0 ? carruselData.length - 1 : prev - 1);
     };
@@ -34,10 +34,10 @@ const CarruselClient = ({ carruselData }) => {
                 </button>
 
                 <StrapiImage
-                    imagen={itemActual.imagen}
+                    fallback={itemActual.url}
                     alt={itemActual.fraseSuperior || "Imagen Carrusel"}
                     fill={true}
-                    className="object-cover"
+                    className="object-cover h-full"
                     priority={true}
                 />
 

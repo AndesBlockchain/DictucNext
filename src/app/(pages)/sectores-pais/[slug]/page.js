@@ -13,7 +13,6 @@ export default async function HomeServicios({ params })
   const sectoresPais = await useSectoresPais();
   const servicios = await useServiciosBySector(slug);
 
-console.log("sector",sector)
 
   return (
     <>

@@ -5,7 +5,7 @@ const ItemCarrusel =({index, foto}) => {
   return(
     <div id={"item"+index} className="carousel-item w-full">
       <StrapiImage
-        imagen={foto}
+        fallback={foto}
         alt=""
         className="w-full"
       />

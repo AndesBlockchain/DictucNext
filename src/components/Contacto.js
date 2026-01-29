@@ -75,7 +75,6 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
         servicio: servicio,
         codigo_unidad: codigoUnidad 
       }
-      console.log(JSON.stringify(body));
       const response = await fetch(strapiApiUrl + endpoint, {
         method: 'POST',
         headers: {
@@ -83,7 +82,6 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
         },
         body: JSON.stringify(body)
       });
-      console.log(response);
       if (!response.ok) {
         throw new Error(`Error HTTP: ${response.status}`);
       }

@@ -5,8 +5,6 @@ import useSiteMetadata from "../hooks/use-site-metadata";
 
 const MenuSecundario = (items) => {
 
-    console.log("items", items);
-
     return (
         <div className="w-full flex justify-center items-center">
             <div className="p-2 w-3/4 flex flex-row justify-center">

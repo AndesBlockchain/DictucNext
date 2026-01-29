@@ -10,7 +10,6 @@ import useUltimasNoticias from "@/hooks/use-ultimas-noticias";
 export default async function HomeNoticiasPage() {
 
     const noticias= await useUltimasNoticias();
-    console.log("noticias",noticias);
   return (
     <PaginaInterior fallback={BannerNoticias}
                     titulo="Noticias y Proyectos Destacados"

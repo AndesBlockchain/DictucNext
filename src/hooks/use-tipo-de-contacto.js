@@ -15,15 +15,12 @@ const useTipoDeContacto = async () => {
   const path = `/api/tipos-de-contactos`;
   const fullUrl = baseUrl + path;
 
-  console.log('Fetching tipos de contacto from:', fullUrl);
-
   try {
     const res = await fetch(fullUrl, {
       next: { revalidate: 3600 }, // Revalidar cada hora
       cache: 'force-cache'
     });
 
-    console.log('Response status:', res.status);
 
     if (!res.ok) {
       const errorText = await res.text();

@@ -14,7 +14,6 @@ export default async function PaginasContenido({params}) {
 
   const pagina = await usePagina(slug);
   
-console.log("pagina", pagina);
   const menuSecundario= await useMenuSecundario();
 
   return (

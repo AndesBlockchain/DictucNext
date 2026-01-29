@@ -51,7 +51,6 @@ export async function fetchFromStrapi({
   };
 
   try {
-    console.log(`[Strapi Fetcher] Fetching: ${fullUrl}`);
 
     const res = await fetch(fullUrl, fetchOptions);
 
@@ -67,7 +66,6 @@ export async function fetchFromStrapi({
     }
 
     const data = await res.json();
-    console.log(data);
     // Validar que la respuesta tenga datos
     if (!data || (data.data && !Array.isArray(data.data) && typeof data.data !== 'object')) {
       console.warn(`[Strapi Fetcher] Invalid data structure for ${context}`);

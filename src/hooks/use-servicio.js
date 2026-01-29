@@ -14,7 +14,6 @@ const useServicio = async (slug) => {
   const path = `/api/servicios?filters[slug][$eq]=${slug}&populate=all`;
 
   const res = await fetch(baseUrl + path);
-  console.log(baseUrl + path);
   if (!res.ok) {
     throw new Error(`Failed to fetch servicios for servicio: ${slug} (Status: ${res.status})`);
   }

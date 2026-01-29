@@ -10,6 +10,7 @@ async function getCarrusel() {
   if (!res.ok) throw new Error("Failed to fetch carruseles");
 
   const data = await res.json();
+  console.log(data.data[0].Imagen);
   return data;
 }
 

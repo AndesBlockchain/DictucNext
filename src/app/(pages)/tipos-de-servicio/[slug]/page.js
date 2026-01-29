@@ -13,7 +13,6 @@ export default async function HomeServicios({ params })
   const sectoresPais = await useSectoresPais();
   const servicios = await useServiciosByTipoDeServicio(slug);
 
-  console.log("tipoServicio",tipoServicio)
   return (
     <>
       <PaginaInterior

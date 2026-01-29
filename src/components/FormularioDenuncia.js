@@ -141,8 +141,7 @@ export default function FormularioDenuncia() {
         };
       }
 
-      console.log('Datos preparados para envío:', JSON.stringify(payload, null, 2));
-
+     
       // TODO: Aquí se enviará a la URL que indique el usuario
       // const response = await fetch(URL_A_CONFIGURAR, {
       //   method: 'POST',

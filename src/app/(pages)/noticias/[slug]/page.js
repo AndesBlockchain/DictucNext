@@ -10,7 +10,6 @@ export default async function PaginasContenido({ params })
 {
     const { slug } = await params;
     const noticia = await useNoticia(slug);
-    console.log("noticia", noticia)
   return (
     <PaginaInterior fallback={bannerNoticias}
                     titulo="Noticias y Proyectos Destacados"

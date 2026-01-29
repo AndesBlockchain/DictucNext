@@ -1,11 +1,10 @@
 import React from "react";
-import StrapiImage from "../StrapiImage";
 
 const ItemCarrusel =({index, foto}) => {
   return(
     <div id={"item"+index} className="carousel-item w-full">
-      <StrapiImage
-        fallback={foto}
+      <img
+        src={foto}
         alt=""
         className="w-full"
       />

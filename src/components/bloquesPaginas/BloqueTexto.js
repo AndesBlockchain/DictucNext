@@ -7,8 +7,10 @@ const BloqueTexto = ({ datosBloque }) => {
     const colorLetra = datosBloque.Texto?.colorTexto?.Codigo || "black";
     const botones = datosBloque.CallToAction || [];
     
+    
+    console.log("texto",datosBloque)
     // Obtener el texto de forma segura
-    const textoHTML = datosBloque.Texto?.Texto?.data?.Texto || '';
+    const textoHTML = datosBloque.Texto?.Texto || '';
     
     // Construir className de forma más limpia
     const textoClassName = `${letra} text-${colorLetra}`;

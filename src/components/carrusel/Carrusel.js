@@ -26,7 +26,7 @@ const Carrusel = async () => {
       fraseInferior: item.FraseInferior || "",
       frasesVisibles: !item.OcultarFrases,
       imagen: imagen, // Pass the raw Strapi image object/array to StrapiImage
-      url: imagen.url || "",
+      url: process.env.STRAPI_API_URL + imagen.url || "",
       alto: imagen.height || 0,
       ancho: imagen.width || 0,
     };

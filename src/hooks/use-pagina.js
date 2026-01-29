@@ -15,7 +15,7 @@ const usePagina = async (slug) => {
 
   const res = await fetch(baseUrl + path, {
     next: { revalidate: 3600 }, // Revalidar cada hora
-    cache: 'force-cache'
+    cache: 'no-store'
   });
 
   if (!res.ok) {

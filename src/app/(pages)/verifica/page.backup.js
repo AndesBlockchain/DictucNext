@@ -1,8 +1,9 @@
+"use client"
 import React, {useState} from "react";
-import PaginaInterior from "../../components/PaginaInterior";
-import BannerVerificarInforme from "../../images/BannerVerificarInforme.webp"
-import Noticias from "../../components/Noticias";
-import useHomeNoticias from "../../hooks/use-home-noticias";
+import PaginaInterior from "@/components/PaginaInterior";
+const BannerVerificarInforme = "/images/BannerVerificarInforme.webp"
+import Noticias from "@/components/Noticias";
+import useHomeNoticias from "@/hooks/use-home-noticias";
 
  export default function VerificaPage() {
 

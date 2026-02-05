@@ -5,9 +5,6 @@ const FotoDefaultNoticias = "/images/noticias.png";
 
 const BloqueNoticias = async ({ datosBloque }) => {
  
-  // Query para obtener noticias
-console.log("tag",datosBloque.etiqueta_noticia.noticias)
-
 const cantidadNoticias= datosBloque.CantidadNoticias
 const mostrarFecha= datosBloque.MostrarFecha
   return (

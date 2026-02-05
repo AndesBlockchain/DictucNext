@@ -5,7 +5,6 @@ import StrapiImage from "../StrapiImage";
 
 const CarruselClient = ({ carruselData }) => {
     const [indiceCarrusel, setIndiceCarrusel] = useState(0);
-    console.log("carruselData", carruselData);
     const anteriorImagen = () => {
         setIndiceCarrusel(prev => prev === 0 ? carruselData.length - 1 : prev - 1);
     };

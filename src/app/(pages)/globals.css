@@ -57,3 +57,19 @@ ol {
   list-style-position: inside;
   list-style-type: decimal;
 }
+
+@source inline("text-azul-dictuc");
+@source inline("bg-azul-dictuc border-azul-dictuc text-gris-dictuc bg-gris-dictuc border-gris-dictuc");
+@source inline("text-rojo-sostenibilidad bg-rojo-sostenibilidad border-rojo-sostenibilidad");
+@source inline("text-amarillo-sostenibilidad bg-amarillo-sostenibilidad border-amarillo-sostenibilidad");
+@source inline("text-verde-sostenibilidad bg-verde-sostenibilidad border-verde-sostenibilidad");
+@source inline("text-azul-sostenibilidad bg-azul-sostenibilidad border-azul-sostenibilidad");
+@source inline("text-fucsia-sostenibilidad bg-fucsia-sostenibilidad border-fucsia-sostenibilidad");
+@source inline("text-azul-dictuc/50 text-azul-dictuc/75 bg-azul-dictuc/10 bg-azul-dictuc/20 bg-azul-dictuc/50 bg-azul-dictuc/75");
+@source inline("text-gris-dictuc/50 text-gris-dictuc/75 bg-gris-dictuc/10 bg-gris-dictuc/20 bg-gris-dictuc/50 bg-gris-dictuc/75");
+@source inline("text-rojo-sostenibilidad/50 text-rojo-sostenibilidad/75 bg-rojo-sostenibilidad/10 bg-rojo-sostenibilidad/20 bg-rojo-sostenibilidad/50 bg-rojo-sostenibilidad/75");
+@source inline("text-amarillo-sostenibilidad/50 text-amarillo-sostenibilidad/75 bg-amarillo-sostenibilidad/10 bg-amarillo-sostenibilidad/20 bg-amarillo-sostenibilidad/50 bg-amarillo-sostenibilidad/75");
+@source inline("text-verde-sostenibilidad/50 text-verde-sostenibilidad/75 bg-verde-sostenibilidad/10 bg-verde-sostenibilidad/20 bg-verde-sostenibilidad/50 bg-verde-sostenibilidad/75");
+@source inline("text-azul-sostenibilidad/50 text-azul-sostenibilidad/75 bg-azul-sostenibilidad/10 bg-azul-sostenibilidad/20 bg-azul-sostenibilidad/50 bg-azul-sostenibilidad/75");
+@source inline("text-fucsia-sostenibilidad/50 text-fucsia-sostenibilidad/75 bg-fucsia-sostenibilidad");
+@source inline("table table-sm table-xs table-zebra");

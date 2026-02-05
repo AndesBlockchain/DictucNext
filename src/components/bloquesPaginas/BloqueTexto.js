@@ -8,7 +8,7 @@ const BloqueTexto = ({ datosBloque }) => {
     const botones = datosBloque.CallToAction || [];
     
     
-    console.log("texto",datosBloque)
+
     // Obtener el texto de forma segura
     const textoHTML = datosBloque.Texto?.Texto || '';
     

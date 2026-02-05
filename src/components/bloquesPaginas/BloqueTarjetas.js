@@ -4,9 +4,7 @@ import CardServicio from "../CardServicio";
 
 const BloqueTarjetas = ({ datosBloque }) => {
 
-
   const tarjetasPorFila = datosBloque.TarjetasPorFila
-
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
     <div id="tarjetas" className="flex flex-col gap-8">

@@ -1,4 +1,3 @@
-
 import React from "react";
 import MenuSecundario from "@/components/MenuSecundario";
 import PaginaInterior from "@/components/PaginaInterior";
@@ -8,7 +7,15 @@ import usePagina from "@/hooks/use-pagina";
 import useMenuSecundario from "@/hooks/use-menu-secundario";
 
 
-export default async function PaginasContenido({params}) {
+/**
+   * Render page content for a given slug by fetching the page and secondary menu, and composing PaginaInterior with menu, optional ScrollSpy, and page blocks.
+   *
+   * @param {Object} props - Component props.
+   * @param {Object|Promise<Object>} props.params - Route parameters object or a promise that resolves to it.
+   * @param {string} props.params.slug - Slug of the page to load.
+   * @returns {JSX.Element} The composed PaginaInterior element containing the secondary menu, optional ScrollSpy, and the page's blocks or a fallback message.
+   */
+  export default async function PaginasContenido({params}) {
 
   const {slug} = await params;
 

@@ -5,6 +5,7 @@ import StrapiImage from "./StrapiImage";
 
 const CardServicio = ({ titulo, icono, imagen, contenido, callToAction=false, color_fondo="white", color_texto="black" }) => {
 
+
   // Función para detectar si el contenido es una lista
   const esLista = (html) => {
     return /<(ul|ol)[^>]*>/i.test(html);
@@ -25,7 +26,7 @@ const CardServicio = ({ titulo, icono, imagen, contenido, callToAction=false, co
           containerClassName="h-32 flex items-center justify-center mx-auto"
         />
 
-        <h3 className={clsx("text-base font-bold mb-2 text-center text-azul-dictuc")}>
+        <h3 className={clsx("text-base font-bold mb-2 text-center", `text-${color_texto}`)}>
           {titulo}
         </h3>
 

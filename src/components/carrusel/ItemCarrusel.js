@@ -2,7 +2,6 @@ import React from "react";
 
 const ItemCarrusel =({index, foto}) => {
 
-  console.log("foto", foto)
   return(
     <div id={"item"+index} className="carousel-item w-full">
       <img

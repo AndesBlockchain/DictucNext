@@ -13,7 +13,6 @@ export default async function PaginasContenido({params}) {
   const {slug} = await params;
 
   const pagina = await usePagina(slug);
-  
   const menuSecundario= await useMenuSecundario();
 
   return (

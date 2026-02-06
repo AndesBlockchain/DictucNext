@@ -10,6 +10,9 @@ const colorLetra = datosBloque.Texto?.colorTexto?.Codigo || "black";
 const posicion_foto= datosBloque.posicion_foto
 const margenSuperior= datosBloque.Bloque.MargenSuperior
 const margenInferior= datosBloque.Bloque.MargenInferior
+const colorFondo = datosBloque.Bloque?.colorFondoBloque?.Codigo || "white";
+
+console.log("datos bloque hero", datosBloque);
 
 // Clases CSS usando clsx
 const tituloClasses = clsx(
@@ -37,6 +40,8 @@ const contenidoFlexClasses = clsx(
 const contenedorPrincipalClasses = clsx(
   {
     [`mt-${margenSuperior}`]: true,
+    [`mb-${margenInferior}`]: true,
+    [`bg-${colorFondo}`]: true,
   }
 );
 

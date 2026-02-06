@@ -22,7 +22,7 @@ const BloqueTarjetas = ({ datosBloque }) => {
                   color_fondo={tarjeta?.color_fondo?.Codigo || "white"}
                   color_texto={tarjeta?.color_texto?.Codigo || "black"}
                   imagen={tarjeta.Imagen} 
-                  contenido={tarjeta.Texto?.data?.Texto || ""} 
+                  contenido={tarjeta.Texto || ""} 
                   callToAction={tarjeta.CallToAction}
                 />
               </div>

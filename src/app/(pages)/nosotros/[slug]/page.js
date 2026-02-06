@@ -14,7 +14,6 @@ export default async function PaginasContenido({params}) {
 
   const pagina = await usePagina(slug);
   const menuSecundario= await useMenuSecundario();
-
   return (
     <PaginaInterior
       fallback={process.env.STRAPI_API_URL + pagina.Banner.url}
@@ -25,7 +24,7 @@ export default async function PaginasContenido({params}) {
         { label: "Home", link: "/" }, 
         { label: pagina?.titulo || "Página", link: "/" }
       ]}> 
-      <MenuSecundario items={menuSecundario} />
+      <MenuSecundario items={menuSecundario} slug={slug} />
       {(pagina.ScrollSpyVisible !== false) && (
         <ScrollSpy datosBloques={pagina.Bloques}/>
       )}

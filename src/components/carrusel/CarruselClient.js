@@ -27,7 +27,7 @@ const CarruselClient = ({ carruselData }) => {
             <div id="texto-carrusel-2" className={"font-semibold absolute text-lg bottom-15 right-0 z-5 w-3/5 bg-gray-200 opacity-90 text-opacity-90 px-6 py-3 rounded-l-full" + (!itemActual.frasesVisibles ? " invisible" : "")}>
                 {itemActual.fraseInferior}
             </div>
-            <div className="w-full bg-gray-50 flex items-center justify-center shadow-md relative h-[300px] md:h-[400px] lg:h-[500px]">
+            <div className="w-full bg-gray-50 flex items-center justify-center shadow-md relative">
                 <button onClick={anteriorImagen} className="absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition-all z-10">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                 </button>

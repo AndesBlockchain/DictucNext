@@ -3,9 +3,9 @@ import useSectoresPais from "../../hooks/use-sectores-pais";
 import Bloque from "./Bloque";
 import StrapiImage from "../StrapiImage";
 
-const BloqueSectoresPais = ({datosBloque}) => {
+const BloqueSectoresPais = async ({datosBloque}) => {
 
-    const sectores = useSectoresPais();
+    const sectores = await useSectoresPais();
 
   return (
     <Bloque datosBloque={datosBloque.Bloque}>

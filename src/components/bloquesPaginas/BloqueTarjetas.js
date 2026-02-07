@@ -3,34 +3,42 @@ import Bloque from "./Bloque";
 import CardServicio from "../CardServicio";
 
 const BloqueTarjetas = ({ datosBloque }) => {
+  const tarjetasPorFila = datosBloque.TarjetasPorFila || 3; // Default 3 si no está definido
 
-  const tarjetasPorFila = datosBloque.TarjetasPorFila
+  // Mapear tarjetasPorFila a clases basis de Tailwind para desktop
+  const basisMap = {
+    1: "lg:basis-full",
+    2: "lg:basis-1/2",
+    3: "lg:basis-1/3",
+    4: "lg:basis-1/4",
+    5: "lg:basis-1/5",
+    6: "lg:basis-1/6"
+  };
+
+  const desktopBasis = basisMap[tarjetasPorFila] || "lg:basis-1/3";
+
+  // Responsive basis: mobile (full) → tablet (1/2) → desktop (variable)
+  const responsiveBasis = `basis-full sm:basis-1/2 ${desktopBasis}`;
+
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
-    <div id="tarjetas" className="flex flex-col gap-8">
-      {Array.from({ length: Math.ceil(datosBloque.Tarjetas.length / tarjetasPorFila) }, (_, rowIndex) => {
-        const startIndex = rowIndex * tarjetasPorFila;
-        const endIndex = startIndex + tarjetasPorFila;
-        const tarjetasEnFila = datosBloque.Tarjetas.slice(startIndex, endIndex);
-        
-        return (
-          <div key={rowIndex} className="flex flex-row justify-center items-stretch gap-8 w-full">
-            {tarjetasEnFila.map((tarjeta, index) => (
-              <div key={startIndex + index} className="flex-1 max-w-xs">
-                <CardServicio 
-                  titulo={tarjeta.Titulo || ""} 
-                  color_fondo={tarjeta?.color_fondo?.Codigo || "white"}
-                  color_texto={tarjeta?.color_texto?.Codigo || "black"}
-                  imagen={tarjeta.Imagen} 
-                  contenido={tarjeta.Texto || ""} 
-                  callToAction={tarjeta.CallToAction}
-                />
-              </div>
-            ))}
+      <div
+        id="tarjetas"
+        className="flex flex-wrap justify-center"
+      >
+        {datosBloque.Tarjetas.map((tarjeta, index) => (
+          <div key={index} className={`${responsiveBasis} p-2`}>
+            <CardServicio
+              titulo={tarjeta.Titulo || ""}
+              color_fondo={tarjeta?.color_fondo?.Codigo || "white"}
+              color_texto={tarjeta?.color_texto?.Codigo || "black"}
+              imagen={tarjeta.Imagen}
+              contenido={tarjeta.Texto || ""}
+              callToAction={tarjeta.CallToAction}
+            />
           </div>
-        );
-      })}
-    </div>
+        ))}
+      </div>
     </Bloque>
   );
 };

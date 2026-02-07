@@ -27,7 +27,7 @@ const BloqueTarjetas = ({ datosBloque }) => {
         className="flex flex-wrap justify-center"
       >
         {datosBloque.Tarjetas.map((tarjeta, index) => (
-          <div key={index} className={`${responsiveBasis} p-2`}>
+          <div key={index} className={`${responsiveBasis} p-2 pl-8 pr-8`}>
             <CardServicio
               titulo={tarjeta.Titulo || ""}
               color_fondo={tarjeta?.color_fondo?.Codigo || "white"}

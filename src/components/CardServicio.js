@@ -14,7 +14,7 @@ const CardServicio = ({ titulo, icono, imagen, contenido, callToAction=false, co
   const bg_color = 'bg-' + color_fondo;
 
   return (
-    <div className={clsx("flex flex-col w-72 h-full rounded-xl shadow-lg overflow-hidden flex-1",
+    <div className={clsx("flex flex-col w-full h-full rounded-xl shadow-lg overflow-hidden",
       color_fondo && color_fondo !== "white" && "border")}>
       <div className={clsx("p-4 h-full flex flex-col flex-1", bg_color)}>
 

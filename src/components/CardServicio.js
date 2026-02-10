@@ -23,7 +23,7 @@ const CardServicio = ({ titulo, icono, imagen, contenido, callToAction=false, co
           fallback={icono}
           alt={titulo}
           className="h-auto object-contain max-w-[60px]"
-          containerClassName="h-32 flex items-center justify-center mx-auto"
+          containerClassName="h-16 flex items-center justify-center mx-auto"
         />
 
         <h3 className={clsx("text-base font-bold mb-2 text-center", `text-${color_texto}`)}>

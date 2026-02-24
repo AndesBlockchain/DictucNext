@@ -19,7 +19,7 @@ export default async function PaginasContenido({ params })
         <div className="w-min mt-2 mb-2">
         <FranjaAzul/>
         </div>
-        <div className="p-8 pl-16 pr-16 text-sm">
+        <div className="p-8 pl-16 pr-16 text-sm [&_a]:text-azul-dictuc [&_a]:underline [&_a]:hover:text-blue-800">
           <div dangerouslySetInnerHTML={{__html: noticia.cuerpo}}></div>
          </div>
          <div className="flex justify-center mb-8">

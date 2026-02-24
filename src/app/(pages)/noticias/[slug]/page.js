@@ -15,7 +15,7 @@ export default async function PaginasContenido({ params })
                     titulo="Noticias y Proyectos Destacados"
     breadcrum={[{ label: "Home", link: "/" }, {label:"Noticias y Proyectos Destacados", link:"/noticias"}, { label: noticia.titulo, link: "/" }]}>
         <h1 className="text-lg text-bold uppercase font-bold">{noticia.titulo}</h1>
-        <div className="text-sm text-gray-300">{noticia.fecha}</div>
+        <div className="text-sm text-gris-dictuc">{noticia.fecha}</div>
         <div className="w-min mt-2 mb-2">
         <FranjaAzul/>
         </div>

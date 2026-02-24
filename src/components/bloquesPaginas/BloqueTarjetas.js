@@ -24,7 +24,7 @@ const BloqueTarjetas = ({ datosBloque }) => {
     <Bloque datosBloque={datosBloque.Bloque}>
       <div
         id="tarjetas"
-        className="flex flex-wrap justify-center"
+        className="flex flex-wrap justify-center gap-y-8"
       >
         {datosBloque.Tarjetas.map((tarjeta, index) => (
           <div key={index} className={`${responsiveBasis} p-4 pl-8 pr-8`}>

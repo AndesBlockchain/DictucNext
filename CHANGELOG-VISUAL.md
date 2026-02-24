@@ -43,3 +43,10 @@ Registro de cambios visuales realizados en el proyecto.
 - **Problema:** La fecha en el detalle de noticia aparecía en un gris muy claro, casi invisible.
 - **Solución:** Se cambió el color de la fecha de `text-gray-300` a `text-gris-dictuc` (#53565A) para que sea legible y use el color corporativo.
 - **Archivos modificados:** `src/app/(pages)/noticias/[slug]/page.js`
+
+---
+
+## Issue #48 - 2026-02-24
+- **Problema:** El breadcrumb y el título de la noticia estaban muy pegados, sin suficiente separación visual.
+- **Solución:** Se agregó `mt-10` (40px de margen superior) al título para separarlo del breadcrumb.
+- **Archivos modificados:** `src/app/(pages)/noticias/[slug]/page.js`

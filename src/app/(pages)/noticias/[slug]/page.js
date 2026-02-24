@@ -14,7 +14,7 @@ export default async function PaginasContenido({ params })
     <PaginaInterior fallback={bannerNoticias}
                     titulo="Noticias y Proyectos Destacados"
     breadcrum={[{ label: "Home", link: "/" }, {label:"Noticias y Proyectos Destacados", link:"/noticias"}, { label: noticia.titulo, link: "/" }]}>
-        <h1 className="text-lg text-bold uppercase font-bold">{noticia.titulo}</h1>
+        <h1 className="text-lg text-bold uppercase font-bold mt-10">{noticia.titulo}</h1>
         <div className="text-sm text-gris-dictuc">{noticia.fecha}</div>
         <div className="w-min mt-2 mb-2">
         <FranjaAzul/>

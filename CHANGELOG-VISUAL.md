@@ -22,3 +22,10 @@ Registro de cambios visuales realizados en el proyecto.
 - **Problema:** El fondo gris del bloque de fichas de servicio (Utilidad, Experiencia, Potenciales Clientes) era más oscuro que el gris de la sección del agente en el Home.
 - **Solución:** Se cambió el color de fondo de `bg-gray-200` a `bg-gray-100` para que coincida con el gris claro del agente del Home.
 - **Archivos modificados:** `src/app/(pages)/servicios/[slug]/page.js`
+
+---
+
+## Issue #38 - 2026-02-23
+- **Problema:** Los títulos de las tarjetas de servicio (Utilidad, Experiencia, Potenciales Clientes) estaban en minúsculas y en negro. Además faltaba espacio entre el bloque de tarjetas y la descripción del servicio.
+- **Solución:** Se pusieron los títulos en mayúsculas y en azul DICTUC, se agregó espacio entre el icono y el título, y se aumentó la separación entre el bloque de tarjetas y el siguiente bloque.
+- **Archivos modificados:** `src/app/(pages)/servicios/[slug]/page.js`

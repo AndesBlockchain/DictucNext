@@ -36,8 +36,8 @@ export default async function Servicio({ params }) {
         ))}
       </div>
 
-      <div>
-        <div id="tarjetas" className="flex flex-wrap p-8 bg-gray-100 justify-center">
+      <div className="mb-16">
+        <div id="tarjetas" className="flex flex-wrap p-8 bg-gray-100 justify-center [&_h3]:uppercase [&_h3]:!text-azul-dictuc [&_h3]:mt-2">
           <div className="lg:basis-1/3 md:basis-1/2 basis-full lg:pl-12 lg:pr-12 md:pl-8 md:pr-8 pl-4 pr-4 pb-4">
           <CardServicio
             key={1}

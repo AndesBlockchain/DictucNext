@@ -22,7 +22,7 @@ export default async function PaginasContenido({ params })
         <div className="p-8 pl-16 pr-16 text-sm [&_a]:text-azul-dictuc [&_a]:underline [&_a]:hover:text-blue-800">
           <div dangerouslySetInnerHTML={{__html: noticia.cuerpo}}></div>
          </div>
-         <div className="flex justify-center mb-8">
+         <div className="flex justify-center mt-8 mb-24">
            <StrapiImage
              imagen={noticia.foto}
              gatsbyImageData={noticia.foto?.localFile?.childImageSharp?.gatsbyImageData}

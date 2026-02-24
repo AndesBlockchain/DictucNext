@@ -29,3 +29,10 @@ Registro de cambios visuales realizados en el proyecto.
 - **Problema:** Los títulos de las tarjetas de servicio (Utilidad, Experiencia, Potenciales Clientes) estaban en minúsculas y en negro. Además faltaba espacio entre el bloque de tarjetas y la descripción del servicio.
 - **Solución:** Se pusieron los títulos en mayúsculas y en azul DICTUC, se agregó espacio entre el icono y el título, y se aumentó la separación entre el bloque de tarjetas y el siguiente bloque.
 - **Archivos modificados:** `src/app/(pages)/servicios/[slug]/page.js`
+
+---
+
+## Issue #39 - 2026-02-23
+- **Problema:** En la página de detalle de noticia, la foto estaba muy pegada al texto de la noticia y al footer.
+- **Solución:** Se agregó espacio arriba de la foto (32px) para separarla del texto, y se aumentó el espacio abajo (96px) para separarla del footer.
+- **Archivos modificados:** `src/app/(pages)/noticias/[slug]/page.js`

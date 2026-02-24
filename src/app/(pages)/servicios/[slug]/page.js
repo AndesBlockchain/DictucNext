@@ -37,7 +37,7 @@ export default async function Servicio({ params }) {
       </div>
 
       <div>
-        <div id="tarjetas" className="flex flex-wrap p-8 bg-gray-200 justify-center">
+        <div id="tarjetas" className="flex flex-wrap p-8 bg-gray-100 justify-center">
           <div className="lg:basis-1/3 md:basis-1/2 basis-full lg:pl-12 lg:pr-12 md:pl-8 md:pr-8 pl-4 pr-4 pb-4">
           <CardServicio
             key={1}
@@ -63,7 +63,7 @@ export default async function Servicio({ params }) {
           />
           </div>
         </div>
-        <div className="flex justify-center mb-4 pb-8 bg-gray-200">
+        <div className="flex justify-center mb-4 pb-8 bg-gray-100">
           <a href="#cotizar" className="bg-azul-dictuc text-white px-4 py-1 rounded-full shadow hover:bg-gray-900 transition-all text-sm">
             Cotizar servicio
           </a>

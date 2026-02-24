@@ -36,3 +36,10 @@ Registro de cambios visuales realizados en el proyecto.
 - **Problema:** En la página de detalle de noticia, la foto estaba muy pegada al texto de la noticia y al footer.
 - **Solución:** Se agregó espacio arriba de la foto (32px) para separarla del texto, y se aumentó el espacio abajo (96px) para separarla del footer.
 - **Archivos modificados:** `src/app/(pages)/noticias/[slug]/page.js`
+
+---
+
+## Issue #36 - 2026-02-23
+- **Problema:** La fecha en el detalle de noticia aparecía en un gris muy claro, casi invisible.
+- **Solución:** Se cambió el color de la fecha de `text-gray-300` a `text-gris-dictuc` (#53565A) para que sea legible y use el color corporativo.
+- **Archivos modificados:** `src/app/(pages)/noticias/[slug]/page.js`

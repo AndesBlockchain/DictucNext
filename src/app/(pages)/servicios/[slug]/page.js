@@ -21,6 +21,8 @@ export default async function Servicio({ params }) {
       banner={servicio.tipo_de_servicio.BannerBuscadorServicios.url}
       fallback={bannerLaboratorio}
       titulo={servicio.nombre}
+      titulo_visible={false}
+      icono_secundario={servicio.tipo_de_servicio.Icono.formats.thumbnail.url}
       breadcrum={[
         { label: "Home", link: "/" },
         { label: "Servicios", link: "/" },

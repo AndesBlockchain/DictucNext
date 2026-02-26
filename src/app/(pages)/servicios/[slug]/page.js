@@ -15,12 +15,12 @@ export default async function Servicio({ params }) {
 
   const { slug } = await params;
   const servicio = await useServicio(slug);
+ 
   const strapiApiUrl = process.env.STRAPI_API_URL;
   return (
     <PaginaInterior
-      banner={servicio.tipo_de_servicio.BannerBuscadorServicios.url}
+      banner={servicio?.banner}
       fallback={bannerLaboratorio}
-      titulo={servicio.nombre}
       titulo_visible={false}
       icono_secundario={servicio.tipo_de_servicio.Icono.formats.thumbnail.url}
       breadcrum={[

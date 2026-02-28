@@ -11,6 +11,8 @@ export default async function TodosLosServicios()
   const sectoresPais = await useSectoresPais();
   const servicios = await useServicios();
 
+  console.log("servicios",servicios.length);
+  
   return (
     <>
       <PaginaInterior

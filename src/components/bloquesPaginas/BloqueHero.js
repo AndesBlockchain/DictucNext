@@ -12,8 +12,6 @@ const margenSuperior= datosBloque.Bloque.MargenSuperior
 const margenInferior= datosBloque.Bloque.MargenInferior
 const colorFondo = datosBloque.Bloque?.colorFondoBloque?.Codigo || "white";
 
-console.log("datos bloque hero", datosBloque);
-
 // Clases CSS usando clsx
 const tituloClasses = clsx(
   "border border-[#53565A] text-[#53565A] uppercase text-base rounded-full",

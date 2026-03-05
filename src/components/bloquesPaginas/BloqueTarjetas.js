@@ -36,7 +36,6 @@ const BloqueTarjetas = ({ datosBloque }) => {
 
   const desktopBasis = getDesktopBasis(datosBloque.TarjetasPorFila ?? 3);
   const responsiveBasis = `basis-full sm:basis-1/2 ${desktopBasis}`;
-  console.log(datosBloque);
 
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
@@ -51,35 +50,31 @@ const BloqueTarjetas = ({ datosBloque }) => {
 
               {datosBloque.TipoTarjeta === "Full" && (
                 <CardServicio
-                titulo={titulo}
-                color_fondo={colorFondo}
-                color_texto={colorTexto}
-                imagen={imagen}
-                contenido={contenido}
-                callToAction={callToAction}
-              />
-            )}
+                  titulo={titulo}
+                  color_fondo={colorFondo}
+                  color_texto={colorTexto}
+                  imagen={imagen}
+                  contenido={contenido}
+                  callToAction={callToAction}
+                />
+              )}
 
               {datosBloque.TipoTarjeta === "Small" && (
                 <CardSmall
-                titulo={titulo}
-                color_fondo={colorFondo}
-                color_texto={colorTexto}
-                imagen={imagen}
-                contenido={contenido}
-                callToAction={callToAction}
-              />
-            )}
+                  titulo={titulo}
+                  color_fondo={colorFondo}
+                  color_texto={colorTexto}
+                  icono={imagen}
+                  contenido={contenido}
+                  callToAction={callToAction}
+                />
+              )}
               {datosBloque.TipoTarjeta === "Mini" && (
                 <CardMini
-                titulo={titulo}
-                color_fondo={colorFondo}
-                color_texto={colorTexto}
-                imagen={imagen}
-                contenido={contenido}
-                callToAction={callToAction}
-              />
-            )}
+                  titulo={titulo}
+                  callToAction={callToAction}
+                />
+              )}
 
             </div>
           );

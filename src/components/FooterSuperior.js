@@ -8,6 +8,7 @@ const FooterSuperior = async () => {
   const STRAPI_URL = process.env.STRAPI_API_URL;
 
   const data = await useMenuFooterSuperior();
+  console.log("data", data);
 
   return (
     <div id="footer-superior" className="grid grid-cols-12 pl-8 pr-8 pt-4 pb-2 w-full gap-6 bg-gray-200">
@@ -22,8 +23,10 @@ const FooterSuperior = async () => {
         <div className="text-azul-dictuc font-bold mb-3 self-start" style={{ marginLeft: '4px' }}>Certificaciones</div>
         <div className="flex flex-row gap-4 w-full">
           {data.map(item => (
-            <div key={item.id || item.documentId} className="w-16 h-16 flex items-center justify-center">
-              <img src={STRAPI_URL + item.Logo.url} alt="" className="h-16 w-auto mx-auto" />
+            <div key={item.id || item.documentId} className="w-16 h-16 flex items-center justify-center" target="_blank">
+              <a href={item.url}>
+                <img src={STRAPI_URL + item.Logo.url} alt="" className="h-16 w-auto mx-auto" />
+              </a>
             </div>
           ))}
         </div>

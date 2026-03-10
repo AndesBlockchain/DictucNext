@@ -3,7 +3,7 @@
  * Retorna null si el sector no existe
  */
 
-const useMenuSecundario = async (slug) => {
+const useMenuSecundario = async (seccion, slug) => {
   const baseUrl = process.env.STRAPI_API_URL;
 
   // Validar que STRAPI_API_URL esté definida
@@ -11,12 +11,10 @@ const useMenuSecundario = async (slug) => {
     throw new Error('STRAPI_API_URL environment variable is not defined');
   }
 
-  const path = `/api/menu-secundarios`;
+  const path = `/api/menu-secundarios?filters[seccion][slug][$eq]=${seccion}`;
 
-  const res = await fetch(baseUrl + path, {
-    next: { revalidate: 3600 }, // Revalidar cada hora
-    cache: 'force-cache'
-  });
+  console.log(baseUrl + path);
+  const res = await fetch(baseUrl + path);
 
   if (!res.ok) {
     throw new Error(`Failed to fetch menu secundario: ${slug} (Status: ${res.status})`);
@@ -24,10 +22,7 @@ const useMenuSecundario = async (slug) => {
 
   const data = await res.json();
 
-  // Validar que la respuesta tenga datos
-  if (!data || !data.data || !Array.isArray(data.data) || data.data.length === 0) {
-    return null;
-  }
+  console.log("data menu secundario", data);
   return data.data;
 };
 

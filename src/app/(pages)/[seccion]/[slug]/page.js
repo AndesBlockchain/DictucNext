@@ -10,10 +10,11 @@ import useMenuSecundario from "@/hooks/use-menu-secundario";
 
 export default async function PaginasContenido({params}) {
 
-  const {slug} = await params;
+  const {seccion, slug} = await params;
 
   const pagina = await usePagina(slug);
-  const menuSecundario= await useMenuSecundario();
+  const menuSecundario= await useMenuSecundario(seccion, slug);
+console.log("items menu secundario",menuSecundario);
   return (
     <PaginaInterior
       fallback={process.env.STRAPI_API_URL + pagina.Banner.url}

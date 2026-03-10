@@ -6,6 +6,7 @@ import FilaServicios from "./FilaServicios";
 const Servicios = ({
   sectores_pais,
   tipos_de_servicio,
+  unidades,
   sectores_pais_visibles,
   tipos_de_servicio_visibles,
   servicios,
@@ -38,6 +39,7 @@ const Servicios = ({
             tiposDeServicioVisibles={tipos_de_servicio_visibles}
             sectores_pais={sectores_pais}
             tipos_de_servicio={tipos_de_servicio}
+            unidades={unidades}
             servicios={servicios}
             onFiltrosChange={handleFiltrosChange}
           />

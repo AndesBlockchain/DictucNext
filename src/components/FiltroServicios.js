@@ -6,26 +6,30 @@ import Agente from "./Agente";
 const FiltroServicios = ({
   tipos_de_servicio,
   sectores_pais,
+  unidades,
   tiposDeServicioVisibles = true,
   sectoresPaisVisibles = true,
+  unidadesVisibles = true,
   onFiltrosChange,
   servicios
 }) => {
 
   const tiposDeServicio = tipos_de_servicio;
   const sectoresPais = sectores_pais;
-  
+
   // Estado de filtros
   const [filtros, setFiltros] = useState({
     busqueda: '',
-    tipoServicio: '',
-    sectoresPais: []
+    tiposServicio: [],
+    sectoresPais: [],
+    unidades: []
   });
 
   // Estados para servicios filtrados y conteos
   const [serviciosFiltrados, setServiciosFiltrados] = useState([]);
   const [conteoPorTipo, setConteoPorTipo] = useState({});
   const [conteoPorSector, setConteoPorSector] = useState({});
+  const [conteoPorUnidad, setConteoPorUnidad] = useState({});
 
   // Función para calcular conteo por tipo de servicio
   const calcularConteoPorTipo = (servicios) => {
@@ -39,6 +43,23 @@ const FiltroServicios = ({
       const tipoSlug = servicio.tipo_de_servicio?.slug;
       if (tipoSlug) {
         conteo[tipoSlug] = (conteo[tipoSlug] || 0) + 1;
+      }
+    });
+
+    return conteo;
+  };
+
+  // Función para calcular conteo por unidad (ejecutor)
+  const calcularConteoPorUnidad = (servicios) => {
+    const serviciosArray = Array.isArray(servicios) ? servicios : servicios?.data;
+    if (!serviciosArray || !Array.isArray(serviciosArray)) return {};
+
+    const conteo = {};
+
+    serviciosArray.forEach(servicio => {
+      const unidadNombre = servicio.unidad?.nombre;
+      if (unidadNombre) {
+        conteo[unidadNombre] = (conteo[unidadNombre] || 0) + 1;
       }
     });
 
@@ -73,18 +94,19 @@ const FiltroServicios = ({
     return serviciosArray.filter(servicio => {
       // Filtro 1: Búsqueda de texto
       if (filtros.busqueda && filtros.busqueda.trim() !== '') {
-        const busqueda = filtros.busqueda.toLowerCase();
-        const nombreMatch = servicio.nombre?.toLowerCase().includes(busqueda);
-        const contenidoMatch = servicio.contenido?.toLowerCase().includes(busqueda);
+        const normalizar = (str) => str?.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() ?? '';
+        const busqueda = normalizar(filtros.busqueda);
+        const nombreMatch = normalizar(servicio.nombre).includes(busqueda);
+        const contenidoMatch = normalizar(servicio.contenido).includes(busqueda);
 
         if (!nombreMatch && !contenidoMatch) {
           return false;
         }
       }
 
-      // Filtro 2: Tipo de servicio
-      if (filtros.tipoServicio && filtros.tipoServicio !== '') {
-        if (servicio.tipo_de_servicio?.slug !== filtros.tipoServicio) {
+      // Filtro 2: Tipos de servicio (OR: cualquier tipo seleccionado)
+      if (filtros.tiposServicio && filtros.tiposServicio.length > 0) {
+        if (!filtros.tiposServicio.includes(servicio.tipo_de_servicio?.slug)) {
           return false;
         }
       }
@@ -97,6 +119,14 @@ const FiltroServicios = ({
         );
 
         if (!tieneSector) {
+          return false;
+        }
+      }
+
+      // Filtro 4: Unidades (OR: cualquier unidad seleccionada)
+      if (filtros.unidades && filtros.unidades.length > 0) {
+        const unidadNombre = servicio.unidad?.nombre;
+        if (!unidadNombre || !filtros.unidades.includes(unidadNombre)) {
           return false;
         }
       }
@@ -119,9 +149,11 @@ const FiltroServicios = ({
     // 1. Calcular conteos sobre TODOS los servicios (sin filtrar)
     const conteoTipos = calcularConteoPorTipo(servicios);
     const conteoSectores = calcularConteoPorSector(servicios);
+    const conteoUnidades = calcularConteoPorUnidad(servicios);
 
     setConteoPorTipo(conteoTipos);
     setConteoPorSector(conteoSectores);
+    setConteoPorUnidad(conteoUnidades);
 
     // 2. Aplicar filtros
     const filtrados = filtrarServicios(servicios, filtros);
@@ -132,7 +164,7 @@ const FiltroServicios = ({
     if (typeof onFiltrosChange === 'function') {
       onFiltrosChange({
         busqueda: filtros.busqueda,
-        tipoServicio: filtros.tipoServicio,
+        tiposServicio: filtros.tiposServicio,
         sectoresPais: filtros.sectoresPais,
         serviciosFiltrados: filtrados
       });
@@ -147,8 +179,19 @@ const FiltroServicios = ({
   }
 
   const handleTipoServicioChange = (e) => {
-    const value = e.target.value;
-    setFiltros(prev => ({ ...prev, tipoServicio: value }));
+    const tipo = e.target.value;
+    const isChecked = e.target.checked;
+
+    setFiltros(prev => {
+      if (isChecked) {
+        if (!prev.tiposServicio.includes(tipo)) {
+          return { ...prev, tiposServicio: [...prev.tiposServicio, tipo] };
+        }
+        return prev;
+      } else {
+        return { ...prev, tiposServicio: prev.tiposServicio.filter(t => t !== tipo) };
+      }
+    });
   }
 
   const handleSectoresPaisChange = (e) => {
@@ -163,6 +206,22 @@ const FiltroServicios = ({
         return prev;
       } else {
         return { ...prev, sectoresPais: prev.sectoresPais.filter(s => s !== sector) };
+      }
+    });
+  }
+
+  const handleUnidadesChange = (e) => {
+    const unidad = e.target.value;
+    const isChecked = e.target.checked;
+
+    setFiltros(prev => {
+      if (isChecked) {
+        if (!prev.unidades.includes(unidad)) {
+          return { ...prev, unidades: [...prev.unidades, unidad] };
+        }
+        return prev;
+      } else {
+        return { ...prev, unidades: prev.unidades.filter(u => u !== unidad) };
       }
     });
   }
@@ -192,11 +251,11 @@ const FiltroServicios = ({
               return (
                 <div key={item.slug} style={{ display: "flex", alignItems: "center", marginBottom: 8 }}>
                   <input
-                    type="radio"
+                    type="checkbox"
                     id={`servicio-${item.id}`}
-                    name="tipo-servicio"
+                    name={item.nombre}
                     value={item.slug}
-                    checked={filtros.tipoServicio === item.slug}
+                    checked={filtros.tiposServicio.includes(item.slug)}
                     onChange={handleTipoServicioChange}
                   />
                   <label htmlFor={`servicio-${item.id}`} style={{ marginLeft: 8 }}>
@@ -232,6 +291,38 @@ const FiltroServicios = ({
                     onChange={handleSectoresPaisChange}
                   />
                   <label htmlFor={`sector-${item.id}`} style={{ marginLeft: 8 }}>
+                    {item.nombre}
+                  </label>
+                  <div className="badge badge-soft badge-primary" style={{ marginLeft: 'auto' }}>
+                    {count}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
+
+      {unidadesVisibles && unidades && unidades.data && (
+        <>
+          <div className="font-semibold mb-1 mt-1">Ejecutor</div>
+          <div>
+            {unidades.data.map(item => {
+              const count = conteoPorUnidad[item.nombre] || 0;
+              // Ocultar unidades sin servicios
+              if (count === 0) return null;
+
+              return (
+                <div key={item.id} style={{ display: "flex", alignItems: "center", marginBottom: 8 }}>
+                  <input
+                    type="checkbox"
+                    id={`unidad-${item.id}`}
+                    name={item.nombre}
+                    value={item.nombre}
+                    checked={filtros.unidades.includes(item.nombre)}
+                    onChange={handleUnidadesChange}
+                  />
+                  <label htmlFor={`unidad-${item.id}`} style={{ marginLeft: 8 }}>
                     {item.nombre}
                   </label>
                   <div className="badge badge-soft badge-primary" style={{ marginLeft: 'auto' }}>

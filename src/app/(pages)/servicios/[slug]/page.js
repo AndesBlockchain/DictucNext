@@ -29,18 +29,10 @@ export default async function Servicio({ params }) {
         { label: servicio.nombre }
       ]}
     >
-      <div className="ml-4 mr-4 mt-4"><strong>Tipo de Servicio:</strong> {servicio.tipo_de_servicio.nombre} </div>
-      <div className="ml-4 mr-4 mt-2"><strong>Ejecutor:</strong> {servicio.unidad.nombre}</div>
-      <div className="ml-4 mr-4 mb-8 mt-2">
-        <strong>Sectores: </strong>
-        {servicio.sectores_pais.map(sector => (
-          <span key={sector.slug}>{sector.nombre}</span>
-        ))}
-      </div>
-
+      <div className="text-lg font-bold mt-2 mb-4"><h2>{servicio.nombre}</h2></div>
       <div className="mb-16">
         <div id="tarjetas" className="flex flex-wrap p-8 bg-gray-100 justify-center [&_h3]:uppercase [&_h3]:!text-azul-dictuc [&_h3]:mt-2">
-          <div className="lg:basis-1/3 md:basis-1/2 basis-full lg:pl-12 lg:pr-12 md:pl-8 md:pr-8 pl-4 pr-4 pb-4">
+          <div className="lg:basis-1/3 md:basis-1/2 basis-full lg:pl-8 lg:pr-8 md:pl-8 md:pr-8 pl-4 pr-4 pb-4">
           <CardServicio
             key={1}
             titulo="Utilidad"
@@ -48,7 +40,7 @@ export default async function Servicio({ params }) {
             contenido={servicio.utilidad || "Por completar"}
           />
           </div>
-          <div className="lg:basis-1/3 md:basis-1/2 basis-full lg:pl-12 lg:pr-12 md:pl-8 md:pr-8 pl-4 pr-4 pb-4">
+          <div className="lg:basis-1/3 md:basis-1/2 basis-full lg:pl-8 lg:pr-8 md:pl-8 md:pr-8 pl-4 pr-4 pb-4">
           <CardServicio
             key={2}
             titulo="Experiencia"
@@ -56,7 +48,7 @@ export default async function Servicio({ params }) {
             contenido={servicio.experiencia || "Por completar"}
           />
           </div>
-          <div className="lg:basis-1/3 md:basis-1/2 basis-full lg:pl-12 lg:pr-12 md:pl-8 md:pr-8 pl-4 pr-4 pb-4">
+          <div className="lg:basis-1/3 md:basis-1/2 basis-full lg:pl-8 lg:pr-8 md:pl-8 md:pr-8 pl-4 pr-4 pb-4">
           <CardServicio
             key={3}
             titulo="Potenciales Clientes"
@@ -92,6 +84,15 @@ export default async function Servicio({ params }) {
           <div className="mt-6 mb-12" dangerouslySetInnerHTML={{ __html: servicio.tabla_especificaciones }} />
         </div>
       )}
+
+      <div className="ml-4 mr-4 mt-4"><strong>Tipo de Servicio:</strong> {servicio.tipo_de_servicio.nombre} </div>
+      <div className="ml-4 mr-4 mt-2"><strong>Ejecutor:</strong> {servicio.unidad.nombre}</div>
+      <div className="ml-4 mr-4 mb-8 mt-2">
+        <strong>Sectores: </strong>
+        {servicio.sectores_pais.map(sector => (
+          <span key={sector.slug}>{sector.nombre}</span>
+        ))}
+      </div>
 
       <div id="cotizar" className="w-full md:w-1/2 flex justify-center mx-auto mb-6">
         <Contacto

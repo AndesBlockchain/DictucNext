@@ -3,8 +3,6 @@ import StrapiImage from "./StrapiImage";
 
 export default function CardSmall({ titulo, callToAction, icono, contenido }) {
 
-console.log("icono", icono);
-
   return (
     <div className="border rounded-lg shadow-xl p-4 grid grid-cols-3 w-full">
       <div className="col-span-1 p-4">

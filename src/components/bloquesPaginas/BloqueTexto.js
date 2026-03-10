@@ -6,9 +6,7 @@ const BloqueTexto = ({ datosBloque }) => {
     const letra = datosBloque.Texto?.tipografia?.class || "text-sm";
     const colorLetra = datosBloque.Texto?.colorTexto?.Codigo || "black";
     const botones = datosBloque.CallToAction || [];
-    
-    console.log(datosBloque);
-    
+
 
     // Obtener el texto de forma segura
     const textoHTML = datosBloque.Texto?.Texto || '';

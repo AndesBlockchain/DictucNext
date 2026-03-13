@@ -3,7 +3,7 @@ import FranjaAzul from "./FranjaAzul";
 import ItemSectoresPais from "./ItemSectoresPais";
 import useSectoresPais from "@/hooks/use-sectores-pais";
 
-const SectoresPais = async (titulo) => {
+const SectoresPais = async () => {
 
     const res = await useSectoresPais();
     // Validar que res y res.data existan
@@ -30,7 +30,8 @@ const SectoresPais = async (titulo) => {
     if (totalCount === 0) {
         return null;
     }
-
+    console.log(sectores);
+    const titulo = "Encuentra soluciones y servicios según tu tipo de industria";
     return (
         <div id="sectores" className="relative mt-4 bg-white lg:-mt-8 p-2 pb-4 pt-5 max-w-4xl mx-auto rounded-3xl shadow-lg">
             <FranjaAzul />

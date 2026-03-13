@@ -32,7 +32,7 @@ const IndexPage = async () => {
   });
 
   return (
-    <main className="container m-auto max-w-6xl mb-4 font-montserrat bg-white text-gris-dictuc">
+    <main className="w-full m-auto mb-4 font-montserrat bg-white text-gris-dictuc">
       <BarraSuperior />
       <Carrusel />
       <SectoresPais />

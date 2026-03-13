@@ -1,5 +1,5 @@
 import React from "react";
-const logoDictuc = "/images/logo_dictuc.png"
+const logoDictuc = "/images/logo_dictuc_interior.png"
 import useSiteMetadata from "../hooks/use-site-metadata";
 import useMenuSuperior from "../hooks/use-menu-superior";
 
@@ -37,11 +37,11 @@ const BarraSuperior = async () => {
 
       {/* Logo */}
       <div id="logo" className="col-span-3">
-        <a href="/"><img src={logoDictuc} alt="Logo Dictuc" className="h-20 mt-16 lg:mt-8 mb-8 ml-8" /></a>
+        <a href="/"><img src={logoDictuc} alt="Logo Dictuc" className="h-8 pt-2 mt-16 lg:mt-6 mb-6 ml-6" /></a>
       </div>
 
       {/* Menu Area */}
-      <div id="menu-superior" className="col-span-9 items-start mt-4">
+      <div id="menu-superior" className="col-span-9 items-start mt-8">
         {/* Navigation Wrapper */}
         <nav className="
           hidden peer-checked:flex 
@@ -53,12 +53,9 @@ const BarraSuperior = async () => {
           gap-8 lg:gap-4 
           p-8 lg:p-0 lg:pt-1 lg:pr-2 
           z-50 lg:z-auto
-          font-semibold
-          text-xs
-          xl:text-sm
-          2xl:text-md
+          text-sm lg:text-xs 
         ">
-          <a href="/" className="w-full lg:w-auto text-center lg:text-left py-2 lg:py-0 hover:text-blue-600 cursor-pointer">
+          <a href="/" className="w-full lg:w-auto text-center lg:text-left py-2 lg:py-0 hover:text-blue-600 cursor-pointer font-bold lg:font-normal">
             HOME
           </a>
 
@@ -66,7 +63,7 @@ const BarraSuperior = async () => {
             <a
               key={item.id || item.slug || item.Nombre}
               href={item.link}
-              className="w-full lg:w-auto text-center lg:text-left py-2 lg:py-0 hover:text-blue-600 cursor-pointer"
+              className="w-full lg:w-auto text-center lg:text-left py-2 lg:py-0 hover:text-blue-600 text-[12px] lg:text-[10px] cursor-pointer font-bold lg:font-normal"
             >
               {item.Nombre}
             </a>

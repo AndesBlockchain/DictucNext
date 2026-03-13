@@ -15,36 +15,35 @@ const ContenedorTiposServicio = async ({ useIcono = false }) => {
   }
 
   return (
-    <div id="items-servicios" className="grid gap-6 mt-8 pl-2 pr-2">
-      <div className="grid grid-cols-3 lg:grid-cols-5 gap-6 justify-center">
-        {tiposArray.map((item) => {
-          // Obtener URL de imagen de forma segura
-          const iconoUrl = item.Icono.url;
-          const fotoPortadaUrl = item.fotoPortada.url;
-          const imageUrl = useIcono ? iconoUrl : fotoPortadaUrl;
+    <div id="items-servicios" className="flex flex-wrap gap-4 mt-8 pl-2 pr-2 justify-center">
+      {tiposArray.map((item) => {
+        // Obtener URL de imagen de forma segura
+        const iconoUrl = item.Icono.url;
+        const fotoPortadaUrl = item.fotoPortada.url;
+        const imageUrl = useIcono ? iconoUrl : fotoPortadaUrl;
 
-          return (
+        return (
+          <div key={item.slug} className="flex lg:basis-1/6 md:basis-1/4">
             <a
-              key={item.slug}
               href={"/tipos-de-servicio/" + item.slug}
-              className="flex flex-col justify-center lg:w-[215px] lg:h-[180px] group"
+              className="justify-center lg:w-[215px] lg:h-[180px] group"
             >
               {imageUrl && (
                 <img
                   src={STRAPI_URL + imageUrl}
                   alt={item.nombre}
-                  className="rounded-xl object-cover shadow-md w-full h-full"
+                  className="rounded-xl object-cover shadow-md w-full"
                 />
               )}
-              <div className="w-full bg-gray-700 rounded-b-xl -mt-[40px] py-2 text-center relative z-10">
+              <div className="bg-gray-700 rounded-b-xl -mt-[40px] py-2 text-center relative z-10">
                 <span className="text-white lg:text-xs xl:text-xs text-xs font-bold">
                   {item.nombre}
                 </span>
               </div>
             </a>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
   )
 }

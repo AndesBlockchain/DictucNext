@@ -10,7 +10,8 @@ const FooterSuperior = async () => {
   const data = await useMenuFooterSuperior();
 
   return (
-    <div id="footer-superior" className="grid grid-cols-12 pl-8 pr-8 pt-4 pb-2 w-full gap-6 bg-gray-200">
+    <div id="footer-superior" className="m-auto  bg-gray-200">
+      <div className="grid grid-cols-12 pl-8 pr-8 pt-4 pb-2 w-full gap-6 max-w-6xl mx-auto">
       {/* Logo Escuela de Ingeniería UC */}
       <div className="lg:col-span-3 md:col-span-4 col-span-12 content-center">
         <div>
@@ -37,6 +38,7 @@ const FooterSuperior = async () => {
           <img src={logo_gbc} className="h-12" alt="Logo GBC" />
         </div>
       </div>
+    </div>
     </div>
   )
 }

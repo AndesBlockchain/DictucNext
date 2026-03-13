@@ -14,6 +14,7 @@ const Footer = async () => {
   return (
     <div>
       <footer className="text-sm text-white flex flex-col lg:flex-row justify-between items-center pt-6 pb-6 pl-10 pr-10 bg-gray-500">
+        <div className="container m-auto max-w-6xl">
         <div id="footer-sobre-dictuc" className="flex flex-col w-full lg:w-auto basis-full">
           <div className="mb-2 font-bold text-lg">Sobre Dictuc</div>
           <div className="flex flex-col lg:flex-row gap-4">
@@ -55,10 +56,12 @@ const Footer = async () => {
             </div>
           </div>
         </div>
+        </div>
       </footer>
       <div className="flex flex-row bg-black text-white text-xs p-1 justify-center">
         <a href="/nosotros/condiciones-de-uso-del-sitio">Condiciones de Uso del Sitio</a>
       </div>
+      
     </div>
   );
 };

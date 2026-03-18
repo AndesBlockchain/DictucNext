@@ -3,7 +3,7 @@ import clsx from "clsx"
 import CallToAction from "./CallToAction";
 import StrapiImage from "./StrapiImage";
 
-const CardServicio = ({ titulo, icono, imagen, contenido, callToAction=false, color_fondo="white", color_texto="black" }) => {
+const CardServicio = ({ titulo, icono, imagen, contenido, callToAction = false, color_fondo = "white", color_texto = "black" }) => {
 
 
   // Función para detectar si el contenido es una lista
@@ -16,7 +16,7 @@ const CardServicio = ({ titulo, icono, imagen, contenido, callToAction=false, co
   return (
     <div className={clsx("flex flex-col w-full h-full rounded-xl shadow-lg overflow-hidden",
       color_fondo && color_fondo !== "white" && "border")}>
-      <div className={clsx("p-4 h-full flex flex-col flex-1", bg_color)}>
+      <div className={clsx("px-8 py-4 h-full flex flex-col flex-1", bg_color)}>
 
         <StrapiImage
           imagen={imagen}
@@ -30,10 +30,10 @@ const CardServicio = ({ titulo, icono, imagen, contenido, callToAction=false, co
           {titulo}
         </h3>
 
-        <div className={clsx("text-gray-600 text-xs leading-relaxed mb-6 flex-1", `text-${color_texto}`)}>
+        <div className={clsx("text-gray-600 text-md leading-tight mb-6 flex-1", `text-${color_texto}`)}>
           {esLista(contenido) ? (
             <div
-              className="list-inside list-disc [&_ul]:list-disc [&_ol]:list-decimal [&_li]:ml-4"
+              className="list-inside list-disc [&_ul]:list-disc [&_ol]:list-decimal [&_li]:ml-4 [&_li]:mb-1.5"
               dangerouslySetInnerHTML={{ __html: contenido }}
             />
           ) : (

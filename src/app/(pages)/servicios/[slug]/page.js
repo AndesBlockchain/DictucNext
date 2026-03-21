@@ -29,7 +29,7 @@ export default async function Servicio({ params }) {
         { label: servicio.nombre }
       ]}
     >
-      <div className="text-lg font-bold mt-2 mb-4"><h2>{servicio.nombre}</h2></div>
+      <div className="text-2xl font-bold mt-2 mb-4 text-left"><h2>{servicio.nombre}</h2></div>
       <div className="mb-16">
         <div id="tarjetas" className="flex flex-wrap p-8 bg-gray-100 justify-center [&_h3]:uppercase [&_h3]:!text-azul-dictuc [&_h3]:mt-2">
           <div className="lg:basis-1/3 md:basis-1/2 basis-full lg:pl-8 lg:pr-8 md:pl-8 md:pr-8 pl-4 pr-4 pb-4">
@@ -94,7 +94,7 @@ export default async function Servicio({ params }) {
         ))}
       </div>
 
-      <div id="cotizar" className="w-full md:w-1/2 flex justify-center mx-auto mb-6">
+      <div id="cotizar" className="w-full md:w-3/4 flex justify-center mx-auto mb-6">
         <Contacto
           titulo="Solicitud de <span class='text-azul-dictuc'>Cotización</span>"
           border={true}

@@ -4,9 +4,9 @@ import StrapiImage from "./StrapiImage";
 const BannerInterior = ({ banner, gatsbyImageData, fallback, alt = "Banner", titulo = "", titulo_visible = true, color_titulo = "azul-dictuc", icono_secundario = "" }) => {
 
   return (
-    <div className="w-full pt-2 mb-2 relative">
+    <div className="w-full pt-2 mb-2 relative max-h-[250px] overflow-hidden">
       {titulo_visible && (
-        <div className={"text-sm xl:text-2xl w-auto z-10 opacity-85 text-white pl-10 pr-10 px-6 py-3 rounded-r-full absolute bottom-12 left-0 bg-" + color_titulo}>
+        <div className={"text-sm xl:text-2xl min-w-1/4 z-10 opacity-85 text-white pl-10 pr-10 px-6 py-3 absolute bottom-12 left-0 bg-" + color_titulo}>
           {titulo}
         </div>
       )}

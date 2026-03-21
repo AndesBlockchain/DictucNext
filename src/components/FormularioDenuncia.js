@@ -152,7 +152,7 @@ export default function FormularioDenuncia() {
       // });
 
       showToast('Formulario preparado correctamente (pendiente configurar URL de envío)', 'success');
-
+      console.log(payload);
       // Resetear el formulario después del envío exitoso
       reset();
 
@@ -206,7 +206,7 @@ export default function FormularioDenuncia() {
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Nombre *</legend>
               <input
-                className="input validator"
+                className="input"
                 {...register("nombre", { required: watchAnonimo === 'no' })}
                 aria-invalid={errors.nombre ? "true" : "false"}
                 placeholder="Ingrese su nombre completo"

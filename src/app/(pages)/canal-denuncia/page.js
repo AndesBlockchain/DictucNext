@@ -11,11 +11,11 @@ export default function FormularioDenunciaPage() {
   return (
     <PaginaInterior
       className="justify-center"
-      fallback={BannerTeclado}
       titulo="Canal de Denuncia"
+      fallback={BannerTeclado}
       breadcrum={[
         { label: "Home", link: "/" },
-        { label: "Canal de Denuncia", link: "/paginas/canal-denuncia" }
+        { label: "Canal de Denuncia", link: "/canal-denuncia" }
       ]}
     >
       <div className="ml-auto mr-auto xl:w-3/5 lg:w-4/5 md:w-4/5 sm:w-full px-4 justify-center items-center mb-6">

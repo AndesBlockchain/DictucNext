@@ -30,7 +30,7 @@ const BloquePersonas = ({datosBloque}) => {
           );
 
           return (
-                <div className="flex-basis-4 justify-center items-center max-w-sm w-full h-full mx-auto rounded-md shadow-lg bg-gray-100 p-4" key={persona.id}>
+                <div className="flex-basis-4 justify-center items-center max-w-sm w-full h-full mx-auto rounded-lg shadow-lg bg-gray-100 pt-6 p-4" key={persona.id}>
                   <div className="w-24 bg-white m-auto rounded-sm">
                     {imagenComponent}
                   </div>
@@ -45,12 +45,12 @@ const BloquePersonas = ({datosBloque}) => {
                     <a href={persona.LinkedIn} target="_blank" rel="noopener noreferrer"><img src={LogoLinkedIn} alt="LinkedIn" className="w-4 h-4 m-auto" /></a>
                   </div>
                   {persona.link_ver_mas_informacion && (
-                    <div className="text-center text-sm">
+                    <div className="text-center text-xs">
                       <a className="text-azul-dictuc font-semibold" href={persona.link_ver_mas_informacion} target="_blank" rel="noopener noreferrer">Más información</a>
                     </div>
                   )}
                    {persona.link_info_adicional && (
-                  <div className="text-center text-sm">
+                  <div className="text-center text-xs">
                     <a className="text-azul-dictuc font-semibold" href={persona.link_info_adicional} target="_blank" rel="noopener noreferrer">{persona.label_info_adicional}</a>
                   </div>
                    )}

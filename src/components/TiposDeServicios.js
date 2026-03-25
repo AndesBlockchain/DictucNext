@@ -18,7 +18,7 @@ const TiposDeServicios = () => {
       que responden a los desafíos que enfrenta tu negocio.</p><br />
       <p className="text-azul-dictuc font-bold text-sm">Confía en nuestra experiencia para transformar tus ideas en resultados exitosos.</p>
       </div>
-      <ContenedorTiposServicio useIcono={false}/>
+      <ContenedorTiposServicio className="mt-12" useIcono={false}/>
     </div>
   </div>
 )}

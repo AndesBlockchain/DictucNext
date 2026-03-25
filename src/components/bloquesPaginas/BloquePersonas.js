@@ -11,8 +11,8 @@ const BloquePersonas = ({datosBloque}) => {
     console.log(personasSorted)
     return (
         <Bloque datosBloque={datosBloque.Bloque}>
-        <div className="grid grid-cols-2 justify-center items-center gap-8 mt-8 lg:ml-32 lg:mr-32 md:mr-32 md:ml-32 sm:mr-2 sm:ml-2">
-        {personasSorted.map((persona)=>{
+        <div className="container m-auto max-w-6xl grid grid-cols-1 md:grid-cols-2 justify-center items-center xl:gap-16 lg:gap-8 gap-4 mt-8">
+        {personasSorted.map((persona)=>{ 
           // Normalizar imagen: usar formats.thumbnail.url como fallback si existe
           const imagenFallback = persona.Foto?.formats?.thumbnail?.url || persona.Foto?.url;
           const imagenData = persona.Foto?.localFile?.childImageSharp?.gatsbyImageData
@@ -30,8 +30,8 @@ const BloquePersonas = ({datosBloque}) => {
           );
 
           return (
-                <div className="flex flex-col justify-center items-center w-60 rounded-md shadow-lg bg-gray-100 p-4" key={persona.id}>
-                  <div className="w-24 bg-white rounded-sm">
+                <div className="flex-basis-2 justify-center items-center max-w-sm w-full h-full mx-auto rounded-md shadow-lg bg-gray-100 p-4" key={persona.id}>
+                  <div className="w-24 bg-white m-auto rounded-sm">
                     {imagenComponent}
                   </div>
                   <div className="mt-3 text-azul-dictuc font-bold text-center">
@@ -42,7 +42,7 @@ const BloquePersonas = ({datosBloque}) => {
                   </div>
                   <div className="mt-2 text-center text-sm" dangerouslySetInnerHTML={{__html: persona.Descripcion}} />
                   <div className="mt-2 mb-2">
-                    <a href={persona.LinkedIn} target="_blank" rel="noopener noreferrer"><img src={LogoLinkedIn} alt="LinkedIn" className="w-4 h-4" /></a>
+                    <a href={persona.LinkedIn} target="_blank" rel="noopener noreferrer"><img src={LogoLinkedIn} alt="LinkedIn" className="w-4 h-4 m-auto" /></a>
                   </div>
                   {persona.link_ver_mas_informacion && (
                     <div className="text-center text-sm">

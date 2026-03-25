@@ -64,6 +64,7 @@ const contenedorPrincipalClasses = clsx(
 
   return (
     <div className={contenedorPrincipalClasses}>
+      <div className="container m-auto max-w-6xl">
       <div className={tituloClasses}
           dangerouslySetInnerHTML={{__html:datosBloque.Bloque.Titulo}} />
       
@@ -84,6 +85,7 @@ const contenedorPrincipalClasses = clsx(
           <DegradeBase color="azul-dictuc" toRight={false} />
           </div>
         )}
+        </div>
      </div>
 );
 };

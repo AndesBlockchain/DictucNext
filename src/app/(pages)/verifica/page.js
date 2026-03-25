@@ -34,14 +34,17 @@ export default async function VerificaPage() {
       ]}
     >
       {/* Formulario de verificación (Client Component) */}
-      <VerificaForm verificacionUrl={verificacionUrl} />
+      <div className="container m-auto max-w-12xl">
+          <VerificaForm verificacionUrl={verificacionUrl} />
+    
 
-      {/* Sección de noticias */}
-      <Noticias
-        noticias={noticias}
-        className="mt-6"
-        titulo='<span class="text-azul-dictuc">En qué </span>estamos'
-      />
+        {/* Sección de noticias */}
+        <Noticias
+          noticias={noticias}
+          className="mt-6"
+          titulo='<span class="text-azul-dictuc">En qué </span>estamos'
+        />
+      </div>
     </PaginaInterior>
   );
 }

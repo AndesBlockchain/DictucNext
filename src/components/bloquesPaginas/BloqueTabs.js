@@ -14,7 +14,7 @@ const BloqueTabs = ({ datosBloque }) => {
 
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto max-w-6xl px-4 py-8">
         <div className="mb-6 text-sm" dangerouslySetInnerHTML={{__html: datosBloque.texto?.Texto || ""}} />
         <div className="mb-8">
           {/* Tab buttons */}

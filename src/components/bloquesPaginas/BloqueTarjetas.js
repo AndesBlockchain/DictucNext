@@ -41,7 +41,7 @@ const BloqueTarjetas = ({ datosBloque }) => {
     <Bloque datosBloque={datosBloque.Bloque}>
       <div
         id="tarjetas"
-        className="flex flex-wrap justify-center gap-y-8"
+        className="container m-auto max-w-6xl flex flex-wrap justify-center gap-y-8"
       >
         {tarjetas.map((tarjeta, index) => {
           const { id, titulo, colorFondo, colorTexto, imagen, contenido, callToAction } = normalizarTarjeta(tarjeta);

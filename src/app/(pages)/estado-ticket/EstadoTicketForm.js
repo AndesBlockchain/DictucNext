@@ -97,7 +97,7 @@ export default function EstadoTicketForm({ strapiApiUrl }) {
   };
 
   return (
-    <div>
+    <div className="container m-auto max-w-12xl">
       <fieldset className="fieldset border-base-300 rounded-box w-xs border p-4 mb-8">
         <legend className="fieldset-legend">Ingrese el Nº de Ticket</legend>
         <input

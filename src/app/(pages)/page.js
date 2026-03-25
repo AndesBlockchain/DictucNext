@@ -40,7 +40,7 @@ const IndexPage = async () => {
         titulo="¿Qué <span class='text-azul-dictuc'>Necesitas?</span>"
         franja={true}
       />
-      <TiposDeServicios />
+      <TiposDeServicios/>
       <div className="flex justify-center mt-6">
         <a href="/servicios/todos-los-servicios" className="bg-azul-dictuc text-white px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver todos</a>
       </div>

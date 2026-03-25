@@ -14,9 +14,11 @@ export default async function HomeNoticiasPage() {
     <PaginaInterior fallback={BannerNoticias}
                     titulo="Noticias y Proyectos Destacados"
                     breadcrum={[{ label: "Home", link: "/" }, { label: "Noticias y Proyectos Destacados", link: "/noticias" }]}> 
-    <Noticias noticias={noticias} linkFiltroNoticias={true} titulo="Últimas Noticias"/>
-    <Titulo titulo="Nuestro Instagram"/>
-    <Instagram />
+    <div className="container m-auto max-w-12xl">
+      <Noticias noticias={noticias} linkFiltroNoticias={true} titulo="Últimas Noticias"/>
+      <Titulo titulo="Nuestro Instagram"/>
+      <Instagram />
+    </div>
     </PaginaInterior>
   );
 }

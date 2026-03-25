@@ -30,8 +30,10 @@ export default async function Servicio({ params }) {
       ]}
     >
       <div className="text-2xl font-bold mt-2 mb-4 text-left"><h2>{servicio.nombre}</h2></div>
-      <div className="mb-16">
-        <div id="tarjetas" className="flex flex-wrap p-8 bg-gray-100 justify-center [&_h3]:uppercase [&_h3]:!text-azul-dictuc [&_h3]:mt-2">
+      <div className="bg-gray-100">
+      <div className="container mx-auto max-w-6xl">
+        <div id="tarjetas" className="flex flex-wrap p-8 justify-center [&_h3]:uppercase [&_h3]:!text-azul-dictuc [&_h3]:mt-2">
+    
           <div className="lg:basis-1/3 md:basis-1/2 basis-full lg:pl-8 lg:pr-8 md:pl-8 md:pr-8 pl-4 pr-4 pb-4">
           <CardServicio
             key={1}
@@ -62,8 +64,10 @@ export default async function Servicio({ params }) {
             Cotizar servicio
           </a>
         </div>
+        </div>
       </div>
 
+      <div className="container mx-auto max-w-6xl">
       <FranjaAzul />
       <div className="ml-8 mr-8">
       <div className="text-lg text-center mt-2 uppercase font-semibold">
@@ -85,15 +89,6 @@ export default async function Servicio({ params }) {
         </div>
       )}
 
-      <div className="ml-4 mr-4 mt-4"><strong>Tipo de Servicio:</strong> {servicio.tipo_de_servicio.nombre} </div>
-      <div className="ml-4 mr-4 mt-2"><strong>Ejecutor:</strong> {servicio.unidad.nombre}</div>
-      <div className="ml-4 mr-4 mb-8 mt-2">
-        <strong>Sectores: </strong>
-        {servicio.sectores_pais.map(sector => (
-          <span key={sector.slug}>{sector.nombre}</span>
-        ))}
-      </div>
-
       <div id="cotizar" className="w-full md:w-3/4 flex justify-center mx-auto mb-6">
         <Contacto
           titulo="Solicitud de <span class='text-azul-dictuc'>Cotización</span>"
@@ -103,6 +98,19 @@ export default async function Servicio({ params }) {
           strapiApiUrl={strapiApiUrl}
           codigoUnidad={servicio.unidad.codigoDictuc}
         />
+      </div>
+
+
+      <div className="ml-4 mr-4 mt-4"><strong>Tipo de Servicio:</strong> {servicio.tipo_de_servicio.nombre} </div>
+      <div className="ml-4 mr-4 mt-2"><strong>Ejecutor:</strong> {servicio.unidad.nombre}</div>
+      <div className="ml-4 mr-4 mb-8 mt-2">
+        <strong>Sectores: </strong>
+        {servicio.sectores_pais.map(sector => (
+          <span key={sector.slug}>{sector.nombre}</span>
+        ))}
+      </div>
+
+
       </div>
     </PaginaInterior>
   );

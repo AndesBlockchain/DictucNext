@@ -28,7 +28,7 @@ const Servicios = ({
   };
 
   return (
-    <div className="mb-4 container m-auto max-w-12xl">
+    <div className="mb-4 container m-auto max-w-6xl">
       {/* Contenedor flex responsivo */}
       <div className="flex flex-row gap-4 md:gap-6">
 

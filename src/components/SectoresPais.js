@@ -30,7 +30,7 @@ const SectoresPais = async () => {
     if (totalCount === 0) {
         return null;
     }
-    console.log(sectores);
+
     const titulo = "Encuentra soluciones y servicios según tu tipo de industria";
     return (
         <div id="sectores" className="relative mt-4 bg-white lg:-mt-8 p-2 pb-4 pt-5 max-w-4xl mx-auto rounded-3xl shadow-lg">

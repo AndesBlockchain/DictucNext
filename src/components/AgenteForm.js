@@ -5,7 +5,7 @@ import ModalAgente from "./ModalAgente"
 const AgenteForm = () => {
     const [modalAbierto, setModalAbierto] = useState(false)
     const [textoConsulta, setTextoConsulta] = useState("")
-    const [placeholder, setPlaceholder] = useState("Describe lo que estas buscando, el servicio que necesitas o el problema en que necesitas de nuestra ayuda")
+    const [placeholder, setPlaceholder] = useState("Describe lo que estás buscando, el servicio que necesitas o el problema en que necesitas de nuestra ayuda")
 
     const handleConsultar = () => {
         if (!textoConsulta.trim()) {

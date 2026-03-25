@@ -14,7 +14,7 @@ export default async function PaginasContenido({params}) {
 
   const pagina = await usePagina(slug);
   const menuSecundario= await useMenuSecundario(seccion, slug);
-console.log("items menu secundario",menuSecundario);
+
   return (
     <PaginaInterior
       fallback={process.env.STRAPI_API_URL + pagina.Banner.url}

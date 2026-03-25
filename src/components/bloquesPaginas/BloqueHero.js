@@ -10,7 +10,7 @@ const BloqueHero = ({ datosBloque }) => {
     <Bloque datosBloque={{ ...datosBloque.Bloque, OcultarTitulo: true }}>
       <div className="container m-auto max-w-6xl pl-8 pr-8">
       <div
-        className="border border-[#53565A] text-[#53565A] uppercase text-base rounded-full
+        className="border border-[#53565A] text-[#53565A] text-base rounded-full
           py-4 px-8 w-fit min-w-[40%] mx-auto relative translate-y-1/2 z-20 mb-0 text-center bg-white font-semibold"
         dangerouslySetInnerHTML={{ __html: datosBloque.Bloque.Titulo }}
       />
@@ -29,8 +29,8 @@ const BloqueHero = ({ datosBloque }) => {
           <div dangerouslySetInnerHTML={{ __html: datosBloque.texto.replaceAll("classname", "class") }} />
         </div>
 
-        <div className="absolute -bottom-8 left-0 right-0 overflow-hidden h-[40px]">
-          <div className="[&>div]:mt-0 [&>div]:mb-0">
+        <div className="absolute xs:-bottom-16 sm:-bottom-12 md:-bottom-8 lg:-bottom-4 left-0 right-0 overflow-hidden h-[40px]">
+          <div className="hidden sm:block [&>div]:mt-0 [&>div]:mb-0">
             <DegradeBase color="azul-dictuc" toRight={fotoADerecha} />
           </div>
         </div>

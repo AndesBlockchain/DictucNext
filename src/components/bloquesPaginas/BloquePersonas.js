@@ -8,7 +8,7 @@ const BloquePersonas = ({datosBloque}) => {
     const personasSorted = datosBloque.etiqueta_persona.personas.sort((a, b) => a.sortOrder - b.sortOrder);
 
 
-    console.log(personasSorted)
+
     return (
         <Bloque datosBloque={datosBloque.Bloque}>
         <div className="container m-auto max-w-6xl grid grid-cols-1 md:grid-cols-2 justify-center items-center xl:gap-16 lg:gap-8 gap-4 mt-8">

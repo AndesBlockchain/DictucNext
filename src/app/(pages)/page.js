@@ -42,7 +42,7 @@ const IndexPage = async () => {
       />
       <TiposDeServicios/>
       <div className="flex justify-center mt-6">
-        <a href="/servicios/todos-los-servicios" className="bg-azul-dictuc text-white px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver todos</a>
+        <a href="/servicios/todos-los-servicios" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver todos</a>
       </div>
       <Noticias noticias={noticias} titulo='<span class="text-azul-dictuc">Noticias</span> destacadas' />
       <FooterSuperior />

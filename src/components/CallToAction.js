@@ -8,12 +8,11 @@ const CallToAction = ({ url, colorFondo, colorTexto, ComoAbrir, texto }) => {
   
     // Construir className de forma segura
     const getClassName = () => {
-        const baseClasses = "btn rounded-full";
-        const colorFondoCodigo = colorFondo?.Codigo === "azul-dictuc" ? "primary" : colorFondo?.Codigo;
-        const colorFondoClass = colorFondoCodigo ? `btn-${colorFondoCodigo}` : 'btn-primary';
-        const colorTextoClass = colorTexto?.Codigo ? `text-${colorTexto.Codigo}` : 'text-azul-dictuc';
-        
-        return [baseClasses, colorFondoClass, colorTextoClass].filter(Boolean).join(' ');
+        const baseClasses = "bg-azul-dictuc text-white font-bold rounded-full px-4 py-2 text-xs hover:bg-azul-dictuc/90 transition-all";
+        const bgOverride = colorFondo?.Codigo && colorFondo.Codigo !== "azul-dictuc" ? `bg-${colorFondo.Codigo}` : '';
+        const textOverride = colorTexto?.Codigo ? `text-${colorTexto.Codigo}` : '';
+
+        return [baseClasses, bgOverride, textOverride].filter(Boolean).join(' ');
     };
 
     return (

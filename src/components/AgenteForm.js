@@ -28,7 +28,7 @@ const AgenteForm = () => {
                     />
                     <div className="flex justify-end">
                         <button
-                            className="bg-azul-dictuc text-white px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all"
+                            className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all"
                             onClick={handleConsultar}
                         >
                             Consultar

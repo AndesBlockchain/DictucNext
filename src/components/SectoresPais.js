@@ -83,7 +83,7 @@ const SectoresPais = async () => {
             <div className="flex justify-center mt-6">
                 <a
                     href="/servicios/todos-los-servicios"
-                    className="btn btn-primary btn-outline btn-xs rounded-full px-4"
+                    className="bg-azul-dictuc text-white font-bold rounded-full px-4 py-2 text-xs hover:bg-azul-dictuc/90 transition-all"
                 >
                     Ver todos los Servicios
                 </a>

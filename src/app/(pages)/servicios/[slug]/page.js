@@ -58,7 +58,7 @@ export default async function Servicio({ params }) {
           </div>
         </div>
         <div className="flex justify-center mb-4 pb-8 bg-gray-100">
-          <a href="#cotizar" className="bg-azul-dictuc text-white px-4 py-1 rounded-full shadow hover:bg-gray-900 transition-all text-sm">
+          <a href="#cotizar" className="bg-azul-dictuc text-white font-bold rounded-full px-4 py-2 text-xs hover:bg-azul-dictuc/90 transition-all">
             Cotizar servicio
           </a>
         </div>

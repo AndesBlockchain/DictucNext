@@ -12,7 +12,7 @@ const BloqueHero = ({ datosBloque }) => {
       <div className="">
       <div
         className="border border-[#53565A] text-[#53565A] text-base rounded-full
-          py-4 px-4 w-fit min-w-[40%] mx-auto relative translate-y-1/2 z-20 mb-0 text-center bg-white font-semibold"
+          py-4 px-4 w-fit mx-auto relative translate-y-1/2 z-20 mb-0 text-center bg-white font-semibold"
         dangerouslySetInnerHTML={{ __html: datosBloque.Bloque.Titulo }}
       />
   <div className="container m-auto max-w-6xl pl-8 pr-8">

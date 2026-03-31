@@ -17,25 +17,27 @@ const BloqueTexto = ({ datosBloque }) => {
     const textoBajadaClassName = `${letra} text-${colorLetra} font-semibold mb-2`;
     return (
         <Bloque datosBloque={datosBloque.Bloque}>
-            <div 
-                className={textoBajadaClassName} 
-                dangerouslySetInnerHTML={{ __html: textoBajada }} 
-            />
-            <div 
-                className={textoClassName} 
-                dangerouslySetInnerHTML={{ __html: textoHTML }} 
-            />
-            <div className="flex flex-row mt-4 items-center justify-center gap-4">
-                {botones.map((item, index) => (
-                    <CallToAction 
-                        key={index}
-                        url={item.url}
-                        colorFondo={item.colorBoton}
-                        colorTexto={item.colorTexto}
-                        ComoAbrir={item.ComoAbrir}
-                        texto={item.texto}
-                    />
-                ))}
+            <div className="max-w-4xl m-auto">
+                <div
+                    className={textoBajadaClassName}
+                    dangerouslySetInnerHTML={{ __html: textoBajada }}
+                />
+                <div
+                    className={textoClassName}
+                    dangerouslySetInnerHTML={{ __html: textoHTML }}
+                />
+                <div className="flex flex-row mt-4 items-center justify-center gap-4">
+                    {botones.map((item, index) => (
+                        <CallToAction
+                            key={index}
+                            url={item.url}
+                            colorFondo={item.colorBoton}
+                            colorTexto={item.colorTexto}
+                            ComoAbrir={item.ComoAbrir}
+                            texto={item.texto}
+                        />
+                    ))}
+                </div>
             </div>
         </Bloque>
     );

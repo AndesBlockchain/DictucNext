@@ -18,15 +18,15 @@ const ContenedorTiposServicio = async ({ useIcono = false }) => {
     <div id="items-servicios" className="flex flex-wrap gap-4 mt-8 pl-2 pr-2 justify-center">
       {tiposArray.map((item) => {
         // Obtener URL de imagen de forma segura
-        const iconoUrl = item.Icono.url;
-        const fotoPortadaUrl = item.fotoPortada.url;
+        const iconoUrl = item.Icono?.url;
+        const fotoPortadaUrl = item.fotoPortada?.url;
         const imageUrl = useIcono ? iconoUrl : fotoPortadaUrl;
 
         return (
-          <div key={item.slug} className="flex lg:basis-1/6 md:basis-1/4">
+          <div key={item.slug} className="flex">
             <a
               href={"/tipos-de-servicio/" + item.slug}
-              className="justify-center lg:w-[215px] lg:h-[180px] group"
+              className="justify-center w-[215px] h-[180px] group"
             >
               {imageUrl && (
                 <img

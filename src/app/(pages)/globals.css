@@ -63,7 +63,7 @@ ol {
 }
 
 @source inline("text-azul-dictuc");
-@source inline("bg-azul-dictuc border-azul-dictuc text-gris-dictuc bg-gris-dictuc border-gris-dictuc");
+@source inline("bg-azul-dictuc border-azul-dictuc text-gris-dictuc bg-gris-dictuc border-gris-dictuc from-gris-dictuc to-gris-dictuc from-azul-dictuc to-azul-dictuc");
 @source inline("text-rojo-sostenibilidad bg-rojo-sostenibilidad border-rojo-sostenibilidad");
 @source inline("text-amarillo-sostenibilidad bg-amarillo-sostenibilidad border-amarillo-sostenibilidad");
 @source inline("text-verde-sostenibilidad bg-verde-sostenibilidad border-verde-sostenibilidad");

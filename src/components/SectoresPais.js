@@ -39,7 +39,7 @@ const SectoresPais = async () => {
                 Encuentra soluciones y servicios según tu tipo de <span className="text-azul-dictuc">industria</span>
             </div>
             {totalCount <= 10 ?
-                <div className={"flex flew-row justify-center gap-2"}>
+                <div className={"grid grid-cols-5 md:grid-cols-10 justify-center items-start gap-2"}>
                     {sectores.map((item, index) =>
                         <ItemSectoresPais
                             key={index}
@@ -53,26 +53,26 @@ const SectoresPais = async () => {
                 </div>
                 :
                 <div>
-                    <div className="flex flex-row justify-center gap-2">
+                    <div className="flex flex-row justify-center items-start gap-2">
                         {sectores.slice(0, gridClassTop(totalCount)).map(item =>
                             <ItemSectoresPais
                                 key={item.slug}
                                 url={"/sectores-pais/" + item.slug}
                                 icono={item.icono}
                                 gatsbyImageData={null}
-                                url_icono={item.icono?.attributes?.url}
+                                url_icono={item.icono?.url}
                                 nombre={item.nombre}
                             />
                         )}
                     </div>
-                    <div className="flex flex-row gap-2 justify-center">
-                        {sectores.slice(gridClassBottom(totalCount) + 1).map(item =>
+                    <div className="flex flex-row gap-2 justify-center items-start">
+                        {sectores.slice(gridClassTop(totalCount)).map(item =>
                             <ItemSectoresPais
                                 key={item.slug}
                                 url={"/sectores-pais/" + item.slug}
                                 icono={item.icono}
                                 gatsbyImageData={null}
-                                url_icono={item.icono?.attributes?.url}
+                                url_icono={item.icono?.url}
                                 nombre={item.nombre}
                             />
                         )}

@@ -1,5 +1,5 @@
 import * as React from "react"
-import BarraSuperiorInterior from "./BarraSuperiorInterior"
+import BarraSuperior from "./BarraSuperior"
 import Breadcrumbs from "./Breadcrumbs"
 import BannerInterior from "./BannerInterior"
 import FooterSuperior from "./FooterSuperior"
@@ -9,7 +9,7 @@ export default function PaginaInterior({children, breadcrum = [], banner, gatsby
 
   return (
     <main className="m-auto mb-4 font-montserrat bg-white text-gris-dictuc">
-      <BarraSuperiorInterior />
+      <BarraSuperior />
       <BannerInterior banner={banner} gatsbyImageData={gatsbyImageData} fallback={fallback} titulo={titulo} titulo_visible={titulo_visible} color_titulo={color_titulo} icono_secundario={icono_secundario} />
       <Breadcrumbs items={breadcrum} />
 

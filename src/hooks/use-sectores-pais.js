@@ -12,7 +12,7 @@ const useSectoresPais = async() => {
 
   try {
     const res = await fetch(baseUrl + path, {
-      next: { revalidate: 3600 }, // Revalidar cada hora
+      next: { revalidate: 60 }, // Revalidar cada 60 segundos
       cache: 'force-cache'
     });
 

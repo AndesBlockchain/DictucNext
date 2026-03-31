@@ -58,17 +58,21 @@ const BarraSuperior = async () => {
           xl:text-sm
           2xl:text-md
         ">
-          <a href="/" className="w-full lg:w-auto text-center lg:text-left py-2 lg:py-0 hover:text-blue-600 cursor-pointer">
-            HOME
+          <a href="/" className="w-full lg:w-auto text-center lg:text-left py-2 lg:py-0 cursor-pointer group flex flex-col items-center" aria-label="Home">
+            <svg className="w-6 h-6 inline group-hover:text-azul-dictuc transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span className="block h-[2px] w-0 group-hover:w-1/2 group-hover:max-w-[20px] bg-azul-dictuc rounded-full transition-all duration-300 mt-1" />
           </a>
 
           {data?.data?.map(item => (
             <a
               key={item.id || item.slug || item.Nombre}
               href={item.link}
-              className="w-full lg:w-auto text-center lg:text-left py-2 lg:py-0 hover:text-blue-600 cursor-pointer"
+              className="w-full lg:w-auto text-center lg:text-left py-2 lg:py-0 cursor-pointer group flex flex-col items-center hover:text-azul-dictuc transition-colors"
             >
               {item.Nombre}
+              <span className="block h-[2px] w-0 group-hover:w-1/2 group-hover:max-w-[20px] bg-azul-dictuc rounded-full transition-all duration-300 mt-1" />
             </a>
           ))}
 

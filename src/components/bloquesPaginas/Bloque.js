@@ -23,7 +23,7 @@ const Bloque = ({ children, datosBloque, sinBarrita=false }) => {
 
   // Construir las clases usando clsx
   const bloqueClasses = clsx(
-    "my-8 text-center pl-8 pr-8 relative",
+    "my-8 text-center mx-auto pl-8 pr-8 relative",
     {
       [`bg-${colorFondo}`]: !fotoFondo,
       [`pt-${4 + margenSuperior}`]: true,

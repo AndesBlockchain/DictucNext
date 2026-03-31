@@ -9,6 +9,7 @@ const useUltimasNoticias = async () => {
   const query = buildStrapiQuery({
     custom: { status: 'published' },
     sort: 'publishedAt:desc',
+    populate: "*",
     pagination: {
       page: 1,
       pageSize: 6

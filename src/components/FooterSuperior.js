@@ -15,7 +15,7 @@ const FooterSuperior = async () => {
       {/* Logo Escuela de Ingeniería UC */}
       <div className="lg:col-span-3 md:col-span-4 col-span-12 content-center">
         <div>
-          <img src={logo_ingenieria} alt="Logo Ingenieria UC" className="max-w-xs w-full h-auto" />
+          <a href="https://www.ing.uc.cl/" target="_blank"><img src={logo_ingenieria} alt="Logo Ingenieria UC" className="max-w-xs w-full h-auto" /></a>
         </div>
       </div>
       {/* Certificaciones */}
@@ -35,7 +35,7 @@ const FooterSuperior = async () => {
       <div className="col-span-12 md:col-span-2">
         <div className="text-azul-dictuc font-bold mb-3">Entidades Relacionadas</div>
         <div>
-          <img src={logo_gbc} className="h-12" alt="Logo GBC" />
+          <a href="https://www.chilegbc.cl/" target="_blank"><img src={logo_gbc} className="h-12" alt="Logo GBC" /></a>
         </div>
       </div>
     </div>

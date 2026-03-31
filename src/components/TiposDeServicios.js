@@ -6,7 +6,7 @@ const TiposDeServicios = () => {
 
   return(
   <div id="tipo_servicios" className="mt-8 mb-8">
-    <div className="container m-auto max-w-6xl">
+    <div className="m-auto max-w-7xl">
       <FranjaAzul />
       <div className="text-center mb-4 mt-4 font-semibold uppercase">
       <span className="text-azul-dictuc">Servicios</span> que ofrecemos

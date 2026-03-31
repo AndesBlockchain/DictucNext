@@ -30,9 +30,13 @@ const BloqueHero = ({ datosBloque }) => {
           <div dangerouslySetInnerHTML={{ __html: datosBloque.texto.replaceAll("classname", "class") }} />
         </div>
 
-
+     <div className="absolute xs:-bottom-16 sm:-bottom-12 md:-bottom-8 lg:-bottom-4 left-0 right-0 overflow-hidden h-[40px]">
+          <div className="hidden sm:block [&>div]:mt-0 [&>div]:mb-0">
+            <DegradeBase color={datosBloque.color.Codigo} toRight={fotoADerecha} />
+          </div>
         </div>
-
+        </div>
+           
       </div>
       </div>
     </Bloque>

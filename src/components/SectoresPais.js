@@ -33,13 +33,13 @@ const SectoresPais = async () => {
 
     const titulo = "Encuentra soluciones y servicios según tu tipo de industria";
     return (
-        <div id="sectores" className="relative mt-4 bg-white lg:-mt-8 p-2 pb-4 pt-5 max-w-4xl mx-auto rounded-3xl shadow-lg">
+        <div id="sectores" className="relative mt-4 bg-white lg:-mt-8 p-4 pb-4 pt-5 max-w-6xl mx-auto rounded-3xl shadow-lg">
             <FranjaAzul />
             <div className="text-center mb-4 mt-4 font-semibold uppercase">
                 Encuentra soluciones y servicios según tu tipo de <span className="text-azul-dictuc">industria</span>
             </div>
             {totalCount <= 10 ?
-                <div className={"grid grid-cols-5 md:grid-cols-10 justify-center items-start gap-2"}>
+                <div className={"flex flex-row flex-wrap grid grid-cols-5 md:grid-cols-9 justify-center items-start gap-2"}>
                     {sectores.map((item, index) =>
                         <ItemSectoresPais
                             key={index}

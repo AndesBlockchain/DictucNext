@@ -10,7 +10,7 @@ const Noticias = ({ noticias, titulo, linkFiltroNoticias = false }) => {
   const noticiasArray = noticias?.data || [];
 
   return (
-    <div id="noticias" className="mt-8">
+    <div id="noticias" className="mt-8 mb-8">
       <div className="container m-auto max-w-6xl">
       <FranjaAzul />
       <Titulo titulo={titulo} />

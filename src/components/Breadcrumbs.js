@@ -5,7 +5,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const Breadcrumbs = ({ items = [] }) => {
   return (
-    <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-4 ml-2" aria-label="Breadcrumb">
+    <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-4 ml-10" aria-label="Breadcrumb">
       
       {items.map((item, index) => (
         <React.Fragment key={index}>

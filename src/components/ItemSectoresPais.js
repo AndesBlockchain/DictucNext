@@ -3,7 +3,7 @@ import StrapiImage from "./StrapiImage";
 
 const ItemSectoresPais = ({ icono, url_icono, gatsbyImageData, url, nombre }) => {
   return (
-    <div className="flex flex-col items-center w-[90px]">
+    <div className="flex flex-col items-center w-[120px]">
       <div>
       <a href={url} className="flex flex-col items-center">
         <div className="h-[45px] flex items-start justify-center">
@@ -17,7 +17,7 @@ const ItemSectoresPais = ({ icono, url_icono, gatsbyImageData, url, nombre }) =>
         </div>
       </a>
       </div>
-      <div className="text-center text-azul-dictuc font-semibold text-[9px] mt-1">{nombre}</div>
+      <div className="text-center text-azul-dictuc font-bold text-[11px] mt-1">{nombre}</div>
     </div>
   )
 };

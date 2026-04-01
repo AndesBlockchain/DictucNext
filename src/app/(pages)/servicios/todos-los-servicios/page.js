@@ -4,7 +4,7 @@ import useTipoDeServicio from "@/hooks/use-tipo-de-servicios";
 import useSectoresPais from "@/hooks/use-sectores-pais";
 import useServicios from "@/hooks/use-servicios";
 import useUnidades from "@/hooks/use-unidades";
-const BannerServicios = "/images/BannerLaboratorioServicios.webp"
+const BannerServicios = "/images/banner_servicios.jpg";
 
 export default async function TodosLosServicios()
 {
@@ -18,7 +18,7 @@ export default async function TodosLosServicios()
   return (
     <>
       <PaginaInterior
-        banner={BannerServicios}
+        fallback={BannerServicios}
         titulo="Todos los servicios"
         breadcrum={[{ label: "Home", link: "/" }, { label: "Todos los servicios", link: "/todos-los-servicios" }]}>
 

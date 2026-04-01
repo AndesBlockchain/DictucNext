@@ -11,7 +11,7 @@ const useMenuSecundario = async (seccion, slug) => {
     throw new Error('STRAPI_API_URL environment variable is not defined');
   }
 
-  const path = `/api/menu-secundarios?filters[seccion][slug][$eq]=${seccion}`;
+  const path = `/api/menu-secundarios?sort=sortOrder&filters[seccion][slug][$eq]=${seccion}`;
 
   console.log(baseUrl + path);
   const res = await fetch(baseUrl + path);

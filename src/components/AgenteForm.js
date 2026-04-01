@@ -24,7 +24,7 @@ const AgenteForm = () => {
                         value={textoConsulta}
                         onChange={(e) => setTextoConsulta(e.target.value)}
                         placeholder={placeholder}
-                        className="flex-grow px-6 py-6 text-lg focus:outline-none resize-none"
+                        className="flex-grow px-6 py-6 text-md focus:outline-none resize-none"
                     />
                     <div className="flex justify-end">
                         <button

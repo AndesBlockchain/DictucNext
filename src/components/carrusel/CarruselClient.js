@@ -1,10 +1,21 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import BarraFondoGris from "../BarraFondoGris";
 import StrapiImage from "../StrapiImage";
 
 const CarruselClient = ({ carruselData }) => {
     const [indiceCarrusel, setIndiceCarrusel] = useState(0);
+
+    const avanzarSlide = useCallback(() => {
+        setIndiceCarrusel((prev) => (prev + 1) % carruselData.length);
+    }, [carruselData.length]);
+
+    useEffect(() => {
+        if (!carruselData || carruselData.length <= 1) return;
+        const intervalo = setInterval(avanzarSlide, 3000);
+        return () => clearInterval(intervalo);
+    }, [carruselData, avanzarSlide]);
+
     if (!carruselData || carruselData.length === 0) {
         return null;
     }

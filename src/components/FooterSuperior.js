@@ -24,7 +24,7 @@ const FooterSuperior = async () => {
         <div className="flex flex-row gap-4 w-full">
           {data.map(item => (
             <div key={item.id || item.documentId} className="w-16 h-16 flex items-center justify-center" target="_blank">
-              <a href={item.url}>
+              <a href={item.url} target="_blank">
                 <img src={STRAPI_URL + item.Logo.url} alt="" className="h-16 w-auto mx-auto" />
               </a>
             </div>

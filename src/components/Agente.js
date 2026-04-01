@@ -24,7 +24,7 @@ const Agente = ({
       className="mt-8 pt-6 bg-gray-100 pb-6"
     >
       {franja && <FranjaAzul />}
-      <Titulo titulo="¿Qué <span class='text-azul-dictuc'>necesitas?</span>" />
+      <Titulo titulo="¿QUÉ <span class='text-azul-dictuc'>NECESITAS?</span>" />
       <AgenteForm />
     </div>
   )

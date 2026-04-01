@@ -42,7 +42,7 @@ const BloquePersonas = ({datosBloque}) => {
                   </div>
                   <div className="mt-2 text-center text-sm" dangerouslySetInnerHTML={{__html: persona.Descripcion}} />
                   <div className="mt-2 mb-2">
-                    <a href={persona.LinkedIn} target="_blank" rel="noopener noreferrer"><img src={LogoLinkedIn} alt="LinkedIn" className="w-4 h-4 m-auto" /></a>
+                    <a href={persona.LinkedIn} target="_blank" rel="noopener noreferrer"><img src={LogoLinkedIn} alt="LinkedIn" className="w-5 h-5 m-auto" /></a>
                   </div>
                   {persona.link_ver_mas_informacion && (
                     <div className="text-center text-xs">

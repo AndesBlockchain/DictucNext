@@ -3,12 +3,14 @@ import PaginaInterior from "@/components/PaginaInterior";
 const BannerNoticias = "/images/BannerMicrofonos.webp"
 import useNoticiasPorAgno from "@/hooks/use-noticias-por-agno";
 import Instagram from "@/components/Instagram";
-import Titulo from "@/components/Titulo";
+import FranjaAzul from "@/components/FranjaAzul";
 
 export const metadata = {
   title: 'Dictuc | Noticias'
 };
 
+
+const htmlInsta= "NUESTRO <span className='text-azul-dictuc'>INSTAGRAM</span>"
 export default async function HomeNoticiasPage() {
 
     const noticias = await useNoticiasPorAgno()
@@ -52,9 +54,10 @@ export default async function HomeNoticiasPage() {
         </div>
       ))}
   </div>
-<div className="mt-8">
-
-    <Titulo titulo="Nuestro Instagram"/>
+<div className="mt-16 container m-auto max-w-8xl pl-8 pr-8">
+    <FranjaAzul className="mt-8"/>
+    <div className={"text-center mb-4 mt-4 font-semibold "} 
+      dangerouslySetInnerHTML={{__html: htmlInsta}} />
       <Instagram />
 </div>
     </PaginaInterior>

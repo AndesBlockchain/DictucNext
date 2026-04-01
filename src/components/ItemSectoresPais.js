@@ -17,7 +17,7 @@ const ItemSectoresPais = ({ icono, url_icono, gatsbyImageData, url, nombre }) =>
         </div>
       </a>
       </div>
-      <div className="text-center text-azul-dictuc text-[9px] mt-1">{nombre}</div>
+      <div className="text-center text-azul-dictuc font-semibold text-[9px] mt-1">{nombre}</div>
     </div>
   )
 };

@@ -65,16 +65,21 @@ const BarraSuperior = async () => {
             <span className="block h-[2px] w-0 group-hover:w-1/2 group-hover:max-w-[20px] bg-azul-dictuc rounded-full transition-all duration-300 mt-1" />
           </a>
 
-          {data?.data?.map(item => (
+          {data?.data?.map(item => {
+            const esExterno = item.link?.startsWith("http");
+            return (
             <a
               key={item.id || item.slug || item.Nombre}
               href={item.link}
+              target={esExterno ? "_blank" : "_self"}
+              rel={esExterno ? "noopener noreferrer" : ""}
               className="w-full lg:w-auto text-center lg:text-left py-2 lg:py-0 cursor-pointer group flex flex-col items-center hover:text-azul-dictuc transition-colors"
             >
               {item.Nombre}
               <span className="block h-[2px] w-0 group-hover:w-1/2 group-hover:max-w-[20px] bg-azul-dictuc rounded-full transition-all duration-300 mt-1" />
             </a>
-          ))}
+          );
+          })}
 
           {/* Search Bar */}
           <div className="w-full lg:w-auto flex flex-col lg:flex-row items-center gap-2 mt-4 lg:mt-0">

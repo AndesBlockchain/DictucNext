@@ -2,6 +2,8 @@ import React from "react";
 import PaginaInterior from "@/components/PaginaInterior";
 const BannerNoticias = "/images/BannerMicrofonos.webp"
 import useNoticiasPorAgno from "@/hooks/use-noticias-por-agno";
+import Instagram from "@/components/Instagram";
+import Titulo from "@/components/Titulo";
 
 export const metadata = {
   title: 'Dictuc | Noticias'
@@ -16,8 +18,8 @@ export default async function HomeNoticiasPage() {
   return (
     <PaginaInterior fallback={BannerNoticias}
                     titulo="Noticias"
-                    breadcrum={[{ label: "Home", link: "/" }, { label: "Noticias y Proyectos Destacados", link: "/noticias" }]}> 
-      <div>
+                    breadcrum={[{ label: "Home", link: "/" }, { label: "Noticias", link: "/noticias" }]}> 
+      <div className="container m-auto max-w-6xl pl-8 pr-8">
         <fieldset className="fieldset border-base-300 rounded-box w-xs border p-4 mb-8">
           <legend className="fieldset-legend">Buscar dentro de noticias</legend>
           <input type="text" className="input"/>
@@ -25,9 +27,9 @@ export default async function HomeNoticiasPage() {
         </fieldset>
       </div>
 
-
+      <div className="mt-8">
       {noticiasOrdenadas.map(([agno, noticiasDelAgno], index) => (
-        <div key={agno} className="collapse collapse-plus bg-base-100 border border-base-300">
+        <div key={agno} className="container m-auto max-w-6xl pl-8 pr-8 collapse collapse-plus bg-base-100 border border-base-300">
           <input type="checkbox" name="my-accordion-3" defaultChecked={index === 0} />
           <div className="collapse-title font-semibold text-xl">{agno}</div>
           <div className="collapse-content text-sm">
@@ -49,7 +51,12 @@ export default async function HomeNoticiasPage() {
           </div>
         </div>
       ))}
-  
+  </div>
+<div className="mt-8">
+
+    <Titulo titulo="Nuestro Instagram"/>
+      <Instagram />
+</div>
     </PaginaInterior>
   );
 }

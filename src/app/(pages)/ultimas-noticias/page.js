@@ -6,6 +6,7 @@ const BannerNoticias = "/images/BannerMicrofonos.webp"
 import Titulo from "@/components/Titulo";
 import Instagram from "@/components/Instagram";
 import useUltimasNoticias from "@/hooks/use-ultimas-noticias";
+import FranjaAzul from "@/components/FranjaAzul";
 
 export default async function HomeNoticiasPage() {
 
@@ -16,6 +17,7 @@ export default async function HomeNoticiasPage() {
                     breadcrum={[{ label: "Home", link: "/" }, { label: "Noticias y Proyectos Destacados", link: "/noticias" }]}> 
     <div className="container m-auto max-w-12xl">
       <Noticias noticias={noticias} linkFiltroNoticias={true} titulo="Últimas Noticias"/>
+      <FranjaAzul className="mt-8"/>
       <Titulo titulo="Nuestro Instagram"/>
       <Instagram />
     </div>

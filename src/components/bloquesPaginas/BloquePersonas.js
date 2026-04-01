@@ -1,7 +1,7 @@
 import React from "react";
 import StrapiImage from "../StrapiImage";
 import Bloque from "./Bloque";
-const LogoLinkedIn = "/images/Linkedin.png"
+const LogoLinkedIn = "/images/linkedin-gris.png"
 
 const BloquePersonas = ({datosBloque}) => {
 
@@ -37,7 +37,7 @@ const BloquePersonas = ({datosBloque}) => {
                   <div className="mt-3 text-azul-dictuc font-bold text-center">
                     {persona.Nombre}
                   </div>
-                  <div className="mt-2 text-center font-semibold">
+                  <div className="mt-2 text-center text-sm font-semibold">
                     {persona.Cargo}
                   </div>
                   <div className="mt-2 text-center text-sm" dangerouslySetInnerHTML={{__html: persona.Descripcion}} />

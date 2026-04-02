@@ -18,6 +18,9 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
   // Estado para manejar el loading durante el envío
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
+  // Estado para manejar el loading de consulta de RUT
+  const [isConsultingRut, setIsConsultingRut] = React.useState(false);
+
   // Limpiar el timeout del toast al desmontar para evitar memory leaks
   React.useEffect(() => {
     let timeoutId;
@@ -135,9 +138,21 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
         message: "El RUT ingresado no es válido"
       });
     } else {
+      setIsConsultingRut(true);
       const resultado = await obtenerNombrePorRut(valor);
+      setIsConsultingRut(false);
       if (resultado.success && resultado.data) {
-        setValue("empresa", resultado.data);
+        // Extraer cuerpo del RUT (sin puntos, guión ni dígito verificador)
+        const rutLimpio = valor.replace(/[.\-]/g, '');
+        const rutNumero = parseInt(rutLimpio.slice(0, -1), 10);
+        if (rutNumero < 50000000) {
+          // Persona natural
+          setValue("persona", resultado.data);
+          setValue("empresa", "Particular");
+          setValue("cargo", "Particular");
+        } else {
+          setValue("empresa", resultado.data);
+        }
       } else {
         console.error("Error al obtener nombre de empresa:", resultado.error);
       }
@@ -145,17 +160,13 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
   }
 
   const obtenerNombrePorRut = async (rut) => {
-/*     try {
-      const rutificador= process.env.STRAPI_API_URL + `/api/rutificador`
-      console.log(rutificador);
-      const response = await fetch(rutificador, {
+    try {
+      const response = await fetch(strapiApiUrl + `/api/rutificador`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          rut: rut
-        })
+        body: JSON.stringify({ rut })
       });
 
       if (!response.ok) {
@@ -164,7 +175,6 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
 
       const data = await response.json();
 
-      // Validar que la respuesta tenga la estructura esperada
       if (data.data?.message) {
         return {
           success: true,
@@ -181,11 +191,11 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
         data: null,
         error: error.message || 'Error al consultar el RUT'
       };
-    } */
+    }
   }
 
   return (
-    <div className={`col-md-8 mt-5 rounded-xl p-6 ${border ? 'border' : ''}`}>
+    <div className={`w-full col-md-8 mt-5 rounded-xl p-6 ${border ? 'border' : ''}`}>
       {/* Toast container */}
       {toast.show && (
         <div className="toast toast-top toast-end">
@@ -201,7 +211,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
       {!isCotizacion && (
         <fieldset className="fieldset">
         <legend className="fieldset-legend">Tipo de Consulta</legend>
-          <select className="select border border-gray-300" defaultValue="0" {...register("tipo_consulta",{required: true})}>
+          <select className="select border border-gray-300" defaultValue="0" disabled={isConsultingRut} {...register("tipo_consulta",{required: true})}>
           <option value="0">-- Seleccione --</option>
           {tiposDeContacto.map((tipo) =>(
             <option key={tipo.id} value={tipo.documentId}>{tipo.Tipo}</option>
@@ -216,17 +226,22 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
         <fieldset className="fieldset">
         <legend className="fieldset-legend">RUT Empresa</legend>
-          <input
-            className="input validator border border-gray-300 w-full"
-            {...register("rut_empresa",{
-              onBlur: handleRutBlur,
-              required: true,
-            })}
-            onChange={handleRutChange}
-            disabled={watchEmpresaExtranjera}
-            aria-invalid={errors.rut_empresa ? "true" : "false"}
-            placeholder="Ej: 12.345.678-9"
-          />
+          <div className="relative w-full">
+            <input
+              className="input validator border border-gray-300 w-full"
+              {...register("rut_empresa",{
+                onBlur: handleRutBlur,
+                required: true,
+              })}
+              onChange={handleRutChange}
+              disabled={watchEmpresaExtranjera || isConsultingRut}
+              aria-invalid={errors.rut_empresa ? "true" : "false"}
+              placeholder="Ej: 12.345.678-9"
+            />
+            {isConsultingRut && (
+              <span className="loading loading-spinner loading-sm absolute right-3 top-1/2 -translate-y-1/2"></span>
+            )}
+          </div>
           {errors.rut_empresa?.type === "required" && (
             <p className="text-red-500" role="alert">Revise el RUT de la empresa</p>
           )}
@@ -237,21 +252,21 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
         </fieldset>
         <fieldset className="fieldset">
         <legend className="fieldset-legend">Empresa</legend>
-          <input className="input validator border border-gray-300 w-full" {...register("empresa",{required: true})} aria-invalid={errors.empresa ? "true" : "false"} />
+          <input className="input validator border border-gray-300 w-full" disabled={isConsultingRut} {...register("empresa",{required: true})} aria-invalid={errors.empresa ? "true" : "false"} />
           {errors.empresa?.type === "required" && (
             <p className="text-red-500" role="alert">Revise el nombre de la empresa</p>
           )}
         </fieldset>
         <fieldset className="fieldset">
         <legend className="fieldset-legend">Persona de Contacto</legend>
-          <input className="input validator border border-gray-300 w-full" {...register("persona",{required: true})} aria-invalid={errors.persona ? "true" : "false"} />
+          <input className="input validator border border-gray-300 w-full" disabled={isConsultingRut} {...register("persona",{required: true})} aria-invalid={errors.persona ? "true" : "false"} />
           {errors.persona?.type === "required" && (
             <p className="text-red-500" role="alert">Revise el nombre de la persona de contacto</p>
           )}
         </fieldset>
         <fieldset className="fieldset">
         <legend className="fieldset-legend">Cargo</legend>
-          <input className="input validator border border-gray-300 w-full" {...register("cargo",{required: true})} aria-invalid={errors.cargo ? "true" : "false"} />
+          <input className="input validator border border-gray-300 w-full" disabled={isConsultingRut} {...register("cargo",{required: true})} aria-invalid={errors.cargo ? "true" : "false"} />
           {errors.cargo?.type === "required" && (
             <p className="text-red-500" role="alert">Revise el cargo de contacto</p>
           )}
@@ -261,6 +276,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
           <input
             className="input validator border border-gray-300 w-full"
             type="email"
+            disabled={isConsultingRut}
             {...register("email",{
               required: true,
               pattern: {
@@ -279,7 +295,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
         </fieldset>
         <fieldset className="fieldset">
         <legend className="fieldset-legend">Teléfono</legend>
-          <input className="input validator border border-gray-300 w-full" {...register("telefono",{required: true})} aria-invalid={errors.telefono ? "true" : "false"} />
+          <input className="input validator border border-gray-300 w-full" disabled={isConsultingRut} {...register("telefono",{required: true})} aria-invalid={errors.telefono ? "true" : "false"} />
           {errors.telefono?.type === "required" && (
            <p className="text-red-500" role="alert">Revise el teléfono</p>
           )}
@@ -288,26 +304,26 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
 
       <fieldset className="fieldset">
       <legend className="fieldset-legend">Consulta</legend>
-          <textarea className="textarea border border-gray-300 w-full" placeholder="Escriba su consulta" {...register("consulta",{required:true})}></textarea>
+          <textarea className="textarea border border-gray-300 w-full" placeholder="Escriba su consulta" disabled={isConsultingRut} {...register("consulta",{required:true})}></textarea>
           {errors.consulta?.type === "required" && (
             <p className="text-red-500" role="alert">Ingrese su consulta</p>
           )}
       </fieldset>
       <fieldset className="fieldset">
-          <div className="join"><input type="checkbox" {...register("politica", {required:true})}/> &nbsp;Acepto la política de tratamiento de datos</div>
+          <div className="join"><input type="checkbox" disabled={isConsultingRut} {...register("politica", {required:true})}/> &nbsp;Acepto la política de tratamiento de datos</div>
             {errors.politica?.type === "required" && (
             <p className="text-red-500" role="alert">Debe aceptar nuestra política de uso de datos</p>
           )}
         </fieldset>
       <fieldset className="fieldset">
-          <div className="join"><input type="checkbox" {...register("newsletter")} /> &nbsp;Deseo recibir información de Dictuc</div>
+          <div className="join"><input type="checkbox" disabled={isConsultingRut} {...register("newsletter")} /> &nbsp;Deseo recibir información de Dictuc</div>
       </fieldset>
 
 
         <button
           className="ml-auto mr-auto btn btn-primary mt-2 rounded-full"
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || isConsultingRut}
         >
           {isSubmitting ? (
             <>

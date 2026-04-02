@@ -15,21 +15,22 @@ export default async function Servicio({ params }) {
 
   const { slug } = await params;
   const servicio = await useServicio(slug);
- 
+ console.log(servicio.tipo_de_servicio.IconoFichaProducto.formats.small.url)
   const strapiApiUrl = process.env.STRAPI_API_URL;
   return (
     <PaginaInterior
       banner={servicio?.banner}
       fallback={bannerLaboratorio}
       titulo_visible={false}
-      icono_secundario={servicio.tipo_de_servicio.Icono.formats.thumbnail.url}
+      icono_secundario={servicio.tipo_de_servicio.IconoFichaProducto.formats.small.url}
       breadcrum={[
         { label: "Home", link: "/" },
         { label: "Servicios", link: "/" },
         { label: servicio.nombre }
       ]}
     >
-      <div className="text-2xl font-bold mt-2 mb-4 text-left"><h2>{servicio.nombre}</h2></div>
+      <div className="text-2xl font-bold mt-2 mb-2 ml-10 text-left"><h2>{servicio.nombre}</h2></div>
+      <div className="ml-10 mb-4"><span className="text-azul-dictuc font-bold">Ejecutor:</span> {servicio.unidad.nombre}  <span className="text-azul-dictuc font-bold"> | Tipo de Servicio:</span> {servicio.tipo_de_servicio.nombre} <span className="text-azul-dictuc font-bold"> | Sectores:</span> {servicio.sectores_pais.map(sector => sector.nombre).join(", ")}</div>
       <div className="bg-gray-100">
       <div className="container mx-auto max-w-6xl">
         <div id="tarjetas" className="flex flex-wrap p-8 justify-center [&_h3]:uppercase [&_h3]:!text-azul-dictuc [&_h3]:mt-2">
@@ -99,17 +100,6 @@ export default async function Servicio({ params }) {
           codigoUnidad={servicio.unidad.codigoDictuc}
         />
       </div>
-
-
-      <div className="ml-4 mr-4 mt-4"><strong>Tipo de Servicio:</strong> {servicio.tipo_de_servicio.nombre} </div>
-      <div className="ml-4 mr-4 mt-2"><strong>Ejecutor:</strong> {servicio.unidad.nombre}</div>
-      <div className="ml-4 mr-4 mb-8 mt-2">
-        <strong>Sectores: </strong>
-        {servicio.sectores_pais.map(sector => (
-          <span key={sector.slug}>{sector.nombre}</span>
-        ))}
-      </div>
-
 
       </div>
     </PaginaInterior>

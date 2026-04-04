@@ -35,13 +35,13 @@ const IndexPage = async () => {
     <main className="w-full m-auto mb-4 font-montserrat bg-white text-gris-dictuc">
       <BarraSuperior />
       <Carrusel />
-      <SectoresPais />
+      <SectoresPais botonHollow={true} />
       <Agente
         titulo="¿Qué <span class='text-azul-dictuc'>Necesitas?</span>"
         franja={true}
       />
       <TiposDeServicios/>
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center mt-6 mb-10">
         <a href="/servicios/todos-los-servicios" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver todos</a>
       </div>
       <Noticias noticias={noticias} titulo='<span class="text-azul-dictuc">NOTICIAS</span> DESTACADAS' />

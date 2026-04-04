@@ -59,7 +59,7 @@ const BarraSuperior = async () => {
           2xl:text-md
         ">
           <a href="/" className="w-full lg:w-auto text-center lg:text-left py-2 lg:py-0 cursor-pointer group flex flex-col items-center" aria-label="Home">
-            <svg className="w-6 h-6 inline group-hover:text-azul-dictuc transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-5 h-5 inline group-hover:text-azul-dictuc transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
             <span className="block h-[2px] w-0 group-hover:w-1/2 group-hover:max-w-[20px] bg-azul-dictuc rounded-full transition-all duration-300 mt-1" />
@@ -82,12 +82,13 @@ const BarraSuperior = async () => {
           })}
 
           {/* Search Bar */}
-          <div className="w-full lg:w-auto flex flex-col lg:flex-row items-center gap-2 mt-4 lg:mt-0">
+          <div className="w-full lg:w-auto flex flex-col items-center gap-2 mt-4 lg:mt-0">
             <input
               type="text"
               placeholder="Buscar en el sitio"
               className="w-full max-w-xs lg:w-auto px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs"
             />
+            <span className="block h-[2px] w-0 rounded-full mt-[1px]" />
           </div>
           <div>&nbsp;</div>
         </nav>

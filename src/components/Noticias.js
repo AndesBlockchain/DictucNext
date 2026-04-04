@@ -14,7 +14,7 @@ const Noticias = ({ noticias, titulo, linkFiltroNoticias = false }) => {
       <div className="container m-auto max-w-6xl">
       <FranjaAzul />
       <Titulo titulo={titulo} />
-      <div id="items-noticias" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center mt-12 pl-16 pr-16 gap-y-12">
+      <div id="items-noticias" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center mt-4 pl-16 pr-16 gap-y-12">
         {noticiasArray.length > 0 ? (
           noticiasArray.map(noticia => (
             <CardNoticia className="border"

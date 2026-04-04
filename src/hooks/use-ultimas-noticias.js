@@ -8,7 +8,7 @@ const useUltimasNoticias = async () => {
   // Construir query con el helper
   const query = buildStrapiQuery({
     custom: { status: 'published' },
-    sort: 'publishedAt:desc',
+    sort: 'fecha:desc',
     populate: "*",
     pagination: {
       page: 1,

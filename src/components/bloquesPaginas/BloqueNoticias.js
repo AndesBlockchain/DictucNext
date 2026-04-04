@@ -4,7 +4,7 @@ import Bloque from "./Bloque";
 const FotoDefaultNoticias = "/images/noticias.png";
 
 const BloqueNoticias = async ({ datosBloque }) => {
- console.log("datosBloque",datosBloque)
+ console.log("datosBloque",datosBloque.etiqueta_noticia.noticias)
 const cantidadNoticias= datosBloque.CantidadNoticias
 const mostrarFecha= datosBloque.MostrarFecha
   return (
@@ -15,6 +15,7 @@ const mostrarFecha= datosBloque.MostrarFecha
               key={noticia.id}
               titulo={noticia.titulo}
               imagen={noticia.foto}
+              gatsbyImageData={noticia.foto?.localFile?.childImageSharp?.gatsbyImageData}
               fallback={noticia.url_foto || FotoDefaultNoticias}
               fecha={noticia.fecha}
               bajada={noticia.cuerpo}

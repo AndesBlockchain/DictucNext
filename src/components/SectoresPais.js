@@ -3,7 +3,7 @@ import FranjaAzul from "./FranjaAzul";
 import ItemSectoresPais from "./ItemSectoresPais";
 import useSectoresPais from "@/hooks/use-sectores-pais";
 
-const SectoresPais = async () => {
+const SectoresPais = async ({ botonHollow = false }) => {
 
     const res = await useSectoresPais();
     // Validar que res y res.data existan
@@ -39,7 +39,7 @@ const SectoresPais = async () => {
                 Encuentra soluciones y servicios según tu tipo de <span className="text-azul-dictuc">industria</span>
             </div>
             {totalCount <= 10 ?
-                <div className={"flex flex-row flex-wrap grid grid-cols-5 md:grid-cols-9 justify-center items-start gap-2"}>
+                <div className={"group/sectores flex flex-row flex-wrap grid grid-cols-5 md:grid-cols-9 justify-center items-start gap-2"}>
                     {sectores.map((item, index) =>
                         <ItemSectoresPais
                             key={index}
@@ -52,7 +52,7 @@ const SectoresPais = async () => {
                     )}
                 </div>
                 :
-                <div>
+                <div className="group/sectores">
                     <div className="flex flex-row justify-center items-start gap-2">
                         {sectores.slice(0, gridClassTop(totalCount)).map(item =>
                             <ItemSectoresPais
@@ -83,7 +83,10 @@ const SectoresPais = async () => {
             <div className="flex justify-center mt-6">
                 <a
                     href="/servicios/todos-los-servicios"
-                    className="bg-azul-dictuc text-white font-bold rounded-full px-4 py-2 text-xs hover:bg-azul-dictuc/90 transition-all"
+                    className={botonHollow
+                        ? "border-2 border-azul-dictuc text-azul-dictuc bg-transparent font-bold rounded-full px-4 py-2 text-xs hover:bg-azul-dictuc hover:text-white transition-all"
+                        : "bg-azul-dictuc text-white font-bold rounded-full px-4 py-2 text-xs hover:bg-azul-dictuc/90 transition-all"
+                    }
                 >
                     Ver todos los Servicios
                 </a>

@@ -12,7 +12,7 @@ const CarruselClient = ({ carruselData }) => {
 
     useEffect(() => {
         if (!carruselData || carruselData.length <= 1) return;
-        const intervalo = setInterval(avanzarSlide, 3000);
+        const intervalo = setInterval(avanzarSlide, 6000);
         return () => clearInterval(intervalo);
     }, [carruselData, avanzarSlide]);
 

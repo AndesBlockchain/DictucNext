@@ -2,7 +2,7 @@ import React from "react"
 import useTipoDeServicio from "@/hooks/use-tipo-de-servicios";
 import StrapiImage from "../StrapiImage";
 
-const BloqueTiposServicio = async ({useIcono=false}) => {
+const BloqueTiposServicio = async () => {
 
     const tipos = await useTipoDeServicio();
     
@@ -27,6 +27,9 @@ const BloqueTiposServicio = async ({useIcono=false}) => {
         </div>
       )}
     </div>
+    <div className="flex justify-center mb-6">
+        <a href="/servicios/todos-los-servicios" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Buscar Servicios</a>
+      </div>
     </div>
   )
 }

@@ -26,10 +26,13 @@ const Bloque = ({ children, datosBloque, sinBarrita=false }) => {
     "my-8 text-center mx-auto pl-8 pr-8 relative",
     {
       [`bg-${colorFondo}`]: !fotoFondo,
-      [`pt-${4 + margenSuperior}`]: true,
-      [`pb-${4 + margenInferior}`]: true,
     }
   );
+
+  const paddingStyle = {
+    paddingTop: `${(4 + margenSuperior) * 0.25}rem`,
+    paddingBottom: `${(4 + margenInferior) * 0.25}rem`,
+  };
 
   // Estilos para la imagen de fondo
   const backgroundImageStyle = fotoFondo ? {
@@ -42,7 +45,7 @@ const Bloque = ({ children, datosBloque, sinBarrita=false }) => {
 
   return (
     <div 
-      style={backgroundImageStyle}
+      style={{...backgroundImageStyle, ...paddingStyle}}
       key={datosBloque?.id}
       className={bloqueClasses}
     >      

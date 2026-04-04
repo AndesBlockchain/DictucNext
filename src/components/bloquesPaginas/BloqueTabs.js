@@ -14,7 +14,7 @@ const BloqueTabs = ({ datosBloque }) => {
 
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
-      <div className="container mx-auto max-w-6xl px-4 py-8">
+      <div className="container mx-auto max-w-6xl px-4 pb-8">
         <div className="mb-6 text-sm" dangerouslySetInnerHTML={{__html: datosBloque.texto?.Texto || ""}} />
         <div className="mb-8">
           {/* Tab buttons */}
@@ -24,7 +24,7 @@ const BloqueTabs = ({ datosBloque }) => {
                 key={tab.id}
                 role="tab"
                 onClick={() => setActiveTab(index)}
-                className={`tab ${activeTab === index ? 'tab-active text-azul-dictuc border-b-2 border-azul-dictuc' : ''}`}
+                className={`tab ${activeTab === index ? 'tab-active text-azul-dictuc border-b-2 border-azul-dictuc font-semibold' : ''}`}
                 aria-label={tab.Titulo}
               >
                 {tab.Titulo}

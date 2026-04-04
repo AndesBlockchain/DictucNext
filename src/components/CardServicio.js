@@ -26,9 +26,7 @@ const CardServicio = ({ titulo, icono, imagen, contenido, callToAction = false, 
           containerClassName="h-16 flex items-center justify-center mx-auto"
         />
 
-        <h3 className={clsx("text-base font-bold mb-2 text-center", `text-${color_texto}`)}>
-          {titulo}
-        </h3>
+        <h3 className={clsx("text-base font-bold mb-2 text-center", `text-${color_texto}`)} dangerouslySetInnerHTML={{ __html: titulo }} />
 
         <div className={clsx("text-gray-600 text-md leading-tight mb-6 flex-1", `text-${color_texto}`)}>
           {esLista(contenido) ? (

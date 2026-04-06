@@ -4,30 +4,28 @@ import Titulo from "./Titulo"
 import AgenteForm from "./AgenteForm"
 
 const Agente = ({
-  titulo = "¿Qué Necesitas?",
+  titulo = "¿QUÉ <span class='text-azul-dictuc'>NECESITAS?</span>",
   franja = true,
   backgroundColor = "bg-gray-100",
-  padding = 8,
-  marginTop = 12
+  padding = 6,
+  marginTop = 8
 }) => {
-
-  // Note: These class maps are not used in the original return JSX for the container div
-  // The container div has hardcoded "mt-8 pt-6 pb-6"
-  // If we wanted to use them, we should apply them.
-  // For now, preserving existing functionality which ignored them or applied basics.
-  // Actually, checking original code, it ignored `marginTop` and `padding` props in the returned JSX,
-  // using hardcoded classes instead. I will stick to what was rendered basically, but logically injecting AgenteForm.
 
   return (
     <div
       id="agente"
-      className="mt-8 pt-6 bg-gray-100 pb-6"
+      style={{
+        marginTop: `${marginTop * 0.25}rem`,
+        paddingTop: `${padding * 0.25}rem`,
+        paddingBottom: `${padding * 0.25}rem`,
+      }}
+      className={backgroundColor}
     >
       {franja && <FranjaAzul />}
-      <Titulo titulo="¿QUÉ <span class='text-azul-dictuc'>NECESITAS?</span>" />
+      <Titulo titulo={titulo} />
       <AgenteForm />
     </div>
   )
 }
 
-export default Agente 
+export default Agente

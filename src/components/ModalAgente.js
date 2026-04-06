@@ -25,7 +25,7 @@ const ModalAgente = ({ onClose, pregunta }) => {
 
     const llamarAPI = async () => {
       try {
-        const response = await fetch(process.env.STRAPI_API_URL + '/api/chatgpt', {
+        const response = await fetch('/api/chatgpt', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -106,9 +106,6 @@ const ModalAgente = ({ onClose, pregunta }) => {
               >
                 ¿Desea ir a nuestro listado de servicios?
               </a>
-            )}
-            {isActionGetQuoteAvailable && (
-              <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-1.5 px-4 rounded-full shadow text-sm transition-colors">¿Desea cotizar este servicio?</button>
             )}
           </div>
         </div>

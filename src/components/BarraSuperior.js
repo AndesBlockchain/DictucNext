@@ -1,12 +1,10 @@
 import React from "react";
 const logoDictuc = "/images/logo_dictuc_interior.png"
-import useSiteMetadata from "../hooks/use-site-metadata";
 import useMenuSuperior from "../hooks/use-menu-superior";
 
 const BarraSuperior = async () => {
 
   const data = await useMenuSuperior();
-  const siteMetadata = useSiteMetadata();
 
   return (
     <header className="w-full items-start grid grid-cols-12 grid-row-1 z-100 uppercase relative">
@@ -90,7 +88,6 @@ const BarraSuperior = async () => {
             />
             <span className="block h-[2px] w-0 rounded-full mt-[1px]" />
           </div>
-          <div>&nbsp;</div>
         </nav>
 
         {/* Mobile Overlay Backdrop (Optional for better UX) */}

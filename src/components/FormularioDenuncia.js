@@ -187,11 +187,11 @@ export default function FormularioDenuncia() {
           <legend className="fieldset-legend">¿Desea permanecer en el anonimato para esta denuncia?</legend>
           <div className="flex gap-4">
             <label className="flex items-center gap-2">
-              <input type="radio" value="no" {...register("anonimo", { required: true })} className="radio" />
+              <input type="radio" value="no" {...register("anonimo", { required: true })} className="radio border-1 border-gray-400" />
               <span>No</span>
             </label>
             <label className="flex items-center gap-2">
-              <input type="radio" value="si" {...register("anonimo", { required: true })} className="radio" />
+              <input type="radio" value="si" {...register("anonimo", { required: true })} className="radio border-1 border-gray-400" />
               <span>Sí</span>
             </label>
           </div>
@@ -206,7 +206,7 @@ export default function FormularioDenuncia() {
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Nombre *</legend>
               <input
-                className="input"
+                className="input border border-gray-300"
                 {...register("nombre", { required: watchAnonimo === 'no' })}
                 aria-invalid={errors.nombre ? "true" : "false"}
                 placeholder="Ingrese su nombre completo"
@@ -219,7 +219,7 @@ export default function FormularioDenuncia() {
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Teléfono *</legend>
               <input
-                className="input validator"
+                className="input validator border border-gray-300"
                 type="tel"
                 {...register("telefono", { required: watchAnonimo === 'no' })}
                 aria-invalid={errors.telefono ? "true" : "false"}
@@ -233,7 +233,7 @@ export default function FormularioDenuncia() {
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Correo Electrónico *</legend>
               <input
-                className="input validator"
+                className="input validator border border-gray-300"
                 type="email"
                 {...register("email", {
                   required: watchAnonimo === 'no',
@@ -265,7 +265,7 @@ export default function FormularioDenuncia() {
                   type="radio"
                   value={opcion.value}
                   {...register("relacion_dictuc", { required: true })}
-                  className="radio"
+                  className="radio border-1 border-gray-400"
                 />
                 <span>{opcion.label}</span>
               </label>
@@ -279,7 +279,7 @@ export default function FormularioDenuncia() {
         {/* Lugar del incidente */}
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Lugar dónde sucedió el incidente *</legend>
-          <select className="select" {...register("lugar_incidente", { required: true })}>
+          <select className="select border border-gray-300" {...register("lugar_incidente", { required: true })}>
             <option value="">-- Seleccione --</option>
             {LUGARES_INCIDENTE.map((lugar, index) => (
               <option key={index} value={lugar}>{lugar}</option>
@@ -302,7 +302,7 @@ export default function FormularioDenuncia() {
                   {...register("tipo_denuncia", {
                     validate: (value) => value.length > 0 || "Debe seleccionar al menos un tipo"
                   })}
-                  className="checkbox"
+                  className="checkbox border-1 border-gray-400"
                 />
                 <span>{tipo.label}</span>
               </label>
@@ -323,7 +323,7 @@ export default function FormularioDenuncia() {
                   type="radio"
                   value={opcion.value}
                   {...register("como_se_entero", { required: true })}
-                  className="radio"
+                  className="radio border-1 border-gray-400"
                 />
                 <span>{opcion.label}</span>
               </label>
@@ -340,7 +340,7 @@ export default function FormularioDenuncia() {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="label">Mes</label>
-              <select className="select" {...register("mes_incidente", { required: true })}>
+              <select className="select border border-gray-300" {...register("mes_incidente", { required: true })}>
                 <option value="">-- Mes --</option>
                 {MESES.map((mes) => (
                   <option key={mes.value} value={mes.value}>{mes.label}</option>
@@ -352,7 +352,7 @@ export default function FormularioDenuncia() {
             </div>
             <div>
               <label className="label">Año</label>
-              <select className="select" {...register("anio_incidente", { required: true })}>
+              <select className="select border border-gray-300" {...register("anio_incidente", { required: true })}>
                 <option value="">-- Año --</option>
                 {anios.map((anio) => (
                   <option key={anio} value={anio}>{anio}</option>
@@ -369,7 +369,7 @@ export default function FormularioDenuncia() {
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Descripción de la situación</legend>
           <textarea
-            className="textarea w-full"
+            className="textarea w-full border border-gray-300"
             rows="5"
             placeholder="Describa la situación que desea denunciar"
             {...register("descripcion")}

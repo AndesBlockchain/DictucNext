@@ -319,7 +319,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
           <div className="join"><input type="checkbox" disabled={isConsultingRut} {...register("newsletter")} /> &nbsp;Deseo recibir información de Dictuc</div>
       </fieldset>
 
-
+      <div className="text-center"> 
         <button
           className="ml-auto mr-auto btn btn-primary mt-2 rounded-full"
           type="submit"
@@ -334,6 +334,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
             'Enviar'
           )}
         </button>
+      </div>
 
       </form>
     </div>

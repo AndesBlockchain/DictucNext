@@ -1,6 +1,7 @@
 import React from "react";
 const logoDictuc = "/images/logo_dictuc_interior.png"
 import useMenuSuperior from "../hooks/use-menu-superior";
+import BuscadorAlgolia from "./BuscadorAlgolia";
 
 const BarraSuperior = async () => {
 
@@ -80,14 +81,7 @@ const BarraSuperior = async () => {
           })}
 
           {/* Search Bar */}
-          <div className="w-full lg:w-auto flex flex-col items-center gap-2 mt-4 lg:mt-0">
-            <input
-              type="text"
-              placeholder="Buscar en el sitio"
-              className="w-full max-w-xs lg:w-auto px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs"
-            />
-            <span className="block h-[2px] w-0 rounded-full mt-[1px]" />
-          </div>
+          <BuscadorAlgolia />
         </nav>
 
         {/* Mobile Overlay Backdrop (Optional for better UX) */}

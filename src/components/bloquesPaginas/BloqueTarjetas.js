@@ -46,7 +46,7 @@ const BloqueTarjetas = ({ datosBloque }) => {
         {tarjetas.map((tarjeta, index) => {
           const { id, titulo, colorFondo, colorTexto, imagen, contenido, callToAction } = normalizarTarjeta(tarjeta);
           return (
-            <div key={id ?? index} className={`${responsiveBasis} p-4 pl-8 pr-8`}>
+            <div key={id ?? index} className={`${responsiveBasis} p-4 pl-4 pr-4`}>
 
               {datosBloque.TipoTarjeta === "Full" && (
                 <CardServicio

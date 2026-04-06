@@ -20,7 +20,7 @@ const BannerInterior = ({ banner, gatsbyImageData, fallback, alt = "Banner", tit
         />
       </div>
       {icono_secundario && (
-        <div className="absolute -bottom-5 right-0 z-10 bg-gris-dictuc shadow-md rounded-tl-xl pl-11 pr-11 py-4">
+        <div className="absolute -bottom-3 right-0 z-10 bg-gris-dictuc shadow-md rounded-tl-xl pl-14 pr-14 py-4">
           <img src={process.env.STRAPI_API_URL + icono_secundario} className="max-w-14" alt="Icono secundario" />
         </div>
       )}

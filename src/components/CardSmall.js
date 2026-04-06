@@ -4,7 +4,7 @@ import StrapiImage from "./StrapiImage";
 export default function CardSmall({ titulo, callToAction, icono, contenido }) {
 
   return (
-    <div className="border rounded-lg shadow-xl p-4 grid grid-cols-3 w-full h-full">
+    <div className="border rounded-lg shadow-xl p-2 grid grid-cols-3 w-full h-full">
       <div className="col-span-1 p-4 flex items-center">
         <StrapiImage
           imagen={icono}
@@ -15,10 +15,10 @@ export default function CardSmall({ titulo, callToAction, icono, contenido }) {
         />
       </div>
       <div className="col-span-2 flex flex-col">
-        <h2 className="text-lg font-bold">{titulo}</h2>
-        <div className="text-xs text-left flex-grow" dangerouslySetInnerHTML={{__html: contenido}} />
+        <h2 className="text-sm text-left font-bold">{titulo}</h2>
+        <div className="text-xs text-left flex-grow mr-4" dangerouslySetInnerHTML={{__html: contenido}} />
         {callToAction && callToAction.url && (
-          <div className="mt-4 text-sm"><a className="text-azul-dictuc" href={callToAction.url}>Ver detalle →</a></div>
+          <div className="mt-4 text-xs text-right mr-4"><a className="text-azul-dictuc" href={callToAction.url}>Ver detalle →</a></div>
         )}
       </div>
     </div>

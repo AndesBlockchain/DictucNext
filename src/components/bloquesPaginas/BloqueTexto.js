@@ -12,18 +12,19 @@ const BloqueTexto = ({ datosBloque }) => {
     const textoHTML = datosBloque.Texto?.Texto || '';
     const textoBajada = datosBloque.Bajada?.Texto || '';
     
-    // Construir className de forma más limpia
-    const textoClassName = `${letra} text-${colorLetra}`;
-    const textoBajadaClassName = `${letra} text-${colorLetra} font-semibold mb-2`;
     return (
         <Bloque datosBloque={datosBloque.Bloque}>
             <div className="max-w-4xl m-auto">
+                {textoBajada && (
+                    <div
+                        className={`${letra} font-semibold mb-2`}
+                        style={{ color: colorLetra }}
+                        dangerouslySetInnerHTML={{ __html: textoBajada }}
+                    />
+                )}
                 <div
-                    className={textoBajadaClassName}
-                    dangerouslySetInnerHTML={{ __html: textoBajada }}
-                />
-                <div
-                    className={textoClassName}
+                    className={letra}
+                    style={{ color: colorLetra }}
                     dangerouslySetInnerHTML={{ __html: textoHTML }}
                 />
                 <div className="flex flex-row mt-4 items-center justify-center gap-4">

@@ -8,7 +8,7 @@ const useMenuSuperior = async () => {
   // Construir query con el helper
 
   return fetchFromStrapi({
-    endpoint: `/api/menu-superiors?sort=posicion`,
+    endpoint: `/api/menu-superiors?sort=posicion&populate=all`,
     cache: CACHE_PRESETS.FREQUENT, // Revalidar cada 5 minutos
     fallback: { data: [] },
     errorContext: 'menu superior  '

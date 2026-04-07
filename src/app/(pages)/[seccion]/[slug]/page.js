@@ -6,6 +6,7 @@ import ScrollSpy from "@/components/ScrollSpy";
 import { renderBloque } from "@/helpers/bloque-renderer";
 import usePagina from "@/hooks/use-pagina";
 import useMenuSecundario from "@/hooks/use-menu-secundario";
+import useMenuCajon from "@/hooks/use-menu-cajon";
 
 
 export default async function PaginasContenido({params}) {
@@ -14,6 +15,7 @@ export default async function PaginasContenido({params}) {
 
   const pagina = await usePagina(slug);
   const menuSecundario= await useMenuSecundario(seccion, slug);
+  const menuCajon = await useMenuCajon(seccion);
 
   return (
     <PaginaInterior
@@ -21,8 +23,9 @@ export default async function PaginasContenido({params}) {
       titulo = {pagina.titulo}
       titulo_visible={pagina.TituloVisible}
       color_titulo= {pagina.color_titulo.Codigo}
+      menuCajon={menuCajon}
       breadcrum={[
-        { label: "Home", link: "/" }, 
+        { label: "Home", link: "/" },
         { label: pagina?.titulo || "Página", link: "/" }
       ]}> 
       <MenuSecundario items={menuSecundario} slug={slug} />

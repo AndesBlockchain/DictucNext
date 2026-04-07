@@ -6,19 +6,13 @@ const CallToAction = ({ url, colorFondo, colorTexto, ComoAbrir, texto }) => {
         return null;
     }
   
-    // Construir className de forma segura
-    const getClassName = () => {
-        const baseClasses = "bg-azul-dictuc font-bold rounded-full px-4 py-2 text-xs hover:bg-azul-dictuc/90 transition-all";
-        const bgOverride = colorFondo?.Codigo && colorFondo.Codigo !== "azul-dictuc" ? `bg-${colorFondo.Codigo}` : '';
-        const textOverride = colorTexto?.Codigo ? `text-${colorTexto.Codigo}` : '';
-
-        return [baseClasses, bgOverride, textOverride].filter(Boolean).join(' ');
-    };
+    const bgClass = colorFondo?.Codigo ? `bg-${colorFondo.Codigo}` : "bg-azul-dictuc";
+    const txtClass = colorTexto?.Codigo ? `text-${colorTexto.Codigo}` : "text-white";
 
     return (
-        <a 
-            href={url} 
-            className={getClassName()}
+        <a
+            href={url}
+            className={`${bgClass} ${txtClass} font-bold rounded-full px-4 py-2 text-xs hover:opacity-90 transition-all`}
             target={ComoAbrir === "Ventana Nueva" ? "_blank" : "_self"}
             rel={ComoAbrir === "Ventana Nueva" ? "noopener noreferrer" : ""}
         >

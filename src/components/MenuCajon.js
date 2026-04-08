@@ -15,7 +15,7 @@ const MenuCajon = ({ menuCajon, children }) => {
           className="fixed left-0 top-1/2 -translate-y-1/2 z-40 bg-azul-dictuc text-white px-2 py-4 rounded-r-lg cursor-pointer hover:bg-azul-dictuc/90 transition-all shadow-lg flex items-center gap-1 writing-vertical-lr text-xs font-semibold"
           aria-label="Abrir menú lateral"
         >
-          {menuCajon.nombre}
+          <span className="hidden lg:inline">{menuCajon.nombre}</span>
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>

@@ -11,6 +11,7 @@ import BloqueTabs from "../components/bloquesPaginas/BloqueTabs";
 import BloqueTiposServicio from "../components/bloquesPaginas/bloqueTiposDeServicio";
 import BloqueAcordeon from "../components/bloquesPaginas/BloqueAcordeon";
 import BloqueSectoresPais from "../components/bloquesPaginas/BloqueSectoresPais";
+import BloqueTablaBuscable from "../components/bloquesPaginas/BloqueTablaBuscable";
 
 export const renderBloque = (bloque) => {
 
@@ -62,9 +63,12 @@ export const renderBloque = (bloque) => {
       return <BloqueTiposServicio datosBloque={bloque} />;
 
     case "bloques.bloque-sectores-pais":
-      case "STRAPI__COMPONENT_BLOQUES_BLOQUE_SECTORES_PAIS":
-        return <BloqueSectoresPais datosBloque={bloque} />;
+    case "STRAPI__COMPONENT_BLOQUES_BLOQUE_SECTORES_PAIS":
+      return <BloqueSectoresPais datosBloque={bloque} />;
 
+    case "bloques.bloque-tabla-buscable":
+    case "STRAPI__COMPONENT_BLOQUES_BLOQUE_TABLA_BUSCABLE":
+      return <BloqueTablaBuscable datosBloque={bloque} />;
 
     default:
       return (

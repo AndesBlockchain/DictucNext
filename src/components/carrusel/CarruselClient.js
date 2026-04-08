@@ -27,7 +27,7 @@ const CarruselClient = ({ carruselData }) => {
             <BarraFondoGris className={!itemActual.frasesVisibles ? " invisible" : ""}>
                 {itemActual.fraseSuperior}
             </BarraFondoGris>
-            <div id="texto-carrusel-2" className={"absolute font-semibold text-sm xl:text-xl 2xl:text-xl bottom-15 right-0 z-5 w-2/5 bg-gray-200 opacity-90 pl-8 text-opacity-90 px-6 py-3" + (!itemActual.frasesVisibles ? " invisible" : "")}>
+            <div id="texto-carrusel-2" className={"absolute font-semibold text-sm xl:text-xl 2xl:text-xl bottom-15 right-0 z-5 w-2/5 bg-gray-200 opacity-90 pl-8 text-opacity-90 px-6 py-3" + (!itemActual.frasesVisibles ? " invisible" : " md:visible invisible")}>
                 {itemActual.fraseInferior}
             </div>
             <div className="w-full bg-gray-50 flex items-center justify-center shadow-md relative">

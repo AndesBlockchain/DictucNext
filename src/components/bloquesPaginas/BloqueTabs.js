@@ -39,17 +39,17 @@ const BloqueTabs = ({ datosBloque }) => {
               role="tabpanel"
               className={`bg-base-100 border-base-300 rounded-box p-6 ${activeTab === index ? '' : 'hidden'}`}
             >
-              <div className="flex flex-row items-start gap-2 mb-4">
-                <div className="flex flex-item w-2/5 pl-8 pr-8">
+              <div className="flex flex-col md:flex-row md:flex-nowrap items-center md:items-start gap-2 mb-4">
+                <div className="flex flex-col sm:w-2/3 md:w-2/5 items-center pl-8 pr-8">
                   <StrapiImage
                     imagen={tab.Foto}
                     gatsbyImageData={tab.Foto?.localFile?.childImageSharp?.gatsbyImageData}
                     fallback={tab.Foto?.formats?.medium?.url}
                     alt={tab.Titulo || ""}
-                    className="rounded-xl"
+                    className="rounded-xl align-center"
                   />
                 </div>
-                <div className="mt-auto mb-auto w-3/5 pl-8 text-left text-sm" dangerouslySetInnerHTML={{__html: tab.Texto || ""}} />
+                <div className="mt-auto mb-auto w-full md:w-3/5 pl-8 text-left text-sm" dangerouslySetInnerHTML={{__html: tab.Texto || ""}} />
               </div>
               <CallToActionGroup buttons={tab.CallToAction}/>
             </div>

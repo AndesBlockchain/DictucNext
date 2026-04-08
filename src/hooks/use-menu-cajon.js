@@ -5,7 +5,6 @@ const useMenuCajon = async (slug) => {
 
   const result = await fetchFromStrapi({
     endpoint: `/api/menu-cajons?filters[slug][$eq]=${slug}&populate=all`,
-    cache: CACHE_PRESETS.HOURLY,
     fallback: { data: [] },
     errorContext: 'menu cajon'
   });

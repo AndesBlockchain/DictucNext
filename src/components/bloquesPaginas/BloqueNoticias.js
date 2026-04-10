@@ -1,12 +1,14 @@
 import React from "react";
 import CardNoticia  from "../CardNoticia";
+import CallToAction from "../CallToAction";
 import Bloque from "./Bloque";
 const FotoDefaultNoticias = "/images/noticias.png";
 
-const BloqueNoticias = async ({ datosBloque }) => {
- console.log("datosBloque",datosBloque.etiqueta_noticia.noticias)
-const cantidadNoticias= datosBloque.CantidadNoticias
-const mostrarFecha= datosBloque.MostrarFecha
+const BloqueNoticias = ({ datosBloque }) => {
+  const cantidadNoticias = datosBloque.CantidadNoticias;
+  const mostrarFecha = datosBloque.MostrarFecha;
+  const botones = datosBloque.CallToAction || [];
+
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
         <div className="container m-auto max-w-6xl flex flex-wrap justify-center items-center gap-8 mt-8 pb-6">
@@ -24,6 +26,20 @@ const mostrarFecha= datosBloque.MostrarFecha
             />
           ))}
         </div>
+        {botones.length > 0 && (
+          <div className="flex flex-row mt-4 items-center justify-center gap-4 pb-6">
+            {botones.map((item, index) => (
+              <CallToAction
+                key={index}
+                url={item.url}
+                colorFondo={item.colorBoton}
+                colorTexto={item.colorTexto}
+                ComoAbrir={item.ComoAbrir}
+                texto={item.texto}
+              />
+            ))}
+          </div>
+        )}
     </Bloque>
 );
 

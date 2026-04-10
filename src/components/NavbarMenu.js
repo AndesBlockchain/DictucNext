@@ -35,7 +35,7 @@ const MenuItem = ({ item }) => {
         <summary className="hover:!bg-transparent hover:text-azul-dictuc transition-colors -mt-[10px]">
           {item.Nombre}
         </summary>
-        <ul className="min-w-[200px] rounded-md z-[70] normal-case font-normal">
+        <ul className="min-w-[280px] rounded-md z-[70] normal-case font-normal">
           {item.LInks.map((sublink, index) => {
             const esSubExterno = sublink.url?.startsWith("http")
             return (

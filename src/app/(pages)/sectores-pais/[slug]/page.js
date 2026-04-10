@@ -23,7 +23,7 @@ export default async function HomeServicios({ params })
         breadcrum={[{ label: "Home", link: "/" }, { label: sector.nombre, link: "/" + slug }]}>
 
         <Servicios tipos_de_servicio={tiposDeServicio} sectores_pais={sectoresPais} unidades={unidades}
-        sectores_pais_visibles={false} tipos_de_servicio_visibles={true}
+        sectores_pais_visibles={true} tipos_de_servicio_visibles={true}
           servicios={servicios} slug={slug} />
 
     </PaginaInterior>

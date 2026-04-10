@@ -109,7 +109,7 @@ const BuscadorAlgolia = () => {
 
       {/* Dropdown de resultados */}
       {isOpen && inputValue.trim().length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-[70] max-h-80 overflow-y-auto normal-case font-normal min-w-[280px]">
+        <div className="absolute top-full right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-[70] max-h-80 overflow-y-auto normal-case font-normal min-w-[280px]">
           {isLoading && (
             <div className="px-4 py-3 text-xs text-gray-500">Buscando...</div>
           )}

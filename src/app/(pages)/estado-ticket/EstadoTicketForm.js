@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from "react";
 
-export default function EstadoTicketForm({ strapiApiUrl }) {
+export default function EstadoTicketForm() {
   const [ticket, setTicket] = useState("");
   const [estadoTicket, setEstadoTicket] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,7 +49,7 @@ export default function EstadoTicketForm({ strapiApiUrl }) {
     setInputError("");
 
     try {
-      const response = await fetch(strapiApiUrl + '/api/estado-cotizacion', {
+      const response = await fetch('/api/estado-ticket', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,8 +77,8 @@ export default function EstadoTicketForm({ strapiApiUrl }) {
           estado: result.data.nombre_estado
         });
       }
-    } catch (error) {
-      console.error('Error al verificar el ticket:', error);
+    } catch (err) {
+      console.error('Error al verificar el ticket:', err);
       setError({
         show: true,
         message: "Error al verificar el estado del ticket. Por favor, inténtelo nuevamente.",
@@ -97,15 +97,15 @@ export default function EstadoTicketForm({ strapiApiUrl }) {
   };
 
   return (
-    <div className="container m-auto max-w-12xl">
+    <div className="container m-auto">
       <fieldset className="fieldset border-base-300 rounded-box w-xs border p-4 mb-8">
         <legend className="fieldset-legend">Ingrese el Nº de Ticket</legend>
         <input
           type="text"
-          className="input"
+          className="input border border-gray-300"
           value={ticket}
           onChange={handleTicketChange}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
           disabled={isSubmitting}
           aria-invalid={inputError ? "true" : "false"}
           placeholder="Ej: 12345"

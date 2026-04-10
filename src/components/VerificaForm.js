@@ -169,7 +169,7 @@ export default function VerificaForm({ verificacionUrl }) {
   };
 
   return (
-    <div className="pl-12 pr-12 pt-12 pb-6">
+    <div className="pb-2 mt-6 mb-6 pl-6">
       {/* Toast de notificaciones */}
       {toast.show && (
         <div
@@ -195,16 +195,6 @@ export default function VerificaForm({ verificacionUrl }) {
           </div>
         </div>
       )}
-
-      <p className="mb-4">
-        Dictuc actualmente genera informes con una firma digital, en el caso de servicios rutinarios,
-        y con dos firmas tradicionales en el caso de estudios y peritajes.
-      </p>
-
-      <p className="mb-6">
-        Acá puedes verificar la autenticidad de un certificado emitido por Dictuc. Ingresa el código
-        de verificación del documento y revisa si es genuino.
-      </p>
 
       {/* Formulario oculto para POST tradicional */}
       <form
@@ -235,7 +225,7 @@ export default function VerificaForm({ verificacionUrl }) {
           <div className="relative">
             <input
               type="text"
-              className={`input ${error ? 'border-red-500 focus:ring-red-500' : ''}`}
+              className={`input border ${error ? 'border-red-500 focus:ring-red-500' : 'border-gray-300'}`}
               placeholder="Ej: yrt439k"
               onChange={handleCambiarCodigo}
               onKeyDown={handleKeyDown}
@@ -288,6 +278,7 @@ export default function VerificaForm({ verificacionUrl }) {
           type="button"
           aria-label="Verificar la autenticidad del certificado"
         >
+   
           {/* Spinner de loading */}
           {isSubmitting && (
             <svg
@@ -318,17 +309,6 @@ export default function VerificaForm({ verificacionUrl }) {
           </span>
         </button>
       </form>
-
-      <p className="text-sm text-gray-600 mt-4">
-        En el caso de informes con dos firmas, estos se emiten sin código de verificación.
-        Si requieres confirmar su validez, contacta a{' '}
-        <a
-          href="mailto:informes@dictuc.cl"
-          className="text-azul-dictuc hover:underline focus:outline-none focus:ring-2 focus:ring-azul-dictuc focus:ring-offset-2"
-        >
-          informes@dictuc.cl
-        </a>
-      </p>
     </div>
   );
 }

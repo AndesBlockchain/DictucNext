@@ -12,10 +12,12 @@ import useMenuCajon from "@/hooks/use-menu-cajon";
 export default async function PaginasContenido({params}) {
 
   const {seccion, slug} = await params;
+  const slugFinal = slug[slug.length - 1];
 
-  const pagina = await usePagina(slug);
-  const menuSecundario= await useMenuSecundario(seccion, slug);
-  const menuCajon = await useMenuCajon(seccion);
+  const pagina = await usePagina(slugFinal);
+  const menuSecundario = await useMenuSecundario(seccion, slugFinal);
+  const menuCajonSlug = slug.length > 1 ? slug[0] : seccion;
+  const menuCajon = await useMenuCajon(menuCajonSlug);
 
   return (
     <PaginaInterior
@@ -28,7 +30,7 @@ export default async function PaginasContenido({params}) {
         { label: "Home", link: "/" },
         { label: pagina?.titulo || "Página", link: "/" }
       ]}> 
-      <MenuSecundario items={menuSecundario} slug={slug} />
+      <MenuSecundario items={menuSecundario} slug={slugFinal} />
       {(pagina.ScrollSpyVisible !== false) && (
         <ScrollSpy datosBloques={pagina.Bloques}/>
       )}

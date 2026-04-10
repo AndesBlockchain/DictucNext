@@ -8,8 +8,6 @@ export const metadata = {
 };
 
 export default async function EstadoTicketPage() {
-  const strapiApiUrl = process.env.STRAPI_API_URL;
-
   return (
     <PaginaInterior
       fallback={BannerNoticias}
@@ -19,7 +17,11 @@ export default async function EstadoTicketPage() {
         { label: "Estado de Ticket", link: "/estado-ticket" }
       ]}
     >
-      <EstadoTicketForm strapiApiUrl={strapiApiUrl} />
+      <div className="ml-auto mr-auto xl:w-2/5 lg:w-2/5 md:w-3/5 sm:w-4/5  justify-center items-center mb-6">
+        <p className="mb-4">Aquí puedes consultar el estado de tu ticket y hacer seguimiento al avance de tu solicitud.
+          Ingresa los datos requeridos para conocer su estado actual y la información disponible.</p>
+        <EstadoTicketForm />
+      </div>
     </PaginaInterior>
   );
 }

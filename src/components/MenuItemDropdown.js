@@ -55,7 +55,7 @@ const MenuItemDropdown = ({ item }) => {
       </button>
 
       {isOpen && (
-        <div className="lg:absolute lg:top-full lg:left-1/2 lg:-translate-x-1/2 lg:pt-2 z-[70] min-w-[200px] normal-case font-normal">
+        <div className="lg:absolute lg:top-full lg:left-1/2 lg:-translate-x-1/2 lg:pt-2 z-[70] min-w-[280px] normal-case font-normal">
           <div className="bg-white lg:border lg:border-gray-200 lg:rounded-md lg:shadow-lg">
           {item.LInks.map((sublink, index) => {
             const esSubExterno = sublink.url?.startsWith("http")

@@ -37,7 +37,7 @@ export default async function VerificaPage() {
     >
 <div className="container m-auto max-w-2xl">
   <FranjaAzul />
-  <Titulo titulo="Verifica un Certificado" />
+  <Titulo titulo="VERIFICA UN <span class='text-azul-dictuc'>CERTIFICADO</span>" />
       <p className="mb-4">
         Dictuc emite informes y certificados con distintos mecanismos de validación, según el tipo de servicio.<br /><br />
         <ul>
@@ -67,12 +67,12 @@ export default async function VerificaPage() {
         </a>
       </p>
 
-      <div className="container m-auto max-w-12xl">
+      <div className="container m-auto max-w-12xl mt-16">
         {/* Sección de noticias */}
         <Noticias
           noticias={noticias}
           className="mt-6"
-          titulo='<span class="text-azul-dictuc">En qué </span>estamos'
+          titulo='<span class="text-azul-dictuc">EN QUÉ </span>ESTAMOS'
         />
       </div>
     </PaginaInterior>

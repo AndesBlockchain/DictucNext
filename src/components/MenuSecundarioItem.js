@@ -16,7 +16,7 @@ const MenuSecundarioItem = ({ item, isActive }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
-  const baseClasses = `font-semibold text-sm px-4 whitespace-nowrap ${
+  const baseClasses = `font-semibold text-sm px-4 whitespace-nowrap transition-colors hover:text-azul-dictuc ${
     isActive ? 'border-azul-dictuc border-b-2 text-azul-dictuc' : 'border-black border-b-1'
   }`
 

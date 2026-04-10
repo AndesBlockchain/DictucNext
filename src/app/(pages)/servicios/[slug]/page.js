@@ -29,7 +29,7 @@ export default async function Servicio({ params }) {
         { label: servicio.nombre }
       ]}
     >
-      <div className="text-2xl font-bold mt-2 mb-2 ml-10 text-left"><h2>{servicio.nombre}</h2></div>
+      <div className="text-xl font-bold mt-2 mb-2 ml-10 text-left"><h2>{servicio.nombre}</h2></div>
       <div className="ml-10 mb-4 text-sm"><span className="text-azul-dictuc font-semibold">Ejecutor:</span> {servicio.unidad.nombre} <span className="text-azul-dictuc font-semibold"> &nbsp;&nbsp;|&nbsp;&nbsp; Tipo de Servicio:</span> {servicio.tipo_de_servicio.nombre} <span className="text-azul-dictuc font-semibold"> &nbsp;&nbsp;|&nbsp;&nbsp; Sectores:</span> {servicio.sectores_pais.map(sector => sector.nombre).join(", ")}</div>
       <div className="bg-gray-100">
       <div className="container mx-auto max-w-8xl mt-6">

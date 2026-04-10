@@ -8,7 +8,7 @@ const useUnidades = async() => {
     return { data: [], totalCount: 0 }; // Retornar estructura vacía válida
   }
 
-  const path = "/api/unidades?populate=all&sort=nombre";
+  const path = "/api/unidades?populate=all&sort=nombre&pagination[limit]=200";
 
   try {
     const res = await fetch(baseUrl + path, {

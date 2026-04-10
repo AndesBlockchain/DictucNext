@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 
 /**
  * Componente Cliente para verificar certificados DICTUC
@@ -10,26 +10,10 @@ export default function VerificaForm({ verificacionUrl }) {
   const [codigo, setCodigo] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const [toast, setToast] = useState({ show: false, message: "", type: "success" });
   const formRef = useRef(null);
 
   // Regex para validar formato de código (alfanumérico, 4-20 caracteres)
   const CODIGO_REGEX = /^[a-zA-Z0-9]{4,20}$/;
-
-  // Cleanup del toast
-  useEffect(() => {
-    let timeoutId;
-    if (toast.show) {
-      timeoutId = setTimeout(() => {
-        setToast({ show: false, message: "", type: "success" });
-      }, 4000);
-    }
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
-  }, [toast.show]);
 
   /**
    * Sanitiza el input del usuario
@@ -101,11 +85,6 @@ export default function VerificaForm({ verificacionUrl }) {
 
     if (!validacion.valido) {
       setError(validacion.mensaje);
-      setToast({
-        show: true,
-        message: validacion.mensaje,
-        type: "error"
-      });
       return;
     }
 
@@ -123,13 +102,6 @@ export default function VerificaForm({ verificacionUrl }) {
         // El formulario se envía automáticamente al target _blank
         formRef.current.submit();
 
-        // Mostrar feedback de éxito
-        setToast({
-          show: true,
-          message: "Abriendo verificación en nueva ventana...",
-          type: "success"
-        });
-
         // Limpiar código después de enviar
         setTimeout(() => {
           setCodigo("");
@@ -141,11 +113,6 @@ export default function VerificaForm({ verificacionUrl }) {
     } catch (error) {
       console.error('[VerificaForm] Error al verificar certificado:', error);
       setError("Ocurrió un error al verificar el certificado. Por favor intenta nuevamente.");
-      setToast({
-        show: true,
-        message: "Error al verificar. Por favor intenta nuevamente.",
-        type: "error"
-      });
       setIsSubmitting(false);
     }
   };
@@ -170,32 +137,6 @@ export default function VerificaForm({ verificacionUrl }) {
 
   return (
     <div className="pb-2 mt-6 mb-6 pl-6">
-      {/* Toast de notificaciones */}
-      {toast.show && (
-        <div
-          className={`fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg transition-all ${
-            toast.type === "error"
-              ? "bg-red-500 text-white"
-              : "bg-green-500 text-white"
-          }`}
-          role="alert"
-          aria-live="polite"
-        >
-          <div className="flex items-center gap-3">
-            {toast.type === "error" ? (
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-              </svg>
-            ) : (
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-            )}
-            <span>{toast.message}</span>
-          </div>
-        </div>
-      )}
-
       {/* Formulario oculto para POST tradicional */}
       <form
         ref={formRef}
@@ -274,7 +215,7 @@ export default function VerificaForm({ verificacionUrl }) {
         <button
           className="btn btn-primary mb-6 mt-4 rounded-full flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={verificarCertificado}
-          disabled={!codigo.trim() || isSubmitting || !!error}
+          disabled={isSubmitting}
           type="button"
           aria-label="Verificar la autenticidad del certificado"
         >

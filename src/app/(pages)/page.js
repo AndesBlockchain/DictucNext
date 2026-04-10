@@ -37,7 +37,7 @@ const IndexPage = async () => {
       <Carrusel />
       <SectoresPais botonHollow={true} />
       <Agente
-        titulo="¿Qué <span class='text-azul-dictuc'>Necesitas?</span>"
+        titulo="¿QUÉ <span class='text-azul-dictuc'>NECESITAS?</span>"
         franja={true}
       />
       <TiposDeServicios/>

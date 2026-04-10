@@ -13,7 +13,7 @@ export default async function PaginasContenido({params}) {
 
   const {seccion, slug} = await params;
   const slugFinal = slug[slug.length - 1];
-
+console.log("dro")
   const pagina = await usePagina(slugFinal);
   const menuSecundario = await useMenuSecundario(seccion, slugFinal);
   const menuCajonSlug = slug.length > 1 ? slug[0] : seccion;

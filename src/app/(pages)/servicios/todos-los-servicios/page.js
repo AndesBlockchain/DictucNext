@@ -6,15 +6,19 @@ import useServicios from "@/hooks/use-servicios";
 import useUnidades from "@/hooks/use-unidades";
 const BannerServicios = "/images/banner_servicios.jpg";
 
-export default async function TodosLosServicios()
+export default async function TodosLosServicios({ searchParams })
 {
+  const { ejecutor } = await searchParams;
   const tiposDeServicio = await useTipoDeServicio();
   const sectoresPais = await useSectoresPais();
   const servicios = await useServicios();
   const unidades = await useUnidades();
 
-  console.log("servicios",servicios.length);
-  
+  // Buscar el nombre de la unidad que corresponde al slug del param GET
+  const ejecutorInicial = ejecutor
+    ? unidades.data?.find(u => u.slug === ejecutor)?.nombre || null
+    : null;
+
   return (
     <>
       <PaginaInterior
@@ -24,7 +28,7 @@ export default async function TodosLosServicios()
 
         <Servicios tipos_de_servicio={tiposDeServicio} sectores_pais={sectoresPais} unidades={unidades}
         sectores_pais_visibles={true} tipos_de_servicio_visibles={true}
-          servicios={servicios}/>
+          servicios={servicios} ejecutorInicial={ejecutorInicial}/>
 
     </PaginaInterior>
     </>

@@ -14,7 +14,7 @@ const useMenuSecundario = async (seccion, slug) => {
   const path = `/api/menu-secundarios?sort=sortOrder&populate=Links&filters[seccion][slug][$eq]=${seccion}`;
 
   const res = await fetch(baseUrl + path);
-
+console.log(baseUrl + path)
   if (!res.ok) {
     throw new Error(`Failed to fetch menu secundario: ${slug} (Status: ${res.status})`);
   }

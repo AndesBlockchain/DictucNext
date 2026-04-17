@@ -2,7 +2,7 @@
 import React from "react"
 import BuscadorAlgolia from "./BuscadorAlgolia"
 
-const hoverClasses = "hover:!bg-transparent hover:text-azul-dictuc transition-colors flex flex-col items-center after:block after:h-[2px] after:w-0 after:bg-azul-dictuc after:rounded-full after:transition-all after:duration-300 hover:after:w-[20px]"
+const hoverClasses = "hover:!bg-transparent hover:text-azul-dictuc hover:no-underline transition-colors flex flex-col items-center after:block after:h-[2px] after:w-0 after:bg-azul-dictuc after:rounded-full after:transition-all after:duration-300 hover:after:w-[20px]"
 
 const HomeIcon = () => (
   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -44,7 +44,7 @@ const MenuItem = ({ item }) => {
                   href={sublink.url}
                   target={esSubExterno ? "_blank" : "_self"}
                   rel={esSubExterno ? "noopener noreferrer" : undefined}
-                  className="text-xs text-gray-700 hover:!bg-transparent hover:text-azul-dictuc transition-colors"
+                  className="text-xs text-gray-700 hover:!bg-transparent hover:text-azul-dictuc hover:no-underline transition-colors"
                 >
                   {sublink.texto}
                 </a>

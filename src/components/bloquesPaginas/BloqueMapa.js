@@ -28,8 +28,8 @@ const BloqueMapa = ({ datosBloque }) => {
               <div className={`w-full h-64 md:h-80 rounded-lg overflow-hidden shadow ${invertido ? "md:[direction:ltr]" : ""}`}>
                 <iframe
                   src={mapSrc}
-                  width="100%"
-                  height="100%"
+                  width="80%"
+                  height="80%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
@@ -39,7 +39,7 @@ const BloqueMapa = ({ datosBloque }) => {
               </div>
 
               <div className={invertido ? "md:[direction:ltr]" : ""}>
-                <h3 className="text-azul-dictuc font-bold text-xl mb-4">
+                <h3 className="text-azul-dictuc font-bold text-lg mb-4">
                   <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-azul-dictuc" />
                   {lugar.Nombre}
                 </h3>

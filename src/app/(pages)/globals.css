@@ -57,6 +57,12 @@ li a:hover {
   text-decoration: underline;
 }
 
+.menu li a:hover,
+.drawer-side li a:hover {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
 /* Estilos globales para listas */
 ul {
   list-style-position: inside;

@@ -40,7 +40,7 @@ const TablaPersonasClient = ({ personas, cantidadFilas }) => {
       {/* Tabla */}
       <table className="w-full border-collapse">
         <thead>
-          <tr className="bg-azul-dictuc text-white">
+          <tr className="bg-gris-dictuc text-white">
             <th className="px-4 py-3 text-center text-sm font-semibold">Nombre</th>
             <th className="px-4 py-3 text-center text-sm font-semibold">Cargo</th>
             <th className="px-4 py-3 text-center text-sm font-semibold">Más información</th>

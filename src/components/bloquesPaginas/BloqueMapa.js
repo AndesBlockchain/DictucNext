@@ -25,7 +25,7 @@ const BloqueMapa = ({ datosBloque }) => {
               key={lugar.id}
               className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-left ${invertido ? "md:[direction:rtl]" : ""}`}
             >
-              <div className={`w-full h-48 md:h-80 rounded-lg overflow-hidden shadow ${invertido ? "md:[direction:ltr]" : ""}`}>
+              <div className={`w-full h-48 md:h-64 rounded-lg overflow-hidden shadow ${invertido ? "md:[direction:ltr]" : ""}`}>
                 <iframe
                   src={mapSrc}
                   width="100%"

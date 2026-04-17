@@ -16,8 +16,8 @@ export default async function PaginasContenido({params}) {
 console.log("dro")
   const pagina = await usePagina(slugFinal);
   const menuSecundario = await useMenuSecundario(seccion, slugFinal);
-  const menuCajonSlug = slug.length > 1 ? slug[0] : seccion;
-  const menuCajon = await useMenuCajon(menuCajonSlug);
+  const menuCajonCandidatos = [...slug.slice(0, -1)].reverse().concat(seccion);
+  const menuCajon = await useMenuCajon(menuCajonCandidatos);
 
   return (
     <PaginaInterior

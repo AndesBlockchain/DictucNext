@@ -35,7 +35,7 @@ const MenuCajon = ({ menuCajon, children }) => {
               <li key={link.id}>
                 <a
                   href={link.url}
-                  className="text-sm text-gris-dictuc hover:text-azul-dictuc hover:bg-gray-100 rounded-lg transition-colors"
+                  className="text-sm text-gris-dictuc hover:text-gris-dictuc hover:no-underline hover:bg-gray-100 rounded-lg transition-colors"
                   onClick={() => {
                     document.getElementById(drawerId).checked = false
                   }}

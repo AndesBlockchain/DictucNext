@@ -1,15 +1,20 @@
 import { fetchFromStrapi, CACHE_PRESETS } from '@/lib/strapi-fetcher';
 
-const useMenuCajon = async (slug) => {
-  if (!slug) return null;
+const useMenuCajon = async (slugCandidatos) => {
+  if (!slugCandidatos || slugCandidatos.length === 0) return null;
 
-  const result = await fetchFromStrapi({
-    endpoint: `/api/menu-cajons?filters[slug][$eq]=${slug}&populate=all`,
-    fallback: { data: [] },
-    errorContext: 'menu cajon'
-  });
+  for (const slug of slugCandidatos) {
+    const result = await fetchFromStrapi({
+      endpoint: `/api/menu-cajons?filters[slug][$eq]=${slug}&populate=all`,
+      fallback: { data: [] },
+      errorContext: 'menu cajon'
+    });
 
-  return result?.data?.[0] || null;
+    const menuCajon = result?.data?.[0] || null;
+    if (menuCajon) return menuCajon;
+  }
+
+  return null;
 }
 
 export default useMenuCajon;

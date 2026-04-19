@@ -24,13 +24,13 @@ const MenuCajon = ({ menuCajon, children }) => {
         {children}
       </div>
 
-      <div className="drawer-side z-50">
+      <div className="drawer-side z-[110]">
         <label htmlFor={drawerId} aria-label="Cerrar menú" className="drawer-overlay"></label>
         <div className="bg-white min-h-full w-72 p-6 pt-24">
-          <h3 className="font-bold text-lg text-azul-dictuc mb-4 uppercase">
-            {menuCajon.nombre}
-          </h3>
           <ul className="menu menu-vertical gap-1">
+            <li className="menu-title text-lg text-azul-dictuc uppercase">
+              {menuCajon.nombre}
+            </li>
             {menuCajon.links?.map((link) => (
               <li key={link.id}>
                 <a

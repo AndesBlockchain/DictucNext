@@ -97,9 +97,9 @@ export default function EstadoTicketForm() {
   };
 
   return (
-    <div className="container m-auto">
+    <div className="container m-auto flex flex-col items-center">
       <fieldset className="fieldset border-base-300 rounded-box w-xs border p-4 mb-8">
-        <legend className="fieldset-legend">Ingrese el Nº de Ticket</legend>
+        <legend className="fieldset-legend text-gris-dictuc">Ingrese el Nº de Ticket</legend>
         <input
           type="text"
           className="input border border-gray-300"

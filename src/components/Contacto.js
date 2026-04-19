@@ -5,9 +5,20 @@ import {useForm} from 'react-hook-form';
 import { formatearRut, validarRut } from "../helpers/rut-helpers";
 const codigoUnidadDefault = "5401";
 
-export default function Contacto({ titulo = "Formulario de Contacto", border = false, isCotizacion=false, servicio="", tiposDeContacto, strapiApiUrl, codigoUnidad = codigoUnidadDefault}) {
+export default function Contacto({ titulo = "Formulario de Contacto", border = false, isCotizacion=false, servicio="", tiposDeContacto, strapiApiUrl, codigoUnidad = codigoUnidadDefault, accionInicial = null}) {
 
-  const { register, formState: {errors}, handleSubmit, setValue, watch, setError, clearErrors, reset } = useForm()
+  // Buscar el documentId del tipo de contacto que coincida con la acción inicial
+  const defaultTipoConsulta = React.useMemo(() => {
+    if (!accionInicial || !tiposDeContacto) return "0";
+    const tipo = tiposDeContacto.find(t => t.Tipo?.toLowerCase() === accionInicial.toLowerCase());
+    return tipo?.documentId || "0";
+  }, [accionInicial, tiposDeContacto]);
+
+  const { register, formState: {errors}, handleSubmit, setValue, watch, setError, clearErrors, reset } = useForm({
+    defaultValues: {
+      tipo_consulta: defaultTipoConsulta
+    }
+  })
 
   const watchRut = watch("rut_empresa", false);
   const watchEmpresaExtranjera = watch("empresa_extranjera", false);
@@ -211,7 +222,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
       {!isCotizacion && (
         <fieldset className="fieldset">
         <legend className="fieldset-legend">Tipo de Consulta</legend>
-          <select className="select border border-gray-300" defaultValue="0" disabled={isConsultingRut} {...register("tipo_consulta",{required: true})}>
+          <select className="select border border-gray-300" defaultValue={defaultTipoConsulta} disabled={isConsultingRut} {...register("tipo_consulta",{required: true})}>
           <option value="0">-- Seleccione --</option>
           {tiposDeContacto.map((tipo) =>(
             <option key={tipo.id} value={tipo.documentId}>{tipo.Tipo}</option>

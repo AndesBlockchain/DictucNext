@@ -1,5 +1,6 @@
 import React from "react";
 import PaginaInterior from "@/components/PaginaInterior";
+import FranjaAzul from "@/components/FranjaAzul";
 import EstadoTicketForm from "./EstadoTicketForm";
 const BannerNoticias = "/images/BannerMicrofonos.webp";
 
@@ -17,10 +18,16 @@ export default async function EstadoTicketPage() {
         { label: "Estado de Ticket", link: "/estado-ticket" }
       ]}
     >
-      <div className="ml-auto mr-auto xl:w-2/5 lg:w-2/5 md:w-3/5 sm:w-4/5  justify-center items-center mb-6">
-        <p className="mb-4">Aquí puedes consultar el estado de tu ticket y hacer seguimiento al avance de tu solicitud.
-          Ingresa los datos requeridos para conocer su estado actual y la información disponible.</p>
-        <EstadoTicketForm />
+      <div className="my-8 text-center mx-auto pl-8 pr-8">
+        <FranjaAzul />
+        <div className="text-center mb-4 mt-4 font-semibold">
+          ESTADO DE <span className="text-azul-dictuc">TICKET</span>
+        </div>
+        <div className="max-w-4xl m-auto">
+          <p className="text-sm text-gris-dictuc mb-6">Aquí puedes consultar el estado de tu ticket y hacer seguimiento al avance de tu solicitud.
+            Ingresa los datos requeridos para conocer su estado actual y la información disponible.</p>
+          <EstadoTicketForm />
+        </div>
       </div>
     </PaginaInterior>
   );

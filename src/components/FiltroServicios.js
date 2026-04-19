@@ -170,9 +170,9 @@ const FiltroServicios = ({
 
   return (
     <div className="border-1 border-x-gray-500 rounded-md text-xs p-4 w-full">
-      <div className="font-semibold text-center text-base mb-2">Filtros de Busqueda</div>
+      <div className="font-semibold text-center text-base mb-2">Filtros de Búsqueda</div>
 
-      <div className="mt-3 font-semibold">Busqueda por palabra</div>
+      <div className="mt-3 font-semibold">Búsqueda por palabra</div>
       <input
         type="text"
         value={filtros.busqueda}
@@ -182,11 +182,13 @@ const FiltroServicios = ({
       />
 
       {tiposDeServicioVisibles && tiposDeServicio?.data && (
-        <>
-          <div className="font-semibold mb-1">Tipo de Servicio</div>
-          <div>
+        <div className="collapse collapse-arrow border-b border-gray-200">
+          <input type="checkbox" defaultChecked />
+          <div className="collapse-title font-semibold px-0 min-h-0 py-2">Tipo de Servicio</div>
+          <div className="collapse-content px-0">
             {[...tiposDeServicio.data].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')).map((item) => {
               const count = conteoPorTipo[item.slug] || 0;
+              if (count === 0) return null;
 
               return (
                 <div key={item.slug} className="flex items-center mb-2">
@@ -208,15 +210,17 @@ const FiltroServicios = ({
               );
             })}
           </div>
-        </>
+        </div>
       )}
 
       {sectoresPaisVisibles && sectoresPais?.data && (
-        <>
-          <div className="font-semibold mb-1 mt-1">Sector Pais</div>
-          <div>
+        <div className="collapse collapse-arrow border-b border-gray-200">
+          <input type="checkbox" defaultChecked />
+          <div className="collapse-title font-semibold px-0 min-h-0 py-2">Sector País</div>
+          <div className="collapse-content px-0">
             {sectoresPais.data.map(item => {
               const count = conteoPorSector[item.slug] || 0;
+              if (count === 0) return null;
 
               return (
                 <div key={item.id} className="flex items-center mb-2">
@@ -238,15 +242,17 @@ const FiltroServicios = ({
               );
             })}
           </div>
-        </>
+        </div>
       )}
 
       {unidadesVisibles && unidades?.data && (
-        <>
-          <div className="font-semibold mb-1 mt-1">Ejecutor</div>
-          <div>
+        <div className="collapse collapse-arrow border-b border-gray-200">
+          <input type="checkbox" defaultChecked />
+          <div className="collapse-title font-semibold px-0 min-h-0 py-2">Ejecutor</div>
+          <div className="collapse-content px-0">
             {unidades.data.map(item => {
               const count = conteoPorUnidad[item.nombre] || 0;
+              if (count === 0) return null;
 
               return (
                 <div key={item.id} className="flex items-center mb-2">
@@ -268,7 +274,7 @@ const FiltroServicios = ({
               );
             })}
           </div>
-        </>
+        </div>
       )}
 
       <SeparadorHorizontal />

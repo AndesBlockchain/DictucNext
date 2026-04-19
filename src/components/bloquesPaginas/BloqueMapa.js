@@ -39,10 +39,14 @@ const BloqueMapa = ({ datosBloque }) => {
               </div>
 
               <div className={invertido ? "md:[direction:ltr]" : ""}>
-                <h3 className="text-azul-dictuc font-bold text-lg mb-4">
+                <h3 className="text-azul-dictuc font-bold text-lg">
                   <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-azul-dictuc" />
                   {lugar.Nombre}
                 </h3>
+                {lugar.Direccion && (
+                  <p className="text-base text-gray-500 font-semibold mt-1 mb-4">{lugar.Direccion}</p>
+                )}
+                {!lugar.Direccion && <div className="mb-4" />}
                 {lugar.Instalaciones?.map((instalacion) => (
                   <div key={instalacion.id} className="mb-4">
                     <p className="font-bold text-xs">{instalacion.Nombre}</p>

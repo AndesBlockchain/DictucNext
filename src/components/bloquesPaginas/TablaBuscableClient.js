@@ -1,9 +1,7 @@
 "use client"
 import React, { useState, useMemo } from "react"
 
-const ITEMS_PER_PAGE = 8
-
-const TablaBuscableClient = ({ datos }) => {
+const TablaBuscableClient = ({ datos, filasPorPagina = 8 }) => {
   const [busqueda, setBusqueda] = useState("")
   const [paginaActual, setPaginaActual] = useState(1)
 
@@ -15,9 +13,9 @@ const TablaBuscableClient = ({ datos }) => {
     )
   }, [datos, busqueda])
 
-  const totalPaginas = Math.ceil(datosFiltrados.length / ITEMS_PER_PAGE)
-  const inicio = (paginaActual - 1) * ITEMS_PER_PAGE
-  const datosPagina = datosFiltrados.slice(inicio, inicio + ITEMS_PER_PAGE)
+  const totalPaginas = Math.ceil(datosFiltrados.length / filasPorPagina)
+  const inicio = (paginaActual - 1) * filasPorPagina
+  const datosPagina = datosFiltrados.slice(inicio, inicio + filasPorPagina)
 
   const handleBusqueda = (e) => {
     setBusqueda(e.target.value)

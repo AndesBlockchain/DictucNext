@@ -11,7 +11,7 @@ const BloqueNoticias = ({ datosBloque }) => {
 
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
-        <div className="container m-auto max-w-6xl flex flex-wrap justify-center items-center gap-8 mt-8 pb-6">
+        <div className="container m-auto max-w-6xl flex flex-wrap justify-center items-stretch gap-8 mt-8 pb-6">
           {(datosBloque.etiqueta_noticia?.noticias || []).slice(0, cantidadNoticias).map((noticia) => (
             <CardNoticia
               key={noticia.id}

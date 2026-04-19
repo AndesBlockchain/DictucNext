@@ -1,29 +1,30 @@
 import React from "react";
 import Bloque from "./Bloque";
-import CardServicio from "../CardServicio";
 
 const BloqueAcordeon = ({ datosBloque }) => {
   const STRAPI_URL = process.env.STRAPI_API_URL;
-  const tabsData = datosBloque?.Tabs || []
+  const tabsData = datosBloque?.Tabs || [];
+  const acordeonId = `acordeon-${datosBloque?.Bloque?.id || 'default'}`;
 
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
-      <div className="container mx-auto px-4 py-8">
-        {/* Ejemplo 1: Tabs básicas */}
+      <div className="container mx-auto max-w-4xl px-4 py-8">
         <div className="mb-8">
           <div>
             {tabsData.map((tab, index) => (
               <React.Fragment key={tab.id}>
                 <div className="collapse collapse-arrow bg-base-100 border border-base-300">
-                  <input type="radio" name="my-accordion-2" defaultChecked={index === 0} />
+                  <input type="radio" name={acordeonId} defaultChecked={index === 0} />
                   <div className="collapse-title font-semibold text-azul-dictuc">{tab.Titulo}</div>
                   <div className="collapse-content text-sm">
-                    <div className="flex flex-row items-start gap-2 mb-4">
-                    <div className="flex flex-item w-2/5 pl-8 pr-8">
-                      <img className="rounded-xl" src={STRAPI_URL + tab.Foto.formats.medium.url} />
+                    <div className="flex flex-col md:flex-row items-start gap-2 mb-4">
+                      {tab.Foto?.formats?.medium?.url && (
+                        <div className="w-full md:w-2/5 px-8">
+                          <img className="rounded-xl" src={STRAPI_URL + tab.Foto.formats.medium.url} alt={tab.Titulo} />
+                        </div>
+                      )}
+                      <div className="mt-auto mb-auto flex-1 md:pl-8 text-left text-sm" dangerouslySetInnerHTML={{__html: tab.Texto || ''}} />
                     </div>
-                    <div className="mt-auto mb-auto w-3/5 pl-8 text-left text-sm" dangerouslySetInnerHTML={{__html: tab.Texto.data.Texto}} />
-                  </div>                
                   </div>
                 </div>
               </React.Fragment>

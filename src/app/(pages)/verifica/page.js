@@ -29,22 +29,22 @@ export default async function VerificaPage() {
   return (
     <PaginaInterior
       fallback={BannerVerificarInforme}
-      titulo="Verifica un Certificado"
+      titulo="Verificación de Informes y Certificados"
       breadcrum={[
         { label: "Home", link: "/" },
-        { label: "Verifica", link: "/verifica" }
+        { label: "Verificación de Informes y Certificados", link: "/verifica" }
       ]}
     >
-<div className="container m-auto max-w-2xl">
+<div className="container m-auto max-w-4xl">
   <FranjaAzul />
-  <Titulo titulo="VERIFICA UN <span class='text-azul-dictuc'>CERTIFICADO</span>" />
+  <Titulo titulo="VERIFICACIÓN DE INFORMES Y <span class='text-azul-dictuc'>CERTIFICADOS</span>" />
       <p className="mb-4">
-        Dictuc emite informes y certificados con distintos mecanismos de validación, según el tipo de servicio.<br /><br />
+        Dictuc emite informes y certificados con distintos mecanismos de validación, según el tipo de servicio.<br />
         <ul>
-            <li>Servicios rutinarios: informes con firma digital y código de verificación.</li>
-          <li>Estudios y peritajes: informes con dos firmas y sin código de verificación.</li>
-        </ul><br /><br />
-        Si el documento tiene firma digital, ingresa a continuación el código de verificación para comprobar su autenticidad.
+            <li><strong>Servicios rutinarios:</strong> informes con <strong>firma digital</strong> y <strong>código de verificación.</strong></li>
+          <li><strong>Estudios y peritajes:</strong> informes con <strong>dos firmas</strong> y <strong>sin código de verificación.</strong></li>
+        </ul><br />
+        Si el documento tiene <strong>firma digital</strong>, ingresa a continuación el <strong>código de verificación</strong> para comprobar su autenticidad.
       </p>
       </div>
 
@@ -53,9 +53,9 @@ export default async function VerificaPage() {
           <VerificaForm verificacionUrl={verificacionUrl} />
     </div>
       
-      <p className="container m-auto max-w-2xl text-sm text-gray-600 mt-4">
+      <p className="container m-auto max-w-4xl text-sm text-gray-600 mt-4">
         <p className="text-sm text-gray-600 mt-2">Si el código es válido, podrás visualizar un documento en formato PDF para 
-            cotejar su contenido. Este archivo no corresponde al documento oficial firmado electrónicamente, sino a una versión idéntica 
+            cotejar su contenido. Este archivo <strong>no corresponde al documento oficial firmado electrónicamente</strong>, sino a una versión idéntica 
             emitida exclusivamente para efectos de verificación.</p><br />
         En el caso de informes con dos firmas, estos se emiten sin código de verificación.
         Si requieres confirmar su validez, contacta a{' '}

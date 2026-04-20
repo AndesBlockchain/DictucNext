@@ -50,8 +50,8 @@ const BloqueEfemerides = ({ datosBloque }) => {
             className="max-w-3xl max-h-[80vh] rounded-lg overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
-              src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'}${fotoModal.formats?.large?.url || fotoModal.url}`}
+            <StrapiImage
+              imagen={fotoModal.formats?.large || fotoModal}
               alt="Efeméride"
               className="w-full object-contain max-h-[80vh]"
             />

@@ -1,27 +1,21 @@
+"use client"
 import React, { useState, useEffect } from "react"
 
 const ModalAgente = ({ onClose, pregunta }) => {
   const [puntos, setPuntos] = useState("")
   const [respuesta, setRespuesta] = useState("")
   const [isLoading, setIsLoading] = useState(true)
-  const [isActionCheckServicesAvailable, setIsActionCheckServicesAvailable]= useState(false);
-  const [isActionGoServicesAvailable, setIsActionGoServicesAvailable]= useState(false);
-  const [isActionGetQuoteAvailable, setIsActionGetQuoteAvailable]= useState(false);
-  const [serviceLink,setServiceLink]= useState("");
+  const [isActionGoServicesAvailable, setIsActionGoServicesAvailable] = useState(false)
+  const [isActionGetQuoteAvailable, setIsActionGetQuoteAvailable] = useState(false)
+  const [serviceLink, setServiceLink] = useState("")
 
-
-  // Resetear variables cuando se abre el modal
   useEffect(() => {
     setPuntos("")
     setRespuesta("")
     setIsLoading(true)
-    setIsActionCheckServicesAvailable(false)
     setIsActionGoServicesAvailable(false)
     setIsActionGetQuoteAvailable(false)
     setServiceLink("")
-  }, [pregunta])
-
-  useEffect(() => {
 
     const llamarAPI = async () => {
       try {
@@ -30,22 +24,26 @@ const ModalAgente = ({ onClose, pregunta }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ data: {input: pregunta }})
+          body: JSON.stringify({ data: { input: pregunta } })
         })
-        
+
+        if (!response.ok) {
+          throw new Error(`Error del servidor: ${response.status}`)
+        }
+
         const data = await response.json()
-        const respuesta= JSON.parse(data.data.message)
-        setRespuesta(respuesta.respuesta)
-        if (respuesta.exito=="si") {
-          setServiceLink(respuesta.link)
+        const parsed = JSON.parse(data.data.message)
+        setRespuesta(parsed.respuesta)
+        if (parsed.exito === "si") {
+          setServiceLink(parsed.link)
           setIsActionGetQuoteAvailable(true)
         } else {
-          setIsActionGoServicesAvailable(true);
+          setIsActionGoServicesAvailable(true)
         }
-        setIsLoading(false)
       } catch (error) {
         console.error('Error al llamar a la API:', error)
         setRespuesta("Lo siento, hubo un error al procesar tu consulta.")
+      } finally {
         setIsLoading(false)
       }
     }
@@ -90,7 +88,7 @@ const ModalAgente = ({ onClose, pregunta }) => {
           </div>
           <div>
             {isActionGetQuoteAvailable && (
-              <a 
+              <a
                 href={serviceLink}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -100,7 +98,7 @@ const ModalAgente = ({ onClose, pregunta }) => {
               </a>
             )}
             {isActionGoServicesAvailable && (
-              <a 
+              <a
                 href="/servicios"
                 className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-1.5 px-4 rounded-full shadow text-sm transition-colors mr-2 inline-block"
               >
@@ -114,4 +112,4 @@ const ModalAgente = ({ onClose, pregunta }) => {
   )
 }
 
-export default ModalAgente 
+export default ModalAgente

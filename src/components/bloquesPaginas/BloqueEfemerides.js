@@ -47,13 +47,14 @@ const BloqueEfemerides = ({ datosBloque }) => {
             &times;
           </button>
           <div
-            className="max-w-3xl max-h-[80vh] rounded-lg overflow-hidden shadow-2xl"
+            className="relative w-[90vw] max-w-3xl h-[80vh] rounded-lg overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <StrapiImage
               imagen={fotoModal.formats?.large || fotoModal}
               alt="Efeméride"
-              className="w-full object-contain max-h-[80vh]"
+              fill
+              className="object-contain"
             />
           </div>
         </div>

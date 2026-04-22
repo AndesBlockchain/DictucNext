@@ -43,12 +43,10 @@ export async function fetchFromStrapi({
   const context = errorContext || endpoint;
 
   // Configurar opciones de fetch
-  const fetchOptions = {
-    next: {
-      revalidate: cache.revalidate ?? 3600, // Default: 1 hora
-    },
-    cache: cache.mode ?? 'force-cache'
-  };
+  // cache y next.revalidate son mutuamente excluyentes en Next.js
+  const fetchOptions = cache.mode === 'no-store'
+    ? { cache: 'no-store' }
+    : { next: { revalidate: cache.revalidate ?? 3600 } };
 
   try {
 

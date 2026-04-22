@@ -1,26 +1,16 @@
-/**
- * Hook async para obtener servicios de un sector desde Strapi API
- * Retorna servicios en formato compatible con Gatsby (nodes array)
- */
+import { fetchFromStrapi, CACHE_PRESETS } from '@/lib/strapi-fetcher';
 
-const useServiciosBySector = async (sectorSlug) => {
-  const baseUrl = process.env.STRAPI_API_URL;
+const useServiciosByTipoDeServicio = async (tipoSlug) => {
+  if (!tipoSlug) return [];
 
-  // Validar que STRAPI_API_URL esté definida
-  if (!baseUrl) {
-    throw new Error('STRAPI_API_URL environment variable is not defined');
-  }
+  const result = await fetchFromStrapi({
+    endpoint: `/api/servicios?filters[tipo_de_servicio][slug][$eq]=${tipoSlug}&fields[0]=nombre&fields[1]=slug&fields[2]=contenido&pagination[limit]=1000&populate[0]=tipo_de_servicio&populate[1]=sectores_pais&populate[2]=unidad`,
+    fallback: { data: [] },
+    cache: CACHE_PRESETS.FREQUENT,
+    errorContext: `servicios by tipo ${tipoSlug}`
+  });
 
-  const path = `/api/servicios?filters[tipo_de_servicio][slug][$eq]=${sectorSlug}&fields[0]=nombre&fields[1]=slug&fields[2]=contenido&pagination[limit]=1000&populate[0]=tipo_de_servicio&populate[1]=sectores_pais&populate[2]=unidad`;
-
-  const res = await fetch(baseUrl + path);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch servicios for sector: ${sectorSlug} (Status: ${res.status})`);
-  }
-
-  const data = await res.json();
-  return data.data
-
+  return result?.data || [];
 };
 
-export default useServiciosBySector;
+export default useServiciosByTipoDeServicio;

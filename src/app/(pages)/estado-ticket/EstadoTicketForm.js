@@ -72,10 +72,18 @@ export default function EstadoTicketForm() {
       } else {
         // Éxito
         const result = await response.json();
-        setEstadoTicket({
-          unidad: result.data.nombre_unidad,
-          estado: result.data.nombre_estado
-        });
+        if (!result.nombre_estado && !result.nombre_unidad && !result.id_estado && !result.id_unidad) {
+          setError({
+            show: true,
+            message: "Lamentablemente, no pudimos encontrar su ticket. Le rogamos confirmar el número o tomar contacto con Dictuc.",
+            type: "not-found"
+          });
+        } else {
+          setEstadoTicket({
+            unidad: result.nombre_unidad,
+            estado: result.nombre_estado
+          });
+        }
       }
     } catch (err) {
       console.error('Error al verificar el ticket:', err);
@@ -141,7 +149,7 @@ export default function EstadoTicketForm() {
 
       {/* Alert de error/warning */}
       {error.show && (
-        <div role="alert" className={`alert ${error.type === 'warning' ? 'alert-warning' : 'alert-error'} mb-12`}>
+        <div role="alert" className={`alert ${error.type === 'not-found' ? 'alert-warning bg-orange-100 border-orange-300 text-orange-800' : error.type === 'warning' ? 'alert-warning' : 'alert-error'} mb-12`}>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>

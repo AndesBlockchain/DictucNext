@@ -78,6 +78,11 @@ export default function EstadoTicketForm() {
             message: "Lamentablemente, no pudimos encontrar su ticket. Le rogamos confirmar el número o tomar contacto con Dictuc.",
             type: "not-found"
           });
+        } else if (result.nombre_estado === "No asignado") {
+          setEstadoTicket({
+            unidad: null,
+            estado: "Ticket recibido. Actualmente en proceso de revisión por nuestro equipo."
+          });
         } else {
           setEstadoTicket({
             unidad: result.nombre_unidad,
@@ -143,7 +148,7 @@ export default function EstadoTicketForm() {
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span>Asignado a: {estadoTicket.unidad}, Estado: {estadoTicket.estado}</span>
+          <span>{estadoTicket.unidad ? `Asignado a: ${estadoTicket.unidad}, Estado: ${estadoTicket.estado}` : estadoTicket.estado}</span>
         </div>
       )}
 

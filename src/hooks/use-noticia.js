@@ -1,13 +1,16 @@
+import { fetchFromStrapi, CACHE_PRESETS } from '@/lib/strapi-fetcher';
+
 const useNoticia = async (slug) => {
+  if (!slug) return null;
 
-  const baseUrl = process.env.STRAPI_API_URL;
-  const path = `/api/noticias?filters[slug][$eq]=${slug}&status=published&populate=all`;
+  const result = await fetchFromStrapi({
+    endpoint: `/api/noticias?filters[slug][$eq]=${slug}&status=published&populate=all`,
+    fallback: { data: [] },
+    cache: CACHE_PRESETS.FREQUENT,
+    errorContext: `noticia ${slug}`
+  });
 
-  const res = await fetch(baseUrl + path);
-
-  if (!res.ok) throw new Error("Failed to fetch noticia");
-  const data = await res.json();
-  return data.data[0];
+  return result?.data?.[0] || null;
 }
 
 export default useNoticia;

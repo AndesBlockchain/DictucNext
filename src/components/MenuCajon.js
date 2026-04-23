@@ -28,7 +28,7 @@ const MenuCajon = ({ menuCajon, children }) => {
         <label htmlFor={drawerId} aria-label="Cerrar menú" className="drawer-overlay"></label>
         <div className="bg-white min-h-full w-72 p-6 pt-24">
           <ul className="menu menu-vertical gap-1">
-            <li className="menu-title text-lg text-azul-dictuc uppercase">
+            <li className="menu-title text-lg text-azul-dictuc">
               {menuCajon.nombre}
             </li>
             {menuCajon.links?.map((link) => (

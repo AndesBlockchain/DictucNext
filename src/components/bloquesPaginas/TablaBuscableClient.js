@@ -44,7 +44,7 @@ const TablaBuscableClient = ({ datos, filasPorPagina = 8 }) => {
                 key={item.documentId || item.id || index}
                 className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
               >
-                <td className="px-4 py-3 align-middle text-center border-b border-gray-200">
+                <td className="px-4 py-3 align-middle text-left border-b border-gray-200">
                   <div className="font-semibold text-sm text-azul-dictuc">{item.Titulo}</div>
                   {item.Bajada && (
                     <div className="text-xs text-gray-500 mt-1">{item.Bajada}</div>

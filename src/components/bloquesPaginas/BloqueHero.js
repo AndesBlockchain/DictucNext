@@ -4,12 +4,10 @@ import StrapiImage from "../StrapiImage";
 import DegradeBase from "../DegradeBase";
 
 const BloqueHero = ({ datosBloque }) => {
-  console.log("Hero",datosBloque)
   const fotoADerecha = datosBloque.posicion_foto === "Derecha";
 
   return (
     <Bloque datosBloque={{ ...datosBloque.Bloque, OcultarTitulo: true }}>
-      <div className="">
       <div
         className="border border-[#53565A] text-[#53565A] text-base rounded-full
           py-4 px-6 w-fit min-w-[30%] mx-auto relative translate-y-1/2 z-20 mb-0 text-center bg-white font-semibold"
@@ -26,7 +24,7 @@ const BloqueHero = ({ datosBloque }) => {
           />
         </div>
 
-        <div className="w-full lg:w-3/5 flex flex-col justify-center text-sm text-center lg:text-justify">
+        <div className="w-full lg:w-3/5 flex flex-col  mt-8 justify-center text-sm text-center lg:text-justify">
           <div dangerouslySetInnerHTML={{ __html: datosBloque.texto.replaceAll("classname", "class") }} />
         </div>
 
@@ -37,7 +35,6 @@ const BloqueHero = ({ datosBloque }) => {
         </div>
         </div>
            
-      </div>
       </div>
     </Bloque>
   );

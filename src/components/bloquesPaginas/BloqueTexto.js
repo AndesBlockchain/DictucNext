@@ -1,15 +1,15 @@
 import React from "react";
 import Bloque from "./Bloque";
 import CallToAction from "../CallToAction";
+import { oembedToIframe } from "@/helpers/oembed-to-iframe";
 
 const BloqueTexto = ({ datosBloque }) => {
     const letra = datosBloque.Texto?.tipografia?.class || "text-sm";
     const colorLetra = datosBloque.Texto?.colorTexto?.Codigo || "black";
     const botones = datosBloque.CallToAction || [];
 
-
-    // Obtener el texto de forma segura
-    const textoHTML = datosBloque.Texto?.Texto || '';
+    // Obtener el texto de forma segura y transformar oembeds
+    const textoHTML = oembedToIframe(datosBloque.Texto?.Texto || '');
     const textoBajada = datosBloque.Bajada?.Texto || '';
     
     return (

@@ -15,7 +15,7 @@ const BloqueAcordeon = ({ datosBloque }) => {
               <React.Fragment key={tab.id}>
                 <div className="collapse collapse-arrow bg-base-100 border border-base-300">
                   <input type="radio" name={acordeonId} defaultChecked={index === 0} />
-                  <div className="collapse-title font-semibold text-azul-dictuc">{tab.Titulo}</div>
+                  <div className="collapse-title font-semibold text-azul-dictuc text-left">{tab.Titulo}</div>
                   <div className="collapse-content text-sm">
                     <div className="flex flex-col md:flex-row items-start gap-2 mb-4">
                       {tab.Foto?.formats?.medium?.url && (

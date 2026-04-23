@@ -49,6 +49,11 @@ html {
 /* Color de texto por defecto para toda la página */
 body {
   color: #53565A;
+  line-height: 1.625;
+}
+
+p {
+  margin-bottom: 1rem;
 }
 
 /* Estilos globales para links dentro de listas */

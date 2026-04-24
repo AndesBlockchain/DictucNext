@@ -217,7 +217,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
       )}
 
       <FranjaAzul />
-      <h3 className="text-center uppercase mb-2 font-semibold" dangerouslySetInnerHTML={{__html:titulo}} />
+      <h3 className="text-center uppercase mb-2 font-semibold">¿En qué podemos <span className="text-azul-dictuc">ayudarte?</span></h3>
       <form className="w-full max-w-[900px]" onSubmit={handleSubmit(handleOnSubmit)}>
       {!isCotizacion && (
         <fieldset className="fieldset">

@@ -9,18 +9,14 @@ const RELACIONES_DICTUC = [
   { value: 'cliente', label: 'Cliente' },
   { value: 'proveedor', label: 'Proveedor' },
   { value: 'comunidad', label: 'Comunidad' },
+  { value: 'universidad', label: 'Universidad' },
   { value: 'otro', label: 'Otro' }
 ];
 
 const LUGARES_INCIDENTE = [
-  'Gerencia General',
-  'Gerencia de Administración y Finanzas',
-  'Gerencia de Desarrollo Estratégico y Sustentabilidad',
-  'Gerencia de Servicios Técnicos',
-  'Unidad de Acreditación y Certificación',
-  'Laboratorio de Ensayos',
-  'Laboratorio de Análisis Químico',
-  'Laboratorio de Metrología',
+  'Instalaciones de Dictuc',
+  'Terreno',
+  'Instalaciones del cliente o proveedor',
   'Otro'
 ];
 
@@ -33,7 +29,7 @@ const TIPOS_DENUNCIA = [
   { value: 'delitos_ambientales', label: 'Delitos contra el medio ambiente' },
   { value: 'propiedad_intelectual', label: 'Propiedad intelectual e industrial' },
   { value: 'desigualdad_genero', label: 'Desigualdad de género' },
-  { value: 'abuso_poder', label: 'Abuso de poder' },
+  { value: 'discriminacion_y_violencia_en_el_trabajo', label: 'Discriminación y violencia en el trabajo' },
   { value: 'acoso_laboral', label: 'Acoso laboral' },
   { value: 'acoso_sexual', label: 'Acoso sexual' },
   { value: 'otro', label: 'Otro' }
@@ -177,11 +173,22 @@ export default function FormularioDenuncia() {
         </div>
       )}
 
-      <FranjaAzul />
-      <h3 className="text-center uppercase mb-2 font-semibold">Canal de Denuncia</h3>
-
-      <form className="w-full max-w-2xl mx-auto" onSubmit={handleSubmit(handleOnSubmit)}>
-
+      <form className="w-full max-w-2xl mx-auto text-left" onSubmit={handleSubmit(handleOnSubmit)}>
+        <FranjaAzul />
+        <div className="text-center mb-4 mt-4 font-semibold">
+          CANAL DE <span className="text-azul-dictuc">DENUNCIA</span>
+        </div>
+        <div className="max-w-4xl m-auto">
+          <p className="text-sm mb-4">
+            Dictuc cuenta con un Canal de Denuncia para que trabajadores, clientes, proveedores
+            y cualquier persona de la comunidad pueda reportar situaciones que puedan constituir
+            una falta a nuestros principios éticos y de integridad.
+          </p>
+          <p className="text-sm mb-8">
+            Este canal garantiza la confidencialidad de la información y la protección del denunciante.
+            Todas las denuncias son tratadas con la máxima seriedad y son investigadas de manera imparcial.
+          </p>
+          </div>
         {/* Anonimato */}
         <fieldset className="fieldset">
           <legend className="fieldset-legend">¿Desea permanecer en el anonimato para esta denuncia?</legend>
@@ -383,8 +390,10 @@ export default function FormularioDenuncia() {
             por favor enviar al mail <a href="mailto:epd@dictuc.cl" className="text-azul-dictuc underline">epd@dictuc.cl</a>
           </p>
           <p className="text-sm mt-2">
-            <strong>Confidencialidad:</strong> Dictuc vela por la confidencialidad de la información y porque no existan
-            represalias de ningún tipo hacia el denunciante.
+            <strong>Confidencialidad:</strong> Dictuc se compromete a velar porque toda persona de Dictuc o de la comunidad, 
+            que denuncie hechos constitutivos de faltas, infracciones o delitos, en los que presuntamente tuviere participación Dictuc, 
+            tenga el derecho a que su denuncia se tramite con confidencialidad y a ser protegida contra eventuales represalias de terceros, 
+            según la Política de Protección a Denunciantes
           </p>
         </div>
 
@@ -402,8 +411,9 @@ export default function FormularioDenuncia() {
           )}
         </fieldset>
 
+<div className="flex justify-center mt-4 mb-4">
         <button
-          className="ml-auto mr-auto btn btn-primary mt-2 rounded-full"
+          className="btn btn-primary mt-2 rounded-full btn-sm"
           type="submit"
           disabled={isSubmitting}
         >
@@ -416,6 +426,7 @@ export default function FormularioDenuncia() {
             'Enviar Denuncia'
           )}
         </button>
+</div>
       </form>
     </div>
   );

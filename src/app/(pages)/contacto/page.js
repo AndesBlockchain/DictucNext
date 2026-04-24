@@ -19,8 +19,8 @@ export default async function ContactoPage({ searchParams }) {
 
   return (
     <PaginaInterior className="justify-center" fallback={BannerTeclado} titulo={tituloPagina} breadcrum={[{ label: "Home", link: "/" }, { label: tituloPagina, link: "/contacto" }]}>
-    <div className="ml-auto mr-auto xl:w-2/5 lg:w-2/5 md:w-3/5 sm:w-4/5  justify-center items-center mb-6">
-      <Contacto border={true} tiposDeContacto={tiposDeContacto} titulo="¿En qué podemos ayudarte?" strapiApiUrl={strapiApiUrl} accionInicial={accion} />
+    <div className="ml-auto mr-auto xl:w-2/5 lg:w-2/5 md:w-3/5 sm:w-4/5  justify-center items-center mb-24">
+      <Contacto border={true} tiposDeContacto={tiposDeContacto} strapiApiUrl={strapiApiUrl} accionInicial={accion} />
     </div>
     </PaginaInterior>
   );

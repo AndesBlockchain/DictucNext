@@ -136,7 +136,7 @@ export default function VerificaForm({ verificacionUrl }) {
   };
 
   return (
-    <div className="pb-2 mt-6 mb-6 pl-6">
+    <div className="pb-2 mt-6 pl-6">
       {/* Formulario oculto para POST tradicional */}
       <form
         ref={formRef}
@@ -213,7 +213,7 @@ export default function VerificaForm({ verificacionUrl }) {
         </fieldset>
 
         <button
-          className="btn btn-primary mb-6 mt-4 rounded-full flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="mx-auto btn btn-primary btn-sm mb-6 mt-4 rounded-full flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={verificarCertificado}
           disabled={isSubmitting}
           type="button"

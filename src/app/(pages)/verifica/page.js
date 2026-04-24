@@ -38,7 +38,7 @@ export default async function VerificaPage() {
 <div className="container m-auto max-w-4xl">
   <FranjaAzul />
   <Titulo titulo="VERIFICACIÓN DE INFORMES Y <span class='text-azul-dictuc'>CERTIFICADOS</span>" />
-      <p className="mb-4">
+      <p className="text-sm mb-4 mt-8">
         Dictuc emite informes y certificados con distintos mecanismos de validación, según el tipo de servicio.<br />
         <ul>
             <li><strong>Servicios rutinarios:</strong> informes con <strong>firma digital</strong> y <strong>código de verificación.</strong></li>

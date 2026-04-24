@@ -9,7 +9,7 @@ const BloqueEfemerides = ({ datosBloque }) => {
 
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
-      <div className="max-w-4xl mx-auto px-4">
+      <div className="max-w-4xl mx-auto px-4 mt-18">
         {/* Contenedor con línea continua de fondo */}
         <div className="relative">
           {/* Línea vertical continua - desktop centrada, mobile a la izquierda */}

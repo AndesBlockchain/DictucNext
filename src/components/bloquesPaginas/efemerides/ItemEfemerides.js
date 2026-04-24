@@ -23,7 +23,7 @@ const ItemEfemerides = ({ agno, evento, foto, index = 0, isFirst = false, isLast
         )}
 
         {/* Columna izquierda */}
-        <div className="flex flex-col gap-2 items-end text-right px-6">
+        <div className="flex flex-col gap-2 items-end text-right px-16">
           {!isRight && (
             <>
               <span className={`${badgeColor} text-white rounded-full px-5 py-1 text-sm font-bold inline-block w-fit`}>
@@ -34,7 +34,7 @@ const ItemEfemerides = ({ agno, evento, foto, index = 0, isFirst = false, isLast
           )}
           {isRight && foto && (
             <div
-              className={`relative z-10 w-44 h-28 md:w-52 md:h-32 rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow border-4 ${borderColor} shadow-md`}
+              className={`relative z-10 w-35 h-28 md:w-42 md:h-32 rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow border-4 ${borderColor} shadow-md`}
               onClick={() => onFotoClick?.(foto)}
             >
               <StrapiImage imagen={foto} alt={`${evento} - ${agno}`} className="w-full h-full object-cover" />
@@ -50,7 +50,7 @@ const ItemEfemerides = ({ agno, evento, foto, index = 0, isFirst = false, isLast
         </div>
 
         {/* Columna derecha */}
-        <div className="flex flex-col gap-2 items-start text-left px-6">
+        <div className="flex flex-col gap-2 items-start text-left px-16">
           {isRight && (
             <>
               <span className={`${badgeColor} text-white rounded-full px-5 py-1 text-sm font-bold inline-block w-fit`}>
@@ -61,7 +61,7 @@ const ItemEfemerides = ({ agno, evento, foto, index = 0, isFirst = false, isLast
           )}
           {!isRight && foto && (
             <div
-              className={`relative z-10 w-44 h-28 md:w-52 md:h-32 rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow border-4 ${borderColor} shadow-md`}
+              className={`relative z-10 w-35 h-28 md:w-42 md:h-32 rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow border-4 ${borderColor} shadow-md`}
               onClick={() => onFotoClick?.(foto)}
             >
               <StrapiImage imagen={foto} alt={`${evento} - ${agno}`} className="w-full h-full object-cover" />

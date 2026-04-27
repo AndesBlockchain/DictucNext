@@ -11,7 +11,7 @@ const BloquePersonas = ({datosBloque}) => {
 
     return (
         <Bloque datosBloque={datosBloque.Bloque}>
-        <div className="container m-auto max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center items-center xl:gap-16 lg:gap-8 gap-8 mt-8">
+        <div className="container m-auto max-w-6xl flex flex-wrap justify-center items-stretch xl:gap-16 lg:gap-8 gap-8 mt-8">
         {personasSorted.map((persona)=>{ 
           // Normalizar imagen: usar formats.thumbnail.url como fallback si existe
           const imagenFallback = persona.Foto?.formats?.thumbnail?.url || persona.Foto?.url;
@@ -30,8 +30,8 @@ const BloquePersonas = ({datosBloque}) => {
           );
 
           return (
-                <div className="flex-basis-4 justify-center items-center max-w-sm w-full h-full mx-auto rounded-lg shadow-lg bg-gray-100 pt-6 p-4" key={persona.id}>
-                  <div className="w-24 bg-white m-auto rounded-sm">
+                <div className="basis-full sm:basis-[calc(50%-1rem)] lg:basis-[calc(25%-1.5rem)] flex flex-col justify-start items-center max-w-sm w-full mx-auto rounded-lg shadow-lg bg-gray-100 pt-6 p-4" key={persona.id}>
+                  <div className="w-24 bg-white mx-auto rounded-sm">
                     {imagenComponent}
                   </div>
                   <div className="mt-3 text-azul-dictuc text-sm font-bold text-center">

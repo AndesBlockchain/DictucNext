@@ -78,6 +78,9 @@ export default function FormularioDenuncia() {
 
   // Observar el valor de anonimo para mostrar/ocultar campos
   const watchAnonimo = watch("anonimo");
+  const watchRelacion = watch("relacion_dictuc");
+  const watchLugar = watch("lugar_incidente");
+  const watchComoSeEntero = watch("como_se_entero");
 
   // Estado para manejar el toast
   const [toast, setToast] = React.useState({ show: false, message: '', type: 'success' });
@@ -117,10 +120,10 @@ export default function FormularioDenuncia() {
       // Preparar los datos en formato JSON
       const payload = {
         anonimo: data.anonimo === 'si',
-        relacion_dictuc: data.relacion_dictuc,
-        lugar_incidente: data.lugar_incidente,
+        relacion_dictuc: data.relacion_dictuc === 'otro' ? data.relacion_dictuc_otro : data.relacion_dictuc,
+        lugar_incidente: data.lugar_incidente === 'Otro' ? data.lugar_incidente_otro : data.lugar_incidente,
         tipo_denuncia: data.tipo_denuncia,
-        como_se_entero: data.como_se_entero,
+        como_se_entero: data.como_se_entero === 'otro' ? data.como_se_entero_otro : data.como_se_entero,
         fecha_incidente: {
           mes: data.mes_incidente,
           anio: data.anio_incidente
@@ -278,22 +281,49 @@ export default function FormularioDenuncia() {
               </label>
             ))}
           </div>
+          {watchRelacion === 'otro' && (
+            <input
+              className="input border border-gray-300 mt-2"
+              {...register("relacion_dictuc_otro", { required: watchRelacion === 'otro' })}
+              placeholder="Especifique su relación con Dictuc"
+            />
+          )}
           {errors.relacion_dictuc?.type === "required" && (
             <p className="text-red-500" role="alert">Debe seleccionar una opción</p>
+          )}
+          {errors.relacion_dictuc_otro?.type === "required" && (
+            <p className="text-red-500" role="alert">Debe especificar su relación</p>
           )}
         </fieldset>
 
         {/* Lugar del incidente */}
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Lugar dónde sucedió el incidente *</legend>
-          <select className="select border border-gray-300" {...register("lugar_incidente", { required: true })}>
-            <option value="">-- Seleccione --</option>
+          <div className="flex flex-col gap-2">
             {LUGARES_INCIDENTE.map((lugar, index) => (
-              <option key={index} value={lugar}>{lugar}</option>
+              <label key={index} className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  value={lugar}
+                  {...register("lugar_incidente", { required: true })}
+                  className="radio border-1 border-gray-400"
+                />
+                <span>{lugar}</span>
+              </label>
             ))}
-          </select>
+          </div>
+          {watchLugar === 'Otro' && (
+            <input
+              className="input border border-gray-300 mt-2"
+              {...register("lugar_incidente_otro", { required: watchLugar === 'Otro' })}
+              placeholder="Especifique el lugar"
+            />
+          )}
           {errors.lugar_incidente?.type === "required" && (
             <p className="text-red-500" role="alert">Debe seleccionar un lugar</p>
+          )}
+          {errors.lugar_incidente_otro?.type === "required" && (
+            <p className="text-red-500" role="alert">Debe especificar el lugar</p>
           )}
         </fieldset>
 
@@ -336,8 +366,18 @@ export default function FormularioDenuncia() {
               </label>
             ))}
           </div>
+          {watchComoSeEntero === 'otro' && (
+            <input
+              className="input border border-gray-300 mt-2"
+              {...register("como_se_entero_otro", { required: watchComoSeEntero === 'otro' })}
+              placeholder="Especifique cómo se enteró"
+            />
+          )}
           {errors.como_se_entero?.type === "required" && (
             <p className="text-red-500" role="alert">Debe seleccionar una opción</p>
+          )}
+          {errors.como_se_entero_otro?.type === "required" && (
+            <p className="text-red-500" role="alert">Debe especificar cómo se enteró</p>
           )}
         </fieldset>
 

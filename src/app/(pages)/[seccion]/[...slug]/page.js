@@ -7,19 +7,22 @@ import { renderBloque } from "@/helpers/bloque-renderer";
 import usePagina from "@/hooks/use-pagina";
 import useMenuSecundario from "@/hooks/use-menu-secundario";
 import useMenuCajon from "@/hooks/use-menu-cajon";
+import EditorModeProvider from "@/components/editor/EditorModeProvider";
+import BloqueDebugBadge from "@/components/editor/BloqueDebugBadge";
+import EditorPanel from "@/components/editor/EditorPanel";
 
 
 export default async function PaginasContenido({params}) {
 
   const {seccion, slug} = await params;
   const slugFinal = slug[slug.length - 1];
-console.log("dro")
   const pagina = await usePagina(slugFinal);
   const menuSecundario = await useMenuSecundario(seccion, slugFinal);
   const menuCajonCandidatos = [...slug.slice(0, -1)].reverse().concat(seccion);
   const menuCajon = await useMenuCajon(menuCajonCandidatos);
 
   return (
+    <EditorModeProvider bloques={pagina?.Bloques || []} documentId={pagina?.documentId}>
     <PaginaInterior
       fallback={process.env.STRAPI_API_URL + pagina.Banner.url}
       titulo = {pagina.titulo}
@@ -29,14 +32,19 @@ console.log("dro")
       breadcrum={[
         { label: "Home", link: "/" },
         { label: pagina?.titulo || "Página", link: "/" }
-      ]}> 
+      ]}>
       <MenuSecundario items={menuSecundario} slug={slugFinal} />
       {(pagina.ScrollSpyVisible !== false) && (
         <ScrollSpy datosBloques={pagina.Bloques}/>
       )}
       {pagina?.Bloques && Array.isArray(pagina.Bloques) && pagina.Bloques.length > 0 ? (
         pagina.Bloques.map((bloque, index) => (
-          <div key={bloque.id || index} id={bloque.id}>
+          <div key={bloque.id || index} id={`bloque-${bloque.id || index}`} className="relative">
+            <BloqueDebugBadge
+              component={bloque.__component}
+              blockId={bloque.id}
+              title={bloque.Bloque?.Titulo}
+            />
             {renderBloque(bloque)}
           </div>
         ))
@@ -46,5 +54,7 @@ console.log("dro")
         </div>
       )}
       </PaginaInterior>
+      <EditorPanel />
+    </EditorModeProvider>
   );
   }

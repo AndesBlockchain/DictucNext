@@ -10,14 +10,16 @@ const iconoExperiencia = "/images/Experiencia.png";
 const iconoPotenciales = "/images/PotencialesClientes.png";
 
 import useServicio from "@/hooks/use-servicio";
+import EditorModeProvider from "@/components/editor/EditorModeProvider";
+import EditorBadge from "@/components/editor/EditorBadge";
 
 export default async function Servicio({ params }) {
 
   const { slug } = await params;
   const servicio = await useServicio(slug);
- console.log(servicio.tipo_de_servicio.IconoFichaProducto.formats.small.url)
   const strapiApiUrl = process.env.STRAPI_API_URL;
   return (
+    <EditorModeProvider documentId={servicio.documentId}>
     <PaginaInterior
       banner={servicio?.banner}
       fallback={bannerLaboratorio}
@@ -29,6 +31,7 @@ export default async function Servicio({ params }) {
         { label: servicio.nombre }
       ]}
     >
+      <EditorBadge contentType="api::servicio.servicio" documentId={servicio.documentId} label="servicio" />
       <div className="text-xl font-bold mt-2 mb-2 ml-10 text-left"><h2>{servicio.nombre}</h2></div>
       <div className="ml-10 mb-4 text-sm"><span className="text-azul-dictuc font-semibold">Ejecutor:</span> {servicio.unidad.nombre} <span className="text-azul-dictuc font-semibold"> &nbsp;&nbsp;|&nbsp;&nbsp; Tipo de Servicio:</span> {servicio.tipo_de_servicio.nombre} <span className="text-azul-dictuc font-semibold"> &nbsp;&nbsp;|&nbsp;&nbsp; Sectores:</span> {servicio.sectores_pais.map(sector => sector.nombre).join(", ")}</div>
       <div className="bg-gray-100">
@@ -103,5 +106,6 @@ export default async function Servicio({ params }) {
 
       </div>
     </PaginaInterior>
+    </EditorModeProvider>
   );
 }

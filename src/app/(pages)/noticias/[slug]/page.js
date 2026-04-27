@@ -5,6 +5,8 @@ import FranjaAzul from "@/components/FranjaAzul";
 import StrapiImage from "@/components/StrapiImage";
 const FotoDefaultNoticias = "/images/noticias.png"
 import useNoticia from '@/hooks/use-noticia';
+import EditorModeProvider from "@/components/editor/EditorModeProvider";
+import EditorBadge from "@/components/editor/EditorBadge";
 
 export default async function PaginasContenido({ params })
 {
@@ -25,17 +27,19 @@ export default async function PaginasContenido({ params })
       : '';
 
   return (
+    <EditorModeProvider documentId={noticia.documentId}>
     <PaginaInterior fallback={bannerNoticias}
                     titulo="Noticias"
     breadcrum={[{ label: "Home", link: "/" }, {label:"Noticias", link:"/todas-las-noticias"}, { label: noticia.titulo, link: "/" }]}>
+        <EditorBadge contentType="api::noticia.noticia" documentId={noticia.documentId} label="noticia" />
         <div className="container m-auto max-w-6xl px-8 mt-10 mb-24">
           <h1 className="text-xl font-bold">{noticia.titulo}</h1>
           <div className="text-sm text-gris-dictuc">{fechaFormateada}</div>
           <div className="w-min mt-2 mb-6">
             <FranjaAzul/>
           </div>
-          <div className="flex flex-col md:flex-row gap-8">
-            <div className="w-full md:w-2/5 shrink-0">
+          <div className="text-sm [&_a]:text-azul-dictuc [&_a]:underline [&_a]:hover:text-blue-800">
+            <div className="md:float-right md:ml-6 mb-4 md:w-2/5">
               <StrapiImage
                 imagen={noticia.foto}
                 gatsbyImageData={noticia.foto?.localFile?.childImageSharp?.gatsbyImageData}
@@ -44,12 +48,11 @@ export default async function PaginasContenido({ params })
                 alt={noticia.titulo || 'Imagen de la noticia'}
               />
             </div>
-            <div className="w-full md:w-3/5 text-sm [&_a]:text-azul-dictuc [&_a]:underline [&_a]:hover:text-blue-800">
-              <div dangerouslySetInnerHTML={{__html: noticia.cuerpo}}></div>
-            </div>
+            <div dangerouslySetInnerHTML={{__html: noticia.cuerpo}}></div>
           </div>
-        </div> 
+        </div>
          </PaginaInterior>
+    </EditorModeProvider>
 
   );
 }

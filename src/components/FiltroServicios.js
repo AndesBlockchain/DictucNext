@@ -47,7 +47,7 @@ const calcularConteoPorSector = (serviciosArray) => {
 const normalizarTexto = (str) =>
   str?.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() ?? '';
 
-const filtrarServicios = (serviciosArray, filtros) => {
+const filtrarServicios = (serviciosArray, filtros, excluir = null) => {
   return serviciosArray.filter(servicio => {
     if (filtros.busqueda && filtros.busqueda.trim() !== '') {
       const busqueda = normalizarTexto(filtros.busqueda);
@@ -56,16 +56,16 @@ const filtrarServicios = (serviciosArray, filtros) => {
       if (!nombreMatch && !contenidoMatch) return false;
     }
 
-    if (filtros.tiposServicio.length > 0) {
+    if (excluir !== 'tiposServicio' && filtros.tiposServicio.length > 0) {
       if (!filtros.tiposServicio.includes(servicio.tipo_de_servicio?.slug)) return false;
     }
 
-    if (filtros.sectoresPais.length > 0) {
+    if (excluir !== 'sectoresPais' && filtros.sectoresPais.length > 0) {
       const servicioSectores = servicio.sectores_pais?.map(s => s.slug) || [];
       if (!filtros.sectoresPais.some(sector => servicioSectores.includes(sector))) return false;
     }
 
-    if (filtros.unidades.length > 0) {
+    if (excluir !== 'unidades' && filtros.unidades.length > 0) {
       const unidadNombre = servicio.unidad?.nombre;
       if (!unidadNombre || !filtros.unidades.includes(unidadNombre)) return false;
     }
@@ -115,9 +115,13 @@ const FiltroServicios = ({
       return;
     }
 
-    setConteoPorTipo(calcularConteoPorTipo(serviciosArray));
-    setConteoPorSector(calcularConteoPorSector(serviciosArray));
-    setConteoPorUnidad(calcularConteoPorUnidad(serviciosArray));
+    const serviciosSinTipo = filtrarServicios(serviciosArray, filtros, 'tiposServicio');
+    const serviciosSinSector = filtrarServicios(serviciosArray, filtros, 'sectoresPais');
+    const serviciosSinUnidad = filtrarServicios(serviciosArray, filtros, 'unidades');
+
+    setConteoPorTipo(calcularConteoPorTipo(serviciosSinTipo));
+    setConteoPorSector(calcularConteoPorSector(serviciosSinSector));
+    setConteoPorUnidad(calcularConteoPorUnidad(serviciosSinUnidad));
 
     const filtrados = filtrarServicios(serviciosArray, filtros);
 

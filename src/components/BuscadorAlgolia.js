@@ -2,10 +2,16 @@
 import React, { useState, useRef, useEffect, useCallback } from "react"
 import { liteClient as algoliasearch } from "algoliasearch/lite"
 
-const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY
-)
+let searchClient = null
+const getSearchClient = () => {
+  if (!searchClient && process.env.NEXT_PUBLIC_ALGOLIA_APP_ID) {
+    searchClient = algoliasearch(
+      process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+      process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY
+    )
+  }
+  return searchClient
+}
 
 const INDICES = [
   { name: "development_api::servicio.servicio", label: "Servicios", urlPrefix: "/servicios/" },
@@ -41,7 +47,9 @@ const BuscadorAlgolia = () => {
     setIsLoading(true)
     const timer = setTimeout(async () => {
       try {
-        const { results: searchResults } = await searchClient.search({
+        const client = getSearchClient()
+        if (!client) return
+        const { results: searchResults } = await client.search({
           requests: INDICES.map((idx) => ({
             indexName: idx.name,
             query: inputValue,

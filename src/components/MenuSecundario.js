@@ -6,7 +6,7 @@ const MenuSecundario = ({ items, slug }) => {
 
     return (
         <div className="w-full flex justify-center items-center">
-            <div className="p-2 w-3/4 flex flex-row justify-center overflow-x-visible">
+            <div className="p-2 w-full md:w-3/4 flex flex-wrap justify-center gap-y-2">
                 {items.map((item) => (
                     <MenuSecundarioItem
                         key={item.Link || item.Titulo}

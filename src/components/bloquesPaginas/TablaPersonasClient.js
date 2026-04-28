@@ -11,9 +11,8 @@ const TablaPersonasClient = ({ personas, cantidadFilas }) => {
     return personas.filter(
       (p) =>
         p.Nombre?.toLowerCase().includes(termino) ||
-        p.Cargo?.toLowerCase().includes(termino) ||
-        p.personas_departamento?.Departamente?.toLowerCase().includes(termino) ||
-        p.personas_especialidads?.some(e => e.Especialidad?.toLowerCase().includes(termino))
+        p.especialidad?.toLowerCase().includes(termino) ||
+        p.personas_departamentos?.some(d => d.Departamente?.toLowerCase().includes(termino))
     )
   }, [personas, busqueda])
 
@@ -32,7 +31,7 @@ const TablaPersonasClient = ({ personas, cantidadFilas }) => {
       <div className="flex justify-end mb-4">
         <input
           type="text"
-          placeholder="Buscar por nombre, cargo, departamento o especialidad..."
+          placeholder="Buscar por nombre, departamento o especialidad..."
           value={busqueda}
           onChange={handleBusqueda}
           className="px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-azul-dictuc text-sm w-64"
@@ -44,7 +43,6 @@ const TablaPersonasClient = ({ personas, cantidadFilas }) => {
         <thead>
           <tr className="bg-azul-dictuc text-white">
             <th className="px-4 py-3 text-center text-sm font-semibold">Nombre</th>
-            <th className="px-4 py-3 text-center text-sm font-semibold">Cargo</th>
             <th className="px-4 py-3 text-center text-sm font-semibold">Departamento</th>
             <th className="px-4 py-3 text-center text-sm font-semibold">Especialidad</th>
             <th className="px-4 py-3 text-center text-sm font-semibold">Más información</th>
@@ -61,16 +59,13 @@ const TablaPersonasClient = ({ personas, cantidadFilas }) => {
                   {persona.Nombre}
                 </td>
                 <td className="px-4 py-3 text-sm text-left border-b border-gray-200">
-                  {persona.Cargo}
-                </td>
-                <td className="px-4 py-3 text-sm text-left border-b border-gray-200">
-                  {persona.personas_departamento?.Departamente || <span className="text-gray-400">—</span>}
-                </td>
-                <td className="px-4 py-3 text-sm text-left border-b border-gray-200">
-                  {persona.personas_especialidads?.length > 0
-                    ? persona.personas_especialidads.map(e => e.Especialidad).join(", ")
+                  {persona.personas_departamentos?.length > 0
+                    ? persona.personas_departamentos.map(d => d.Departamente).join(", ")
                     : <span className="text-gray-400">—</span>
                   }
+                </td>
+                <td className="px-4 py-3 text-sm text-left border-b border-gray-200">
+                  {persona.especialidad || <span className="text-gray-400">—</span>}
                 </td>
                 <td className="px-4 py-3 text-sm border-b border-gray-200 text-center">
                   {persona.link_ver_mas_informacion ? (
@@ -90,7 +85,7 @@ const TablaPersonasClient = ({ personas, cantidadFilas }) => {
             ))
           ) : (
             <tr>
-              <td colSpan={5} className="px-4 py-6 text-center text-sm text-gray-500">
+              <td colSpan={4} className="px-4 py-6 text-center text-sm text-gray-500">
                 No se encontraron resultados
               </td>
             </tr>

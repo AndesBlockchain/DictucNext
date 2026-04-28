@@ -10,7 +10,8 @@ const Servicios = ({
   sectores_pais_visibles,
   tipos_de_servicio_visibles,
   servicios,
-  ejecutorInicial
+  ejecutorInicial,
+  slug
 }) => {
   const serviciosArray = Array.isArray(servicios) ? servicios : servicios?.data ?? [];
   const [serviciosFiltrados, setServiciosFiltrados] = useState(serviciosArray);
@@ -77,6 +78,7 @@ const Servicios = ({
               servicios={servicios}
               onFiltrosChange={handleFiltrosChange}
               ejecutorInicial={ejecutorInicial}
+              sectorInicial={slug}
             />
             <label htmlFor={drawerId} className="btn btn-primary w-full mt-4 md:hidden">
               Ver {serviciosFiltrados.length} resultados

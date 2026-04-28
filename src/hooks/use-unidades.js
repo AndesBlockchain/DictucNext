@@ -1,43 +1,17 @@
-const useUnidades = async() => {
+import { fetchFromStrapi, CACHE_PRESETS } from '@/lib/strapi-fetcher';
 
-  const baseUrl = process.env.STRAPI_API_URL;
+const useUnidades = async () => {
+  const result = await fetchFromStrapi({
+    endpoint: '/api/unidades?populate=all&sort=nombre&pagination[limit]=200',
+    fallback: { data: [] },
+    cache: CACHE_PRESETS.FREQUENT,
+    errorContext: 'unidades'
+  });
 
-  // Validar que STRAPI_API_URL esté definida
-  if (!baseUrl) {
-    console.error('STRAPI_API_URL is not defined');
-    return { data: [], totalCount: 0 }; // Retornar estructura vacía válida
-  }
-
-  const path = "/api/unidades?populate=all&sort=nombre&pagination[limit]=200";
-
-  try {
-    const res = await fetch(baseUrl + path, {
-      next: { revalidate: 3600 }, // Revalidar cada hora
-      cache: 'force-cache'
-    });
-
-    if (!res.ok) {
-      console.error("Failed to fetch unidades:", res.status);
-      return { data: [], totalCount: 0 }; // Retornar estructura vacía válida
-    }
-
-    const data = await res.json();
-
-    // Asegurar que data tenga la estructura correcta
-    if (!data || !data.data) {
-      console.warn('Invalid unidades data structure');
-      return { data: [], totalCount: 0 };
-    }
-
-    // Añadir totalCount si no existe
-    return {
-      data: data.data,
-      totalCount: data.data.length || 0
-    };
-  } catch (error) {
-    console.error('Error fetching unidades:', error);
-    return { data: [], totalCount: 0 }; // Retornar estructura vacía válida
-  }
-}
+  return {
+    data: result?.data || [],
+    totalCount: result?.data?.length || 0
+  };
+};
 
 export default useUnidades;

@@ -23,8 +23,8 @@ export default async function TodosLosServicios({ searchParams })
     <>
       <PaginaInterior
         fallback={BannerServicios}
-        titulo="Todos los servicios"
-        breadcrum={[{ label: "Home", link: "/" }, { label: "Todos los servicios", link: "/todos-los-servicios" }]}>
+        titulo="Nuestros Servicios"
+        breadcrum={[{ label: "Home", link: "/" }, { label: "Nuestros Servicios", link: "/todos-los-servicios" }]}>
 
         <Servicios tipos_de_servicio={tiposDeServicio} sectores_pais={sectoresPais} unidades={unidades}
         sectores_pais_visibles={true} tipos_de_servicio_visibles={true}

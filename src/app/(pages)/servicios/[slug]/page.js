@@ -27,7 +27,7 @@ export default async function Servicio({ params }) {
       icono_secundario={servicio.tipo_de_servicio.IconoFichaProducto.formats.small.url}
       breadcrum={[
         { label: "Home", link: "/" },
-        { label: "Servicios", link: "/servicios/todos-los-servicios" },
+        { label: "Nuestros Servicios", link: "/servicios/todos-los-servicios" },
         { label: servicio.nombre }
       ]}
     >

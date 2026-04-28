@@ -14,6 +14,9 @@ import BloqueSectoresPais from "../components/bloquesPaginas/BloqueSectoresPais"
 import BloqueTablaBuscable from "../components/bloquesPaginas/BloqueTablaBuscable";
 import BloqueMapa from "../components/bloquesPaginas/BloqueMapa";
 import BloqueTablaPersonas from "../components/bloquesPaginas/BloqueTablaPersonas";
+import BloqueContacto from "../components/bloquesPaginas/BloqueContacto";
+import BloqueEstadoTicket from "../components/bloquesPaginas/BloqueEstadoTicket";
+import BloqueVerificarInforme from "../components/bloquesPaginas/BloqueVerificarInforme";
 
 export const renderBloque = (bloque) => {
 
@@ -79,6 +82,18 @@ export const renderBloque = (bloque) => {
     case "bloques.bloque-tabla-personas":
     case "STRAPI__COMPONENT_BLOQUES_BLOQUE_TABLA_PERSONAS":
       return <BloqueTablaPersonas datosBloque={bloque} />;
+
+    case "bloques.bloque-contacto":
+    case "STRAPI__COMPONENT_BLOQUES_BLOQUE_CONTACTO":
+      return <BloqueContacto datosBloque={bloque} />;
+
+    case "bloques.bloque-estado-ticket":
+    case "STRAPI__COMPONENT_BLOQUES_BLOQUE_ESTADO_TICKET":
+      return <BloqueEstadoTicket datosBloque={bloque} />;
+
+    case "bloques.bloque-verificar-informe":
+    case "STRAPI__COMPONENT_BLOQUES_BLOQUE_VERIFICAR_INFORME":
+      return <BloqueVerificarInforme datosBloque={bloque} />;
 
     default:
       return (

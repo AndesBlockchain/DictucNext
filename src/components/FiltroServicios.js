@@ -83,13 +83,14 @@ const FiltroServicios = ({
   unidadesVisibles = true,
   onFiltrosChange,
   servicios,
-  ejecutorInicial
+  ejecutorInicial,
+  sectorInicial
 }) => {
 
   const [filtros, setFiltros] = useState({
     busqueda: '',
     tiposServicio: [],
-    sectoresPais: [],
+    sectoresPais: sectorInicial ? [sectorInicial] : [],
     unidades: ejecutorInicial ? [ejecutorInicial] : []
   });
 
@@ -216,7 +217,7 @@ const FiltroServicios = ({
       {sectoresPaisVisibles && sectoresPais?.data && (
         <div className="collapse collapse-arrow border-b border-gray-200">
           <input type="checkbox" defaultChecked />
-          <div className="collapse-title font-semibold px-0 min-h-0 py-2">Sector País</div>
+          <div className="collapse-title font-semibold px-0 min-h-0 py-2">Sector Productivo</div>
           <div className="collapse-content px-0">
             {sectoresPais.data.map(item => {
               const count = conteoPorSector[item.slug] || 0;

@@ -6,6 +6,7 @@ const ScrollSpy = ({ datosBloques = [] }) => {
 
   // Filtrar bloques que tienen título o alias visible
   const bloquesVisibles = datosBloques.filter((bloque) => {
+    if (bloque.Alias && bloque.Alias.trim() !== '') return true
     if (bloque.Bloque?.Alias && bloque.Bloque.Alias.trim() !== '') return true
     if (!bloque.Bloque?.OcultarTitulo && bloque.Bloque?.Titulo) return true
     return false
@@ -38,7 +39,7 @@ const ScrollSpy = ({ datosBloques = [] }) => {
     <div className="fixed 2xl:right-10 invisible 2xl:visible right-0 z-50">
       <div className="mb-2 max-w-[200px] text-sm underline underline-offset-4 font-semibold">En esta página</div>
       {bloquesVisibles.map((bloque) => {
-        const label = bloque.Bloque?.Alias?.trim() || bloque.Bloque?.Titulo
+        const label = bloque.Alias?.trim() || bloque.Bloque?.Alias?.trim() || bloque.Bloque?.Titulo
         const bloqueId = `bloque-${bloque.id}`
         const isActive = activeId === bloqueId
 

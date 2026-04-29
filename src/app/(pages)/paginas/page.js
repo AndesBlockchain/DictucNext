@@ -13,10 +13,13 @@ export default async function PaginasContenido({params}) {
   const {slug} = await params;
 
   const pagina = await usePagina(slug);
+  if (!pagina) {
+    return <div className="text-center py-16 text-gray-500">Página no encontrada</div>;
+  }
   const menuSecundario = await useMenuSecundario("paginas", slug);
   return (
     <PaginaInterior
-      fallback={process.env.STRAPI_API_URL + pagina.Banner.url}
+      fallback={pagina.Banner?.url ? process.env.STRAPI_API_URL + pagina.Banner.url : null}
       titulo = {pagina.titulo}
       titulo_visible={pagina.TituloVisible}
       color_titulo= {pagina.color_titulo.Codigo}

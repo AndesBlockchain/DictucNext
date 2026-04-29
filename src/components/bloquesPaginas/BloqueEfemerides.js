@@ -53,7 +53,7 @@ const BloqueEfemerides = ({ datosBloque }) => {
             <StrapiImage
               imagen={fotoModal}
               alt="Efeméride"
-              className="max-w-[95vw] max-h-[90vh] w-auto h-auto"
+              className="w-200 h-auto object-contain mx-auto border-4 border-azul-dictuc rounded-lg"
             />
           </div>
         </div>

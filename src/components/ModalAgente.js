@@ -1,21 +1,16 @@
 "use client"
 import React, { useState, useEffect } from "react"
+import Markdown from "react-markdown"
 
 const ModalAgente = ({ onClose, pregunta }) => {
   const [puntos, setPuntos] = useState("")
   const [respuesta, setRespuesta] = useState("")
   const [isLoading, setIsLoading] = useState(true)
-  const [isActionGoServicesAvailable, setIsActionGoServicesAvailable] = useState(false)
-  const [isActionGetQuoteAvailable, setIsActionGetQuoteAvailable] = useState(false)
-  const [serviceLink, setServiceLink] = useState("")
 
   useEffect(() => {
     setPuntos("")
     setRespuesta("")
     setIsLoading(true)
-    setIsActionGoServicesAvailable(false)
-    setIsActionGetQuoteAvailable(false)
-    setServiceLink("")
 
     const llamarAPI = async () => {
       try {
@@ -32,14 +27,7 @@ const ModalAgente = ({ onClose, pregunta }) => {
         }
 
         const data = await response.json()
-        const parsed = JSON.parse(data.data.message)
-        setRespuesta(parsed.respuesta)
-        if (parsed.exito === "si") {
-          setServiceLink(parsed.link)
-          setIsActionGetQuoteAvailable(true)
-        } else {
-          setIsActionGoServicesAvailable(true)
-        }
+        setRespuesta(data.data.message || "No fue posible procesar la respuesta.")
       } catch (error) {
         console.error('Error al llamar a la API:', error)
         setRespuesta("Lo siento, hubo un error al procesar tu consulta.")
@@ -50,6 +38,14 @@ const ModalAgente = ({ onClose, pregunta }) => {
 
     llamarAPI()
   }, [pregunta])
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") onClose()
+    }
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [onClose])
 
   useEffect(() => {
     if (isLoading) {
@@ -81,29 +77,17 @@ const ModalAgente = ({ onClose, pregunta }) => {
                 <span className="text-blue-600 font-bold text-lg">{puntos}</span>
               </div>
             ) : (
-              <div className="whitespace-pre-line">
-                {respuesta}
+              <div className="prose prose-sm max-w-none [&_a]:text-azul-dictuc [&_a]:underline [&_a:hover]:text-blue-800">
+                <Markdown
+                  components={{
+                    a: ({ href, children }) => (
+                      <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
+                    )
+                  }}
+                >
+                  {respuesta}
+                </Markdown>
               </div>
-            )}
-          </div>
-          <div>
-            {isActionGetQuoteAvailable && (
-              <a
-                href={serviceLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-1.5 px-4 rounded-full shadow text-sm transition-colors mr-2 inline-block"
-              >
-                ¿Desea cotizar este servicio?
-              </a>
-            )}
-            {isActionGoServicesAvailable && (
-              <a
-                href="/servicios"
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-1.5 px-4 rounded-full shadow text-sm transition-colors mr-2 inline-block"
-              >
-                ¿Desea ir a nuestro listado de servicios?
-              </a>
             )}
           </div>
         </div>

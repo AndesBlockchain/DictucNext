@@ -15,6 +15,13 @@ const AgenteForm = () => {
         setModalAbierto(true)
     }
 
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault()
+            handleConsultar()
+        }
+    }
+
     return (
         <>
             <div className="flex justify-center">
@@ -23,6 +30,7 @@ const AgenteForm = () => {
                         rows={3}
                         value={textoConsulta}
                         onChange={(e) => setTextoConsulta(e.target.value)}
+                        onKeyDown={handleKeyDown}
                         placeholder={placeholder}
                         className="flex-grow px-6 py-6 text-md focus:outline-none resize-none"
                     />

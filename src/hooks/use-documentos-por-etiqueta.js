@@ -4,7 +4,7 @@ const useDocumentosPorEtiqueta = async (documentId) => {
   if (!documentId) return [];
 
   const result = await fetchFromStrapi({
-    endpoint: `/api/documentos?filters[etiqueta_documentos][documentId][$eq]=${documentId}&populate=*&pagination[pageSize]=100&sort=sortOrder:asc`,
+    endpoint: `/api/documentos?filters[etiqueta_documentos][documentId][$eq]=${documentId}&populate=*&pagination[pageSize]=100&sort=Titulo:asc`,
     fallback: { data: [] },
     cache: CACHE_PRESETS.FREQUENT,
     errorContext: `documentos por etiqueta ${documentId}`

@@ -27,7 +27,7 @@ const BloqueDocumentos = async ({ datosBloque }) => {
                   />
                 </div>
               </div>
-              <div className="text-center text-sm mt-2">{documento.Titulo}</div>
+              <div className="text-center font-semibold text-sm mt-2">{documento.Titulo}</div>
             </div>
           );
 

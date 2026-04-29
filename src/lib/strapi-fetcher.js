@@ -163,8 +163,8 @@ export const CACHE_PRESETS = {
   // Revalidar cada hora (default)
   HOURLY: { revalidate: 3600, mode: 'force-cache' },
 
-  // Revalidar cada 5 minutos (para datos que cambian frecuentemente)
-  FREQUENT: { revalidate: 300, mode: 'force-cache' },
+  // Revalidar cada 15 segundos (para datos que cambian frecuentemente)
+  FREQUENT: { revalidate: 15, mode: 'force-cache' },
 
   // Revalidar cada día
   DAILY: { revalidate: 86400, mode: 'force-cache' },

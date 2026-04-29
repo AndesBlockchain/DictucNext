@@ -81,6 +81,7 @@ export default function FormularioDenuncia() {
   const watchRelacion = watch("relacion_dictuc");
   const watchLugar = watch("lugar_incidente");
   const watchComoSeEntero = watch("como_se_entero");
+  const watchTipoDenuncia = watch("tipo_denuncia", []);
 
   // Estado para manejar el toast
   const [toast, setToast] = React.useState({ show: false, message: '', type: 'success' });
@@ -122,7 +123,7 @@ export default function FormularioDenuncia() {
         anonimo: data.anonimo === 'si',
         relacion_dictuc: data.relacion_dictuc === 'otro' ? data.relacion_dictuc_otro : data.relacion_dictuc,
         lugar_incidente: data.lugar_incidente === 'Otro' ? data.lugar_incidente_otro : data.lugar_incidente,
-        tipo_denuncia: data.tipo_denuncia,
+        tipo_denuncia: data.tipo_denuncia.map(t => t === 'otro' && data.tipo_denuncia_otro ? data.tipo_denuncia_otro : t),
         como_se_entero: data.como_se_entero === 'otro' ? data.como_se_entero_otro : data.como_se_entero,
         fecha_incidente: {
           mes: data.mes_incidente,
@@ -345,8 +346,18 @@ export default function FormularioDenuncia() {
               </label>
             ))}
           </div>
+          {watchTipoDenuncia?.includes('otro') && (
+            <input
+              className="input border border-gray-300 mt-2"
+              {...register("tipo_denuncia_otro", { required: watchTipoDenuncia?.includes('otro') })}
+              placeholder="Especifique el tipo de denuncia"
+            />
+          )}
           {errors.tipo_denuncia && (
             <p className="text-red-500" role="alert">{errors.tipo_denuncia.message}</p>
+          )}
+          {errors.tipo_denuncia_otro?.type === "required" && (
+            <p className="text-red-500" role="alert">Debe especificar el tipo de denuncia</p>
           )}
         </fieldset>
 

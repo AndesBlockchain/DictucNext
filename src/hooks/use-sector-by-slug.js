@@ -1,36 +1,16 @@
-/**
- * Hook async para obtener detalles de un sector por slug desde Strapi API
- * Retorna null si el sector no existe
- */
+import { fetchFromStrapi, CACHE_PRESETS } from '@/lib/strapi-fetcher';
 
 const useSectorBySlug = async (slug) => {
-  const baseUrl = process.env.STRAPI_API_URL;
+  if (!slug) return null;
 
-  // Validar que STRAPI_API_URL esté definida
-  if (!baseUrl) {
-    throw new Error('STRAPI_API_URL environment variable is not defined');
-  }
-
-  const path = `/api/sectores?filters[slug][$eq]=${slug}&populate[0]=icono&populate[1]=banner`;
-
-  const res = await fetch(baseUrl + path, {
-    next: { revalidate: 3600 }, // Revalidar cada hora
-    cache: 'force-cache'
+  const result = await fetchFromStrapi({
+    endpoint: `/api/sectores?filters[slug][$eq]=${slug}&populate[0]=icono&populate[1]=banner`,
+    fallback: { data: [] },
+    cache: CACHE_PRESETS.FREQUENT,
+    errorContext: `sector ${slug}`
   });
 
-  if (!res.ok) {
-    throw new Error(`Failed to fetch sector: ${slug} (Status: ${res.status})`);
-  }
-
-  const data = await res.json();
-
-  // Validar que la respuesta tenga datos
-  if (!data || !data.data || !Array.isArray(data.data) || data.data.length === 0) {
-    return null;
-  }
-
-  const sector = data.data[0];
-  return sector;
+  return result?.data?.[0] || null;
 };
 
 export default useSectorBySlug;

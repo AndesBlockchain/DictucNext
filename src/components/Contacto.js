@@ -77,24 +77,26 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
       // Determinar la URL del endpoint según si es cotización o contacto
       const endpoint = isCotizacion ? '/api/cotizador' : '/api/contacto';
 
-      const body = {
-        tipo_contacto: data.tipo_consulta,
-        rut_empresa: data.rut_empresa.replaceAll(".",""),
-        empresa: data.empresa,
-        persona: data.persona,
-        cargo: data.cargo,
-        email: data.email,
-        telefono: data.telefono,
-        consulta: data.consulta,
-        servicio: servicio,
-        codigo_unidad: codigoUnidad 
+      const archivo = data.archivo?.[0];
+
+      const formData = new FormData();
+      formData.append('tipo_contacto', data.tipo_consulta);
+      formData.append('rut_empresa', data.rut_empresa.replaceAll(".", ""));
+      formData.append('empresa', data.empresa);
+      formData.append('persona', data.persona);
+      formData.append('cargo', data.cargo);
+      formData.append('email', data.email);
+      formData.append('telefono', data.telefono);
+      formData.append('consulta', data.consulta);
+      formData.append('servicio', servicio);
+      formData.append('codigo_unidad', codigoUnidad);
+      if (archivo) {
+        formData.append('archivo', archivo);
       }
+
       const response = await fetch(strapiApiUrl + endpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body)
+        body: formData
       });
       if (!response.ok) {
         throw new Error(`Error HTTP: ${response.status}`);
@@ -319,6 +321,17 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
           {errors.consulta?.type === "required" && (
             <p className="text-red-500" role="alert">Ingrese su consulta</p>
           )}
+      </fieldset>
+      <fieldset className="fieldset">
+      <legend className="fieldset-legend">Adjuntar archivo (opcional)</legend>
+          <input
+            type="file"
+            className="file-input file-input-bordered border border-gray-300 w-full"
+            disabled={isConsultingRut}
+            {...register("archivo")}
+            accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png"
+          />
+          <p className="text-xs text-gray-400 mt-1">Formatos: PDF, Word, Excel, JPG, PNG. Máximo 10 MB.</p>
       </fieldset>
       <fieldset className="fieldset">
           <div className="join"><input type="checkbox" disabled={isConsultingRut} {...register("politica", {required:true})}/> &nbsp;Acepto la política de tratamiento de datos</div>

@@ -10,7 +10,7 @@ const BloqueContacto = async ({ datosBloque }) => {
 
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
-      <div className="ml-auto mr-auto xl:w-2/5 lg:w-2/5 md:w-3/5 sm:w-4/5 justify-center items-center mb-6">
+      <div className="ml-auto mr-auto xl:w-2/5 lg:w-2/5 md:w-3/5 sm:w-4/5 justify-center items-center mb-6 text-left">
         <Contacto
           border={true}
           tiposDeContacto={tiposDeContacto}

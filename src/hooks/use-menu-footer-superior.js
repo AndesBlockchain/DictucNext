@@ -1,12 +1,14 @@
-const useMenuFooterSuperior = async() => {
-  const baseUrl = process.env.STRAPI_API_URL;
+import { fetchFromStrapi, CACHE_PRESETS } from '@/lib/strapi-fetcher';
 
-  const res = await fetch(baseUrl + "/api/menu-footer-superiors?populate=all");
+const useMenuFooterSuperior = async () => {
+  const result = await fetchFromStrapi({
+    endpoint: '/api/menu-footer-superiors?populate=all',
+    fallback: { data: [] },
+    cache: CACHE_PRESETS.FREQUENT,
+    errorContext: 'menu footer superior'
+  });
 
-  if (!res.ok) throw new Error("Failed to fetch menu superior");
-
-  const data = await res.json();
-  return data.data;
-}
+  return result?.data || [];
+};
 
 export default useMenuFooterSuperior;

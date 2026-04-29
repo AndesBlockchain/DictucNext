@@ -1,12 +1,14 @@
+import { fetchFromStrapi, CACHE_PRESETS } from '@/lib/strapi-fetcher';
+
 const useMenuFooter = async () => {
-  const baseUrl = process.env.STRAPI_API_URL;
+  const result = await fetchFromStrapi({
+    endpoint: '/api/menu-footers?sort=sortOrder:asc&populate=*',
+    fallback: { data: [] },
+    cache: CACHE_PRESETS.FREQUENT,
+    errorContext: 'menu footer'
+  });
 
-  const res = await fetch(baseUrl + "/api/menu-footers?sort=sortOrder:asc&populate=*");
-
-  if (!res.ok) throw new Error("Failed to fetch menu footer");
-
-  const data = await res.json();
-  return data.data;
+  return result?.data || [];
 };
 
 export default useMenuFooter;

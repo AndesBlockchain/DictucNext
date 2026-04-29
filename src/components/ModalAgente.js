@@ -14,7 +14,7 @@ const ModalAgente = ({ onClose, pregunta }) => {
 
     const llamarAPI = async () => {
       try {
-        const response = await fetch('/api/chatgpt', {
+        const response = await fetch('/api/claude', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const ModalAgente = ({ onClose, pregunta }) => {
                 <span className="text-blue-600 font-bold text-lg">{puntos}</span>
               </div>
             ) : (
-              <div className="prose prose-sm max-w-none [&_a]:text-azul-dictuc [&_a]:underline [&_a:hover]:text-blue-800">
+              <div className="prose prose-xs max-w-none text-xs [&_a]:text-azul-dictuc [&_a]:underline [&_a:hover]:text-blue-800 [&_h3]:text-sm [&_h2]:text-base [&_ul]:mt-1 [&_ul]:mb-1 [&_ol]:mt-1 [&_ol]:mb-1 [&_li]:mb-0 [&_li_p]:mb-0 [&_li_p]:mt-0 [&_p]:mb-1">
                 <Markdown
                   components={{
                     a: ({ href, children }) => (

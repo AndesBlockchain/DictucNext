@@ -27,7 +27,13 @@ const ModalAgente = ({ onClose, pregunta }) => {
         }
 
         const data = await response.json()
-        setRespuesta(data.data.message || "No fue posible procesar la respuesta.")
+        const mensaje = data.data.message || "No fue posible procesar la respuesta."
+        // Convertir URLs planas en links Markdown
+        const mensajeConLinks = mensaje.replace(
+          /(?<!\()(https?:\/\/[^\s\)]+)/g,
+          (url) => `[${url}](${url})`
+        )
+        setRespuesta(mensajeConLinks)
       } catch (error) {
         console.error('Error al llamar a la API:', error)
         setRespuesta("Lo siento, hubo un error al procesar tu consulta.")
@@ -73,16 +79,28 @@ const ModalAgente = ({ onClose, pregunta }) => {
           <div id="respuesta" className="w-full text-gray-800 text-left space-y-4 bg-white px-2">
             {isLoading ? (
               <div className="flex items-center space-x-1">
-                <span className="text-gray-600">Procesando</span>
+                <span className="text-gray-600">Procesando (la respuesta toma del orden de 30 segundos)</span>
                 <span className="text-blue-600 font-bold text-lg">{puntos}</span>
               </div>
             ) : (
-              <div className="prose prose-xs max-w-none text-xs [&_a]:text-azul-dictuc [&_a]:underline [&_a:hover]:text-blue-800 [&_h3]:text-sm [&_h2]:text-base [&_ul]:mt-1 [&_ul]:mb-1 [&_ol]:mt-1 [&_ol]:mb-1 [&_li]:mb-0 [&_li_p]:mb-0 [&_li_p]:mt-0 [&_p]:mb-1">
+              <div className="prose prose-xs max-w-none text-xs [&_a]:text-azul-dictuc [&_a]:underline [&_a]:cursor-pointer [&_a]:pointer-events-auto [&_a:hover]:text-blue-800 [&_h3]:text-sm [&_h2]:text-base [&_ul]:mt-1 [&_ul]:mb-1 [&_ol]:mt-1 [&_ol]:mb-1 [&_li]:mb-0 [&_li_p]:mb-0 [&_li_p]:mt-0 [&_p]:mb-1">
                 <Markdown
                   components={{
-                    a: ({ href, children }) => (
-                      <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
-                    )
+                    a: ({ href, children }) => {
+                      const isInternal = href?.includes('dictuc.cl/');
+                      const finalHref = isInternal
+                        ? href.replace(/https?:\/\/(www\.)?dictuc\.cl/, '')
+                        : href;
+                      return (
+                        <a
+                          href={finalHref}
+                          target={isInternal ? "_self" : "_blank"}
+                          rel={isInternal ? undefined : "noopener noreferrer"}
+                        >
+                          {children}
+                        </a>
+                      );
+                    }
                   }}
                 >
                   {respuesta}

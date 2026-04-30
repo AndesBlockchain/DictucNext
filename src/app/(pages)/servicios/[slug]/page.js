@@ -10,6 +10,7 @@ const iconoExperiencia = "/images/Experiencia.png";
 const iconoPotenciales = "/images/PotencialesClientes.png";
 
 import useServicio from "@/hooks/use-servicio";
+import { limpiarTabla } from "@/helpers/limpiar-tabla";
 import EditorModeProvider from "@/components/editor/EditorModeProvider";
 import EditorBadge from "@/components/editor/EditorBadge";
 
@@ -89,7 +90,7 @@ export default async function Servicio({ params }) {
           <div className="text-lg text-center mt-2 uppercase font-semibold">
             <span className="text-azul-dictuc">Especificaciones</span> Técnicas
           </div>
-          <div className="mt-6 mb-12" dangerouslySetInnerHTML={{ __html: servicio.tabla_especificaciones }} />
+          <div className="mt-6 mb-12" dangerouslySetInnerHTML={{ __html: limpiarTabla(servicio.tabla_especificaciones) }} />
         </div>
       )}
 

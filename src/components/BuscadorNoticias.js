@@ -37,7 +37,7 @@ const BuscadorNoticias = ({ noticiasOrdenadas }) => {
       <div className="mt-8">
         {noticiasFiltradas.length > 0 ? (
           noticiasFiltradas.map(([agno, noticiasDelAgno], index) => (
-            <div key={agno} className="container m-auto max-w-6xl pl-8 pr-8 collapse collapse-plus bg-base-100 border border-base-300">
+            <div key={agno} className="container m-auto max-w-6xl pl-8 pr-8 collapse collapse-plus bg-base-100 border border-base-300 text-left">
               <input type="checkbox" name="my-accordion-3" defaultChecked={index === 0} />
               <div className="collapse-title font-semibold text-xl">{agno}</div>
               <div className="collapse-content text-sm">

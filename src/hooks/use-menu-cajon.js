@@ -7,6 +7,7 @@ const useMenuCajon = async (slugCandidatos) => {
     const result = await fetchFromStrapi({
       endpoint: `/api/menu-cajons?filters[slug][$eq]=${slug}&populate[0]=links&pagination[pageSize]=100`,
       fallback: { data: [] },
+      cache: CACHE_PRESETS.FREQUENT,
       errorContext: 'menu cajon'
     });
 

@@ -17,6 +17,9 @@ import BloqueTablaPersonas from "../components/bloquesPaginas/BloqueTablaPersona
 import BloqueContacto from "../components/bloquesPaginas/BloqueContacto";
 import BloqueEstadoTicket from "../components/bloquesPaginas/BloqueEstadoTicket";
 import BloqueVerificarInforme from "../components/bloquesPaginas/BloqueVerificarInforme";
+import BloqueCanalDenuncia from "../components/bloquesPaginas/BloqueCanalDenuncia";
+import BloqueNoticiasHistoricas from "../components/bloquesPaginas/BloqueNoticiasHistoricas";
+import BloqueInstagram from "../components/bloquesPaginas/BloqueInstagram";
 
 export const renderBloque = (bloque) => {
 
@@ -94,6 +97,18 @@ export const renderBloque = (bloque) => {
     case "bloques.bloque-verificar-informe":
     case "STRAPI__COMPONENT_BLOQUES_BLOQUE_VERIFICAR_INFORME":
       return <BloqueVerificarInforme datosBloque={bloque} />;
+
+    case "bloques.bloque-canal-denuncia":
+    case "STRAPI__COMPONENT_BLOQUES_BLOQUE_CANAL_DENUNCIA":
+      return <BloqueCanalDenuncia datosBloque={bloque} />;
+
+    case "bloques.bloque-noticias-historicas":
+    case "STRAPI__COMPONENT_BLOQUES_BLOQUE_NOTICIAS_HISTORICAS":
+      return <BloqueNoticiasHistoricas datosBloque={bloque} />;
+
+    case "bloques.bloque-instagram":
+    case "STRAPI__COMPONENT_BLOQUES_BLOQUE_INSTAGRAM":
+      return <BloqueInstagram datosBloque={bloque} />;
 
     default:
       return (

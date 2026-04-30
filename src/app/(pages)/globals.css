@@ -56,6 +56,10 @@ p {
   margin-bottom: 0.666rem;
 }
 
+b, strong {
+  color: #53565A;
+}
+
 /* Estilos globales para links dentro de listas */
 li a:hover {
   color: #307fe2;

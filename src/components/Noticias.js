@@ -36,12 +36,12 @@ const Noticias = ({ noticias, titulo, linkFiltroNoticias = false }) => {
       </div>
       {!linkFiltroNoticias && (
         <div className="flex justify-center items-center mt-8">
-          <a href="/todas-las-noticias" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver más noticias</a>
+          <a href="/paginas/noticias" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver más noticias</a>
         </div>
       )}
       {linkFiltroNoticias && (
         <div className="flex justify-center items-center mt-8">
-          <a href="/todas-las-noticias" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Más noticias</a>
+          <a href="/paginas/noticias" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Más noticias</a>
         </div>
       )}
       </div>

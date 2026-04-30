@@ -1,0 +1,58 @@
+import React from "react";
+import PaginaInterior from "@/components/PaginaInterior";
+const bannerNoticias = "/images/BannerMicrofonos.webp";
+import FranjaAzul from "@/components/FranjaAzul";
+import StrapiImage from "@/components/StrapiImage";
+const FotoDefaultNoticias = "/images/noticias.png"
+import useNoticia from '@/hooks/use-noticia';
+import EditorModeProvider from "@/components/editor/EditorModeProvider";
+import EditorBadge from "@/components/editor/EditorBadge";
+
+export default async function PaginasContenido({ params })
+{
+    const { slug } = await params;
+    const noticia = await useNoticia(slug);
+
+    if (!noticia) {
+      return (
+        <PaginaInterior fallback={bannerNoticias} titulo="Proyectos"
+          breadcrum={[{ label: "Home", link: "/" }, { label: "Proyectos", link: "/paginas/proyectos" }]}>
+          <div className="text-center py-16 text-gray-500">Noticia no encontrada</div>
+        </PaginaInterior>
+      );
+    }
+
+    const fechaFormateada = noticia.fecha
+      ? new Date(noticia.fecha + 'T00:00:00').toLocaleDateString('es-CL', { year: 'numeric' })
+      : '';
+
+  return (
+    <EditorModeProvider documentId={noticia.documentId}>
+    <PaginaInterior fallback={bannerNoticias}
+                    titulo="Proyectos"
+    breadcrum={[{ label: "Home", link: "/" }, {label:"Proyectos", link:"/paginas/proyactos"}, { label: noticia.titulo, link: "/" }]}>
+        <EditorBadge contentType="api::noticia.noticia" documentId={noticia.documentId} label="noticia" />
+        <div className="container m-auto max-w-6xl px-8 mt-10 mb-24">
+          <h1 className="text-xl font-bold">{noticia.titulo}</h1>
+          <div className="text-sm text-gris-dictuc">{fechaFormateada}</div>
+          <div className="w-min mt-2 mb-6">
+            <FranjaAzul/>
+          </div>
+          <div className="text-sm overflow-hidden [&_a]:text-azul-dictuc [&_a]:underline [&_a]:hover:text-blue-800">
+            <div className="md:float-right md:ml-6 mb-4 md:w-2/5">
+              <StrapiImage
+                imagen={noticia.foto}
+                gatsbyImageData={noticia.foto?.localFile?.childImageSharp?.gatsbyImageData}
+                fallback={noticia.url_foto || FotoDefaultNoticias}
+                className="w-full h-auto object-contain rounded-lg"
+                alt={noticia.titulo || 'Imagen de la noticia'}
+              />
+            </div>
+            <div dangerouslySetInnerHTML={{__html: noticia.cuerpo}}></div>
+          </div>
+        </div>
+         </PaginaInterior>
+    </EditorModeProvider>
+
+  );
+}

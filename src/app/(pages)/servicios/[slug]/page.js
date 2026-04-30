@@ -101,7 +101,7 @@ export default async function Servicio({ params }) {
           isCotizacion={true}
           servicio={slug}
           strapiApiUrl={strapiApiUrl}
-          codigoUnidad={servicio.unidad.codigoDictuc}
+          codigoUnidad={servicio.unidad.CodigoSAPDictuc}
         />
       </div>
 

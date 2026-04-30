@@ -3,9 +3,8 @@ import React from "react";
 import FranjaAzul from "./FranjaAzul";
 import {useForm} from 'react-hook-form';
 import { formatearRut, validarRut } from "../helpers/rut-helpers";
-const codigoUnidadDefault = "5401";
 
-export default function Contacto({ titulo = "¿En qué podemos <span class='text-azul-dictuc'>ayudarte?</span>", border = false, isCotizacion=false, servicio="", tiposDeContacto, strapiApiUrl, codigoUnidad = codigoUnidadDefault, accionInicial = null}) {
+export default function Contacto({ titulo = "¿En qué podemos <span class='text-azul-dictuc'>ayudarte?</span>", border = false, isCotizacion=false, servicio="", tiposDeContacto, strapiApiUrl, codigoUnidad, accionInicial = null}) {
 
   // Buscar el documentId del tipo de contacto que coincida con la acción inicial
   const defaultTipoConsulta = React.useMemo(() => {

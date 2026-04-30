@@ -30,7 +30,7 @@ export default async function PaginasContenido({ params })
     <EditorModeProvider documentId={noticia.documentId}>
     <PaginaInterior fallback={bannerNoticias}
                     titulo="Noticias"
-    breadcrum={[{ label: "Home", link: "/" }, {label:"Noticias", link:"/todas-las-noticias"}, { label: noticia.titulo, link: "/" }]}>
+    breadcrum={[{ label: "Home", link: "/" }, {label:"Noticias", link:"/paginas/noticias"}, { label: noticia.titulo, link: "/" }]}>
         <EditorBadge contentType="api::noticia.noticia" documentId={noticia.documentId} label="noticia" />
         <div className="container m-auto max-w-6xl px-8 mt-10 mb-24">
           <h1 className="text-xl font-bold">{noticia.titulo}</h1>

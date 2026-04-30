@@ -333,7 +333,7 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
           <p className="text-xs text-gray-400 mt-1">Formatos: PDF, Word, Excel, JPG, PNG. Máximo 10 MB.</p>
       </fieldset>
       <fieldset className="fieldset">
-          <div className="join"><input type="checkbox" disabled={isConsultingRut} {...register("politica", {required:true})}/> &nbsp;Acepto la <a href="https://backend-dictuc.andesblockchain.com/uploads/Politica_de_Tratamiento_de_Datos_Personales_Dictuc_406721e9e7.pdf" target="_blank">política de tratamiento de datos</a></div>
+          <div className="join"><input type="checkbox" disabled={isConsultingRut} {...register("politica", {required:true})}/> &nbsp;Acepto la&nbsp;<a className="font-semibold" href="https://backend-dictuc.andesblockchain.com/uploads/Politica_de_Tratamiento_de_Datos_Personales_Dictuc_406721e9e7.pdf" target="_blank">&nbsp;política de tratamiento de datos</a></div>
             {errors.politica?.type === "required" && (
             <p className="text-red-500" role="alert">Debe aceptar nuestra política de uso de datos</p>
           )}

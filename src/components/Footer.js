@@ -59,7 +59,7 @@ const Footer = async () => {
         </div>
       </footer>
       <div className="flex flex-row bg-black text-white text-xs p-1 justify-center">
-        <a href="/nosotros/condiciones-de-uso-del-sitio">Condiciones de Uso del Sitio</a>
+        <a target="_blank" href="https://backend-dictuc.andesblockchain.com/uploads/Condiciones_de_uso_del_sitio_Dictuc_f92f47fe66.pdf">Condiciones de Uso del Sitio</a>
       </div>
       
     </div>

@@ -38,7 +38,7 @@ export default async function PaginasContenido({ params })
           <div className="w-min mt-2 mb-6">
             <FranjaAzul/>
           </div>
-          <div className="text-sm [&_a]:text-azul-dictuc [&_a]:underline [&_a]:hover:text-blue-800">
+          <div className="text-sm overflow-hidden [&_a]:text-azul-dictuc [&_a]:underline [&_a]:hover:text-blue-800">
             <div className="md:float-right md:ml-6 mb-4 md:w-2/5">
               <StrapiImage
                 imagen={noticia.foto}

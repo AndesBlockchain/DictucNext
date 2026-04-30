@@ -5,7 +5,7 @@ import {useForm} from 'react-hook-form';
 import { formatearRut, validarRut } from "../helpers/rut-helpers";
 const codigoUnidadDefault = "5401";
 
-export default function Contacto({ titulo = "Formulario de Contacto", border = false, isCotizacion=false, servicio="", tiposDeContacto, strapiApiUrl, codigoUnidad = codigoUnidadDefault, accionInicial = null}) {
+export default function Contacto({ titulo = "¿En qué podemos <span class='text-azul-dictuc'>ayudarte?</span>", border = false, isCotizacion=false, servicio="", tiposDeContacto, strapiApiUrl, codigoUnidad = codigoUnidadDefault, accionInicial = null}) {
 
   // Buscar el documentId del tipo de contacto que coincida con la acción inicial
   const defaultTipoConsulta = React.useMemo(() => {
@@ -219,7 +219,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
       )}
 
       <FranjaAzul />
-      <h3 className="text-center uppercase mb-2 font-semibold">¿En qué podemos <span className="text-azul-dictuc">ayudarte?</span></h3>
+      <h3 className="text-center uppercase mb-2 font-semibold"><div dangerouslySetInnerHTML={{__html:titulo}} /></h3>
       <form className="w-full max-w-[900px]" onSubmit={handleSubmit(handleOnSubmit)}>
       {!isCotizacion && (
         <fieldset className="fieldset">
@@ -334,7 +334,7 @@ export default function Contacto({ titulo = "Formulario de Contacto", border = f
           <p className="text-xs text-gray-400 mt-1">Formatos: PDF, Word, Excel, JPG, PNG. Máximo 10 MB.</p>
       </fieldset>
       <fieldset className="fieldset">
-          <div className="join"><input type="checkbox" disabled={isConsultingRut} {...register("politica", {required:true})}/> &nbsp;Acepto la política de tratamiento de datos</div>
+          <div className="join"><input type="checkbox" disabled={isConsultingRut} {...register("politica", {required:true})}/> &nbsp;Acepto la <a href="https://backend-dictuc.andesblockchain.com/uploads/Politica_de_Tratamiento_de_Datos_Personales_Dictuc_406721e9e7.pdf" target="_blank">política de tratamiento de datos</a></div>
             {errors.politica?.type === "required" && (
             <p className="text-red-500" role="alert">Debe aceptar nuestra política de uso de datos</p>
           )}

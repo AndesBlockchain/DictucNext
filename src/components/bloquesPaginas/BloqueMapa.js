@@ -44,16 +44,16 @@ const BloqueMapa = ({ datosBloque }) => {
                   {lugar.Nombre}
                 </h3>
                 {lugar.Direccion && (
-                  <p className="text-base text-gray-500 font-semibold mt-1 mb-4">{lugar.Direccion}</p>
+                  <p className="text-base text-gray-500 font-semibold text-md mt-1 mb-4">{lugar.Direccion}</p>
                 )}
                 {!lugar.Direccion && <div className="mb-4" />}
                 {lugar.Instalaciones?.map((instalacion) => (
-                  <div key={instalacion.id} className="mb-4">
-                    <p className="font-bold text-xs">{instalacion.Nombre}</p>
-                    <p className="text-sm">
+                  <div key={instalacion.id} className="mb-4 text-sm leading-2">
+                    <p className="font-bold text-xs leading-2">{instalacion.Nombre}</p>
+                    <p>
                       Horario de Atención: {instalacion.Horario}
                     </p>
-                    <p className="text-sm">
+                    <p>
                       Teléfono de contacto: {instalacion.Telefono}
                     </p>
                   </div>

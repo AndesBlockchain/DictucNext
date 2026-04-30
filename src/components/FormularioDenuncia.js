@@ -429,7 +429,7 @@ export default function FormularioDenuncia() {
             <strong>Confidencialidad:</strong> Dictuc se compromete a velar porque toda persona de Dictuc o de la comunidad, 
             que denuncie hechos constitutivos de faltas, infracciones o delitos, en los que presuntamente tuviere participación Dictuc, 
             tenga el derecho a que su denuncia se tramite con confidencialidad y a ser protegida contra eventuales represalias de terceros, 
-            según la Política de Protección a Denunciantes
+            según la <a href="https://backend-dictuc.andesblockchain.com/uploads/Politica_de_Proteccion_de_Denunciantes_v1_8cc1be21bc.pdf" target="_blank">Política de Protección a Denunciantes</a>
           </p>
         </div>
 
@@ -440,7 +440,7 @@ export default function FormularioDenuncia() {
               type="checkbox"
               {...register("aceptacion_condiciones", { required: true })}
             />
-            &nbsp;Acepto las condiciones del canal de denuncia y autorizo el tratamiento de mis datos
+            &nbsp;Acepto las <a href="https://backend-dictuc.andesblockchain.com/uploads/Politica_de_Proteccion_de_Denunciantes_v1_8cc1be21bc.pdf" target="_blank">condiciones del canal de denuncia</a> y autorizo el tratamiento de mis datos
           </div>
           {errors.aceptacion_condiciones?.type === "required" && (
             <p className="text-red-500" role="alert">Debe aceptar las condiciones para enviar la denuncia</p>

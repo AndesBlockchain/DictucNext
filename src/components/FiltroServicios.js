@@ -84,12 +84,13 @@ const FiltroServicios = ({
   onFiltrosChange,
   servicios,
   ejecutorInicial,
-  sectorInicial
+  sectorInicial,
+  tipoServicioInicial
 }) => {
 
   const [filtros, setFiltros] = useState({
     busqueda: '',
-    tiposServicio: [],
+    tiposServicio: tipoServicioInicial ? [tipoServicioInicial] : [],
     sectoresPais: sectorInicial ? [sectorInicial] : [],
     unidades: ejecutorInicial ? [ejecutorInicial] : []
   });

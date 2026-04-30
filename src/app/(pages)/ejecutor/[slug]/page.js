@@ -2,33 +2,32 @@ import PaginaInterior from "@/components/PaginaInterior";
 import Servicios from "@/components/Servicios";
 import useTipoDeServicio from "@/hooks/use-tipo-de-servicios";
 import useSectoresPais from "@/hooks/use-sectores-pais";
-import useTipoDeServicioBySlug from "@/hooks/use-tipo-de-servicio-by-slug";
 import useUnidades from "@/hooks/use-unidades";
 import useServicios from "@/hooks/use-servicios";
+const BannerServicios = "/images/banner_servicios.jpg";
 
-export default async function HomeServicios({ params })
-{
-  const {slug} = await params;
-  const tipoServicio = await useTipoDeServicioBySlug(slug);
-
-  if (!tipoServicio) {
-    return <div className="text-center py-16 text-gray-500">Tipo de servicio no encontrado</div>;
-  }
-
+export default async function EjecutorServicios({ params }) {
+  const { slug } = await params;
   const tiposDeServicio = await useTipoDeServicio();
   const sectoresPais = await useSectoresPais();
   const servicios = await useServicios();
   const unidades = await useUnidades();
 
+  const unidad = unidades.data?.find(u => u.slug === slug);
+
+  if (!unidad) {
+    return <div className="text-center py-16 text-gray-500">Ejecutor no encontrado</div>;
+  }
+
   return (
     <PaginaInterior
-      banner={tipoServicio.BannerBuscadorServicios}
+      fallback={BannerServicios}
       titulo="Nuestros Servicios"
-      breadcrum={[{ label: "Home", link: "/" }, { label: "Nuestro Servicios", link: "/" + slug }]}>
+      breadcrum={[{ label: "Home", link: "/" }, { label: "Nuestros Servicios", link: "/servicios/todos-los-servicios" }, { label: unidad.nombre }]}>
 
       <Servicios tipos_de_servicio={tiposDeServicio} sectores_pais={sectoresPais} unidades={unidades}
         sectores_pais_visibles={true} tipos_de_servicio_visibles={true}
-        servicios={servicios} tipoServicioInicial={slug} />
+        servicios={servicios} ejecutorInicial={unidad.nombre} />
 
     </PaginaInterior>
   );

@@ -50,7 +50,7 @@ const TablaBuscableClient = ({ datos, filasPorPagina = 8 }) => {
                     <div className="text-xs text-gray-500 mt-1">{item.Bajada}</div>
                   )}
                 </td>
-                <td className="px-4 py-3 align-top border-b border-gray-200 text-xs" dangerouslySetInnerHTML={{ __html: item.Contenido || "" }} />
+                <td className="px-4 py-3 align-top border-b border-gray-200 text-xs prose prose-xs max-w-none" dangerouslySetInnerHTML={{ __html: item.Contenido || "" }} />
               </tr>
             ))
           ) : (

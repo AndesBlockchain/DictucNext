@@ -23,7 +23,7 @@ const BloqueAcordeon = ({ datosBloque }) => {
                           <img className="rounded-xl" src={STRAPI_URL + tab.Foto.formats.medium.url} alt={tab.Titulo} />
                         </div>
                       )}
-                      <div className="mt-auto mb-auto flex-1 md:pl-8 text-left text-sm" dangerouslySetInnerHTML={{__html: tab.Texto || ''}} />
+                      <div className="mt-auto mb-auto flex-1 md:pl-8 text-left text-sm prose prose-sm max-w-none" dangerouslySetInnerHTML={{__html: tab.Texto || ''}} />
                     </div>
                   </div>
                 </div>

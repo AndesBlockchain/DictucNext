@@ -10,7 +10,7 @@ const BloqueMapa = ({ datosBloque }) => {
     <Bloque datosBloque={datosBloque.Bloque}>
       {Texto && (
         <div
-          className="container max-w-6xl mx-auto mt-4 text-center text-sm"
+          className="container max-w-6xl mx-auto mt-4 text-center text-sm prose prose-sm max-w-none"
           dangerouslySetInnerHTML={{ __html: Texto }}
         />
       )}

@@ -23,7 +23,7 @@ const BloqueTexto = ({ datosBloque }) => {
                     />
                 )}
                 <div
-                    className={letra}
+                    className={`${letra} prose prose-sm max-w-none`}
                     style={{ color: colorLetra }}
                     dangerouslySetInnerHTML={{ __html: textoHTML }}
                 />

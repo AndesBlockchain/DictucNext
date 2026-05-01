@@ -15,7 +15,7 @@ const BloqueTabs = ({ datosBloque }) => {
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
       <div className="container mx-auto max-w-6xl px-4 pb-8">
-        <div className="mb-6 text-sm" dangerouslySetInnerHTML={{__html: datosBloque.texto?.Texto || ""}} />
+        <div className="mb-6 text-sm prose prose-sm max-w-none" dangerouslySetInnerHTML={{__html: datosBloque.texto?.Texto || ""}} />
         <div className="mb-8">
           {/* Tab buttons */}
           <div role="tablist" className="tabs tabs-lifted justify-center">
@@ -49,7 +49,7 @@ const BloqueTabs = ({ datosBloque }) => {
                     className="rounded-xl align-center"
                   />
                 </div>
-                <div className="mt-auto mb-auto w-full md:w-3/5 pl-8 text-left text-sm" dangerouslySetInnerHTML={{__html: tab.Texto || ""}} />
+                <div className="mt-auto mb-auto w-full md:w-3/5 pl-8 text-left text-sm prose prose-sm max-w-none" dangerouslySetInnerHTML={{__html: tab.Texto || ""}} />
               </div>
               <CallToActionGroup buttons={tab.CallToAction}/>
             </div>

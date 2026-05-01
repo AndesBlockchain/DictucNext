@@ -35,7 +35,7 @@ const CardServicio = ({ titulo, icono, imagen, contenido, callToAction = false, 
               dangerouslySetInnerHTML={{ __html: contenido }}
             />
           ) : (
-            <div dangerouslySetInnerHTML={{ __html: contenido }} />
+            <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: contenido }} />
           )}
         </div>
 

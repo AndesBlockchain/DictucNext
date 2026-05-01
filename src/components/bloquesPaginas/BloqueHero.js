@@ -27,7 +27,7 @@ const BloqueHero = ({ datosBloque }) => {
 
         <div className="w-full lg:w-3/5 flex flex-col mt-8 justify-center text-sm text-center lg:text-justify">
           {datosBloque.texto && (
-            <div dangerouslySetInnerHTML={{ __html: datosBloque.texto.replaceAll("classname", "class") }} />
+            <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: datosBloque.texto.replaceAll("classname", "class") }} />
           )}
         </div>
 

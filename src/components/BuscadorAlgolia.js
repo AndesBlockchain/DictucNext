@@ -4,11 +4,14 @@ import { liteClient as algoliasearch } from "algoliasearch/lite"
 
 let searchClient = null
 const getSearchClient = () => {
-  if (!searchClient && process.env.NEXT_PUBLIC_ALGOLIA_APP_ID) {
-    searchClient = algoliasearch(
-      process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
-      process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY
-    )
+  if (!searchClient) {
+    const appId = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID;
+    const searchKey = process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY;
+    console.log('[Algolia Debug] appId:', appId ? `${appId.substring(0, 4)}...` : 'UNDEFINED');
+    console.log('[Algolia Debug] searchKey:', searchKey ? `${searchKey.substring(0, 4)}...` : 'UNDEFINED');
+    if (appId && searchKey) {
+      searchClient = algoliasearch(appId, searchKey);
+    }
   }
   return searchClient
 }

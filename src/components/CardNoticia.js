@@ -17,7 +17,7 @@ const formatearFecha = (fecha) => {
   return new Date(fecha + 'T00:00:00').toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit', year: 'numeric' });
 };
 
-const CardNoticia = ({ titulo, imagen, fecha, bajada, slug, mostrarFecha = true, fallback = null }) => {
+const CardNoticia = ({ titulo, imagen, fecha, bajada, slug, mostrarFecha = true, fallback = null, seccion = null }) => {
 
   return(
   <div className="flex flex-col w-72 bg-white rounded-xl shadow-lg overflow-hidden mt-4">
@@ -32,7 +32,7 @@ const CardNoticia = ({ titulo, imagen, fecha, bajada, slug, mostrarFecha = true,
       <div className="text-xs leading-relaxed mb-3 flex-grow">{AcortarNoticia(bajada)}</div>
       <div className="flex justify-between items-center mt-auto">
         {mostrarFecha ? <span className="text-xs">{formatearFecha(fecha)}</span> : <span></span>}
-        <a href={"/noticias/" + slug} className="text-azul-dictuc text-xs hover:text-blue-800 font-medium">Ver más</a>
+        <a href={"/novedades/" + seccion + "/" + slug} className="text-azul-dictuc text-xs hover:text-blue-800 font-medium">Ver más</a>
       </div>
     </div>
   </div>

@@ -44,7 +44,7 @@ const IndexPage = async () => {
       <div className="flex justify-center mt-6 mb-10">
         <a href="/servicios/todos-los-servicios" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver todos</a>
       </div>
-      <Noticias noticias={noticias} titulo='<span class="text-azul-dictuc">NOTICIAS</span> DESTACADAS' />
+      <Noticias noticias={noticias} seccion="noticias-general" titulo='<span class="text-azul-dictuc">NOTICIAS</span> DESTACADAS' />
       <FooterSuperior />
       <Footer />
       <ModalContainer modals={{ data: modalsFiltrados }} />

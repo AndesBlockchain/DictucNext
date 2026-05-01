@@ -4,9 +4,8 @@ import React, { useState, useMemo } from "react"
 const normalizarTexto = (str) =>
   str?.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() ?? '';
 
-const BuscadorNoticias = ({ noticiasOrdenadas }) => {
+const BuscadorNoticias = ({ noticiasOrdenadas, seccion, estiloFecha }) => {
   const [busqueda, setBusqueda] = useState("")
-
   const noticiasFiltradas = useMemo(() => {
     if (!busqueda.trim()) return noticiasOrdenadas;
     const termino = normalizarTexto(busqueda);
@@ -45,12 +44,15 @@ const BuscadorNoticias = ({ noticiasOrdenadas }) => {
                   {noticiasDelAgno.map((noticia, noticiaIndex) => (
                     <div key={noticiaIndex} className="border-b border-gray-200 pb-3 last:border-b-0">
                       <h4 className="font-medium text-gray-900 mb-2">
-                        <a href={`/noticias/${noticia.slug}`} className="hover:text-blue-600 transition-colors">
-                          {new Date(noticia.fecha).toLocaleDateString('es-ES', {
-                            year: 'numeric',
-                            month: 'numeric',
-                            day: 'numeric'
-                          })} - {noticia.titulo}
+                        <a href={`/novedades/${seccion}/${noticia.slug}`} className="hover:text-blue-600 transition-colors">
+                          {estiloFecha !== "Año" && noticia.fecha && (
+                            <>{new Date(noticia.fecha).toLocaleDateString('es-ES', {
+                              year: 'numeric',
+                              month: 'numeric',
+                              day: 'numeric'
+                            })} - </>
+                          )}
+                          {noticia.titulo}
                         </a>
                       </h4>
                     </div>

@@ -26,6 +26,7 @@ const BloqueNoticias = async ({ datosBloque }) => {
               bajada={noticia.cuerpo}
               slug={noticia.slug}
               mostrarFecha={mostrarFecha}
+              seccion={datosBloque.etiqueta_noticia?.slug}
             />
           ))}
         </div>

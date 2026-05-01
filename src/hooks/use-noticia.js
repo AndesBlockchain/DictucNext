@@ -4,7 +4,7 @@ const useNoticia = async (slug) => {
   if (!slug) return null;
 
   const result = await fetchFromStrapi({
-    endpoint: `/api/noticias?filters[slug][$eq]=${slug}&status=published&populate=all`,
+    endpoint: `/api/noticias?filters[slug][$eq]=${slug}&status=published&populate[0]=foto&populate[1]=galeria&populate[etiqueta_noticias][populate]=Banner`,
     fallback: { data: [] },
     cache: CACHE_PRESETS.FREQUENT,
     errorContext: `noticia ${slug}`

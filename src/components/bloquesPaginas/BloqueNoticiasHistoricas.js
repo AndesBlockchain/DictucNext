@@ -4,6 +4,7 @@ import BuscadorNoticias from "../BuscadorNoticias";
 
 const BloqueNoticiasHistoricas = ({ datosBloque }) => {
   const noticias = datosBloque.categoria_noticia?.noticias || [];
+  const estiloFecha = datosBloque.categoria_noticia?.EstiloFecha;
 
   // Agrupar por año, noticias sin fecha van en "Sin fecha"
   const noticiasPorAgno = {};
@@ -27,7 +28,7 @@ const BloqueNoticiasHistoricas = ({ datosBloque }) => {
 
   return (
     <Bloque datosBloque={datosBloque.Bloque}>
-      <BuscadorNoticias noticiasOrdenadas={noticiasOrdenadas} />
+      <BuscadorNoticias noticiasOrdenadas={noticiasOrdenadas} seccion={datosBloque.categoria_noticia?.slug} estiloFecha={estiloFecha} />
     </Bloque>
   );
 };

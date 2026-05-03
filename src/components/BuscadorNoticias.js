@@ -25,7 +25,7 @@ const BuscadorNoticias = ({ noticiasOrdenadas, seccion, estiloFecha }) => {
         <div className="flex justify-end mb-4">
           <input
             type="text"
-            placeholder="Buscar dentro de noticias"
+            placeholder="Buscar"
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
             className="px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-azul-dictuc text-sm w-64"

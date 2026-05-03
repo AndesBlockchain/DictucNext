@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react"
+import { createPortal } from "react-dom"
 import Markdown from "react-markdown"
 
 const ModalAgente = ({ onClose, pregunta }) => {
@@ -66,8 +67,8 @@ const ModalAgente = ({ onClose, pregunta }) => {
     }
   }, [isLoading])
 
-  return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+  return createPortal(
+    <div className="fixed inset-0 flex items-center justify-center z-[200]">
       <div className="absolute inset-0 bg-black opacity-40" onClick={onClose}></div>
       <div className="relative bg-white rounded-2xl shadow-2xl p-4 w-[75vw] h-[50vh] flex flex-col items-center justify-start overflow-hidden">
         <button className="absolute top-4 right-6 text-2xl text-gray-400 hover:text-gray-700 transition-colors" onClick={onClose}>&times;</button>
@@ -110,7 +111,8 @@ const ModalAgente = ({ onClose, pregunta }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

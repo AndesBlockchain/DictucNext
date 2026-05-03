@@ -21,11 +21,20 @@ const Footer = async () => {
             {data.map(item => (
               <div key={item.id || item.documentId} className="flex flex-col basis-full lg:basis-1/4 mb-4 lg:mb-0">
                 <div className="font-bold mb-1">{item.Heading}</div>
-                {item.links.map((nestedItem, index) => (
-                  <div key={`${item.id}-${index}`}>
-                    <a href={nestedItem.url}>{nestedItem.texto}</a>
-                  </div>
-                ))}
+                {item.links.map((nestedItem, index) => {
+                  const abrirNueva = nestedItem.ComoAbrir === "Ventana Nueva" || nestedItem.url?.startsWith("http");
+                  return (
+                    <div key={`${item.id}-${index}`}>
+                      <a
+                        href={nestedItem.url}
+                        target={abrirNueva ? "_blank" : "_self"}
+                        rel={abrirNueva ? "noopener noreferrer" : undefined}
+                      >
+                        {nestedItem.texto}
+                      </a>
+                    </div>
+                  );
+                })}
               </div>
             ))}
 

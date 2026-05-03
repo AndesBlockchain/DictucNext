@@ -189,7 +189,7 @@ const FiltroServicios = ({
 
       {tiposDeServicioVisibles && tiposDeServicio?.data && (
         <div className="collapse collapse-arrow border-b border-gray-200">
-          <input type="checkbox" />
+          <input type="checkbox" defaultChecked />
           <div className="collapse-title font-semibold px-0 min-h-0 py-2">Tipo de Servicio</div>
           <div className="collapse-content px-0">
             {[...tiposDeServicio.data].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')).map((item) => {
@@ -221,7 +221,7 @@ const FiltroServicios = ({
 
       {sectoresPaisVisibles && sectoresPais?.data && (
         <div className="collapse collapse-arrow border-b border-gray-200">
-          <input type="checkbox" />
+          <input type="checkbox" defaultChecked />
           <div className="collapse-title font-semibold px-0 min-h-0 py-2">Sector Productivo</div>
           <div className="collapse-content px-0">
             {sectoresPais.data.map(item => {

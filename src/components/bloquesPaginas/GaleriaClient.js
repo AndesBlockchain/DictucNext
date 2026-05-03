@@ -1,10 +1,10 @@
 "use client"
 import React, { useState } from "react"
+import StrapiImage from "../StrapiImage"
 
 const GaleriaClient = ({ fotos }) => {
   const [actual, setActual] = useState(0)
   const total = fotos.length
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || ""
 
   const anterior = () => setActual((prev) => (prev - 1 + total) % total)
   const siguiente = () => setActual((prev) => (prev + 1) % total)
@@ -14,8 +14,8 @@ const GaleriaClient = ({ fotos }) => {
   return (
     <div className="flex flex-col items-center mt-12">
       <div className="relative mx-auto">
-        <img
-          src={strapiUrl + fotos[actual].url}
+        <StrapiImage
+          imagen={{ url: fotos[actual].url }}
           alt={fotos[actual].alt}
           className="h-[350px] w-auto object-contain rounded-lg"
         />

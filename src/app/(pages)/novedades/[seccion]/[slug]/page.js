@@ -5,14 +5,13 @@ import StrapiImage from "@/components/StrapiImage";
 const FotoDefaultNoticias = "/images/noticias.png"
 const bannerDefault = "/images/BannerMicrofonos.webp";
 import useNoticia from '@/hooks/use-noticia';
+import GaleriaClient from "@/components/bloquesPaginas/GaleriaClient";
 import EditorModeProvider from "@/components/editor/EditorModeProvider";
 import EditorBadge from "@/components/editor/EditorBadge";
 
 export default async function PaginasContenido({ params }) {
     const { seccion, slug } = await params;
     const noticia = await useNoticia(slug);
-
-    console.log(noticia)
 
     if (!noticia) {
       return (
@@ -63,6 +62,17 @@ export default async function PaginasContenido({ params }) {
             </div>
             <div dangerouslySetInnerHTML={{__html: noticia.cuerpo}}></div>
           </div>
+          {noticia.galeria?.length > 0 && (
+            <div className="mt-12">
+              <GaleriaClient
+                fotos={noticia.galeria.map((img, index) => ({
+                  url: img.url,
+                  alt: img.alternativeText || `Imagen ${index + 1}`,
+                  texto: null
+                }))}
+              />
+            </div>
+          )}
         </div>
     </PaginaInterior>
     </EditorModeProvider>

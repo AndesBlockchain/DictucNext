@@ -11,6 +11,12 @@ on:
 
 env:
   STRAPI_API_URL: https://backend-dictuc.andesblockchain.com
+  NEXT_PUBLIC_STRAPI_API_URL: https://backend-dictuc.andesblockchain.com
+  VERIFICACION_URL: https://xnet.dictuc.cl/xnet/dictuc/firma_elect/descarga_doc.phtml
+  TICKET_API_TOKEN: hh77ApytA3fWzjQG4FUafsAXPWLMQ8sMqPRK0bunLdnuqobc3ub8AGRAGUfGeA7LPtMwbGbBfjjwkqd7yekLv9gekZu6nCAWcsUr
+  NEXT_PUBLIC_ALGOLIA_APP_ID: 6DXBNCDC9X
+  NEXT_PUBLIC_ALGOLIA_SEARCH_KEY: 7fd66bc77502ecb22bfd3623b6611ca4
+  NEXT_PUBLIC_STRAPI_ADMIN_URL: https://backend-dictuc.andesblockchain.com/admin
 
 jobs:
   build_and_deploy_job:

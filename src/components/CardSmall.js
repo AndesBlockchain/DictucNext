@@ -13,6 +13,7 @@ export default function CardSmall({ titulo, callToAction, icono, contenido }) {
             imagen={icono}
             fallback={icono?.formats?.medium?.url || icono?.url}
             alt={titulo || "Icono"}
+            maxWidth={245}
             className="w-full"
           />
         </div>

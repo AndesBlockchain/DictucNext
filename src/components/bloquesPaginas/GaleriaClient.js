@@ -17,6 +17,7 @@ const GaleriaClient = ({ fotos }) => {
         <StrapiImage
           imagen={{ url: fotos[actual].url }}
           alt={fotos[actual].alt}
+          maxWidth={1000}
           className="h-[350px] w-auto object-contain rounded-lg"
         />
 

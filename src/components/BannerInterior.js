@@ -13,9 +13,9 @@ const BannerInterior = ({ banner, gatsbyImageData, fallback, alt = "Banner", tit
         )}
         <StrapiImage
           imagen={banner}
-          gatsbyImageData={gatsbyImageData}
           fallback={fallback}
           alt={alt}
+          maxWidth={1000}
           className="w-full h-auto object-contain"
         />
       </div>

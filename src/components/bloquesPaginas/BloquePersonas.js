@@ -25,6 +25,7 @@ const BloquePersonas = ({datosBloque}) => {
             <StrapiImage
               imagen={imagenData}
               alt={persona.Nombre}
+              maxWidth={245}
               className="rounded-sm"
             />
           );

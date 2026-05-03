@@ -21,7 +21,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="es">
+      <head>
+        <link rel="preconnect" href="https://backend-dictuc.andesblockchain.com" />
+        <link rel="dns-prefetch" href="https://backend-dictuc.andesblockchain.com" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-full`}
       >

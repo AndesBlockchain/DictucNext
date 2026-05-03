@@ -14,8 +14,10 @@ import Footer from "@/components/Footer"
 
 const IndexPage = async () => {
 
-  const noticias = await useUltimasNoticias();
-  const modals = await useModals();
+  const [noticias, modals] = await Promise.all([
+    useUltimasNoticias(),
+    useModals()
+  ]);
 
   // Filtrar modals por fecha vigente en el servidor para evitar problemas de hidratación
   const modalsNodes = modals?.nodes || modals?.data || [];

@@ -1,29 +1,22 @@
 import React from "react";
 import CarruselClient from "./CarruselClient";
-
-async function getCarrusel() {
-  const baseUrl = process.env.STRAPI_API_URL;
-  const path = "/api/carruseles?populate=*";
-
-  const res = await fetch(baseUrl + path, { cache: 'no-store' });
-
-  if (!res.ok) throw new Error("Failed to fetch carruseles");
-
-  const data = await res.json();
-  return data;
-}
+import { fetchFromStrapi, CACHE_PRESETS } from "@/lib/strapi-fetcher";
 
 const Carrusel = async () => {
+  const carruselFetch = await fetchFromStrapi({
+    endpoint: "/api/carruseles?populate=*",
+    fallback: { data: [] },
+    cache: CACHE_PRESETS.FREQUENT,
+    errorContext: "carrusel"
+  });
 
-  const carruselFetch = await getCarrusel();
-  // Creamos el array carruselData con objetos itemCarrusel
-  const carruselData = carruselFetch.data.map(item => {
-    const imagen = item.Imagen && item.Imagen[0] ? item.Imagen[0] : (item.Imagen || {}); // Handle array or single object if Strapi structure varies
+  const carruselData = (carruselFetch.data || []).map(item => {
+    const imagen = item.Imagen && item.Imagen[0] ? item.Imagen[0] : (item.Imagen || {});
     return {
       fraseSuperior: item.FraseSuperior || "",
       fraseInferior: item.FraseInferior || "",
       frasesVisibles: !item.OcultarFrases,
-      imagen: imagen, // Pass the raw Strapi image object/array to StrapiImage
+      imagen: imagen,
       url: process.env.STRAPI_API_URL + imagen.url || "",
       alto: imagen.height || 0,
       ancho: imagen.width || 0,

@@ -9,10 +9,35 @@ const getImageUrl = (url) => {
 };
 
 /**
+ * Selecciona el formato de imagen Strapi más apropiado según el ancho máximo de visualización.
+ * Evita descargar imágenes más grandes de lo necesario.
+ */
+const elegirFormato = (imgData, maxWidth) => {
+  if (!maxWidth || !imgData?.formats) return imgData;
+
+  const formatos = [
+    { key: 'thumbnail', ancho: 245 },
+    { key: 'small', ancho: 500 },
+    { key: 'medium', ancho: 750 },
+    { key: 'large', ancho: 1000 },
+  ];
+
+  for (const fmt of formatos) {
+    if (maxWidth <= fmt.ancho && imgData.formats[fmt.key]) {
+      return imgData.formats[fmt.key];
+    }
+  }
+
+  return imgData;
+};
+
+/**
  * Componente simplificado para renderizar imágenes de Strapi.
  * Prioriza:
  * 1. Imagen de Strapi (si existe)
  * 2. Fallback (si existe)
+ *
+ * @param {number} maxWidth - Ancho máximo de visualización. Si se pasa, selecciona el formato Strapi más apropiado.
  */
 const StrapiImage = ({
   imagen,
@@ -22,12 +47,13 @@ const StrapiImage = ({
   containerClassName = "",
   fill = false,
   priority = false,
+  maxWidth = null,
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 }) => {
-  const imgData = Array.isArray(imagen) ? imagen[0] : imagen;
+  const rawImgData = Array.isArray(imagen) ? imagen[0] : imagen;
+  const imgData = elegirFormato(rawImgData, maxWidth);
   const imageUrl = getImageUrl(imgData?.url);
 
-  // Determinar qué renderizar
   let content = null;
 
   if (imageUrl) {
@@ -54,20 +80,14 @@ const StrapiImage = ({
         />
       );
     } else {
-      // Fallback a <img> si no hay dimensiones para next/image y no es fill
       content = <img src={imageUrl} alt={alt} className={className} />;
     }
   } else if (fallback) {
-    // Manejo unificado de fallback (ya sea objeto estático o string URL)
     const fallbackSrc = (typeof fallback === 'object' && fallback.src) ? fallback : fallback;
 
-    // Si es objeto de Next.js (import), usamos Image, si es string, tratamos de usar img si no sabemos dimensiones, 
-    // pero si fallback es string, Next Image requiere width/height o fill. 
-    // Asumiremos que si es string fallback simple usa img tag para evitar errores de Next Image sin dimensiones.
     if (typeof fallbackSrc === 'string') {
       content = <img src={fallbackSrc} alt={alt} className={className} />;
     } else {
-      // StaticImageData tiene dimensiones, seguro usar Image
       content = <Image src={fallbackSrc} alt={alt} className={className} priority={priority} />;
     }
   }

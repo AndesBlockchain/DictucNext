@@ -22,6 +22,7 @@ const CardServicio = ({ titulo, icono, imagen, contenido, callToAction = false, 
           imagen={imagen}
           fallback={icono}
           alt={titulo}
+          maxWidth={245}
           className="h-auto object-contain max-w-[60px]"
           containerClassName="h-16 flex items-center justify-center mx-auto"
         />

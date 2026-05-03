@@ -99,17 +99,17 @@ export function generarMailCotizacion({
                     <tr>
                       <td style="padding-right:14px;">
                         <a href="https://www.instagram.com/dictuc.ingenieriaquetransforma/" style="text-decoration:none; color:#ffffff;">
-                          <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" width="20" height="20" style="display:block; border:0;">
+                          <img src="https://cdn-icons-png.flaticon.com/512/3955/3955024.png" alt="Instagram" width="20" height="20" style="display:block; border:0;">
                         </a>
                       </td>
                       <td style="padding-right:14px;">
                         <a href="https://x.com/Dictuc" style="text-decoration:none; color:#ffffff;">
-                          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X" width="18" height="18" style="display:block; border:0;">
+                          <img src="https://cdn-icons-png.flaticon.com/512/11823/11823338.png" alt="X" width="18" height="18" style="display:block; border:0;">
                         </a>
                       </td>
                       <td>
                         <a href="https://www.linkedin.com/company/dictuc-sa/" style="text-decoration:none; color:#ffffff;">
-                          <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" width="20" height="20" style="display:block; border:0;">
+                          <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn" width="20" height="20" style="display:block; border:0;">
                         </a>
                       </td>
                     </tr>

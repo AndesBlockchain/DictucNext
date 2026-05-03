@@ -18,6 +18,7 @@ const formatearFecha = (fecha) => {
 };
 
 const CardNoticia = ({ titulo, imagen, fecha, bajada, slug, mostrarFecha = true, fallback = null, seccion = null }) => {
+  const seccionFinal = seccion === "proyectos-seleccionados" ? "proyectos-destacados" : seccion;
 
   return(
   <div className="flex flex-col w-72 bg-white rounded-xl shadow-lg overflow-hidden mt-4">
@@ -32,7 +33,7 @@ const CardNoticia = ({ titulo, imagen, fecha, bajada, slug, mostrarFecha = true,
       <div className="text-xs leading-relaxed mb-3 flex-grow">{AcortarNoticia(bajada)}</div>
       <div className="flex justify-between items-center mt-auto">
         {mostrarFecha ? <span className="text-xs">{formatearFecha(fecha)}</span> : <span></span>}
-        <a href={"/novedades/" + seccion + "/" + slug} className="text-azul-dictuc text-xs hover:text-blue-800 font-medium">Ver más</a>
+        <a href={"/novedades/" + seccionFinal + "/" + slug} className="text-azul-dictuc text-xs hover:text-blue-800 font-medium">Ver más</a>
       </div>
     </div>
   </div>

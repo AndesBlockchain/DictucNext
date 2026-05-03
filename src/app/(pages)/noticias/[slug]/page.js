@@ -8,6 +8,12 @@ import useNoticia from '@/hooks/use-noticia';
 import EditorModeProvider from "@/components/editor/EditorModeProvider";
 import EditorBadge from "@/components/editor/EditorBadge";
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const noticia = await useNoticia(slug);
+  return { title: noticia?.titulo || "Noticias" };
+}
+
 export default async function PaginasContenido({ params })
 {
     const { slug } = await params;

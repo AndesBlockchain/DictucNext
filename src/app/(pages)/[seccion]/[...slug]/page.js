@@ -12,6 +12,15 @@ import BloqueDebugBadge from "@/components/editor/BloqueDebugBadge";
 import EditorPanel from "@/components/editor/EditorPanel";
 
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const slugFinal = slug[slug.length - 1];
+  const pagina = await usePagina(slugFinal);
+  return {
+    title: pagina?.titulo || "Página"
+  };
+}
+
 export default async function PaginasContenido({params}) {
 
   const {seccion, slug} = await params;

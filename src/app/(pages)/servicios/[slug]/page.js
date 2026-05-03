@@ -14,6 +14,14 @@ import { limpiarTabla } from "@/helpers/limpiar-tabla";
 import EditorModeProvider from "@/components/editor/EditorModeProvider";
 import EditorBadge from "@/components/editor/EditorBadge";
 
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const servicio = await useServicio(slug);
+  return {
+    title: servicio?.nombre || "Servicios"
+  };
+}
+
 export default async function Servicio({ params }) {
 
   const { slug } = await params;

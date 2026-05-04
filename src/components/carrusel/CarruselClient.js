@@ -24,7 +24,7 @@ const CarruselClient = ({ carruselData }) => {
 
     return (
         <div className="relative z-0 isolate">
-            <BarraFondoGris className={!itemActual.frasesVisibles ? " invisible" : ""}>
+            <BarraFondoGris className={!itemActual.frasesVisibles ? " invisible" : " invisible md:visible"}>
                 {itemActual.fraseSuperior}
             </BarraFondoGris>
             <div id="texto-carrusel-2" className={"absolute font-semibold text-sm xl:text-xl 2xl:text-xl bottom-15 right-0 z-5 w-2/5 bg-gray-200 opacity-90 pl-8 text-opacity-90 px-6 py-3" + (!itemActual.frasesVisibles ? " invisible" : " md:visible invisible")}>

@@ -32,7 +32,7 @@ const MenuItem = ({ item }) => {
   return (
     <li>
       <details>
-        <summary className="hover:!bg-transparent hover:text-azul-dictuc transition-colors -mt-[10px]">
+        <summary className="hover:!bg-transparent hover:text-azul-dictuc transition-colors flex justify-center">
           {item.Nombre}
         </summary>
         <ul className="min-w-[280px] rounded-md z-[70] normal-case font-normal">
@@ -69,7 +69,7 @@ const NavbarMenu = ({ items }) => {
         </div>
         <ul
           tabIndex={0}
-          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[70] mt-3 w-64 p-4 shadow-lg uppercase font-semibold text-xs gap-1"
+          className="menu dropdown-content bg-base-100 rounded-box z-[70] mt-3 w-64 p-4 shadow-lg uppercase font-semibold text-xs gap-1 max-h-[80vh] overflow-y-auto"
         >
           <li>
             <a href="/" aria-label="Home" className={hoverClasses}>

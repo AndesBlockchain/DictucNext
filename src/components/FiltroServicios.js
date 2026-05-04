@@ -284,13 +284,7 @@ const FiltroServicios = ({
       )}
 
       <SeparadorHorizontal />
-      <Agente
-        titulo="Asistente IA"
-        franja={false}
-        backgroundColor="bg-white"
-        padding={1}
-        marginTop={4}
-      />
+
     </div>
   );
 }

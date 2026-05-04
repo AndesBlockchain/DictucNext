@@ -62,7 +62,7 @@ export default function FormularioDenuncia() {
 
   const { register, formState: { errors }, handleSubmit, watch, reset } = useForm({
     defaultValues: {
-      anonimo: 'no',
+      anonimo: 'false',
       relacion_dictuc: '',
       lugar_incidente: '',
       tipo_denuncia: [],
@@ -73,7 +73,7 @@ export default function FormularioDenuncia() {
       nombre: '',
       telefono: '',
       email: '',
-      infractor_identificado: 'no',
+      infractor_identificado: 'false',
       nombre_infractor: '',
       cargo_infractor: '',
       trabajado_involucrado_nombre: '',
@@ -130,7 +130,7 @@ export default function FormularioDenuncia() {
     try {
       // Preparar los datos en formato JSON
       const payload = {
-        anonimo: data.anonimo === 'si',
+        anonimo: data.anonimo === 'true',
         relacion_dictuc: data.relacion_dictuc === 'otro' ? data.relacion_dictuc_otro : data.relacion_dictuc,
         lugar_incidente: data.lugar_incidente === 'Otro' ? data.lugar_incidente_otro : data.lugar_incidente,
         tipo_denuncia: data.tipo_denuncia.map(t => t === 'otro' && data.tipo_denuncia_otro ? data.tipo_denuncia_otro : t),
@@ -140,9 +140,9 @@ export default function FormularioDenuncia() {
           anio: data.anio_incidente
         },
         descripcion: data.descripcion,
-        infractor_identificado: data.infractor_identificado === 'si',
-        nombre_infractor: data.infractor_identificado === 'si' ? data.nombre_infractor : '',
-        cargo_infractor: data.infractor_identificado === 'si' ? data.cargo_infractor : '',
+        infractor_identificado: data.infractor_identificado === 'true',
+        nombre_infractor: data.infractor_identificado === 'true' ? data.nombre_infractor : '',
+        cargo_infractor: data.infractor_identificado === 'true' ? data.cargo_infractor : '',
         trabajado_involucrado_nombre: data.trabajado_involucrado_nombre,
         trabajado_involucrado_cargo: data.trabajado_involucrado_cargo,
         autoridad_dictuc_conocedora_nombre: data.autoridad_dictuc_conocedora_nombre,
@@ -152,7 +152,7 @@ export default function FormularioDenuncia() {
       };
 
       // Si no es anónimo, agregar datos de contacto
-      if (data.anonimo === 'no') {
+      if (data.anonimo === 'false') {
         payload.nombre = data.nombre;
         payload.telefono = data.telefono;
         payload.email = data.email;
@@ -201,11 +201,11 @@ export default function FormularioDenuncia() {
           <legend className="fieldset-legend">¿Desea permanecer en el anonimato para esta denuncia?</legend>
           <div className="flex gap-4">
             <label className="flex items-center gap-2">
-              <input type="radio" value="no" {...register("anonimo", { required: true })} className="radio border-1 border-gray-400" />
+              <input type="radio" value="false" {...register("anonimo", { required: true })} className="radio border-1 border-gray-400" />
               <span>No</span>
             </label>
             <label className="flex items-center gap-2">
-              <input type="radio" value="si" {...register("anonimo", { required: true })} className="radio border-1 border-gray-400" />
+              <input type="radio" value="true" {...register("anonimo", { required: true })} className="radio border-1 border-gray-400" />
               <span>Sí</span>
             </label>
           </div>
@@ -215,13 +215,13 @@ export default function FormularioDenuncia() {
         </fieldset>
 
         {/* Campos de contacto - Solo si no es anónimo */}
-        {watchAnonimo === 'no' && (
+        {watchAnonimo === 'false' && (
           <>
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Nombre *</legend>
               <input
                 className="input border border-gray-300"
-                {...register("nombre", { required: watchAnonimo === 'no' })}
+                {...register("nombre", { required: watchAnonimo === 'false' })}
                 aria-invalid={errors.nombre ? "true" : "false"}
                 placeholder="Ingrese su nombre completo"
               />
@@ -235,7 +235,7 @@ export default function FormularioDenuncia() {
               <input
                 className="input validator border border-gray-300"
                 type="tel"
-                {...register("telefono", { required: watchAnonimo === 'no' })}
+                {...register("telefono", { required: watchAnonimo === 'false' })}
                 aria-invalid={errors.telefono ? "true" : "false"}
                 placeholder="Ej: +56912345678"
               />
@@ -250,7 +250,7 @@ export default function FormularioDenuncia() {
                 className="input validator border border-gray-300"
                 type="email"
                 {...register("email", {
-                  required: watchAnonimo === 'no',
+                  required: watchAnonimo === 'false',
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                     message: "Ingrese un email válido"
@@ -442,15 +442,15 @@ export default function FormularioDenuncia() {
           <legend className="fieldset-legend">¿Ha identificado al posible infractor?</legend>
           <div className="flex gap-4">
             <label className="flex items-center gap-2">
-              <input type="radio" value="no" {...register("infractor_identificado")} className="radio border-1 border-gray-400" />
+              <input type="radio" value="false" {...register("infractor_identificado")} className="radio border-1 border-gray-400" />
               <span>No</span>
             </label>
             <label className="flex items-center gap-2">
-              <input type="radio" value="si" {...register("infractor_identificado")} className="radio border-1 border-gray-400" />
+              <input type="radio" value="true" {...register("infractor_identificado")} className="radio border-1 border-gray-400" />
               <span>Sí</span>
             </label>
           </div>
-          {watchInfractor === 'si' && (
+          {watchInfractor === 'true' && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 mt-2">
               <div>
                 <label className="label text-sm">Nombre del infractor</label>
@@ -530,13 +530,14 @@ export default function FormularioDenuncia() {
 
         {/* Aceptación de condiciones */}
         <fieldset className="fieldset">
-          <div className="join">
+          <label className="flex items-start gap-2 cursor-pointer">
             <input
               type="checkbox"
+              className="mt-1 shrink-0"
               {...register("aceptacion_condiciones", { required: true })}
             />
-            &nbsp;Acepto las &nbsp;<a className="font-semibold" href="https://backend-dictuc.andesblockchain.com/uploads/Politica_de_Proteccion_de_Denunciantes_v1_8cc1be21bc.pdf" target="_blank"> condiciones del canal de denuncia </a>&nbsp; y autorizo el tratamiento de mis datos
-          </div>
+            <span>Acepto las <a className="font-semibold text-azul-dictuc" href="https://backend-dictuc.andesblockchain.com/uploads/Politica_de_Proteccion_de_Denunciantes_v1_8cc1be21bc.pdf" target="_blank" rel="noopener noreferrer">condiciones del canal de denuncia</a> y autorizo el tratamiento de mis datos</span>
+          </label>
           {errors.aceptacion_condiciones?.type === "required" && (
             <p className="text-red-500" role="alert">Debe aceptar las condiciones para enviar la denuncia</p>
           )}

@@ -38,10 +38,6 @@ const IndexPage = async () => {
       <BarraSuperior />
       <Carrusel />
       <SectoresPais botonHollow={true} />
-      <Agente
-        titulo="¿QUÉ <span class='text-azul-dictuc'>NECESITAS?</span>"
-        franja={true}
-      />
       <TiposDeServicios/>
       <div className="flex justify-center mt-6 mb-10">
         <a href="/servicios/todos-los-servicios" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver todos</a>

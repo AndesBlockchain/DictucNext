@@ -9,11 +9,13 @@ import useServicios from "@/hooks/use-servicios";
 export default async function HomeServicios({ params })
 {
   const {slug} = await params;
-  const sector = await useSectorBySlug(slug);
-  const tiposDeServicio = await useTipoDeServicio();
-  const sectoresPais = await useSectoresPais();
-  const servicios = await useServicios();
-  const unidades = await useUnidades();
+  const [sector, tiposDeServicio, sectoresPais, servicios, unidades] = await Promise.all([
+    useSectorBySlug(slug),
+    useTipoDeServicio(),
+    useSectoresPais(),
+    useServicios(),
+    useUnidades()
+  ]);
 
   return (
     <>

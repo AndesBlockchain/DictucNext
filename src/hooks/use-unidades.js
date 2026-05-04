@@ -2,7 +2,7 @@ import { fetchFromStrapi, CACHE_PRESETS } from '@/lib/strapi-fetcher';
 
 const useUnidades = async () => {
   const result = await fetchFromStrapi({
-    endpoint: '/api/unidades?populate=all&sort=nombre&pagination[limit]=200',
+    endpoint: '/api/unidades?fields[0]=nombre&fields[1]=slug&sort=nombre&pagination[limit]=200',
     fallback: { data: [] },
     cache: CACHE_PRESETS.FREQUENT,
     errorContext: 'unidades'

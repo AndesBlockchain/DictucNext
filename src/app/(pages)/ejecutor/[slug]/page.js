@@ -8,10 +8,12 @@ const BannerServicios = "/images/banner_servicios.jpg";
 
 export default async function EjecutorServicios({ params }) {
   const { slug } = await params;
-  const tiposDeServicio = await useTipoDeServicio();
-  const sectoresPais = await useSectoresPais();
-  const servicios = await useServicios();
-  const unidades = await useUnidades();
+  const [tiposDeServicio, sectoresPais, servicios, unidades] = await Promise.all([
+    useTipoDeServicio(),
+    useSectoresPais(),
+    useServicios(),
+    useUnidades()
+  ]);
 
   const unidad = unidades.data?.find(u => u.slug === slug);
 

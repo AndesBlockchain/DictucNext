@@ -9,10 +9,12 @@ const BannerServicios = "/images/banner_servicios.jpg";
 export default async function TodosLosServicios({ searchParams })
 {
   const { ejecutor } = await searchParams;
-  const tiposDeServicio = await useTipoDeServicio();
-  const sectoresPais = await useSectoresPais();
-  const servicios = await useServicios();
-  const unidades = await useUnidades();
+  const [tiposDeServicio, sectoresPais, servicios, unidades] = await Promise.all([
+    useTipoDeServicio(),
+    useSectoresPais(),
+    useServicios(),
+    useUnidades()
+  ]);
 
   // Buscar el nombre de la unidad que corresponde al slug del param GET
   const ejecutorInicial = ejecutor

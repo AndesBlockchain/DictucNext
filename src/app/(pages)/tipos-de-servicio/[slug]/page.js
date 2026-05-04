@@ -15,10 +15,12 @@ export default async function HomeServicios({ params })
     return <div className="text-center py-16 text-gray-500">Tipo de servicio no encontrado</div>;
   }
 
-  const tiposDeServicio = await useTipoDeServicio();
-  const sectoresPais = await useSectoresPais();
-  const servicios = await useServicios();
-  const unidades = await useUnidades();
+  const [tiposDeServicio, sectoresPais, servicios, unidades] = await Promise.all([
+    useTipoDeServicio(),
+    useSectoresPais(),
+    useServicios(),
+    useUnidades()
+  ]);
 
   return (
     <PaginaInterior

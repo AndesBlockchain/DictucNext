@@ -19,7 +19,7 @@ env:
   NEXT_PUBLIC_STRAPI_ADMIN_URL: https://backend-dictuc.andesblockchain.com/admin
   SENTRY_AUTH_TOKEN: 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
   REVALIDATION_SECRET: UckIDx4UxmETzPxFrDJCwCipILfgicYYYvS535jcEBUDDKb8fyrQpGqIOl2vuCUV
-
+  SITE_URL: https://ww2.dictuc.cl
 jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')

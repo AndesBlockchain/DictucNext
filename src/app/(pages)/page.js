@@ -58,4 +58,7 @@ export default IndexPage
 
 export const metadata = {
   title: 'Sitio Web Dictuc',
+  other: {
+    'algolia-site-verification': '6E9033B7896E8107',
+  },
 }

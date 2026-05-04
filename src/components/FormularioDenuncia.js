@@ -73,11 +73,21 @@ export default function FormularioDenuncia() {
       nombre: '',
       telefono: '',
       email: '',
+      infractor_identificado: 'no',
+      nombre_infractor: '',
+      cargo_infractor: '',
+      trabajado_involucrado_nombre: '',
+      trabajado_involucrado_cargo: '',
+      autoridad_dictuc_conocedora_nombre: '',
+      autoridad_dictuc_conocedora_cargo: '',
+      monto_involucrado: '',
+      monto_involucrado_moneda: 'CLP',
     }
   })
 
   // Observar el valor de anonimo para mostrar/ocultar campos
   const watchAnonimo = watch("anonimo");
+  const watchInfractor = watch("infractor_identificado");
   const watchRelacion = watch("relacion_dictuc");
   const watchLugar = watch("lugar_incidente");
   const watchComoSeEntero = watch("como_se_entero");
@@ -129,31 +139,39 @@ export default function FormularioDenuncia() {
           mes: data.mes_incidente,
           anio: data.anio_incidente
         },
-        descripcion: data.descripcion
+        descripcion: data.descripcion,
+        infractor_identificado: data.infractor_identificado === 'si',
+        nombre_infractor: data.infractor_identificado === 'si' ? data.nombre_infractor : '',
+        cargo_infractor: data.infractor_identificado === 'si' ? data.cargo_infractor : '',
+        trabajado_involucrado_nombre: data.trabajado_involucrado_nombre,
+        trabajado_involucrado_cargo: data.trabajado_involucrado_cargo,
+        autoridad_dictuc_conocedora_nombre: data.autoridad_dictuc_conocedora_nombre,
+        autoridad_dictuc_conocedora_cargo: data.autoridad_dictuc_conocedora_cargo,
+        monto_involucrado: data.monto_involucrado,
+        monto_involucrado_moneda: data.monto_involucrado_moneda,
       };
 
       // Si no es anónimo, agregar datos de contacto
       if (data.anonimo === 'no') {
-        payload.datos_contacto = {
-          nombre: data.nombre,
-          telefono: data.telefono,
-          email: data.email
-        };
+        payload.nombre = data.nombre;
+        payload.telefono = data.telefono;
+        payload.email = data.email;
       }
 
      
-      // TODO: Aquí se enviará a la URL que indique el usuario
-      const response = await fetch(URL_A_CONFIGURAR, {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify(payload)
-       });
+      const response = await fetch('/api/denuncia', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
 
-      showToast('Formulario preparado correctamente', 'success');
-      console.log(payload);
-      // Resetear el formulario después del envío exitoso
+      if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status}`);
+      }
+
+      showToast('Denuncia enviada correctamente', 'success');
       reset();
 
     } catch (error) {
@@ -417,6 +435,83 @@ export default function FormularioDenuncia() {
             placeholder="Describa la situación que desea denunciar"
             {...register("descripcion")}
           ></textarea>
+        </fieldset>
+
+        {/* Infractor */}
+        <fieldset className="fieldset">
+          <legend className="fieldset-legend">¿Ha identificado al posible infractor?</legend>
+          <div className="flex gap-4">
+            <label className="flex items-center gap-2">
+              <input type="radio" value="no" {...register("infractor_identificado")} className="radio border-1 border-gray-400" />
+              <span>No</span>
+            </label>
+            <label className="flex items-center gap-2">
+              <input type="radio" value="si" {...register("infractor_identificado")} className="radio border-1 border-gray-400" />
+              <span>Sí</span>
+            </label>
+          </div>
+          {watchInfractor === 'si' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 mt-2">
+              <div>
+                <label className="label text-sm">Nombre del infractor</label>
+                <input className="input border border-gray-300 w-full" {...register("nombre_infractor")} placeholder="Nombre completo" />
+              </div>
+              <div>
+                <label className="label text-sm">Cargo del infractor</label>
+                <input className="input border border-gray-300 w-full" {...register("cargo_infractor")} placeholder="Cargo" />
+              </div>
+            </div>
+          )}
+        </fieldset>
+
+        {/* Trabajador involucrado */}
+        <fieldset className="fieldset">
+          <legend className="fieldset-legend">Trabajador involucrado (opcional)</legend>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+            <div>
+              <label className="label text-sm">Nombre</label>
+              <input className="input border border-gray-300 w-full" {...register("trabajado_involucrado_nombre")} placeholder="Nombre completo" />
+            </div>
+            <div>
+              <label className="label text-sm">Cargo</label>
+              <input className="input border border-gray-300 w-full" {...register("trabajado_involucrado_cargo")} placeholder="Cargo" />
+            </div>
+          </div>
+        </fieldset>
+
+        {/* Autoridad de Dictuc conocedora */}
+        <fieldset className="fieldset">
+          <legend className="fieldset-legend">Autoridad de Dictuc conocedora del hecho (opcional)</legend>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+            <div>
+              <label className="label text-sm">Nombre</label>
+              <input className="input border border-gray-300 w-full" {...register("autoridad_dictuc_conocedora_nombre")} placeholder="Nombre completo" />
+            </div>
+            <div>
+              <label className="label text-sm">Cargo</label>
+              <input className="input border border-gray-300 w-full" {...register("autoridad_dictuc_conocedora_cargo")} placeholder="Cargo" />
+            </div>
+          </div>
+        </fieldset>
+
+        {/* Monto involucrado */}
+        <fieldset className="fieldset">
+          <legend className="fieldset-legend">Monto involucrado (opcional)</legend>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+            <div>
+              <label className="label text-sm">Monto</label>
+              <input type="text" className="input border border-gray-300 w-full" {...register("monto_involucrado")} placeholder="Ej: 10000000" />
+            </div>
+            <div>
+              <label className="label text-sm">Moneda</label>
+              <select className="select border border-gray-300 w-full" {...register("monto_involucrado_moneda")}>
+                <option value="CLP">CLP (Peso chileno)</option>
+                <option value="USD">USD (Dólar)</option>
+                <option value="EUR">EUR (Euro)</option>
+                <option value="UF">UF</option>
+              </select>
+            </div>
+          </div>
         </fieldset>
 
         {/* Nota informativa */}

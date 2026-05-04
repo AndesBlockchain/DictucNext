@@ -143,15 +143,15 @@ export default function FormularioDenuncia() {
 
      
       // TODO: Aquí se enviará a la URL que indique el usuario
-      // const response = await fetch(URL_A_CONFIGURAR, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(payload)
-      // });
+      const response = await fetch(URL_A_CONFIGURAR, {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(payload)
+       });
 
-      showToast('Formulario preparado correctamente (pendiente configurar URL de envío)', 'success');
+      showToast('Formulario preparado correctamente', 'success');
       console.log(payload);
       // Resetear el formulario después del envío exitoso
       reset();

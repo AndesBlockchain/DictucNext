@@ -10,7 +10,7 @@ export function oembedToIframe(html) {
     (match, url) => {
       const youtubeId = extractYouTubeId(url);
       if (youtubeId) {
-        return `<div class="flex justify-center my-4"><iframe width="560" height="315" src="https://www.youtube.com/embed/${youtubeId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="max-width:100%; aspect-ratio:16/9;"></iframe></div>`;
+        return `<div class="flex justify-center my-4"><div class="relative w-full" style="max-width:560px; aspect-ratio:16/9;"><iframe src="https://www.youtube.com/embed/${youtubeId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe></div></div>`;
       }
       return match;
     }

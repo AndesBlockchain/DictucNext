@@ -60,6 +60,14 @@ b, strong {
   color: #53565A;
 }
 
+/* Estilos globales para iframes responsivos */
+.prose iframe[src*="youtube"],
+iframe[src*="youtube"] {
+  max-width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16/9;
+}
+
 /* Estilos globales para links dentro de listas */
 li a:hover {
   color: #307fe2;

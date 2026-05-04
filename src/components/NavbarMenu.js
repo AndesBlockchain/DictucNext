@@ -32,7 +32,7 @@ const MenuItem = ({ item }) => {
   return (
     <li>
       <details>
-        <summary className="hover:!bg-transparent hover:text-azul-dictuc transition-colors flex justify-center">
+        <summary className="hover:!bg-transparent hover:text-azul-dictuc transition-colors lg:-mt-[10px]">
           {item.Nombre}
         </summary>
         <ul className="min-w-[280px] rounded-md z-[70] normal-case font-normal">
@@ -69,7 +69,7 @@ const NavbarMenu = ({ items }) => {
         </div>
         <ul
           tabIndex={0}
-          className="menu dropdown-content bg-base-100 rounded-box z-[70] mt-3 w-64 p-4 shadow-lg uppercase font-semibold text-xs gap-1 max-h-[80vh] overflow-y-auto"
+          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[70] mt-3 w-[336px] p-4 shadow-lg uppercase font-semibold text-xs gap-1"
         >
           <li>
             <a href="/" aria-label="Home" className={hoverClasses}>
@@ -87,8 +87,8 @@ const NavbarMenu = ({ items }) => {
       </div>
 
       {/* Desktop: horizontal menu */}
-      <ul className="menu menu-horizontal hidden lg:flex flex-nowrap items-center gap-0 uppercase font-semibold text-xs xl:text-sm 2xl:text-md px-1 whitespace-nowrap">
-        <li>
+      <ul className="menu menu-horizontal hidden lg:flex flex-nowrap items-center gap-0 uppercase font-semibold text-xs xl:text-sm px-1 whitespace-nowrap">
+        <li className="hidden xl:block">
           <a href="/" aria-label="Home" className={hoverClasses}>
             <HomeIcon />
           </a>

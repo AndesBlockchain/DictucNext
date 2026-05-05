@@ -31,7 +31,7 @@ const BloquePersonas = ({datosBloque}) => {
           );
 
           return (
-                <div className="flex-none flex-col w-72 rounded-lg shadow-lg bg-gray-100 pt-6 p-4" key={persona.id}>
+                <div className="flex-none flex-col w-72 rounded-lg shadow-lg bg-gray-100 ml-4 mb-4 mr-4 pt-6 p-4" key={persona.id}>
                   <div className="w-24 bg-white mx-auto rounded-sm">
                     {imagenComponent}
                   </div>

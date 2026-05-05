@@ -48,7 +48,7 @@ const StrapiImage = ({
   fill = false,
   priority = false,
   maxWidth = null,
-  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  sizes = "100vw"
 }) => {
   const rawImgData = Array.isArray(imagen) ? imagen[0] : imagen;
   const imgData = elegirFormato(rawImgData, maxWidth);
@@ -63,6 +63,7 @@ const StrapiImage = ({
           src={imageUrl}
           alt={alt}
           fill
+          quality={95}
           className={`${className} object-cover`}
           sizes={sizes}
           priority={priority}
@@ -75,6 +76,7 @@ const StrapiImage = ({
           alt={alt}
           width={imgData.width}
           height={imgData.height}
+          quality={95}
           className={className}
           priority={priority}
         />
@@ -86,6 +88,7 @@ const StrapiImage = ({
           alt={alt}
           width={800}
           height={600}
+          quality={95}
           className={className}
           priority={priority}
         />

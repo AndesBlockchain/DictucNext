@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server"
 
+export const maxDuration = 120;
+
 const STRAPI_API_URL = process.env.STRAPI_API_URL || "http://127.0.0.1:1337"
 
 export async function POST(request) {

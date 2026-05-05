@@ -1,16 +1,18 @@
 import * as React from "react"
+import dynamic from "next/dynamic"
 
 import Carrusel from "@/components/carrusel/Carrusel"
 import SectoresPais from "@/components/SectoresPais"
-import Agente from "@/components/Agente"
 import TiposDeServicios from "@/components/TiposDeServicios"
 import Noticias from "@/components/Noticias"
 import useUltimasNoticias from "@/hooks/use-ultimas-noticias"
 import useModals from "@/hooks/use-modals"
 import BarraSuperior from "@/components/BarraSuperior"
-import ModalContainer from "@/components/ModalContainer"
 import FooterSuperior from "@/components/FooterSuperior"
 import Footer from "@/components/Footer"
+
+const Agente = dynamic(() => import("@/components/Agente"))
+const ModalContainer = dynamic(() => import("@/components/ModalContainer"))
 
 const IndexPage = async () => {
 
@@ -38,6 +40,10 @@ const IndexPage = async () => {
       <BarraSuperior />
       <Carrusel />
       <SectoresPais botonHollow={true} />
+      <Agente
+        titulo="¿QUÉ <span class='text-azul-dictuc'>NECESITAS?</span>"
+        franja={true}
+      />
       <TiposDeServicios/>
       <div className="flex justify-center mt-6 mb-10">
         <a href="/servicios/todos-los-servicios" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver todos</a>

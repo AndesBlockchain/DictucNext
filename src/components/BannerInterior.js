@@ -16,6 +16,7 @@ const BannerInterior = ({ banner, gatsbyImageData, fallback, alt = "Banner", tit
           fallback={fallback}
           alt={alt}
           maxWidth={1000}
+          priority={true}
           className="w-full h-auto object-contain"
         />
       </div>

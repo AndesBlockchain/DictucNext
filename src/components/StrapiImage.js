@@ -80,13 +80,31 @@ const StrapiImage = ({
         />
       );
     } else {
-      content = <img src={imageUrl} alt={alt} className={className} />;
+      content = (
+        <Image
+          src={imageUrl}
+          alt={alt}
+          width={800}
+          height={600}
+          className={className}
+          priority={priority}
+        />
+      );
     }
   } else if (fallback) {
     const fallbackSrc = (typeof fallback === 'object' && fallback.src) ? fallback : fallback;
 
     if (typeof fallbackSrc === 'string') {
-      content = <img src={fallbackSrc} alt={alt} className={className} />;
+      content = (
+        <Image
+          src={fallbackSrc}
+          alt={alt}
+          width={800}
+          height={600}
+          className={className}
+          priority={priority}
+        />
+      );
     } else {
       content = <Image src={fallbackSrc} alt={alt} className={className} priority={priority} />;
     }

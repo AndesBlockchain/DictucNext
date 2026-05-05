@@ -1,25 +1,10 @@
-import { fetchFromStrapi, buildStrapiQuery, CACHE_PRESETS } from '@/lib/strapi-fetcher';
+import { fetchFromStrapi, CACHE_PRESETS } from '@/lib/strapi-fetcher';
 
-/**
- * Hook para obtener noticias agrupadas por año, filtradas por etiqueta (documentId)
- */
 const useNoticiasPorAgnoEtiqueta = async (etiquetaDocumentId) => {
   if (!etiquetaDocumentId) return {};
 
-  const query = buildStrapiQuery({
-    custom: { status: 'published' },
-    sort: 'fecha:desc',
-    populate: ['foto', 'galeria', 'etiqueta_noticias'],
-    filters: {
-      'etiqueta_noticias][documentId][$eq': etiquetaDocumentId
-    },
-    pagination: {
-      limit: 1000
-    }
-  });
-
   const result = await fetchFromStrapi({
-    endpoint: `/api/noticias${query}`,
+    endpoint: `/api/noticias?status=published&sort=fecha:desc&pagination[limit]=1000&fields[0]=titulo&fields[1]=slug&fields[2]=fecha&filters[etiqueta_noticias][documentId][$eq]=${etiquetaDocumentId}`,
     cache: CACHE_PRESETS.FREQUENT,
     fallback: { data: [] },
     errorContext: `noticias por etiqueta ${etiquetaDocumentId}`,

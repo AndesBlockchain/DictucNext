@@ -1,15 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: {
@@ -26,9 +15,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://backend-dictuc.andesblockchain.com" />
         <link rel="dns-prefetch" href="https://backend-dictuc.andesblockchain.com" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased w-full`}
-      >
+      <body className="antialiased w-full">
         {children}
       </body>
     </html>

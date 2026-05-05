@@ -1,7 +1,8 @@
 "use client"
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, lazy, Suspense } from "react"
 import { createPortal } from "react-dom"
-import Markdown from "react-markdown"
+
+const Markdown = lazy(() => import("react-markdown"))
 
 const ModalAgente = ({ onClose, pregunta }) => {
   const [puntos, setPuntos] = useState("")
@@ -85,6 +86,7 @@ const ModalAgente = ({ onClose, pregunta }) => {
               </div>
             ) : (
               <div className="prose prose-xs max-w-none text-xs [&_a]:text-azul-dictuc [&_a]:underline [&_a]:cursor-pointer [&_a]:pointer-events-auto [&_a:hover]:text-blue-800 [&_h3]:text-sm [&_h2]:text-base [&_ul]:mt-1 [&_ul]:mb-1 [&_ol]:mt-1 [&_ol]:mb-1 [&_li]:mb-0 [&_li_p]:mb-0 [&_li_p]:mt-0 [&_p]:mb-1">
+                <Suspense fallback={<div className="text-gray-400 text-xs">Cargando...</div>}>
                 <Markdown
                   components={{
                     a: ({ href, children }) => {
@@ -106,6 +108,7 @@ const ModalAgente = ({ onClose, pregunta }) => {
                 >
                   {respuesta}
                 </Markdown>
+                </Suspense>
               </div>
             )}
           </div>

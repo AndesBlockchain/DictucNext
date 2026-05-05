@@ -1,24 +1,9 @@
-import { fetchFromStrapi, buildStrapiQuery, CACHE_PRESETS } from '@/lib/strapi-fetcher';
+import { fetchFromStrapi, CACHE_PRESETS } from '@/lib/strapi-fetcher';
 
-/**
- * Hook para obtener las últimas noticias publicadas
- * Versión refactorizada usando la utilidad centralizada
- */
 const useUltimasNoticias = async () => {
-  // Construir query con el helper
-  const query = buildStrapiQuery({
-    custom: { status: 'published' },
-    sort: 'fecha:desc',
-    populate: "*",
-    pagination: {
-      page: 1,
-      pageSize: 6
-    }
-  });
-
   return fetchFromStrapi({
-    endpoint: `/api/noticias${query}`,
-    cache: CACHE_PRESETS.FREQUENT, // Revalidar cada 5 minutos
+    endpoint: '/api/noticias?status=published&sort=fecha:desc&pagination[page]=1&pagination[pageSize]=6&fields[0]=titulo&fields[1]=slug&fields[2]=fecha&fields[3]=cuerpo&fields[4]=url_foto&populate[foto][fields][0]=url&populate[foto][fields][1]=formats&populate[foto][fields][2]=width&populate[foto][fields][3]=height&populate[foto][fields][4]=alternativeText',
+    cache: CACHE_PRESETS.FREQUENT,
     fallback: { data: [] },
     errorContext: 'ultimas noticias'
   });

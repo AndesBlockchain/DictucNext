@@ -17,11 +17,11 @@ const getSearchClient = () => {
 }
 
 const INDICES = [
+  
+  { name: "sitio_web_dictuc_pages", label: "Sitio Web", urlPrefix: "/" },
   { name: "development_api::servicio.servicio", label: "Servicios", urlPrefix: "/servicios/" },
   { name: "development_api::noticia.noticia", label: "Noticias", urlPrefix: "/noticias/" },
-  { name: "development_api::pagina.pagina", label: "Páginas", urlPrefix: "/" },
-  { name: "development_api::documento.documento", label: "Documentos", urlPrefix: "/documentos/" },
-  { name: "frontend_dictuc_andesblockchain_com_6dxbncdc9x_pages", label: "Sitio", urlPrefix: "" },
+  { name: "development_api::persona.persona", label:"Personas", urlPrefix:"/" }
 ]
 
 const getHitTitle = (hit) =>

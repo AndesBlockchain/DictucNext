@@ -41,8 +41,8 @@ export default async function Servicio({ params }) {
       ]}
     >
       <EditorBadge contentType="api::servicio.servicio" documentId={servicio.documentId} label="servicio" />
-      <div className="text-xl font-bold mt-2 mb-2 ml-10 text-left"><h2>{servicio.nombre}</h2></div>
-      <div className="ml-10 mb-4 text-sm"><span className="text-azul-dictuc font-semibold">Ejecutor:</span> {servicio.unidad.nombre} <span className="text-azul-dictuc font-semibold"> &nbsp;&nbsp;|&nbsp;&nbsp; Tipo de Servicio:</span> {servicio.tipo_de_servicio.nombre} <span className="text-azul-dictuc font-semibold"> &nbsp;&nbsp;|&nbsp;&nbsp; Sectores:</span> {servicio.sectores_pais.map(sector => sector.nombre).join(", ")}</div>
+      <div className="text-xl font-bold mt-2 mb-2 ml-10 text-left" data-algolia="servicio-detalle"><h2 data-algolia-name>{servicio.nombre}</h2></div>
+      <div className="ml-10 mb-4 text-sm"><span className="text-azul-dictuc font-semibold">Ejecutor:</span> <span data-algolia-executor>{servicio.unidad.nombre}</span> <span className="text-azul-dictuc font-semibold"> &nbsp;&nbsp;|&nbsp;&nbsp; Tipo de Servicio:</span> <span data-algolia-type>{servicio.tipo_de_servicio.nombre}</span> <span className="text-azul-dictuc font-semibold"> &nbsp;&nbsp;|&nbsp;&nbsp; Sectores:</span> <span data-algolia-sectors>{servicio.sectores_pais.map(sector => sector.nombre).join(", ")}</span></div>
       <div className="bg-gray-100">
       <div className="container mx-auto max-w-8xl mt-6">
         <div id="tarjetas" className="flex flex-wrap p-8 justify-center [&_h3]:uppercase [&_h3]:!text-azul-dictuc [&_h3]:mt-2">
@@ -86,7 +86,7 @@ export default async function Servicio({ params }) {
       <div className="text-lg text-center mt-2 uppercase font-semibold">
         <span className="text-azul-dictuc">Descripción</span> del Servicio
       </div>
-      <div className="mt-6 mb-12 text-md" dangerouslySetInnerHTML={{ __html: servicio.contenido }} />
+      <div className="mt-6 mb-12 text-md" data-algolia-description dangerouslySetInnerHTML={{ __html: servicio.contenido }} />
       </div>
 
       <StrapiImage

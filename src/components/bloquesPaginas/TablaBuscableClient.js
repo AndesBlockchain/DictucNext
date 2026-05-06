@@ -45,14 +45,15 @@ const TablaBuscableClient = ({ datos, filasPorPagina = 8 }) => {
               <tr
                 key={item.documentId || item.id || index}
                 className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                data-algolia="tabla-item"
               >
                 <td className="px-4 py-3 align-middle text-left border-b border-gray-200">
-                  <div className="font-semibold text-sm text-azul-dictuc">{item.Titulo}</div>
+                  <div className="font-semibold text-sm text-azul-dictuc" data-algolia-title>{item.Titulo}</div>
                   {item.Bajada && (
-                    <div className="text-xs text-gray-500 mt-1">{item.Bajada}</div>
+                    <div className="text-xs text-gray-500 mt-1" data-algolia-subtitle>{item.Bajada}</div>
                   )}
                 </td>
-                <td className="px-4 py-3 align-top border-b border-gray-200 text-xs prose prose-xs max-w-none" dangerouslySetInnerHTML={{ __html: item.Contenido || "" }} />
+                <td className="px-4 py-3 align-top border-b border-gray-200 text-xs prose prose-xs max-w-none" data-algolia-content dangerouslySetInnerHTML={{ __html: item.Contenido || "" }} />
               </tr>
             ))
           ) : (
@@ -97,6 +98,17 @@ const TablaBuscableClient = ({ datos, filasPorPagina = 8 }) => {
           </button>
         </div>
       )}
+
+      {/* Datos completos ocultos para indexación Algolia */}
+      <div className="hidden" aria-hidden="true">
+        {datos.map((item, index) => (
+          <div key={item.documentId || item.id || index} data-algolia="tabla-item">
+            <span data-algolia-title>{item.Titulo}</span>
+            <span data-algolia-subtitle>{item.Bajada}</span>
+            <span data-algolia-content dangerouslySetInnerHTML={{ __html: item.Contenido || "" }} />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

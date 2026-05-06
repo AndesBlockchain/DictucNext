@@ -54,17 +54,18 @@ const TablaPersonasClient = ({ personas, cantidadFilas }) => {
               <tr
                 key={persona.documentId || persona.id || index}
                 className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                data-algolia="persona-tabla"
               >
-                <td className="px-4 py-3 text-sm text-left border-b border-gray-200">
+                <td className="px-4 py-3 text-sm text-left border-b border-gray-200" data-algolia-name>
                   {persona.Nombre}
                 </td>
-                <td className="px-4 py-3 text-sm text-left border-b border-gray-200">
+                <td className="px-4 py-3 text-sm text-left border-b border-gray-200" data-algolia-department>
                   {persona.personas_departamentos?.length > 0
                     ? persona.personas_departamentos.map(d => d.Departamente).join(", ")
                     : <span className="text-gray-400">—</span>
                   }
                 </td>
-                <td className="px-4 py-3 text-sm text-left border-b border-gray-200">
+                <td className="px-4 py-3 text-sm text-left border-b border-gray-200" data-algolia-specialty>
                   {persona.especialidad || <span className="text-gray-400">—</span>}
                 </td>
                 <td className="px-4 py-3 text-sm border-b border-gray-200 text-center">
@@ -125,6 +126,17 @@ const TablaPersonasClient = ({ personas, cantidadFilas }) => {
           </button>
         </div>
       )}
+
+      {/* Datos completos ocultos para indexación Algolia */}
+      <div className="hidden" aria-hidden="true">
+        {personas.map((persona) => (
+          <div key={persona.documentId || persona.id} data-algolia="persona-tabla">
+            <span data-algolia-name>{persona.Nombre}</span>
+            <span data-algolia-department>{persona.personas_departamentos?.map(d => d.Departamente).join(", ")}</span>
+            <span data-algolia-specialty>{persona.especialidad}</span>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

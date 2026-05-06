@@ -31,17 +31,17 @@ const BloquePersonas = ({datosBloque}) => {
           );
 
           return (
-                <div className="flex-none flex-col w-72 rounded-lg shadow-lg bg-gray-100 ml-4 mb-4 mr-4 pt-6 p-4" key={persona.id}>
+                <div className="flex-none flex-col w-72 rounded-lg shadow-lg bg-gray-100 ml-4 mb-4 mr-4 pt-6 p-4" key={persona.id} data-algolia="persona">
                   <div className="w-24 bg-white mx-auto rounded-sm">
                     {imagenComponent}
                   </div>
-                  <div className="mt-3 text-azul-dictuc text-sm font-bold text-center">
+                  <div className="mt-3 text-azul-dictuc text-sm font-bold text-center" data-algolia-name>
                     {persona.Nombre}
                   </div>
-                  <div className="mt-2 text-center text-sm font-semibold">
+                  <div className="mt-2 text-center text-sm font-semibold" data-algolia-role>
                     {persona.Cargo}
                   </div>
-                  <div className="mt-2 text-center text-sm" dangerouslySetInnerHTML={{__html: persona.Descripcion}} />
+                  <div className="mt-2 text-center text-sm" data-algolia-description dangerouslySetInnerHTML={{__html: persona.Descripcion}} />
                   {persona.LinkedIn && (
                   <div className="mt-2 mb-2">
                     <a href={persona.LinkedIn} target="_blank" rel="noopener noreferrer"><img src={LogoLinkedIn} alt="LinkedIn" className="w-5 h-5 m-auto" /></a>

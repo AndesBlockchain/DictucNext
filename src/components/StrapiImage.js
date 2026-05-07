@@ -95,7 +95,7 @@ const StrapiImage = ({
       );
     }
   } else if (fallback) {
-    const fallbackSrc = (typeof fallback === 'object' && fallback.src) ? fallback : fallback;
+    const fallbackSrc = (typeof fallback === 'object' && fallback.src) ? fallback.src : fallback;
 
     if (typeof fallbackSrc === 'string') {
       content = (
@@ -104,12 +104,13 @@ const StrapiImage = ({
           alt={alt}
           width={800}
           height={600}
+          quality={95}
           className={className}
           priority={priority}
         />
       );
     } else {
-      content = <Image src={fallbackSrc} alt={alt} className={className} priority={priority} />;
+      content = <Image src={fallbackSrc} alt={alt} quality={95} className={className} priority={priority} />;
     }
   }
 

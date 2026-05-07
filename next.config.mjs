@@ -12,6 +12,7 @@ const nextConfig = {
     ];
   },
   images: {
+    qualities: [75, 90, 95],
     dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {

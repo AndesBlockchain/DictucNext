@@ -9,6 +9,7 @@ const iconoUtilidad = "/images/Utilidad.png";
 const iconoExperiencia = "/images/Experiencia.png";
 const iconoPotenciales = "/images/PotencialesClientes.png";
 
+import { redirect } from "next/navigation";
 import useServicio from "@/hooks/use-servicio";
 import { limpiarTabla } from "@/helpers/limpiar-tabla";
 import EditorModeProvider from "@/components/editor/EditorModeProvider";
@@ -26,6 +27,7 @@ export default async function Servicio({ params }) {
 
   const { slug } = await params;
   const servicio = await useServicio(slug);
+  if (!servicio) redirect("/servicios/todos-los-servicios");
   const strapiApiUrl = process.env.STRAPI_API_URL;
   return (
     <EditorModeProvider documentId={servicio.documentId}>

@@ -63,7 +63,7 @@ const StrapiImage = ({
           src={imageUrl}
           alt={alt}
           fill
-          quality={95}
+          quality={100}
           className={`${className} object-cover`}
           sizes={sizes}
           priority={priority}
@@ -76,7 +76,7 @@ const StrapiImage = ({
           alt={alt}
           width={imgData.width}
           height={imgData.height}
-          quality={95}
+          quality={100}
           className={className}
           priority={priority}
         />
@@ -88,7 +88,7 @@ const StrapiImage = ({
           alt={alt}
           width={800}
           height={600}
-          quality={95}
+          quality={100}
           className={className}
           priority={priority}
         />
@@ -104,13 +104,13 @@ const StrapiImage = ({
           alt={alt}
           width={800}
           height={600}
-          quality={95}
+          quality={100}
           className={className}
           priority={priority}
         />
       );
     } else {
-      content = <Image src={fallbackSrc} alt={alt} quality={95} className={className} priority={priority} />;
+      content = <Image src={fallbackSrc} alt={alt} quality={100} className={className} priority={priority} />;
     }
   }
 

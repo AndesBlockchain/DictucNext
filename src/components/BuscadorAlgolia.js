@@ -22,7 +22,6 @@ const INDICES = [
   { name: "development_api::etiqueta-persona.etiqueta-persona", label: "Personas", urlPrefix: "/" },
   { name: "development_api::servicio.servicio", label: "Servicios", urlPrefix: "/servicios/" },
   { name: "development_api::noticia.noticia", label: "Noticias", urlPrefix: "/noticias/" },
-  { name: "development_api::persona.persona", label:"Personas", urlPrefix:"/" }
 ]
 
 const getHitTitle = (hit) =>

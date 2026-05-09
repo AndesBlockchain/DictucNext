@@ -60,6 +60,7 @@ b, strong {
   color: #53565A;
 }
 
+
 /* Estilos globales para iframes responsivos */
 .prose iframe[src*="youtube"],
 iframe[src*="youtube"] {

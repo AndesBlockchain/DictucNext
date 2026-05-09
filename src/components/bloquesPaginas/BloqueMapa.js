@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Bloque from "./Bloque";
+import { invertirSpanStrong } from "@/helpers/invertir-span-strong";
 
 const BloqueMapa = ({ datosBloque }) => {
   const { Lugares, Texto } = datosBloque;
@@ -11,7 +12,7 @@ const BloqueMapa = ({ datosBloque }) => {
       {Texto && (
         <div
           className="container max-w-6xl mx-auto mt-4 text-center text-sm prose prose-sm max-w-none"
-          dangerouslySetInnerHTML={{ __html: Texto }}
+          dangerouslySetInnerHTML={{ __html: invertirSpanStrong(Texto) }}
         />
       )}
 

@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useMemo } from "react"
+import { invertirSpanStrong } from "@/helpers/invertir-span-strong"
 
 const TablaBuscableClient = ({ datos, filasPorPagina = 8 }) => {
   const [busqueda, setBusqueda] = useState("")
@@ -53,7 +54,7 @@ const TablaBuscableClient = ({ datos, filasPorPagina = 8 }) => {
                     <div className="text-xs text-gray-500 mt-1" data-algolia-subtitle>{item.Bajada}</div>
                   )}
                 </td>
-                <td className="px-4 py-3 align-top border-b border-gray-200 text-xs prose prose-xs max-w-none" data-algolia-content dangerouslySetInnerHTML={{ __html: item.Contenido || "" }} />
+                <td className="px-4 py-3 align-top border-b border-gray-200 text-xs prose prose-xs max-w-none" data-algolia-content dangerouslySetInnerHTML={{ __html: invertirSpanStrong(item.Contenido || "") }} />
               </tr>
             ))
           ) : (
@@ -105,7 +106,7 @@ const TablaBuscableClient = ({ datos, filasPorPagina = 8 }) => {
           <div key={item.documentId || item.id || index} data-algolia="tabla-item">
             <span data-algolia-title>{item.Titulo}</span>
             <span data-algolia-subtitle>{item.Bajada}</span>
-            <span data-algolia-content dangerouslySetInnerHTML={{ __html: item.Contenido || "" }} />
+            <span data-algolia-content dangerouslySetInnerHTML={{ __html: invertirSpanStrong(item.Contenido || "") }} />
           </div>
         ))}
       </div>

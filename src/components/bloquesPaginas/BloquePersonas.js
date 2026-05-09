@@ -1,6 +1,7 @@
 import React from "react";
 import StrapiImage from "../StrapiImage";
 import Bloque from "./Bloque";
+import { invertirSpanStrong } from "@/helpers/invertir-span-strong";
 const LogoLinkedIn = "/images/linkedin-gris.png"
 
 const BloquePersonas = ({datosBloque}) => {
@@ -41,7 +42,7 @@ const BloquePersonas = ({datosBloque}) => {
                   <div className="mt-2 text-center text-sm font-semibold" data-algolia-role>
                     {persona.Cargo}
                   </div>
-                  <div className="mt-2 text-center text-sm" data-algolia-description dangerouslySetInnerHTML={{__html: persona.Descripcion}} />
+                  <div className="mt-2 text-center text-sm" data-algolia-description dangerouslySetInnerHTML={{__html: invertirSpanStrong(persona.Descripcion || '')}} />
                   {persona.LinkedIn && (
                   <div className="mt-2 mb-2">
                     <a href={persona.LinkedIn} target="_blank" rel="noopener noreferrer"><img src={LogoLinkedIn} alt="LinkedIn" className="w-5 h-5 m-auto" /></a>

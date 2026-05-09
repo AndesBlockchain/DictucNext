@@ -2,15 +2,17 @@ import React from "react";
 import Bloque from "./Bloque";
 import CallToAction from "../CallToAction";
 import { oembedToIframe } from "@/helpers/oembed-to-iframe";
+import { invertirSpanStrong } from "@/helpers/invertir-span-strong";
 
 const BloqueTexto = ({ datosBloque }) => {
+
     const letra = datosBloque.Texto?.tipografia?.class || "text-sm";
     const colorLetra = datosBloque.Texto?.colorTexto?.Codigo || "black";
     const botones = datosBloque.CallToAction || [];
 
     // Obtener el texto de forma segura y transformar oembeds
-    const textoHTML = oembedToIframe(datosBloque.Texto?.Texto || '');
-    const textoBajada = datosBloque.Bajada?.Texto || '';
+    const textoHTML = invertirSpanStrong(oembedToIframe(datosBloque.Texto?.Texto || ''));
+    const textoBajada = invertirSpanStrong(datosBloque.Bajada?.Texto || '');
     
     return (
         <Bloque datosBloque={datosBloque.Bloque}>
@@ -23,7 +25,7 @@ const BloqueTexto = ({ datosBloque }) => {
                     />
                 )}
                 <div
-                    className={`${letra} prose prose-sm max-w-none`}
+                    className={`${letra} prose prose-sm max-w-none strapi-content`}
                     style={{ color: colorLetra }}
                     dangerouslySetInnerHTML={{ __html: textoHTML }}
                 />

@@ -43,6 +43,14 @@ async function getRedirects() {
 export async function middleware(request) {
   const pathname = request.nextUrl.pathname;
 
+  // Redirect de imágenes antiguas de WordPress a Azure Blob Storage
+  if (pathname.startsWith("/wp-content/")) {
+    return NextResponse.redirect(
+      `https://wwwdictuc.blob.core.windows.net/fotosnoticiasantiguas${pathname}`,
+      301
+    );
+  }
+
   // No interceptar assets estáticos ni APIs
   if (
     pathname.startsWith("/_next") ||

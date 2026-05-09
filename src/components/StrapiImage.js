@@ -1,8 +1,17 @@
 import React from "react";
 import Image from "next/image";
 
+const reescribirWpContent = (url) => {
+  if (url?.startsWith('https://www.dictuc.cl/wp-content/')) {
+    return url.replace('https://www.dictuc.cl', 'https://wwwdictuc.blob.core.windows.net/fotosnoticiasantiguas');
+  }
+  return url;
+};
+
 const getImageUrl = (url) => {
   if (!url) return null;
+  const reescrita = reescribirWpContent(url);
+  if (reescrita !== url) return reescrita;
   if (url.startsWith('http')) return url;
   const baseUrl = process.env.STRAPI_API_URL || process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337';
   return `${baseUrl}${url}`;
@@ -73,7 +82,8 @@ const StrapiImage = ({
       );
     }
   } else if (fallback) {
-    const fallbackSrc = (typeof fallback === 'object' && fallback.src) ? fallback.src : fallback;
+    const rawFallback = (typeof fallback === 'object' && fallback.src) ? fallback.src : fallback;
+    const fallbackSrc = typeof rawFallback === 'string' ? reescribirWpContent(rawFallback) : rawFallback;
 
     if (typeof fallbackSrc === 'string') {
       content = (

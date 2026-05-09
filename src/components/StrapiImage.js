@@ -9,35 +9,8 @@ const getImageUrl = (url) => {
 };
 
 /**
- * Selecciona el formato de imagen Strapi más apropiado según el ancho máximo de visualización.
- * Evita descargar imágenes más grandes de lo necesario.
- */
-const elegirFormato = (imgData, maxWidth) => {
-  if (!maxWidth || !imgData?.formats) return imgData;
-
-  const formatos = [
-    { key: 'thumbnail', ancho: 245 },
-    { key: 'small', ancho: 500 },
-    { key: 'medium', ancho: 750 },
-    { key: 'large', ancho: 1000 },
-  ];
-
-  for (const fmt of formatos) {
-    if (maxWidth <= fmt.ancho && imgData.formats[fmt.key]) {
-      return imgData.formats[fmt.key];
-    }
-  }
-
-  return imgData;
-};
-
-/**
- * Componente simplificado para renderizar imágenes de Strapi.
- * Prioriza:
- * 1. Imagen de Strapi (si existe)
- * 2. Fallback (si existe)
- *
- * @param {number} maxWidth - Ancho máximo de visualización. Si se pasa, selecciona el formato Strapi más apropiado.
+ * Componente para renderizar imágenes de Strapi.
+ * Usa siempre la imagen original de Strapi y la convierte a WebP vía Next.js.
  */
 const StrapiImage = ({
   imagen,
@@ -47,11 +20,9 @@ const StrapiImage = ({
   containerClassName = "",
   fill = false,
   priority = false,
-  maxWidth = null,
   sizes = "100vw"
 }) => {
-  const rawImgData = Array.isArray(imagen) ? imagen[0] : imagen;
-  const imgData = elegirFormato(rawImgData, maxWidth);
+  const imgData = Array.isArray(imagen) ? imagen[0] : imagen;
   const imageUrl = getImageUrl(imgData?.url);
 
   let content = null;
@@ -70,12 +41,19 @@ const StrapiImage = ({
         />
       );
     } else if (imgData?.width && imgData?.height) {
+      const MAX_WIDTH = 3000;
+      let width = imgData.width;
+      let height = imgData.height;
+      if (width > MAX_WIDTH) {
+        height = Math.round(height * (MAX_WIDTH / width));
+        width = MAX_WIDTH;
+      }
       content = (
         <Image
           src={imageUrl}
           alt={alt}
-          width={imgData.width}
-          height={imgData.height}
+          width={width}
+          height={height}
           quality={100}
           className={className}
           priority={priority}

@@ -2,15 +2,6 @@ import { withSentryConfig } from '@sentry/nextjs';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,  
-  async redirects() {
-    return [
-      {
-        source: '/integridad',
-        destination: '/nosotros/sostenibilidad',
-        permanent: true,
-      },
-    ];
-  },
   images: {
     qualities: [75, 90, 100],
     dangerouslyAllowLocalIP: true,

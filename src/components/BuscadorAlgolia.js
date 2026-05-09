@@ -19,6 +19,7 @@ const getSearchClient = () => {
 const INDICES = [
   
   { name: "sitio_web_dictuc_pages", label: "Sitio Web", urlPrefix: "/" },
+  { name: "manual-records", label: "Sitio Web", urlPrefix: "/" },
   { name: "development_api::etiqueta-persona.etiqueta-persona", label: "Personas", urlPrefix: "/" },
   { name: "development_api::servicio.servicio", label: "Servicios", urlPrefix: "/servicios/" },
   { name: "development_api::noticia.noticia", label: "Noticias", urlPrefix: "/noticias/" },

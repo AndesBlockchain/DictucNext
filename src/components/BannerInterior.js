@@ -17,6 +17,7 @@ const BannerInterior = ({ banner, gatsbyImageData, fallback, alt = "Banner", tit
           alt={alt}
           priority={true}
           className="w-full h-auto object-contain"
+          unoptimized={true}
         />
       </div>
       {titulo_visible && (

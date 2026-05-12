@@ -29,7 +29,8 @@ const StrapiImage = ({
   containerClassName = "",
   fill = false,
   priority = false,
-  sizes = "100vw"
+  sizes = "100vw",
+  unoptimized = false
 }) => {
   const imgData = Array.isArray(imagen) ? imagen[0] : imagen;
   const imageUrl = getImageUrl(imgData?.url);
@@ -47,6 +48,7 @@ const StrapiImage = ({
           className={`${className} object-cover`}
           sizes={sizes}
           priority={priority}
+          unoptimized={unoptimized}
         />
       );
     } else if (imgData?.width && imgData?.height) {
@@ -66,6 +68,7 @@ const StrapiImage = ({
           quality={100}
           className={className}
           priority={priority}
+          unoptimized={unoptimized}
         />
       );
     } else {
@@ -78,6 +81,7 @@ const StrapiImage = ({
           quality={100}
           className={className}
           priority={priority}
+          unoptimized={unoptimized}
         />
       );
     }
@@ -95,10 +99,11 @@ const StrapiImage = ({
           quality={100}
           className={className}
           priority={priority}
+          unoptimized={unoptimized}
         />
       );
     } else {
-      content = <Image src={fallbackSrc} alt={alt} quality={100} className={className} priority={priority} />;
+      content = <Image src={fallbackSrc} alt={alt} quality={100} className={className} priority={priority} unoptimized={unoptimized} />;
     }
   }
 

@@ -32,11 +32,12 @@ const CarruselClient = ({ carruselData }) => {
             </div>
             <div className="w-full bg-gray-50 flex items-center justify-center shadow-md relative">
                 <StrapiImage
+                    imagen={itemActual.imagen}
                     fallback={itemActual.url}
                     alt={itemActual.fraseSuperior || "Imagen Carrusel"}
-                    fill={true}
-                    className="object-cover w-full"
+                    className="w-full h-auto"
                     priority={true}
+                    unoptimized={true}
                 />
 
                 <div className="absolute bottom-6 lg:bottom-12 left-1/2 -translate-x-1/2 z-10 flex gap-2">

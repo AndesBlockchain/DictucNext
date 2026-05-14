@@ -81,11 +81,11 @@ const ModalAgente = ({ onClose, pregunta }) => {
           <div id="respuesta" className="w-full text-gray-800 text-left space-y-4 bg-white px-2">
             {isLoading ? (
               <div className="flex items-center space-x-1">
-                <span className="text-gray-600">Procesando (la respuesta toma del orden de 30 segundos)</span>
+                <span className="text-gray-600">Estoy preparando la respuesta </span>
                 <span className="text-blue-600 font-bold text-lg">{puntos}</span>
               </div>
             ) : (
-              <div className="prose prose-xs max-w-none text-xs [&_a]:text-azul-dictuc [&_a]:underline [&_a]:cursor-pointer [&_a]:pointer-events-auto [&_a:hover]:text-blue-800 [&_h3]:text-sm [&_h2]:text-base [&_ul]:mt-1 [&_ul]:mb-1 [&_ol]:mt-1 [&_ol]:mb-1 [&_li]:mb-0 [&_li_p]:mb-0 [&_li_p]:mt-0 [&_p]:mb-1">
+              <div className="prose prose-xs max-w-none text-xs [&_a]:text-azul-dictuc [&_a]:underline [&_a]:cursor-pointer [&_a]:pointer-events-auto [&_a:hover]:text-blue-800 [&_h3]:text-sm [&_h2]:text-base [&_ul]:mt-1 [&_ul]:mb-1 [&_ol]:mt-1 [&_ol]:mb-1 [&_li]:mb-0 [&_li>p]:inline [&_p]:mb-1">
                 <Suspense fallback={<div className="text-gray-400 text-xs">Cargando...</div>}>
                 <Markdown
                   components={{
@@ -110,6 +110,11 @@ const ModalAgente = ({ onClose, pregunta }) => {
                 </Markdown>
                 </Suspense>
               </div>
+            )}
+            {!isLoading && (
+              <p className="text-xs font-bold mt-4">
+                Puedes realizar otra consulta, usar nuestro <a href="/servicios" className="text-azul-dictuc underline hover:text-blue-800">buscador de servicios</a> especializado o comunicarte con nuestros profesionales a través del <a href="/paginas/cotizacion" className="text-azul-dictuc underline hover:text-blue-800">formulario de contacto</a>
+              </p>
             )}
           </div>
         </div>

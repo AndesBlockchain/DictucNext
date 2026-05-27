@@ -83,7 +83,7 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
       console.log("Servicio:", servicio);
 
       // Determinar la URL del endpoint según si es cotización o contacto
-      const endpoint = (isCotizacion)
+      const endpoint = (isCotizacion || esCotizacionSeleccionada)
         ? '/api/cotizador'
         : '/api/contacto';
 
@@ -99,7 +99,7 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
       formData.append('telefono', data.telefono);
       formData.append('consulta', data.consulta);
       formData.append('servicio', servicio);
-      formData.append('codigo_unidad', codigoUnidad);
+      formData.append('codigo_unidad', codigoUnidad ?? '');
       if (archivo) {
         formData.append('archivo', archivo);
       }

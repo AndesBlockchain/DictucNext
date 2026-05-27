@@ -72,9 +72,16 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
     setIsSubmitting(true);
 
     try {
+      const tipoSeleccionado = tiposDeContacto?.find(
+        (tipo) => tipo.documentId === data.tipo_consulta
+      );
+      const esCotizacionSeleccionada =
+        tipoSeleccionado?.Tipo?.toLowerCase() === 'cotización';
 
       // Determinar la URL del endpoint según si es cotización o contacto
-      const endpoint = isCotizacion ? '/api/cotizador' : '/api/contacto';
+      const endpoint = (isCotizacion || esCotizacionSeleccionada)
+        ? '/api/cotizador'
+        : '/api/contacto';
 
       const archivo = data.archivo?.[0];
 

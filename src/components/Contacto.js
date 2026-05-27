@@ -171,8 +171,8 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
         if (rutNumero < 50000000) {
           // Persona natural
           setValue("persona", resultado.data);
-          setValue("empresa", "Particular");
-          setValue("cargo", "Particular");
+          setValue("empresa", resultado.data);
+          setValue("cargo", "");
         } else {
           setValue("empresa", resultado.data);
         }

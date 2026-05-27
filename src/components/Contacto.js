@@ -78,8 +78,10 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
       const esCotizacionSeleccionada =
         tipoSeleccionado?.Tipo?.toLowerCase() === 'cotización';
 
+      console.log("Datos del formulario:", tipoSeleccionado, esCotizacionSeleccionada);
+
       // Determinar la URL del endpoint según si es cotización o contacto
-      const endpoint = (isCotizacion || esCotizacionSeleccionada)
+      const endpoint = (isCotizacion)
         ? '/api/cotizador'
         : '/api/contacto';
 

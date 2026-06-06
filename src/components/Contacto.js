@@ -72,9 +72,20 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
     setIsSubmitting(true);
 
     try {
+      const tipoSeleccionado = tiposDeContacto?.find(
+        (tipo) => tipo.documentId === data.tipo_consulta
+      );
+      const esCotizacionSeleccionada =
+        tipoSeleccionado?.Tipo?.toLowerCase() === 'cotización';
+
+      console.log("Datos del formulario:", tipoSeleccionado, esCotizacionSeleccionada);
+      console.log("Código de unidad:", codigoUnidad);
+      console.log("Servicio:", servicio);
 
       // Determinar la URL del endpoint según si es cotización o contacto
-      const endpoint = isCotizacion ? '/api/cotizador' : '/api/contacto';
+      const endpoint = (isCotizacion || esCotizacionSeleccionada)
+        ? '/api/cotizador'
+        : '/api/contacto';
 
       const archivo = data.archivo?.[0];
 
@@ -88,7 +99,7 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
       formData.append('telefono', data.telefono);
       formData.append('consulta', data.consulta);
       formData.append('servicio', servicio);
-      formData.append('codigo_unidad', codigoUnidad);
+      formData.append('codigo_unidad', codigoUnidad ?? '');
       if (archivo) {
         formData.append('archivo', archivo);
       }
@@ -160,8 +171,8 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
         if (rutNumero < 50000000) {
           // Persona natural
           setValue("persona", resultado.data);
-          setValue("empresa", "Particular");
-          setValue("cargo", "Particular");
+          setValue("empresa", resultado.data);
+          setValue("cargo", "");
         } else {
           setValue("empresa", resultado.data);
         }

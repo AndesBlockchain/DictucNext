@@ -21,7 +21,7 @@ export default async function HomeServicios({ params })
     <>
       <PaginaInterior
         banner={sector.banner}
-        titulo="Nuestros Servicios"
+        titulo="Nuestros Servicios Prueba"
         breadcrum={[{ label: "Home", link: "/" }, { label: "Nuestros Servicios", link: "/servicios/todos-los-servicios" }, { label: sector.nombre, link: "/" + slug }]}>
 
         <Servicios tipos_de_servicio={tiposDeServicio} sectores_pais={sectoresPais} unidades={unidades}

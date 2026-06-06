@@ -35,6 +35,7 @@ const Bloque = ({ children, datosBloque }) => {
     <div
       style={{ ...backgroundImageStyle, ...paddingStyle }}
       className={bloqueClasses}
+      id={datosBloque?.anchor}
     >
       {!datosBloque?.OcultarTitulo && (
         <>

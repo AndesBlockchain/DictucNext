@@ -100,6 +100,8 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
       formData.append('consulta', data.consulta);
       formData.append('servicio', servicio);
       formData.append('codigo_unidad', codigoUnidad ?? '');
+      formData.append('url_origen', window.location.href);
+      formData.append('newsletter', data.newsletter ? '1' : '0');
       if (archivo) {
         formData.append('archivo', archivo);
       }

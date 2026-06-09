@@ -72,6 +72,8 @@ const BloqueTarjetas = ({ datosBloque }) => {
               {datosBloque.TipoTarjeta === "Mini" && (
                 <CardMini
                   titulo={titulo}
+                  color_fondo={colorFondo}
+                  color_texto={colorTexto}
                   callToAction={callToAction}
                 />
               )}

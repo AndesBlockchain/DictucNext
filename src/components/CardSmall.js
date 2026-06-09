@@ -1,12 +1,12 @@
 import React from "react";
 import StrapiImage from "./StrapiImage";
 
-export default function CardSmall({ titulo, callToAction, icono, contenido }) {
+export default function CardSmall({ titulo, callToAction, icono, contenido, color_fondo, color_texto }) {
   const cta = Array.isArray(callToAction) ? callToAction[0] : callToAction;
   const tieneImagen = icono?.url || icono?.formats;
 
   return (
-    <div className={`border rounded-lg shadow-xl p-2 grid w-full h-full ${tieneImagen ? "grid-cols-3" : "grid-cols-1"}`}>
+    <div className={`border rounded-lg shadow-xl p-2 grid w-full h-full ${tieneImagen ? "grid-cols-3" : "grid-cols-1"} bg-${color_fondo} ${color_texto}`}>
       {tieneImagen && (
         <div className="col-span-1 p-4 flex items-center">
           <StrapiImage

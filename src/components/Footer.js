@@ -56,7 +56,7 @@ const Footer = async () => {
               </div>
               <div>
                 <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
-                Código Postal: 78204376
+                Código Postal: 7820436
               </div>
               <div>
                 <FontAwesomeIcon icon={faPhone} className="mr-2" />

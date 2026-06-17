@@ -10,11 +10,16 @@ const BuscadorNoticias = ({ noticiasOrdenadas, seccion, estiloFecha }) => {
     if (!busqueda.trim()) return noticiasOrdenadas;
     const termino = normalizarTexto(busqueda);
     return noticiasOrdenadas
-      .map(([agno, noticiasDelAgno]) => {
-        const filtradas = noticiasDelAgno.filter((noticia) =>
-          normalizarTexto(noticia.titulo).includes(termino)
-        );
-        return filtradas.length > 0 ? [agno, filtradas] : null;
+      .map(([agno, meses]) => {
+        const mesesFiltrados = meses
+          .map(([mes, noticiasDelMes]) => {
+            const filtradas = noticiasDelMes.filter((noticia) =>
+              normalizarTexto(noticia.titulo).includes(termino)
+            );
+            return filtradas.length > 0 ? [mes, filtradas] : null;
+          })
+          .filter(Boolean);
+        return mesesFiltrados.length > 0 ? [agno, mesesFiltrados] : null;
       })
       .filter(Boolean);
   }, [noticiasOrdenadas, busqueda])
@@ -35,29 +40,37 @@ const BuscadorNoticias = ({ noticiasOrdenadas, seccion, estiloFecha }) => {
 
       <div className="mt-8">
         {noticiasFiltradas.length > 0 ? (
-          noticiasFiltradas.map(([agno, noticiasDelAgno], index) => (
+          noticiasFiltradas.map(([agno, meses], index) => (
             <div key={agno} className="container m-auto max-w-6xl pl-8 pr-8 collapse collapse-plus bg-base-100 border border-base-300 text-left">
               <input type="checkbox" name="my-accordion-3" defaultChecked={index === 0} />
               <div className="collapse-title font-semibold text-xl">{agno}</div>
               <div className="collapse-content text-sm">
-                <div className="space-y-4">
-                  {noticiasDelAgno.map((noticia, noticiaIndex) => (
-                    <div key={noticiaIndex} className="border-b border-gray-200 pb-3 last:border-b-0">
-                      <h4 className="font-medium text-gray-900 mb-2">
-                        <a href={`/novedades/${seccion}/${noticia.slug}`} className="hover:text-blue-600 transition-colors">
-                          {estiloFecha !== "Año" && noticia.fecha && (
-                            <>{new Date(noticia.fecha).toLocaleDateString('es-ES', {
-                              year: 'numeric',
-                              month: 'numeric',
-                              day: 'numeric'
-                            })} - </>
-                          )}
-                          {noticia.titulo}
-                        </a>
-                      </h4>
+                {meses.map(([mes, noticiasDelMes], mesIndex) => (
+                  <div key={mes} className="collapse collapse-plus bg-base-100 border border-base-200">
+                    <input type="checkbox" name={`accordion-mes-${agno}`} defaultChecked={mesIndex === 0} />
+                    <div className="collapse-title font-semibold text-base">{mes}</div>
+                    <div className="collapse-content">
+                      <div className="space-y-4">
+                        {noticiasDelMes.map((noticia, noticiaIndex) => (
+                          <div key={noticiaIndex} className="border-b border-gray-200 pb-3 last:border-b-0">
+                            <h4 className="font-medium text-gray-900 mb-2">
+                              <a href={`/novedades/${seccion}/${noticia.slug}`} className="hover:text-blue-600 transition-colors">
+                                {estiloFecha !== "Año" && noticia.fecha && (
+                                  <>{new Date(noticia.fecha).toLocaleDateString('es-ES', {
+                                    year: 'numeric',
+                                    month: 'numeric',
+                                    day: 'numeric'
+                                  })} - </>
+                                )}
+                                {noticia.titulo}
+                              </a>
+                            </h4>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))

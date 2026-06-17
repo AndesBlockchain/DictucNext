@@ -30,6 +30,9 @@ export default async function PaginasContenido({params}) {
   const menuCajonCandidatos = [...slug.slice(0, -1)].reverse().concat(seccion);
   const menuCajon = await useMenuCajon(menuCajonCandidatos);
 
+console.log("color",pagina)
+
+
   return (
     <EditorModeProvider bloques={pagina?.Bloques || []} documentId={pagina?.documentId}>
     <PaginaInterior

@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Amplitude } from "@/amplitude";
 
 export const metadata = {
   title: {
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
         <link rel="dns-prefetch" href="https://backend-dictuc.andesblockchain.com" />
       </head>
       <body className="antialiased w-full">
+        <Amplitude />
         {children}
       </body>
     </html>

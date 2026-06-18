@@ -5,6 +5,7 @@ import useProyectosPorAgno from "@/hooks/use-proyectos-por-agno";
 import Instagram from "@/components/Instagram";
 import FranjaAzul from "@/components/FranjaAzul";
 import BuscadorNoticias from "@/components/BuscadorNoticias";
+import { agruparPorMes } from "@/helpers/agrupar-por-mes";
 
 export const metadata = {
   title: 'Dictuc | Proyectos Destacados'
@@ -14,7 +15,9 @@ export default async function TodosLosProyectosPage() {
 
     const proyectos = await useProyectosPorAgno()
 
-    const proyectosOrdenados = Object.entries(proyectos).sort(([agnoA], [agnoB]) => parseInt(agnoB) - parseInt(agnoA));
+    const proyectosOrdenados = agruparPorMes(
+      Object.entries(proyectos).sort(([agnoA], [agnoB]) => parseInt(agnoB) - parseInt(agnoA))
+    );
   return (
     <PaginaInterior fallback={BannerNoticias}
                     titulo="Proyectos Destacados"

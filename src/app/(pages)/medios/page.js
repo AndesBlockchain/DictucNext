@@ -5,6 +5,7 @@ import useNoticiasPorAgnoEtiqueta from "@/hooks/use-noticias-por-agno-etiqueta";
 import Instagram from "@/components/Instagram";
 import FranjaAzul from "@/components/FranjaAzul";
 import BuscadorNoticias from "@/components/BuscadorNoticias";
+import { agruparPorMes } from "@/helpers/agrupar-por-mes";
 
 export const metadata = {
   title: 'Dictuc | Medios'
@@ -16,7 +17,9 @@ export default async function MediosPage() {
 
     const noticias = await useNoticiasPorAgnoEtiqueta(ETIQUETA_PRENSA_DOCUMENT_ID)
 
-    const noticiasOrdenadas = Object.entries(noticias).sort(([agnoA], [agnoB]) => parseInt(agnoB) - parseInt(agnoA));
+    const noticiasOrdenadas = agruparPorMes(
+      Object.entries(noticias).sort(([agnoA], [agnoB]) => parseInt(agnoB) - parseInt(agnoA))
+    );
   return (
     <PaginaInterior fallback={BannerNoticias}
                     titulo="Medios"

@@ -5,6 +5,7 @@ import useNoticiasPorAgno from "@/hooks/use-noticias-por-agno";
 import Instagram from "@/components/Instagram";
 import FranjaAzul from "@/components/FranjaAzul";
 import BuscadorNoticias from "@/components/BuscadorNoticias";
+import { agruparPorMes } from "@/helpers/agrupar-por-mes";
 
 export const metadata = {
   title: 'Dictuc | Noticias'
@@ -17,7 +18,9 @@ export default async function HomeNoticiasPage() {
     const noticias = await useNoticiasPorAgno()
 
     // Forzar el orden de los años y agregar logs
-    const noticiasOrdenadas = Object.entries(noticias).sort(([agnoA], [agnoB]) => parseInt(agnoB) - parseInt(agnoA));
+    const noticiasOrdenadas = agruparPorMes(
+      Object.entries(noticias).sort(([agnoA], [agnoB]) => parseInt(agnoB) - parseInt(agnoA))
+    );
   return (
     <PaginaInterior fallback={BannerNoticias}
                     titulo="Noticias"

@@ -4,7 +4,7 @@ const usePagina = async (slug) => {
   if (!slug) return null;
 
   const result = await fetchFromStrapi({
-    endpoint: `/api/paginas?filters[slug][$eq]=${slug}&populate=all`,
+    endpoint: `/api/paginas?filters[slug][$eq]=${slug}&populate=all&status=published`,
     fallback: { data: [] },
     cache: CACHE_PRESETS.FREQUENT,
     errorContext: `pagina ${slug}`

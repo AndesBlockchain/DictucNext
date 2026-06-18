@@ -64,6 +64,7 @@ export default async function PaginasContenido({ params }) {
                 fallback={noticia.url_foto || FotoDefaultNoticias}
                 className="w-full h-auto object-contain rounded-lg"
                 alt={noticia.titulo || 'Imagen de la noticia'}
+                maxWidth={450}
               />
             </div>
             <div dangerouslySetInnerHTML={{__html: noticia.cuerpo}}></div>

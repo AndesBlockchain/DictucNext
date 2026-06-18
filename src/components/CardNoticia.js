@@ -26,7 +26,7 @@ const CardNoticia = ({ titulo, imagen, fecha, bajada, slug, mostrarFecha = true,
       imagen={imagen}
       fallback={fallback}
       alt={titulo}
-      maxWidth={500}
+      maxWidth={300}
       className="w-full h-44 object-cover"
     />
     <div className="p-4 flex flex-col flex-grow">

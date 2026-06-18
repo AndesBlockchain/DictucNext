@@ -31,14 +31,18 @@ const CarruselClient = ({ carruselData }) => {
                 {itemActual.fraseInferior}
             </div>
             <div className="w-full bg-gray-50 flex items-center justify-center shadow-md relative">
-                <StrapiImage
-                    imagen={itemActual.imagen}
-                    fallback={itemActual.url}
-                    alt={itemActual.fraseSuperior || "Imagen Carrusel"}
-                    className="w-full h-auto"
-                    priority={true}
-                    unoptimized={true}
-                />
+                {carruselData.map((item, i) => (
+                    <StrapiImage
+                        key={i}
+                        imagen={item.imagen}
+                        fallback={item.url}
+                        alt={item.fraseSuperior || "Imagen Carrusel"}
+                        className={`w-full h-auto${i === indiceCarrusel ? "" : " hidden"}`}
+                        priority={true}
+                        unoptimized={true}
+                        blurDataURL={item.blurDataURL}
+                    />
+                ))}
 
                 <div className="absolute bottom-6 lg:bottom-12 left-1/2 -translate-x-1/2 z-10 flex gap-2">
                     {carruselData.map((_, i) => (

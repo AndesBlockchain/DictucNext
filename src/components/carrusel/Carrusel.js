@@ -1,6 +1,7 @@
 import React from "react";
 import CarruselClient from "./CarruselClient";
 import { fetchFromStrapi, CACHE_PRESETS } from "@/lib/strapi-fetcher";
+import { getBlurDataURL } from "@/lib/get-blur-data-url";
 
 const Carrusel = async () => {
   const carruselFetch = await fetchFromStrapi({
@@ -10,7 +11,7 @@ const Carrusel = async () => {
     errorContext: "carrusel"
   });
 
-  const carruselData = (carruselFetch.data || []).map(item => {
+  const items = (carruselFetch.data || []).map(item => {
     const imagen = item.Imagen && item.Imagen[0] ? item.Imagen[0] : (item.Imagen || {});
     return {
       fraseSuperior: item.FraseSuperior || "",
@@ -22,6 +23,13 @@ const Carrusel = async () => {
       ancho: imagen.width || 0,
     };
   });
+
+  const carruselData = await Promise.all(
+    items.map(async (item) => ({
+      ...item,
+      blurDataURL: await getBlurDataURL(item.imagen),
+    }))
+  );
 
   return <CarruselClient carruselData={carruselData} />;
 }

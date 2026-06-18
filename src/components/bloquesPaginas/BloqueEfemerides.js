@@ -33,6 +33,18 @@ const BloqueEfemerides = ({ datosBloque }) => {
         </div>
       </div>
 
+      {/* Preload imágenes modal */}
+      <div className="hidden">
+        {datosBloque.Efemerides?.filter((e) => e.Foto).map((efemeride, index) => (
+          <StrapiImage
+            key={index}
+            imagen={efemeride.Foto}
+            alt=""
+            priority={true}
+          />
+        ))}
+      </div>
+
       {/* Modal de foto */}
       {fotoModal && (
         <div

@@ -1,7 +1,12 @@
 import { withSentryConfig } from '@sentry/nextjs';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactCompiler: true,  
+  reactCompiler: true,
+  ...(process.env.NODE_ENV === 'development' && {
+    experimental: {
+      fetchCache: 'force-no-store',
+    },
+  }),
   images: {
     qualities: [75, 90, 100],
     dangerouslyAllowLocalIP: true,

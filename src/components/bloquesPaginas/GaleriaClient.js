@@ -14,12 +14,16 @@ const GaleriaClient = ({ fotos }) => {
   return (
     <div className="flex flex-col items-center mt-12">
       <div className="relative mx-auto">
-        <StrapiImage
-          imagen={{ url: fotos[actual].url }}
-          alt={fotos[actual].alt}
-          maxWidth={1000}
-          className="h-[350px] w-auto object-contain rounded-lg"
-        />
+        {fotos.map((foto, i) => (
+          <StrapiImage
+            key={i}
+            imagen={{ url: foto.url }}
+            alt={foto.alt}
+            maxWidth={1000}
+            className={`h-[350px] w-auto object-contain rounded-lg${i === actual ? "" : " hidden"}`}
+            priority={true}
+          />
+        ))}
 
         <button
           onClick={anterior}

@@ -24,7 +24,8 @@ const BloqueDocumentos = async ({ datosBloque }) => {
                   <StrapiImage
                     imagen={documento.Foto}
                     alt={documento.Titulo || "Documento"}
-                    maxWidth={245}
+                    width={96}
+                    height={96}
                   />
                 </div>
               </div>

@@ -30,7 +30,11 @@ const StrapiImage = ({
   fill = false,
   priority = false,
   sizes = "100vw",
-  unoptimized = false
+  unoptimized = false,
+  width = null,
+  height = null,
+  maxWidth = null,
+  blurDataURL = null
 }) => {
   const imgData = Array.isArray(imagen) ? imagen[0] : imagen;
   const imageUrl = getImageUrl(imgData?.url);
@@ -38,6 +42,8 @@ const StrapiImage = ({
   let content = null;
 
   if (imageUrl) {
+    const blurProps = blurDataURL ? { placeholder: "blur", blurDataURL } : {};
+
     if (fill) {
       content = (
         <Image
@@ -49,16 +55,10 @@ const StrapiImage = ({
           sizes={sizes}
           priority={priority}
           unoptimized={unoptimized}
+          {...blurProps}
         />
       );
-    } else if (imgData?.width && imgData?.height) {
-      const MAX_WIDTH = 3000;
-      let width = imgData.width;
-      let height = imgData.height;
-      if (width > MAX_WIDTH) {
-        height = Math.round(height * (MAX_WIDTH / width));
-        width = MAX_WIDTH;
-      }
+    } else if (width !== null && height !== null) {
       content = (
         <Image
           src={imageUrl}
@@ -69,6 +69,28 @@ const StrapiImage = ({
           className={className}
           priority={priority}
           unoptimized={unoptimized}
+          {...blurProps}
+        />
+      );
+    } else if (imgData?.width && imgData?.height) {
+      const MAX_WIDTH = maxWidth ?? 3000;
+      let imgWidth = imgData.width;
+      let imgHeight = imgData.height;
+      if (imgWidth > MAX_WIDTH) {
+        imgHeight = Math.round(imgHeight * (MAX_WIDTH / imgWidth));
+        imgWidth = MAX_WIDTH;
+      }
+      content = (
+        <Image
+          src={imageUrl}
+          alt={alt}
+          width={imgWidth}
+          height={imgHeight}
+          quality={100}
+          className={className}
+          priority={priority}
+          unoptimized={unoptimized}
+          {...blurProps}
         />
       );
     } else {
@@ -82,6 +104,7 @@ const StrapiImage = ({
           className={className}
           priority={priority}
           unoptimized={unoptimized}
+          {...blurProps}
         />
       );
     }

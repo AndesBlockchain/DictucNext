@@ -48,6 +48,8 @@ const BloqueTabs = ({ datosBloque }) => {
                     fallback={tab.Foto?.formats?.medium?.url}
                     alt={tab.Titulo || ""}
                     className="rounded-xl align-center"
+                    priority={true}
+                    maxWidth={400}
                   />
                 </div>
                 <div className="mt-auto mb-auto w-full md:w-3/5 pl-8 text-left text-sm prose prose-sm max-w-none" dangerouslySetInnerHTML={{__html: invertirSpanStrong(tab.Texto || "")}} />

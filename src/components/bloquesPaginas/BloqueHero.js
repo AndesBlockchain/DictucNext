@@ -22,7 +22,7 @@ const BloqueHero = ({ datosBloque }) => {
             imagen={datosBloque.foto}
             fallback={datosBloque.foto?.formats?.medium?.url || datosBloque.foto?.url}
             alt={datosBloque.Bloque?.Titulo?.replace(/<[^>]*>/g, '') || "Hero"}
-            maxWidth={500}
+            maxWidth={350}
             className="rounded-xl w-full"
           />
         </div>

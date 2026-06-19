@@ -15,6 +15,7 @@ import BloqueTablaBuscable from "../components/bloquesPaginas/BloqueTablaBuscabl
 import BloqueMapa from "../components/bloquesPaginas/BloqueMapa";
 import BloqueTablaPersonas from "../components/bloquesPaginas/BloqueTablaPersonas";
 import BloqueContacto from "../components/bloquesPaginas/BloqueContacto";
+import BloqueContactoSimplificado from "../components/bloquesPaginas/BloqueContactoSimplificado";
 import BloqueEstadoTicket from "../components/bloquesPaginas/BloqueEstadoTicket";
 import BloqueVerificarInforme from "../components/bloquesPaginas/BloqueVerificarInforme";
 import BloqueCanalDenuncia from "../components/bloquesPaginas/BloqueCanalDenuncia";
@@ -109,6 +110,10 @@ export const renderBloque = (bloque) => {
     case "bloques.bloque-instagram":
     case "STRAPI__COMPONENT_BLOQUES_BLOQUE_INSTAGRAM":
       return <BloqueInstagram datosBloque={bloque} />;
+
+    case "bloques.bloque-contacto-simplificado":
+    case "STRAPI__COMPONENT_BLOQUES_BLOQUE_CONTACTO_SIMPLIFICADO":
+      return <BloqueContactoSimplificado datosBloque={bloque} />;
 
     default:
       return (

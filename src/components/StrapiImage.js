@@ -13,7 +13,7 @@ const getImageUrl = (url) => {
   const reescrita = reescribirWpContent(url);
   if (reescrita !== url) return reescrita;
   if (url.startsWith('http')) return url;
-  const baseUrl = process.env.STRAPI_API_URL || process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337';
+  const baseUrl = process.env.STRAPI_API_URL || 'http://localhost:1337';
   return `${baseUrl}${url}`;
 };
 

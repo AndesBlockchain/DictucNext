@@ -20,11 +20,13 @@ export default function ContactoSimplificado({ strapiApiUrl, mostrarTelefono, mo
     setIsSubmitting(true);
     try {
       const formData = new FormData();
-      formData.append("nombre", data.nombre);
+      formData.append("persona", data.nombre);
       formData.append("email", data.email);
       if (mostrarTelefono) formData.append("telefono", data.telefono);
       if (mostrarEmpresa) formData.append("empresa", data.empresa);
       if (campanaId) formData.append("campana_id", campanaId);
+      formData.append("consulta", data.consulta);
+      formData.append("newsletter", data.newsletter ? "1" : "0");
       formData.append("url_origen", window.location.href);
 
       const response = await fetch(strapiApiUrl + "/api/contacto-simplificado", {
@@ -118,6 +120,25 @@ export default function ContactoSimplificado({ strapiApiUrl, mostrarTelefono, mo
             </fieldset>
           )}
         </div>
+
+        <fieldset className="fieldset">
+          <legend className="fieldset-legend">Consulta</legend>
+          <textarea
+            className="textarea border border-gray-300 w-full"
+            placeholder="Escriba su consulta"
+            {...register("consulta", { required: true })}
+          ></textarea>
+          {errors.consulta?.type === "required" && (
+            <p className="text-red-500" role="alert">Ingrese su consulta</p>
+          )}
+        </fieldset>
+
+        <fieldset className="fieldset">
+          <div className="join">
+            <input type="checkbox" {...register("newsletter")} />
+            &nbsp;Deseo recibir información de Dictuc
+          </div>
+        </fieldset>
 
         <fieldset className="fieldset">
           <div className="join">

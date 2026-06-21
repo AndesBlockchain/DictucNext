@@ -43,6 +43,14 @@ async function getRedirects() {
 export async function middleware(request) {
   const pathname = request.nextUrl.pathname;
 
+  // Maintenance mode
+  if (process.env.MAINTENANCE_MODE === "true") {
+    if (pathname !== "/maintenance") {
+      return NextResponse.redirect(new URL("/maintenance", request.url));
+    }
+    return NextResponse.next();
+  }
+
   // Redirect de imágenes antiguas de WordPress a Azure Blob Storage
   if (pathname.startsWith("/wp-content/")) {
     return NextResponse.redirect(

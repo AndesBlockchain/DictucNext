@@ -20,6 +20,8 @@
   --color-primary-content: #ffffff;
 }
 
+@plugin "@tailwindcss/typography";
+
 /* Colores personalizados de Tailwind */
 @theme {
     --font-montserrat: "Montserrat", sans-serif;
@@ -87,8 +89,8 @@ li a:hover {
   text-decoration: none !important;
 }
 
-/* Estilos globales para listas */
-ul {
+/* Estilos globales para listas (excluye .prose que tiene sus propios estilos) */
+:not(.prose) > ul {
   list-style-position: inside;
   list-style-type: disc;
   margin-top: 1rem;
@@ -96,12 +98,12 @@ ul {
   text-align: left;
 }
 
-ol {
+:not(.prose) > ol {
   list-style-position: inside;
   list-style-type: decimal;
 }
 
-li {
+:not(.prose) li {
   margin-left: 1rem;
   margin-bottom: 0.375rem;
 }

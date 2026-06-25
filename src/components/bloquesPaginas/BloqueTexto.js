@@ -3,8 +3,10 @@ import Bloque from "./Bloque";
 import CallToAction from "../CallToAction";
 import { oembedToIframe } from "@/helpers/oembed-to-iframe";
 import { invertirSpanStrong } from "@/helpers/invertir-span-strong";
+import parse from 'html-react-parser';
 
 const BloqueTexto = ({ datosBloque }) => {
+
 
     const letra = datosBloque.Texto?.tipografia?.class || "text-sm";
     const colorLetra = datosBloque.Texto?.colorTexto?.Codigo || "black";
@@ -13,7 +15,7 @@ const BloqueTexto = ({ datosBloque }) => {
     // Obtener el texto de forma segura y transformar oembeds
     const textoHTML = invertirSpanStrong(oembedToIframe(datosBloque.Texto?.Texto || ''));
     const textoBajada = invertirSpanStrong(datosBloque.Bajada?.Texto || '');
-    
+
     return (
         <Bloque datosBloque={datosBloque.Bloque}>
             <div className="max-w-4xl m-auto">
@@ -27,8 +29,7 @@ const BloqueTexto = ({ datosBloque }) => {
                 <div
                     className={`${letra} prose prose-sm max-w-none strapi-content`}
                     style={{ color: colorLetra }}
-                    dangerouslySetInnerHTML={{ __html: textoHTML }}
-                />
+                    dangerouslySetInnerHTML={{ __html: textoHTML }}/>
                 <div className="flex flex-row mt-4 items-center justify-center gap-4">
                     {botones.map((item, index) => (
                         <CallToAction

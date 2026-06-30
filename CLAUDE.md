@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
+ 
 ## Project Overview
 
 This is a Next.js 16.1.3 frontend application for DICTUC (a Chilean organization), built with the App Router architecture. It consumes content from a Strapi CMS backend running on port 1337 and uses a dynamic block-based content system for rendering pages.

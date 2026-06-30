@@ -22,10 +22,16 @@ async function getRedirects() {
     for (const entry of json.data || []) {
       for (const r of entry.Redirect || []) {
         if (r.origen && r.destino) {
+          const esUrlAbsoluta = /^https?:\/\//.test(r.destino);
           redirects.push({
             origen: r.origen.startsWith("/") ? r.origen : `/${r.origen}`,
-            destino: r.destino.startsWith("/") ? r.destino : `/${r.destino}`,
+            destino: esUrlAbsoluta
+              ? r.destino
+              : r.destino.startsWith("/")
+              ? r.destino
+              : `/${r.destino}`,
             prefijo: r.origen.endsWith("*"),
+            absoluta: esUrlAbsoluta,
           });
         }
       }
@@ -79,10 +85,12 @@ export async function middleware(request) {
         const destino = r.destino.endsWith("*")
           ? r.destino.slice(0, -1) + rest
           : r.destino;
-        return NextResponse.redirect(new URL(destino, request.url), 301);
+        const url = r.absoluta ? destino : new URL(destino, request.url);
+        return NextResponse.redirect(url, 301);
       }
     } else if (pathname === r.origen) {
-      return NextResponse.redirect(new URL(r.destino, request.url), 301);
+      const url = r.absoluta ? r.destino : new URL(r.destino, request.url);
+      return NextResponse.redirect(url, 301);
     }
   }
 

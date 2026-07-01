@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 
-const STRAPI_API_URL = process.env.STRAPI_API_URL || "http://127.0.0.1:1337"
+const STRAPI_API_URL = process.env.STRAPI_API_URL
 
 export async function POST(request) {
   try {

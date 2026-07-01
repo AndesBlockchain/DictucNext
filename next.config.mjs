@@ -31,6 +31,12 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'backendweb.dictuc.cl',
+
+        pathname: '/uploads/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'wwwdictuc.blob.core.windows.net',
         pathname: '/fotosnoticiasantiguas/**',
       },

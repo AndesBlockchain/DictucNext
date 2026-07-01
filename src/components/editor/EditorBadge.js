@@ -2,7 +2,7 @@
 import React from "react"
 import { useEditorMode } from "./EditorModeProvider"
 
-const STRAPI_ADMIN_URL = process.env.STRAPI_API_URL || "http://127.0.0.1:1337"
+const STRAPI_ADMIN_URL = process.env.STRAPI_API_URL
 
 export default function EditorBadge({ contentType, documentId, label }) {
   const { editorMode } = useEditorMode()

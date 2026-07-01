@@ -18,6 +18,7 @@ const BloqueEfemerides = ({ datosBloque }) => {
           {/* Items */}
           <div className="flex flex-col gap-6">
             {datosBloque.Efemerides?.map((efemeride, index) => (
+              console.log(efemeride.Foto),
               <ItemEfemerides
                 key={efemeride.id || index}
                 agno={efemeride.agno}
@@ -26,7 +27,7 @@ const BloqueEfemerides = ({ datosBloque }) => {
                 index={index}
                 isFirst={index === 0}
                 isLast={index === datosBloque.Efemerides.length - 1}
-                onFotoClick={(foto) => setFotoModal(foto)}
+                onFotoClick={(foto) => setFotoModal(efemeride.Foto)}
               />
             ))}
           </div>

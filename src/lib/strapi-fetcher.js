@@ -26,7 +26,6 @@ export async function fetchFromStrapi({
   throwOnError = false
 }) {
   const baseUrl = process.env.STRAPI_API_URL;
-
   // Validar que STRAPI_API_URL esté definida
   if (!baseUrl) {
     const errorMsg = 'STRAPI_API_URL environment variable is not defined';

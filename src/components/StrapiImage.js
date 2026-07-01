@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
+const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || process.env.STRAPI_API_URL;
 const reescribirWpContent = (url) => {
   if (url?.startsWith('https://www.dictuc.cl/wp-content/')) {
     return url.replace('https://www.dictuc.cl', 'https://wwwdictuc.blob.core.windows.net/fotosnoticiasantiguas');
@@ -13,7 +14,7 @@ const getImageUrl = (url) => {
   const reescrita = reescribirWpContent(url);
   if (reescrita !== url) return reescrita;
   if (url.startsWith('http')) return url;
-  const baseUrl = process.env.STRAPI_API_URL || 'http://localhost:1337';
+  
   return `${baseUrl}${url}`;
 };
 
@@ -37,6 +38,7 @@ const StrapiImage = ({
   blurDataURL = null
 }) => {
   const imgData = Array.isArray(imagen) ? imagen[0] : imagen;
+  //se usa para manejar las rutas de las imagenes de wordpress antiguas 
   const imageUrl = getImageUrl(imgData?.url);
 
   let content = null;

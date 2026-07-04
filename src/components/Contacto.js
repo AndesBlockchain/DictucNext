@@ -75,8 +75,7 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
       const tipoSeleccionado = tiposDeContacto?.find(
         (tipo) => tipo.documentId === data.tipo_consulta
       );
-      const esCotizacionSeleccionada =
-        tipoSeleccionado?.Tipo?.toLowerCase() === 'cotización';
+      const esCotizacionSeleccionada = tipoSeleccionado?.Cotizar;
 
       console.log("Datos del formulario:", tipoSeleccionado, esCotizacionSeleccionada);
       console.log("Código de unidad:", codigoUnidad);

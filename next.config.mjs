@@ -3,16 +3,12 @@ import withBundleAnalyzer from '@next/bundle-analyzer';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactCompiler: true,
-  ...(process.env.NODE_ENV === 'development' && {
-    experimental: {
-      fetchCache: 'force-no-store',
-    },
-  }),
+  experimental: {
+    reactCompiler: true,
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 90, 100],
-    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
         protocol: 'http',
@@ -59,9 +55,6 @@ export default withSentryConfig(configWithAnalyzer, {
 
   // Tunnel para evitar ad-blockers
   tunnelRoute: "/monitoring",
-
-  // Desactivar features pesadas que no se usan
-  disableLogger: true,
 
   webpack: {
     automaticVercelMonitors: false,

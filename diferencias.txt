@@ -1,0 +1,1518 @@
+diff --git a/.github/workflows/azure-static-web-apps-red-island-047bee91e.yml b/.github/workflows/azure-static-web-apps-red-island-047bee91e.yml
+index f3259dd..f97024d 100644
+--- a/.github/workflows/azure-static-web-apps-red-island-047bee91e.yml
++++ b/.github/workflows/azure-static-web-apps-red-island-047bee91e.yml
+@@ -1,57 +1,68 @@
+-name: Azure Static Web Apps CI/CD
+-
+-on:
+-  push:
+-    branches:
+-      - main
+-  pull_request:
+-    types: [opened, synchronize, reopened, closed]
+-    branches:
+-      - main
+-
+-env:
+-  STRAPI_API_URL: https://backend-dictuc.andesblockchain.com
+-  NEXT_PUBLIC_STRAPI_API_URL: https://backend-dictuc.andesblockchain.com
+-  VERIFICACION_URL: https://xnet.dictuc.cl/xnet/dictuc/firma_elect/descarga_doc.phtml
+-  TICKET_API_TOKEN: hh77ApytA3fWzjQG4FUafsAXPWLMQ8sMqPRK0bunLdnuqobc3ub8AGRAGUfGeA7LPtMwbGbBfjjwkqd7yekLv9gekZu6nCAWcsUr
+-  NEXT_PUBLIC_ALGOLIA_APP_ID: 6DXBNCDC9X
+-  NEXT_PUBLIC_ALGOLIA_SEARCH_KEY: 7fd66bc77502ecb22bfd3623b6611ca4
+-  SENTRY_AUTH_TOKEN: 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
+-  REVALIDATION_SECRET: UckIDx4UxmETzPxFrDJCwCipILfgicYYYvS535jcEBUDDKb8fyrQpGqIOl2vuCUV
+-  SITE_URL: https://www.dictuc.cl
+-jobs:
+-  build_and_deploy_job:
+-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+-    runs-on: ubuntu-latest
+-    name: Build and Deploy Job
+-    steps:
+-      - uses: actions/checkout@v3
+-        with:
+-          submodules: true
+-          lfs: false
+-      - name: Build And Deploy
+-        id: builddeploy
+-        uses: Azure/static-web-apps-deploy@v1
+-        with:
+-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_ISLAND_047BEE91E }}
+-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+-          action: "upload"
+-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+-          app_location: "/" # App source code path
+-          api_location: "" # Api source code path - optional
+-          output_location: "" # Built app content directory - optional
+-          ###### End of Repository/Build Configurations ######
+-
+-  close_pull_request_job:
+-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+-    runs-on: ubuntu-latest
+-    name: Close Pull Request Job
+-    steps:
+-      - name: Close Pull Request
+-        id: closepullrequest
+-        uses: Azure/static-web-apps-deploy@v1
+-        with:
+-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_ISLAND_047BEE91E }}
+-          action: "close"
+-
++name: Azure Static Web Apps CI/CD
++
++on:
++  push:
++    branches:
++      - main
++  pull_request:
++    types: [opened, synchronize, reopened, closed]
++    branches:
++      - main
++
++env:
++  STRAPI_API_URL: https://backend-dictuc.andesblockchain.com
++  NEXT_PUBLIC_STRAPI_API_URL: https://backend-dictuc.andesblockchain.com
++  VERIFICACION_URL: https://xnet.dictuc.cl/xnet/dictuc/firma_elect/descarga_doc.phtml
++  TICKET_API_TOKEN: hh77ApytA3fWzjQG4FUafsAXPWLMQ8sMqPRK0bunLdnuqobc3ub8AGRAGUfGeA7LPtMwbGbBfjjwkqd7yekLv9gekZu6nCAWcsUr
++  NEXT_PUBLIC_ALGOLIA_APP_ID: 6DXBNCDC9X
++  NEXT_PUBLIC_ALGOLIA_SEARCH_KEY: 7fd66bc77502ecb22bfd3623b6611ca4
++  SENTRY_AUTH_TOKEN: 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
++  REVALIDATION_SECRET: UckIDx4UxmETzPxFrDJCwCipILfgicYYYvS535jcEBUDDKb8fyrQpGqIOl2vuCUV
++  SITE_URL: https://www.dictuc.cl
++
++jobs:
++  build_and_deploy_job:
++    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
++    runs-on: ubuntu-latest
++    name: Build and Deploy Job
++    steps:
++      - uses: actions/checkout@v3
++        with:
++          submodules: true
++          lfs: false
++
++      - name: Setup Node.js 20
++        uses: actions/setup-node@v4
++        with:
++          node-version: '20'
++          cache: 'npm'
++
++      - name: Install dependencies
++        run: npm ci
++
++      - name: Build Next.js app
++        run: npm run build
++
++      - name: Build And Deploy
++        id: builddeploy
++        uses: Azure/static-web-apps-deploy@v1
++        with:
++          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_ISLAND_047BEE91E }}
++          repo_token: ${{ secrets.GITHUB_TOKEN }}
++          action: "upload"
++          app_location: "/"
++          api_location: ""
++          output_location: ""
++          skip_app_build: true
++
++  close_pull_request_job:
++    if: github.event_name == 'pull_request' && github.event.action == 'closed'
++    runs-on: ubuntu-latest
++    name: Close Pull Request Job
++    steps:
++      - name: Close Pull Request
++        id: closepullrequest
++        uses: Azure/static-web-apps-deploy@v1
++        with:
++          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_ISLAND_047BEE91E }}
++          action: "close"
+diff --git a/.github/workflows/azure-static-web-apps-witty-mud-07f28ef0f.yml b/.github/workflows/azure-static-web-apps-witty-mud-07f28ef0f.yml.disabled
+similarity index 100%
+rename from .github/workflows/azure-static-web-apps-witty-mud-07f28ef0f.yml
+rename to .github/workflows/azure-static-web-apps-witty-mud-07f28ef0f.yml.disabled
+diff --git a/AGENTS.md b/AGENTS.md
+new file mode 100644
+index 0000000..49dedf2
+--- /dev/null
++++ b/AGENTS.md
+@@ -0,0 +1,119 @@
++# AGENTS.md
++
++This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
++ 
++## Project Overview
++
++This is a Next.js 16.1.3 frontend application for DICTUC (a Chilean organization), built with the App Router architecture. It consumes content from a Strapi CMS backend running on port 1337 and uses a dynamic block-based content system for rendering pages.
++
++## Development Commands
++
++```bash
++# Start development server (runs on http://localhost:3000)
++npm run dev
++
++# Build for production
++npm run build
++
++# Start production server
++npm start
++
++# Run ESLint
++npm run lint
++```
++
++## Tech Stack
++
++- **Framework**: Next.js 16.1.3 with App Router
++- **React**: 19.2.3 with React Compiler enabled (experimental)
++- **Styling**: Tailwind CSS 4 + DaisyUI 5.5.14
++- **Icons**: Font Awesome 7.1.0
++- **CMS Backend**: Strapi (local at http://127.0.0.1:1337)
++- **Fonts**: Montserrat (Google Fonts), Geist Sans & Geist Mono
++
++## Architecture
++
++### Directory Structure
++
++```
++src/
++├── app/(pages)/        # App Router pages (route group)
++│   ├── layout.js       # Root layout with fonts and metadata
++│   ├── page.js         # Home page
++│   └── globals.css     # Global styles and Tailwind config
++├── components/         # React components
++│   ├── bloquesPaginas/ # Dynamic block components for CMS content
++│   └── carrusel/       # Carousel components
++├── helpers/            # Utility functions
++│   ├── bloque-renderer.js  # Maps Strapi block types to components
++│   ├── queries.js          # Legacy Gatsby GraphQL queries
++│   └── [other helpers]
++└── hooks/              # Custom React hooks for data fetching
++```
++
++### Key Patterns
++
++#### Block-Based Content System
++
++The app uses a dynamic block rendering system for CMS content:
++
++1. **Block Renderer** (`src/helpers/bloque-renderer.js`): Central switch statement that maps Strapi component types to React components
++2. **Block Components** (`src/components/bloquesPaginas/`): Each block type has its own component
++3. **Block Wrapper** (`src/components/bloquesPaginas/Bloque.js`): Common wrapper providing titles, backgrounds, and styling
++
++Available block types:
++- `bloques.bloque-texto` → BloqueTexto
++- `bloques.bloque-hero` → BloqueHero
++- `bloques.bloque-galeria` → BloqueGaleria
++- `bloques.bloque-noticias` → BloqueNoticias
++- `bloques.bloque-tarjetas` → BloqueTarjetas
++- `bloques.bloque-efemerides` → BloqueEfemerides
++- `bloques.bloque-personas` → BloquePersonas
++- `bloques.bloque-documentos` → BloqueDocumentos
++- `bloques.bloque-tiposde-servicio` → BloqueTiposServicio
++- `bloques.bloque-tabs` → BloqueTabs (with BloqueAcordeon variant)
++- `bloques.bloque-sectores-pais` → BloqueSectoresPais
++
++#### Data Fetching with Custom Hooks
++
++Data is fetched server-side using async custom hooks (prefixed `use-`):
++- Hooks are async functions that fetch from Strapi API
++- Called in Server Components with `await`
++- Example: `const noticias = await useUltimasNoticias()`
++
++#### Path Aliases
++
++Use `@/` to reference the `src/` directory:
++```javascript
++import Component from '@/components/Component'
++import useHook from '@/hooks/use-hook'
++```
++
++## Configuration
++
++### Environment Variables
++
++Required in `.env.local`:
++```
++STRAPI_API_URL=http://127.0.0.1:1337
++```
++
++### Next.js Config
++
++- **React Compiler**: Enabled in experimental mode
++- **Image Domains**: Configured for Strapi on localhost:1337
++
++### Tailwind/DaisyUI Theme
++
++Custom color tokens defined in `globals.css`:
++- `--color-azul-dictuc`: #307fe2 (primary blue)
++- `--color-gris-dictuc`: #53565A (text gray)
++- Sustainability colors: rojo, amarillo, verde, azul, fucsia (sostenibilidad variants)
++
++## Important Notes
++
++- The codebase contains legacy Gatsby GraphQL queries in `src/helpers/queries.js` - these are not used in the Next.js version
++- Strapi backend must be running on port 1337 for the app to function
++- The app uses Server Components by default (Next.js App Router)
++- Font Awesome is loaded globally
++- Route group `(pages)` is used but doesn't affect URL structure
+diff --git a/PENDIENTES.md b/PENDIENTES.md
+index 34fbf2d..bb39e90 100644
+--- a/PENDIENTES.md
++++ b/PENDIENTES.md
+@@ -1,9 +1,3 @@
+-# Pendientes Sitio Dictuc — Documento de Ejecución
+-
+-> Generado: 2026-03-21 | Basado en revisión del 09-03-2026
+-> Convención: `[ ]` pendiente · `[x]` completado · `[~]` en progreso · `[!]` bloqueado (requiere info externa)
+-
+----
+ 
+ ## Sprint 1 — Quick Wins
+ 
+diff --git a/next.config.mjs b/next.config.mjs
+index 73f573f..e24bbaf 100644
+--- a/next.config.mjs
++++ b/next.config.mjs
+@@ -1,4 +1,6 @@
+ import { withSentryConfig } from '@sentry/nextjs';
++import withBundleAnalyzer from '@next/bundle-analyzer';
++
+ /** @type {import('next').NextConfig} */
+ const nextConfig = {
+   reactCompiler: true,
+@@ -8,6 +10,7 @@ const nextConfig = {
+     },
+   }),
+   images: {
++    formats: ['image/avif', 'image/webp'],
+     qualities: [75, 90, 100],
+     dangerouslyAllowLocalIP: true,
+     remotePatterns: [
+@@ -44,7 +47,9 @@ const nextConfig = {
+   },
+ };
+ 
+-export default withSentryConfig(nextConfig, {
++const configWithAnalyzer = withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })(nextConfig);
++
++export default withSentryConfig(configWithAnalyzer, {
+   org: "andes-blockchain",
+   project: "javascript-nextjs",
+   silent: !process.env.CI,
+diff --git a/package-lock.json b/package-lock.json
+index 5d2efb4..7bde2a2 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -9,31 +9,27 @@
+       "version": "0.1.0",
+       "dependencies": {
+         "@amplitude/unified": "^1.1.9",
+-        "@fortawesome/fontawesome-free": "^7.1.0",
+         "@fortawesome/fontawesome-svg-core": "^7.1.0",
+         "@fortawesome/free-brands-svg-icons": "^7.1.0",
+         "@fortawesome/free-solid-svg-icons": "^7.1.0",
+         "@fortawesome/react-fontawesome": "^3.1.1",
+-        "@next/bundle-analyzer": "^16.2.4",
+         "@sentry/nextjs": "^10.51.0",
+         "algoliasearch": "^5.50.1",
+         "class-variance-authority": "^0.7.1",
+         "clsx": "^2.1.1",
+         "daisyui": "^5.5.14",
+         "html-react-parser": "^6.1.3",
+-        "lucide-react": "^0.575.0",
+         "next": "16.1.3",
+-        "playwright": "^1.58.2",
+         "radix-ui": "^1.4.3",
+         "react": "19.2.3",
+         "react-dom": "19.2.3",
+         "react-hook-form": "^7.71.1",
+         "react-instantsearch": "^7.32.0",
+         "react-markdown": "^10.1.0",
+-        "solc": "^0.8.34",
+         "tailwind-merge": "^3.5.0"
+       },
+       "devDependencies": {
++        "@next/bundle-analyzer": "^16.2.10",
+         "@tailwindcss/postcss": "^4",
+         "@tailwindcss/typography": "^0.5.20",
+         "babel-plugin-react-compiler": "1.0.0",
+@@ -41,7 +37,8 @@
+         "eslint-config-next": "16.1.3",
+         "shadcn": "^3.8.5",
+         "tailwindcss": "^4",
+-        "tw-animate-css": "^1.4.0"
++        "tw-animate-css": "^1.4.0",
++        "webpack-bundle-analyzer": "^5.3.0"
+       }
+     },
+     "node_modules/@algolia/abtesting": {
+@@ -1051,11 +1048,13 @@
+       }
+     },
+     "node_modules/@discoveryjs/json-ext": {
+-      "version": "0.5.7",
+-      "resolved": "https://registry.npmjs.org/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz",
+-      "integrity": "sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==",
++      "version": "0.6.3",
++      "resolved": "https://registry.npmjs.org/@discoveryjs/json-ext/-/json-ext-0.6.3.tgz",
++      "integrity": "sha512-4B4OijXeVNOPZlYA2oEwWOTkzyltLao+xbotHQeqN++Rv27Y6s818+n2Qkp8q+Fxhn0t/5lA5X1Mxktud8eayQ==",
++      "dev": true,
++      "license": "MIT",
+       "engines": {
+-        "node": ">=10.0.0"
++        "node": ">=14.17.0"
+       }
+     },
+     "node_modules/@dotenvx/dotenvx": {
+@@ -1596,15 +1595,6 @@
+         "node": ">=6"
+       }
+     },
+-    "node_modules/@fortawesome/fontawesome-free": {
+-      "version": "7.2.0",
+-      "resolved": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-7.2.0.tgz",
+-      "integrity": "sha512-3DguDv/oUE+7vjMeTSOjCSG+KeawgVQOHrKRnvUuqYh1mfArrh7s+s8hXW3e4RerBA1+Wh+hBqf8sJNpqNrBWg==",
+-      "license": "(CC-BY-4.0 AND OFL-1.1 AND MIT)",
+-      "engines": {
+-        "node": ">=6"
+-      }
+-    },
+     "node_modules/@fortawesome/fontawesome-svg-core": {
+       "version": "7.2.0",
+       "resolved": "https://registry.npmjs.org/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-7.2.0.tgz",
+@@ -2426,13 +2416,107 @@
+       }
+     },
+     "node_modules/@next/bundle-analyzer": {
+-      "version": "16.2.4",
+-      "resolved": "https://registry.npmjs.org/@next/bundle-analyzer/-/bundle-analyzer-16.2.4.tgz",
+-      "integrity": "sha512-EAA9xTDv0P1IiUcZaASJJPkNDjRvL7OMTha6XN8MBzALYGfn7I52Mn7vRiyjVfNrtUPi2qiacY+eFVXe3lKCXA==",
++      "version": "16.2.10",
++      "resolved": "https://registry.npmjs.org/@next/bundle-analyzer/-/bundle-analyzer-16.2.10.tgz",
++      "integrity": "sha512-KcepWhb3IVniZgm00GSSCQDEUQqZXuXtuXRh8J6e3Un342TcQ77iK4DedeEkct+fcx7yFEDL2J6z4Jeho5JDAw==",
++      "dev": true,
++      "license": "MIT",
+       "dependencies": {
+         "webpack-bundle-analyzer": "4.10.1"
+       }
+     },
++    "node_modules/@next/bundle-analyzer/node_modules/@discoveryjs/json-ext": {
++      "version": "0.5.7",
++      "resolved": "https://registry.npmjs.org/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz",
++      "integrity": "sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=10.0.0"
++      }
++    },
++    "node_modules/@next/bundle-analyzer/node_modules/commander": {
++      "version": "7.2.0",
++      "resolved": "https://registry.npmjs.org/commander/-/commander-7.2.0.tgz",
++      "integrity": "sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">= 10"
++      }
++    },
++    "node_modules/@next/bundle-analyzer/node_modules/html-escaper": {
++      "version": "2.0.2",
++      "resolved": "https://registry.npmjs.org/html-escaper/-/html-escaper-2.0.2.tgz",
++      "integrity": "sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/@next/bundle-analyzer/node_modules/sirv": {
++      "version": "2.0.4",
++      "resolved": "https://registry.npmjs.org/sirv/-/sirv-2.0.4.tgz",
++      "integrity": "sha512-94Bdh3cC2PKrbgSOUqTiGPWVZeSiXfKOVZNJniWoqrWrRkB1CJzBU3NEbiTsPcYy1lDsANA/THzS+9WBiy5nfQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@polka/url": "^1.0.0-next.24",
++        "mrmime": "^2.0.0",
++        "totalist": "^3.0.0"
++      },
++      "engines": {
++        "node": ">= 10"
++      }
++    },
++    "node_modules/@next/bundle-analyzer/node_modules/webpack-bundle-analyzer": {
++      "version": "4.10.1",
++      "resolved": "https://registry.npmjs.org/webpack-bundle-analyzer/-/webpack-bundle-analyzer-4.10.1.tgz",
++      "integrity": "sha512-s3P7pgexgT/HTUSYgxJyn28A+99mmLq4HsJepMPzu0R8ImJc52QNqaFYW1Z2z2uIb1/J3eYgaAWVpaC+v/1aAQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@discoveryjs/json-ext": "0.5.7",
++        "acorn": "^8.0.4",
++        "acorn-walk": "^8.0.0",
++        "commander": "^7.2.0",
++        "debounce": "^1.2.1",
++        "escape-string-regexp": "^4.0.0",
++        "gzip-size": "^6.0.0",
++        "html-escaper": "^2.0.2",
++        "is-plain-object": "^5.0.0",
++        "opener": "^1.5.2",
++        "picocolors": "^1.0.0",
++        "sirv": "^2.0.3",
++        "ws": "^7.3.1"
++      },
++      "bin": {
++        "webpack-bundle-analyzer": "lib/bin/analyzer.js"
++      },
++      "engines": {
++        "node": ">= 10.13.0"
++      }
++    },
++    "node_modules/@next/bundle-analyzer/node_modules/ws": {
++      "version": "7.5.11",
++      "resolved": "https://registry.npmjs.org/ws/-/ws-7.5.11.tgz",
++      "integrity": "sha512-zS54Oen9bITtp7kp2XM3AydrCIq1D+HwJOuH+c+e4LfpL/lotP5osijd+UoMnxwAam1GN8R4KtLAyIrIcBNpiA==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=8.3.0"
++      },
++      "peerDependencies": {
++        "bufferutil": "^4.0.1",
++        "utf-8-validate": "^5.0.2"
++      },
++      "peerDependenciesMeta": {
++        "bufferutil": {
++          "optional": true
++        },
++        "utf-8-validate": {
++          "optional": true
++        }
++      }
++    },
+     "node_modules/@next/env": {
+       "version": "16.1.3",
+       "resolved": "https://registry.npmjs.org/@next/env/-/env-16.1.3.tgz",
+@@ -3162,7 +3246,9 @@
+     "node_modules/@polka/url": {
+       "version": "1.0.0-next.29",
+       "resolved": "https://registry.npmjs.org/@polka/url/-/url-1.0.0-next.29.tgz",
+-      "integrity": "sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww=="
++      "integrity": "sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==",
++      "dev": true,
++      "license": "MIT"
+     },
+     "node_modules/@prisma/instrumentation": {
+       "version": "7.6.0",
+@@ -7085,6 +7171,7 @@
+       "version": "8.3.5",
+       "resolved": "https://registry.npmjs.org/acorn-walk/-/acorn-walk-8.3.5.tgz",
+       "integrity": "sha512-HEHNfbars9v4pgpW6SO1KSPkfoS0xVOM/9UzkJltjlsHZmJasxg8aXkuZa7SMf8vKGIBhpUsPluQSqhJFCqebw==",
++      "dev": true,
+       "dependencies": {
+         "acorn": "^8.11.0"
+       },
+@@ -8009,12 +8096,6 @@
+         "url": "https://github.com/sponsors/wooorm"
+       }
+     },
+-    "node_modules/command-exists": {
+-      "version": "1.2.9",
+-      "resolved": "https://registry.npmjs.org/command-exists/-/command-exists-1.2.9.tgz",
+-      "integrity": "sha512-LTQ/SGc+s0Xc0Fu5WaKnR0YiygZkm9eKFvyS+fRsU7/ZWFF8ykFM6Pc9aCVf1+xasOOZpO3BAVgVrKvsqKHV7w==",
+-      "license": "MIT"
+-    },
+     "node_modules/commander": {
+       "version": "14.0.3",
+       "resolved": "https://registry.npmjs.org/commander/-/commander-14.0.3.tgz",
+@@ -8250,7 +8331,9 @@
+     "node_modules/debounce": {
+       "version": "1.2.1",
+       "resolved": "https://registry.npmjs.org/debounce/-/debounce-1.2.1.tgz",
+-      "integrity": "sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug=="
++      "integrity": "sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==",
++      "dev": true,
++      "license": "MIT"
+     },
+     "node_modules/debug": {
+       "version": "4.4.3",
+@@ -8558,7 +8641,9 @@
+     "node_modules/duplexer": {
+       "version": "0.1.2",
+       "resolved": "https://registry.npmjs.org/duplexer/-/duplexer-0.1.2.tgz",
+-      "integrity": "sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg=="
++      "integrity": "sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==",
++      "dev": true,
++      "license": "MIT"
+     },
+     "node_modules/eciesjs": {
+       "version": "0.4.18",
+@@ -8855,6 +8940,7 @@
+       "version": "4.0.0",
+       "resolved": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz",
+       "integrity": "sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==",
++      "dev": true,
+       "license": "MIT",
+       "engines": {
+         "node": ">=10"
+@@ -9665,26 +9751,6 @@
+       "dev": true,
+       "license": "ISC"
+     },
+-    "node_modules/follow-redirects": {
+-      "version": "1.15.11",
+-      "resolved": "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.11.tgz",
+-      "integrity": "sha512-deG2P0JfjrTxl50XGCDyfI97ZGVCxIpfKYmfyrQ54n5FO/0gfIES8C/Psl6kWVDolizcaaxZJnTS0QSMxvnsBQ==",
+-      "funding": [
+-        {
+-          "type": "individual",
+-          "url": "https://github.com/sponsors/RubenVerborgh"
+-        }
+-      ],
+-      "license": "MIT",
+-      "engines": {
+-        "node": ">=4.0"
+-      },
+-      "peerDependenciesMeta": {
+-        "debug": {
+-          "optional": true
+-        }
+-      }
+-    },
+     "node_modules/for-each": {
+       "version": "0.3.5",
+       "resolved": "https://registry.npmjs.org/for-each/-/for-each-0.3.5.tgz",
+@@ -10107,6 +10173,8 @@
+       "version": "6.0.0",
+       "resolved": "https://registry.npmjs.org/gzip-size/-/gzip-size-6.0.0.tgz",
+       "integrity": "sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==",
++      "dev": true,
++      "license": "MIT",
+       "dependencies": {
+         "duplexer": "^0.1.2"
+       },
+@@ -10314,9 +10382,11 @@
+       }
+     },
+     "node_modules/html-escaper": {
+-      "version": "2.0.2",
+-      "resolved": "https://registry.npmjs.org/html-escaper/-/html-escaper-2.0.2.tgz",
+-      "integrity": "sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg=="
++      "version": "3.0.3",
++      "resolved": "https://registry.npmjs.org/html-escaper/-/html-escaper-3.0.3.tgz",
++      "integrity": "sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==",
++      "dev": true,
++      "license": "MIT"
+     },
+     "node_modules/html-react-parser": {
+       "version": "6.1.3",
+@@ -11055,6 +11125,8 @@
+       "version": "5.0.0",
+       "resolved": "https://registry.npmjs.org/is-plain-object/-/is-plain-object-5.0.0.tgz",
+       "integrity": "sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==",
++      "dev": true,
++      "license": "MIT",
+       "engines": {
+         "node": ">=0.10.0"
+       }
+@@ -11363,12 +11435,6 @@
+       "integrity": "sha512-hNngCeKxIUQiEUN3GPJOkz4wF/YvdUdbNL9hsBcMQTkKzboD7T/q3OYOuuPZLUE6dBxSGpwhk5mwuDud7JVAow==",
+       "license": "BSD-3-Clause"
+     },
+-    "node_modules/js-sha3": {
+-      "version": "0.8.0",
+-      "resolved": "https://registry.npmjs.org/js-sha3/-/js-sha3-0.8.0.tgz",
+-      "integrity": "sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==",
+-      "license": "MIT"
+-    },
+     "node_modules/js-tokens": {
+       "version": "4.0.0",
+       "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
+@@ -11908,15 +11974,6 @@
+         "yallist": "^3.0.2"
+       }
+     },
+-    "node_modules/lucide-react": {
+-      "version": "0.575.0",
+-      "resolved": "https://registry.npmjs.org/lucide-react/-/lucide-react-0.575.0.tgz",
+-      "integrity": "sha512-VuXgKZrk0uiDlWjGGXmKV6MSk9Yy4l10qgVvzGn2AWBx1Ylt0iBexKOAoA6I7JO3m+M9oeovJd3yYENfkUbOeg==",
+-      "license": "ISC",
+-      "peerDependencies": {
+-        "react": "^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+-      }
+-    },
+     "node_modules/magic-string": {
+       "version": "0.30.21",
+       "resolved": "https://registry.npmjs.org/magic-string/-/magic-string-0.30.21.tgz",
+@@ -12106,14 +12163,6 @@
+         "node": ">= 0.8"
+       }
+     },
+-    "node_modules/memorystream": {
+-      "version": "0.3.1",
+-      "resolved": "https://registry.npmjs.org/memorystream/-/memorystream-0.3.1.tgz",
+-      "integrity": "sha512-S3UwM3yj5mtUSEfP41UZmt/0SCoVYUcU1rkXv+BQ5Ig8ndL4sPoJNBUJERafdPb5jjHJGuMgytgKvKIf58XNBw==",
+-      "engines": {
+-        "node": ">= 0.10.0"
+-      }
+-    },
+     "node_modules/merge-descriptors": {
+       "version": "2.0.0",
+       "resolved": "https://registry.npmjs.org/merge-descriptors/-/merge-descriptors-2.0.0.tgz",
+@@ -12684,6 +12733,8 @@
+       "version": "2.0.1",
+       "resolved": "https://registry.npmjs.org/mrmime/-/mrmime-2.0.1.tgz",
+       "integrity": "sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==",
++      "dev": true,
++      "license": "MIT",
+       "engines": {
+         "node": ">=10"
+       }
+@@ -13207,6 +13258,7 @@
+       "version": "1.5.2",
+       "resolved": "https://registry.npmjs.org/opener/-/opener-1.5.2.tgz",
+       "integrity": "sha512-ur5UIdyw5Y7yEj9wLzhqXiy6GZ3Mwx0yGI+5sMn2r0N0v3cKJvUmFH5yPP+WXh9e0xfyzyJX95D8l088DNFj7A==",
++      "dev": true,
+       "bin": {
+         "opener": "bin/opener-bin.js"
+       }
+@@ -13266,15 +13318,6 @@
+         "url": "https://github.com/chalk/chalk?sponsor=1"
+       }
+     },
+-    "node_modules/os-tmpdir": {
+-      "version": "1.0.2",
+-      "resolved": "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.2.tgz",
+-      "integrity": "sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==",
+-      "license": "MIT",
+-      "engines": {
+-        "node": ">=0.10.0"
+-      }
+-    },
+     "node_modules/outvariant": {
+       "version": "1.4.3",
+       "resolved": "https://registry.npmjs.org/outvariant/-/outvariant-1.4.3.tgz",
+@@ -13540,36 +13583,6 @@
+         "node": ">=16.20.0"
+       }
+     },
+-    "node_modules/playwright": {
+-      "version": "1.58.2",
+-      "resolved": "https://registry.npmjs.org/playwright/-/playwright-1.58.2.tgz",
+-      "integrity": "sha512-vA30H8Nvkq/cPBnNw4Q8TWz1EJyqgpuinBcHET0YVJVFldr8JDNiU9LaWAE1KqSkRYazuaBhTpB5ZzShOezQ6A==",
+-      "license": "Apache-2.0",
+-      "dependencies": {
+-        "playwright-core": "1.58.2"
+-      },
+-      "bin": {
+-        "playwright": "cli.js"
+-      },
+-      "engines": {
+-        "node": ">=18"
+-      },
+-      "optionalDependencies": {
+-        "fsevents": "2.3.2"
+-      }
+-    },
+-    "node_modules/playwright-core": {
+-      "version": "1.58.2",
+-      "resolved": "https://registry.npmjs.org/playwright-core/-/playwright-core-1.58.2.tgz",
+-      "integrity": "sha512-yZkEtftgwS8CsfYo7nm0KE8jsvm6i/PTgVtB8DL726wNf6H2IMsDuxCpJj59KDaxCtSnrWan2AeDqM7JBaultg==",
+-      "license": "Apache-2.0",
+-      "bin": {
+-        "playwright-core": "cli.js"
+-      },
+-      "engines": {
+-        "node": ">=18"
+-      }
+-    },
+     "node_modules/possible-typed-array-names": {
+       "version": "1.1.0",
+       "resolved": "https://registry.npmjs.org/possible-typed-array-names/-/possible-typed-array-names-1.1.0.tgz",
+@@ -14969,16 +14982,18 @@
+       }
+     },
+     "node_modules/sirv": {
+-      "version": "2.0.4",
+-      "resolved": "https://registry.npmjs.org/sirv/-/sirv-2.0.4.tgz",
+-      "integrity": "sha512-94Bdh3cC2PKrbgSOUqTiGPWVZeSiXfKOVZNJniWoqrWrRkB1CJzBU3NEbiTsPcYy1lDsANA/THzS+9WBiy5nfQ==",
++      "version": "3.0.2",
++      "resolved": "https://registry.npmjs.org/sirv/-/sirv-3.0.2.tgz",
++      "integrity": "sha512-2wcC/oGxHis/BoHkkPwldgiPSYcpZK3JU28WoMVv55yHJgcZ8rlXvuG9iZggz+sU1d4bRgIGASwyWqjxu3FM0g==",
++      "dev": true,
++      "license": "MIT",
+       "dependencies": {
+         "@polka/url": "^1.0.0-next.24",
+         "mrmime": "^2.0.0",
+         "totalist": "^3.0.0"
+       },
+       "engines": {
+-        "node": ">= 10"
++        "node": ">=18"
+       }
+     },
+     "node_modules/sisteransi": {
+@@ -14988,45 +15003,6 @@
+       "dev": true,
+       "license": "MIT"
+     },
+-    "node_modules/solc": {
+-      "version": "0.8.34",
+-      "resolved": "https://registry.npmjs.org/solc/-/solc-0.8.34.tgz",
+-      "integrity": "sha512-qf8HajA1sHhXRV0hMSDXLjVbc4v3Q+SQbL9zok+1WmgVj7Z4oMjMHxaysCzfGtFVqjZdfDDJWyZI+tcx5bO7Dw==",
+-      "license": "MIT",
+-      "dependencies": {
+-        "command-exists": "^1.2.8",
+-        "commander": "^8.1.0",
+-        "follow-redirects": "^1.12.1",
+-        "js-sha3": "0.8.0",
+-        "memorystream": "^0.3.1",
+-        "semver": "^5.5.0",
+-        "tmp": "0.0.33"
+-      },
+-      "bin": {
+-        "solcjs": "solc.js"
+-      },
+-      "engines": {
+-        "node": ">=12.0.0"
+-      }
+-    },
+-    "node_modules/solc/node_modules/commander": {
+-      "version": "8.3.0",
+-      "resolved": "https://registry.npmjs.org/commander/-/commander-8.3.0.tgz",
+-      "integrity": "sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==",
+-      "license": "MIT",
+-      "engines": {
+-        "node": ">= 12"
+-      }
+-    },
+-    "node_modules/solc/node_modules/semver": {
+-      "version": "5.7.2",
+-      "resolved": "https://registry.npmjs.org/semver/-/semver-5.7.2.tgz",
+-      "integrity": "sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==",
+-      "license": "ISC",
+-      "bin": {
+-        "semver": "bin/semver"
+-      }
+-    },
+     "node_modules/source-map": {
+       "version": "0.6.1",
+       "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz",
+@@ -15611,18 +15587,6 @@
+       "dev": true,
+       "license": "MIT"
+     },
+-    "node_modules/tmp": {
+-      "version": "0.0.33",
+-      "resolved": "https://registry.npmjs.org/tmp/-/tmp-0.0.33.tgz",
+-      "integrity": "sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==",
+-      "license": "MIT",
+-      "dependencies": {
+-        "os-tmpdir": "~1.0.2"
+-      },
+-      "engines": {
+-        "node": ">=0.6.0"
+-      }
+-    },
+     "node_modules/to-regex-range": {
+       "version": "5.0.1",
+       "resolved": "https://registry.npmjs.org/to-regex-range/-/to-regex-range-5.0.1.tgz",
+@@ -15650,6 +15614,8 @@
+       "version": "3.0.1",
+       "resolved": "https://registry.npmjs.org/totalist/-/totalist-3.0.1.tgz",
+       "integrity": "sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==",
++      "dev": true,
++      "license": "MIT",
+       "engines": {
+         "node": ">=6"
+       }
+@@ -16338,37 +16304,41 @@
+       }
+     },
+     "node_modules/webpack-bundle-analyzer": {
+-      "version": "4.10.1",
+-      "resolved": "https://registry.npmjs.org/webpack-bundle-analyzer/-/webpack-bundle-analyzer-4.10.1.tgz",
+-      "integrity": "sha512-s3P7pgexgT/HTUSYgxJyn28A+99mmLq4HsJepMPzu0R8ImJc52QNqaFYW1Z2z2uIb1/J3eYgaAWVpaC+v/1aAQ==",
++      "version": "5.3.0",
++      "resolved": "https://registry.npmjs.org/webpack-bundle-analyzer/-/webpack-bundle-analyzer-5.3.0.tgz",
++      "integrity": "sha512-PEhAoqiJ+47d0uLMx/+zo5XOvaU+Vk6N2ZLht7H3n09QLy/fhyvqGNwjdRUHJDgMN8crBR2ZwVHkIswT3Xuawg==",
++      "dev": true,
++      "license": "MIT",
+       "dependencies": {
+-        "@discoveryjs/json-ext": "0.5.7",
++        "@discoveryjs/json-ext": "^0.6.3",
+         "acorn": "^8.0.4",
+         "acorn-walk": "^8.0.0",
+-        "commander": "^7.2.0",
+-        "debounce": "^1.2.1",
+-        "escape-string-regexp": "^4.0.0",
+-        "gzip-size": "^6.0.0",
+-        "html-escaper": "^2.0.2",
+-        "is-plain-object": "^5.0.0",
++        "commander": "^14.0.2",
++        "escape-string-regexp": "^5.0.0",
++        "html-escaper": "^3.0.3",
+         "opener": "^1.5.2",
+         "picocolors": "^1.0.0",
+-        "sirv": "^2.0.3",
+-        "ws": "^7.3.1"
++        "sirv": "^3.0.2",
++        "ws": "^8.19.0"
+       },
+       "bin": {
+         "webpack-bundle-analyzer": "lib/bin/analyzer.js"
+       },
+       "engines": {
+-        "node": ">= 10.13.0"
++        "node": ">= 20.9.0"
+       }
+     },
+-    "node_modules/webpack-bundle-analyzer/node_modules/commander": {
+-      "version": "7.2.0",
+-      "resolved": "https://registry.npmjs.org/commander/-/commander-7.2.0.tgz",
+-      "integrity": "sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==",
++    "node_modules/webpack-bundle-analyzer/node_modules/escape-string-regexp": {
++      "version": "5.0.0",
++      "resolved": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-5.0.0.tgz",
++      "integrity": "sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==",
++      "dev": true,
++      "license": "MIT",
+       "engines": {
+-        "node": ">= 10"
++        "node": ">=12"
++      },
++      "funding": {
++        "url": "https://github.com/sponsors/sindresorhus"
+       }
+     },
+     "node_modules/webpack-sources": {
+@@ -16597,15 +16567,17 @@
+       "license": "ISC"
+     },
+     "node_modules/ws": {
+-      "version": "7.5.10",
+-      "resolved": "https://registry.npmjs.org/ws/-/ws-7.5.10.tgz",
+-      "integrity": "sha512-+dbF1tHwZpXcbOJdVOkzLDxZP1ailvSxM6ZweXTegylPny803bFhA+vqBYw4s31NSAk4S2Qz+AKXK9a4wkdjcQ==",
++      "version": "8.21.0",
++      "resolved": "https://registry.npmjs.org/ws/-/ws-8.21.0.tgz",
++      "integrity": "sha512-Vsp28b7DRcimFQvrqu2Wek3z1iYxDCWqHYB8Qsnk/S4RfaCQzPGPyBNuVjJV3cd6UiKtUtp6sNM77gWvzcCH+g==",
++      "dev": true,
++      "license": "MIT",
+       "engines": {
+-        "node": ">=8.3.0"
++        "node": ">=10.0.0"
+       },
+       "peerDependencies": {
+         "bufferutil": "^4.0.1",
+-        "utf-8-validate": "^5.0.2"
++        "utf-8-validate": ">=5.0.2"
+       },
+       "peerDependenciesMeta": {
+         "bufferutil": {
+diff --git a/package.json b/package.json
+index 08c954c..c60d296 100644
+--- a/package.json
++++ b/package.json
+@@ -10,31 +10,27 @@
+   },
+   "dependencies": {
+     "@amplitude/unified": "^1.1.9",
+-    "@fortawesome/fontawesome-free": "^7.1.0",
+     "@fortawesome/fontawesome-svg-core": "^7.1.0",
+     "@fortawesome/free-brands-svg-icons": "^7.1.0",
+     "@fortawesome/free-solid-svg-icons": "^7.1.0",
+     "@fortawesome/react-fontawesome": "^3.1.1",
+-    "@next/bundle-analyzer": "^16.2.4",
+     "@sentry/nextjs": "^10.51.0",
+     "algoliasearch": "^5.50.1",
+     "class-variance-authority": "^0.7.1",
+     "clsx": "^2.1.1",
+     "daisyui": "^5.5.14",
+     "html-react-parser": "^6.1.3",
+-    "lucide-react": "^0.575.0",
+     "next": "16.1.3",
+-    "playwright": "^1.58.2",
+     "radix-ui": "^1.4.3",
+     "react": "19.2.3",
+     "react-dom": "19.2.3",
+     "react-hook-form": "^7.71.1",
+     "react-instantsearch": "^7.32.0",
+     "react-markdown": "^10.1.0",
+-    "solc": "^0.8.34",
+     "tailwind-merge": "^3.5.0"
+   },
+   "devDependencies": {
++    "@next/bundle-analyzer": "^16.2.10",
+     "@tailwindcss/postcss": "^4",
+     "@tailwindcss/typography": "^0.5.20",
+     "babel-plugin-react-compiler": "1.0.0",
+@@ -42,6 +38,7 @@
+     "eslint-config-next": "16.1.3",
+     "shadcn": "^3.8.5",
+     "tailwindcss": "^4",
+-    "tw-animate-css": "^1.4.0"
++    "tw-animate-css": "^1.4.0",
++    "webpack-bundle-analyzer": "^5.3.0"
+   }
+ }
+diff --git a/src/amplitude.js b/src/amplitude.js
+index b202950..b7a0a41 100644
+--- a/src/amplitude.js
++++ b/src/amplitude.js
+@@ -8,7 +8,7 @@ function initAmplitude() {
+     amplitude.initAll('99efb8c9943db3ac036242c2d02b9291', {"analytics":{"autocapture":true},"sessionReplay":{"sampleRate":1}});
+   }
+ }
+-
++ 
+ initAmplitude();
+ 
+ export const Amplitude = () => null;
+diff --git a/src/app/(pages)/[seccion]/[...slug]/page.js b/src/app/(pages)/[seccion]/[...slug]/page.js
+index 8315e65..c2b18e9 100644
+--- a/src/app/(pages)/[seccion]/[...slug]/page.js
++++ b/src/app/(pages)/[seccion]/[...slug]/page.js
+@@ -7,9 +7,8 @@ import { renderBloque } from "@/helpers/bloque-renderer";
+ import usePagina from "@/hooks/use-pagina";
+ import useMenuSecundario from "@/hooks/use-menu-secundario";
+ import useMenuCajon from "@/hooks/use-menu-cajon";
+-import EditorModeProvider from "@/components/editor/EditorModeProvider";
++import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
+ import BloqueDebugBadge from "@/components/editor/BloqueDebugBadge";
+-import EditorPanel from "@/components/editor/EditorPanel";
+ 
+ 
+ export async function generateMetadata({ params }) {
+@@ -34,7 +33,8 @@ console.log("color",pagina)
+ 
+ 
+   return (
+-    <EditorModeProvider bloques={pagina?.Bloques || []} documentId={pagina?.documentId}>
++    <>
++    <EditorPageRegistrar bloques={pagina?.Bloques || []} documentId={pagina?.documentId} />
+     <PaginaInterior
+       fallback={process.env.STRAPI_API_URL + pagina.Banner.url}
+       titulo = {pagina.titulo}
+@@ -66,7 +66,6 @@ console.log("color",pagina)
+         </div>
+       )}
+       </PaginaInterior>
+-      <EditorPanel />
+-    </EditorModeProvider>
++    </>
+   );
+   }
+diff --git a/src/app/(pages)/layout.js b/src/app/(pages)/layout.js
+index 873da38..8fb01be 100644
+--- a/src/app/(pages)/layout.js
++++ b/src/app/(pages)/layout.js
+@@ -1,5 +1,7 @@
+ import "./globals.css";
+-import { Amplitude } from "@/amplitude";
++import AmplitudeLoader from "@/components/AmplitudeLoader";
++import EditorModeProvider from "@/components/editor/EditorModeProvider";
++import EditorPanel from "@/components/editor/EditorPanel";
+ 
+ export const metadata = {
+   title: {
+@@ -17,8 +19,11 @@ export default function RootLayout({ children }) {
+         <link rel="dns-prefetch" href="https://backend-dictuc.andesblockchain.com" />
+       </head>
+       <body className="antialiased w-full">
+-        <Amplitude />
+-        {children}
++        <AmplitudeLoader />
++        <EditorModeProvider>
++          {children}
++          <EditorPanel />
++        </EditorModeProvider>
+       </body>
+     </html>
+   );
+diff --git a/src/app/(pages)/noticias/[slug]/page.js b/src/app/(pages)/noticias/[slug]/page.js
+index 91443e8..f731efa 100644
+--- a/src/app/(pages)/noticias/[slug]/page.js
++++ b/src/app/(pages)/noticias/[slug]/page.js
+@@ -5,7 +5,7 @@ import FranjaAzul from "@/components/FranjaAzul";
+ import StrapiImage from "@/components/StrapiImage";
+ const FotoDefaultNoticias = "/images/noticias.png"
+ import useNoticia from '@/hooks/use-noticia';
+-import EditorModeProvider from "@/components/editor/EditorModeProvider";
++import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
+ import EditorBadge from "@/components/editor/EditorBadge";
+ 
+ export async function generateMetadata({ params }) {
+@@ -33,7 +33,8 @@ export default async function PaginasContenido({ params })
+       : '';
+ 
+   return (
+-    <EditorModeProvider documentId={noticia.documentId}>
++    <>
++    <EditorPageRegistrar documentId={noticia.documentId} />
+     <PaginaInterior fallback={bannerNoticias}
+                     titulo="Noticias"
+     breadcrum={[{ label: "Home", link: "/" }, {label:"Noticias", link:"/paginas/noticias"}, { label: noticia.titulo, link: "/" }]}>
+@@ -58,7 +59,6 @@ export default async function PaginasContenido({ params })
+           </div>
+         </div>
+          </PaginaInterior>
+-    </EditorModeProvider>
+-
++    </>
+   );
+ }
+\ No newline at end of file
+diff --git a/src/app/(pages)/novedades/[seccion]/[slug]/page.js b/src/app/(pages)/novedades/[seccion]/[slug]/page.js
+index 40d02c4..707f071 100644
+--- a/src/app/(pages)/novedades/[seccion]/[slug]/page.js
++++ b/src/app/(pages)/novedades/[seccion]/[slug]/page.js
+@@ -6,7 +6,7 @@ const FotoDefaultNoticias = "/images/noticias.png"
+ const bannerDefault = "/images/BannerMicrofonos.webp";
+ import useNoticia from '@/hooks/use-noticia';
+ import GaleriaClient from "@/components/bloquesPaginas/GaleriaClient";
+-import EditorModeProvider from "@/components/editor/EditorModeProvider";
++import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
+ import EditorBadge from "@/components/editor/EditorBadge";
+ 
+ export async function generateMetadata({ params }) {
+@@ -44,7 +44,8 @@ export default async function PaginasContenido({ params }) {
+       : '';
+ 
+   return (
+-    <EditorModeProvider documentId={noticia.documentId}>
++    <>
++    <EditorPageRegistrar documentId={noticia.documentId} />
+     <PaginaInterior fallback={bannerEtiqueta}
+                     titulo={tituloPagina}
+     breadcrum={[{ label: "Home", link: "/" }, { label: tituloPagina, link: `/paginas/${seccion}` }, { label: noticia.titulo }]}>
+@@ -82,6 +83,6 @@ export default async function PaginasContenido({ params }) {
+           )}
+         </div>
+     </PaginaInterior>
+-    </EditorModeProvider>
++    </>
+   );
+ }
+diff --git a/src/app/(pages)/proyectos/[slug]/page.js b/src/app/(pages)/proyectos/[slug]/page.js
+index c2bbd32..0e8fd12 100644
+--- a/src/app/(pages)/proyectos/[slug]/page.js
++++ b/src/app/(pages)/proyectos/[slug]/page.js
+@@ -5,7 +5,7 @@ import FranjaAzul from "@/components/FranjaAzul";
+ import StrapiImage from "@/components/StrapiImage";
+ const FotoDefaultNoticias = "/images/noticias.png"
+ import useNoticia from '@/hooks/use-noticia';
+-import EditorModeProvider from "@/components/editor/EditorModeProvider";
++import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
+ import EditorBadge from "@/components/editor/EditorBadge";
+ 
+ export default async function PaginasContenido({ params })
+@@ -27,7 +27,8 @@ export default async function PaginasContenido({ params })
+       : '';
+ 
+   return (
+-    <EditorModeProvider documentId={noticia.documentId}>
++    <>
++    <EditorPageRegistrar documentId={noticia.documentId} />
+     <PaginaInterior fallback={bannerNoticias}
+                     titulo="Proyectos"
+     breadcrum={[{ label: "Home", link: "/" }, {label:"Proyectos", link:"/paginas/proyactos"}, { label: noticia.titulo, link: "/" }]}>
+@@ -52,7 +53,6 @@ export default async function PaginasContenido({ params })
+           </div>
+         </div>
+          </PaginaInterior>
+-    </EditorModeProvider>
+-
++    </>
+   );
+ }
+\ No newline at end of file
+diff --git a/src/app/(pages)/servicios/[slug]/page.js b/src/app/(pages)/servicios/[slug]/page.js
+index 7d39256..49a2d01 100644
+--- a/src/app/(pages)/servicios/[slug]/page.js
++++ b/src/app/(pages)/servicios/[slug]/page.js
+@@ -12,7 +12,7 @@ const iconoPotenciales = "/images/PotencialesClientes.png";
+ import { redirect } from "next/navigation";
+ import useServicio from "@/hooks/use-servicio";
+ import { limpiarTabla } from "@/helpers/limpiar-tabla";
+-import EditorModeProvider from "@/components/editor/EditorModeProvider";
++import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
+ import EditorBadge from "@/components/editor/EditorBadge";
+ 
+ export async function generateMetadata({ params }) {
+@@ -30,7 +30,8 @@ export default async function Servicio({ params }) {
+   if (!servicio) redirect("/servicios/todos-los-servicios");
+   const strapiApiUrl = process.env.STRAPI_API_URL;
+   return (
+-    <EditorModeProvider documentId={servicio.documentId}>
++    <>
++    <EditorPageRegistrar documentId={servicio.documentId} />
+     <PaginaInterior
+       banner={servicio?.banner}
+       fallback={bannerLaboratorio}
+@@ -117,6 +118,6 @@ export default async function Servicio({ params }) {
+ 
+       </div>
+     </PaginaInterior>
+-    </EditorModeProvider>
++    </>
+   );
+ }
+\ No newline at end of file
+diff --git a/src/app/api/warm-images/route.js b/src/app/api/warm-images/route.js
+new file mode 100644
+index 0000000..cc720d1
+--- /dev/null
++++ b/src/app/api/warm-images/route.js
+@@ -0,0 +1,79 @@
++import { NextResponse } from "next/server";
++
++const REVALIDATION_SECRET = process.env.REVALIDATION_SECRET;
++
++// Anchos más comunes para imágenes full-width (deviceSizes de Next.js)
++const WIDTHS = [640, 1080, 1920];
++const QUALITY = 75;
++
++/**
++ * Extrae todas las URLs de imágenes del payload del webhook de Strapi.
++ * Los objetos de imagen de Strapi tienen { url, mime, ... }
++ */
++function extractImageUrls(data, urls = new Set()) {
++  if (!data || typeof data !== "object") return urls;
++  if (Array.isArray(data)) {
++    data.forEach((item) => extractImageUrls(item, urls));
++  } else {
++    if (
++      typeof data.url === "string" &&
++      data.mime?.startsWith("image/")
++    ) {
++      urls.add(data.url);
++    }
++    Object.values(data).forEach((val) => extractImageUrls(val, urls));
++  }
++  return urls;
++}
++
++async function warmImage(strapiUrl, siteOrigin) {
++  const absoluteUrl = strapiUrl.startsWith("http")
++    ? strapiUrl
++    : `${process.env.NEXT_PUBLIC_STRAPI_API_URL || process.env.STRAPI_API_URL}${strapiUrl}`;
++
++  await Promise.all(
++    WIDTHS.map((w) =>
++      fetch(
++        `${siteOrigin}/_next/image?url=${encodeURIComponent(absoluteUrl)}&w=${w}&q=${QUALITY}`,
++        { headers: { Accept: "image/avif,image/webp,*/*" } }
++      ).catch((err) =>
++        console.warn(`[warm-images] Error calentando ${absoluteUrl} w=${w}:`, err.message)
++      )
++    )
++  );
++}
++
++export async function POST(request) {
++  const authHeader = request.headers.get("authorization");
++  const token = authHeader?.replace("Bearer ", "");
++
++  if (!REVALIDATION_SECRET || token !== REVALIDATION_SECRET) {
++    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
++  }
++
++  try {
++    const body = await request.json().catch(() => ({}));
++    const siteOrigin = new URL(request.url).origin;
++
++    const imageUrls = extractImageUrls(body.entry || body);
++
++    if (imageUrls.size === 0) {
++      return NextResponse.json({ warmed: 0, message: "Sin imágenes en el payload" });
++    }
++
++    // Calentar en paralelo, sin bloquear la respuesta
++    Promise.all([...imageUrls].map((url) => warmImage(url, siteOrigin))).catch(
++      (err) => console.error("[warm-images] Error general:", err)
++    );
++
++    return NextResponse.json({
++      warmed: imageUrls.size,
++      urls: [...imageUrls],
++      widths: WIDTHS,
++      timestamp: Date.now(),
++    });
++  } catch (error) {
++    console.error("[warm-images] Error:", error);
++    return NextResponse.json({ error: "Error al procesar" }, { status: 500 });
++  }
++}
+diff --git a/src/components/AmplitudeLoader.js b/src/components/AmplitudeLoader.js
+new file mode 100644
+index 0000000..c6406f4
+--- /dev/null
++++ b/src/components/AmplitudeLoader.js
+@@ -0,0 +1,8 @@
++"use client";
++import dynamic from "next/dynamic";
++
++const Amplitude = dynamic(() => import("@/amplitude").then(m => ({ default: m.Amplitude })), { ssr: false });
++
++export default function AmplitudeLoader() {
++  return <Amplitude />;
++}
+diff --git a/src/components/NavbarMenu.js b/src/components/NavbarMenu.js
+index 8c369f1..dcc9940 100644
+--- a/src/components/NavbarMenu.js
++++ b/src/components/NavbarMenu.js
+@@ -1,6 +1,8 @@
+ "use client"
+ import React from "react"
+-import BuscadorAlgolia from "./BuscadorAlgolia"
++import dynamic from "next/dynamic"
++
++const BuscadorAlgolia = dynamic(() => import("./BuscadorAlgolia"), { ssr: false })
+ 
+ const hoverClasses = "hover:!bg-transparent hover:text-azul-dictuc hover:no-underline transition-colors flex flex-col items-center after:block after:h-[2px] after:w-0 after:bg-azul-dictuc after:rounded-full after:transition-all after:duration-300 hover:after:w-[20px]"
+ 
+diff --git a/src/components/bloquesPaginas/Bloque.js b/src/components/bloquesPaginas/Bloque.js
+index db09ff3..3fcbd8f 100644
+--- a/src/components/bloquesPaginas/Bloque.js
++++ b/src/components/bloquesPaginas/Bloque.js
+@@ -1,42 +1,54 @@
+ import React from "react";
++import Image from "next/image";
+ import clsx from "clsx";
+ import FranjaAzul from "../FranjaAzul";
+ import Titulo from "../Titulo";
+ 
+-const Bloque = ({ children, datosBloque }) => {
+-  const STRAPI_URL = process.env.STRAPI_API_URL;
++const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || process.env.STRAPI_API_URL;
++
++const getFotoFondoUrl = (foto) => {
++  if (!foto?.url) return null;
++  if (foto.url.startsWith("http")) return foto.url;
++  return `${STRAPI_URL}${foto.url}`;
++};
+ 
++const Bloque = ({ children, datosBloque }) => {
+   const colorFondo = datosBloque?.colorFondoBloque?.Codigo || "white";
+-  const fotoFondo = datosBloque?.FotoFondo?.url || null;
++  const fotoFondo = datosBloque?.FotoFondo || null;
++  const fotoFondoUrl = getFotoFondoUrl(fotoFondo);
+   const colorBarrita = datosBloque?.colorBarrita?.Codigo || "azul-dictuc";
+   const margenSuperior = datosBloque?.MargenSuperior || 0;
+   const margenInferior = datosBloque?.MargenInferior || 0;
+-  const titleColor = fotoFondo ? "text-white" : "";
++  const titleColor = fotoFondoUrl ? "text-white" : "";
+ 
+   const bloqueClasses = clsx(
+-    "my-8 text-center mx-auto pl-8 pr-8 relative",
+-    { [`bg-${colorFondo}`]: !fotoFondo }
++    "my-8 text-center mx-auto pl-8 pr-8 relative overflow-hidden isolate",
++    { [`bg-${colorFondo}`]: !fotoFondoUrl }
+   );
+ 
+   const paddingStyle = {
+     paddingTop: `${(4 + margenSuperior) * 0.25}rem`,
+     paddingBottom: `${(4 + margenInferior) * 0.25}rem`,
++    ...(fotoFondoUrl ? { minHeight: '200px' } : {}),
+   };
+ 
+-  const backgroundImageStyle = fotoFondo ? {
+-    backgroundImage: `url(${STRAPI_URL}${fotoFondo})`,
+-    backgroundSize: 'cover',
+-    backgroundPosition: 'center',
+-    backgroundRepeat: 'no-repeat',
+-    minHeight: '200px',
+-  } : {};
+-
+   return (
+     <div
+-      style={{ ...backgroundImageStyle, ...paddingStyle }}
++      style={paddingStyle}
+       className={bloqueClasses}
+       id={datosBloque?.anchor}
+     >
++      {fotoFondoUrl && (
++        <Image
++          src={fotoFondoUrl}
++          alt=""
++          fill
++          priority={false}
++          sizes="100vw"
++          quality={75}
++          className="object-cover -z-10"
++        />
++      )}
+       {!datosBloque?.OcultarTitulo && (
+         <>
+           <FranjaAzul color={colorBarrita} />
+diff --git a/src/components/carrusel/CarruselClient.js b/src/components/carrusel/CarruselClient.js
+index f863b82..6f40bc5 100644
+--- a/src/components/carrusel/CarruselClient.js
++++ b/src/components/carrusel/CarruselClient.js
+@@ -38,8 +38,9 @@ const CarruselClient = ({ carruselData }) => {
+                         fallback={item.url}
+                         alt={item.fraseSuperior || "Imagen Carrusel"}
+                         className={`w-full h-auto${i === indiceCarrusel ? "" : " hidden"}`}
+-                        priority={true}
+-                        unoptimized={true}
++                        priority={i === 0}
++                        fetchPriority={i === 0 ? "high" : "auto"}
++                        loading={i === 0 ? "eager" : "lazy"}
+                         blurDataURL={item.blurDataURL}
+                     />
+                 ))}
+diff --git a/src/components/editor/BloqueDebugBadge.js b/src/components/editor/BloqueDebugBadge.js
+index c75f556..73f727f 100644
+--- a/src/components/editor/BloqueDebugBadge.js
++++ b/src/components/editor/BloqueDebugBadge.js
+@@ -2,7 +2,7 @@
+ import React from "react"
+ import { useEditorMode } from "./EditorModeProvider"
+ 
+-const STRAPI_ADMIN_URL = process.env.STRAPI_API_URL || ""
++const STRAPI_ADMIN_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || process.env.STRAPI_API_URL || ""
+ 
+ const formatComponentName = (component) => {
+   if (!component) return "desconocido"
+diff --git a/src/components/editor/EditorBadge.js b/src/components/editor/EditorBadge.js
+index 29603ce..2125df7 100644
+--- a/src/components/editor/EditorBadge.js
++++ b/src/components/editor/EditorBadge.js
+@@ -2,7 +2,7 @@
+ import React from "react"
+ import { useEditorMode } from "./EditorModeProvider"
+ 
+-const STRAPI_ADMIN_URL = process.env.STRAPI_API_URL
++const STRAPI_ADMIN_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || process.env.STRAPI_API_URL
+ 
+ export default function EditorBadge({ contentType, documentId, label }) {
+   const { editorMode } = useEditorMode()
+diff --git a/src/components/editor/EditorModeProvider.js b/src/components/editor/EditorModeProvider.js
+index 3763bef..c8916a0 100644
+--- a/src/components/editor/EditorModeProvider.js
++++ b/src/components/editor/EditorModeProvider.js
+@@ -1,13 +1,23 @@
+ "use client"
+-import React, { createContext, useContext, useState, useEffect } from "react"
++import React, { createContext, useContext, useState, useEffect, useCallback } from "react"
+ 
+-const EditorModeContext = createContext({ editorMode: false, toggleEditorMode: () => {} })
++const EditorModeContext = createContext({
++  editorMode: false,
++  toggleEditorMode: () => {},
++  panelOpen: false,
++  setPanelOpen: () => {},
++  bloques: [],
++  documentId: null,
++  registerPageData: () => {},
++})
+ 
+ export const useEditorMode = () => useContext(EditorModeContext)
+ 
+-export default function EditorModeProvider({ children, bloques = [], documentId = null }) {
++export default function EditorModeProvider({ children }) {
+   const [editorMode, setEditorMode] = useState(false)
+   const [panelOpen, setPanelOpen] = useState(false)
++  const [bloques, setBloques] = useState([])
++  const [documentId, setDocumentId] = useState(null)
+ 
+   useEffect(() => {
+     const params = new URLSearchParams(window.location.search)
+@@ -30,8 +40,13 @@ export default function EditorModeProvider({ children, bloques = [], documentId
+     }
+   }
+ 
++  const registerPageData = useCallback((newBloques, newDocumentId) => {
++    setBloques(newBloques || [])
++    setDocumentId(newDocumentId || null)
++  }, [])
++
+   return (
+-    <EditorModeContext.Provider value={{ editorMode, toggleEditorMode, panelOpen, setPanelOpen, bloques, documentId }}>
++    <EditorModeContext.Provider value={{ editorMode, toggleEditorMode, panelOpen, setPanelOpen, bloques, documentId, registerPageData }}>
+       {children}
+       {editorMode && (
+         <div className="fixed bottom-4 right-4 z-[200] flex gap-2">
+diff --git a/src/components/editor/EditorPageRegistrar.js b/src/components/editor/EditorPageRegistrar.js
+new file mode 100644
+index 0000000..6f38bfb
+--- /dev/null
++++ b/src/components/editor/EditorPageRegistrar.js
+@@ -0,0 +1,14 @@
++"use client"
++import { useEffect } from "react"
++import { useEditorMode } from "./EditorModeProvider"
++
++export default function EditorPageRegistrar({ bloques = [], documentId = null }) {
++  const { registerPageData } = useEditorMode()
++
++  useEffect(() => {
++    registerPageData(bloques, documentId)
++    return () => registerPageData([], null)
++  }, []) // eslint-disable-line react-hooks/exhaustive-deps
++
++  return null
++}
+diff --git a/src/components/editor/EditorPanel.js b/src/components/editor/EditorPanel.js
+index 79b542e..1c1b92d 100644
+--- a/src/components/editor/EditorPanel.js
++++ b/src/components/editor/EditorPanel.js
+@@ -2,7 +2,7 @@
+ import React from "react"
+ import { useEditorMode } from "./EditorModeProvider"
+ 
+-const STRAPI_ADMIN_URL = process.env.STRAPI_API_URL
++const STRAPI_ADMIN_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || process.env.STRAPI_API_URL
+ 
+ const formatComponentName = (component) => {
+   if (!component) return "desconocido"
+diff --git a/src/middleware.js b/src/middleware.js
+index c66f576..06110d8 100644
+--- a/src/middleware.js
++++ b/src/middleware.js
+@@ -13,9 +13,14 @@ async function getRedirects() {
+   }
+ 
+   try {
++    const controller = new AbortController();
++    const timeout = setTimeout(() => controller.abort(), 4000);
++
+     const res = await fetch(`${STRAPI_API_URL}/api/redirecciones?populate=all`, {
+       next: { revalidate: 60 },
++      signal: controller.signal,
+     });
++    clearTimeout(timeout);
+     const json = await res.json();
+ 
+     const redirects = [];
+@@ -77,6 +82,8 @@ export async function middleware(request) {
+ 
+   const redirects = await getRedirects();
+ 
++  const search = request.nextUrl.search;
++
+   for (const r of redirects) {
+     if (r.prefijo) {
+       const prefix = r.origen.slice(0, -1); // quitar el *
+@@ -85,11 +92,19 @@ export async function middleware(request) {
+         const destino = r.destino.endsWith("*")
+           ? r.destino.slice(0, -1) + rest
+           : r.destino;
+-        const url = r.absoluta ? destino : new URL(destino, request.url);
++        if (r.absoluta) {
++          return NextResponse.redirect(destino, 301);
++        }
++        const url = new URL(destino, request.url);
++        if (search) url.search = search;
+         return NextResponse.redirect(url, 301);
+       }
+     } else if (pathname === r.origen) {
+-      const url = r.absoluta ? r.destino : new URL(r.destino, request.url);
++      if (r.absoluta) {
++        return NextResponse.redirect(r.destino, 301);
++      }
++      const url = new URL(r.destino, request.url);
++      if (search) url.search = search;
+       return NextResponse.redirect(url, 301);
+     }
+   }

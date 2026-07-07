@@ -1,9 +1,3 @@
-# Pendientes Sitio Dictuc — Documento de Ejecución
-
-> Generado: 2026-03-21 | Basado en revisión del 09-03-2026
-> Convención: `[ ]` pendiente · `[x]` completado · `[~]` en progreso · `[!]` bloqueado (requiere info externa)
-
----
 
 ## Sprint 1 — Quick Wins
 

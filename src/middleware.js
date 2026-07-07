@@ -13,9 +13,14 @@ async function getRedirects() {
   }
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 4000);
+
     const res = await fetch(`${STRAPI_API_URL}/api/redirecciones?populate=all`, {
       next: { revalidate: 60 },
+      signal: controller.signal,
     });
+    clearTimeout(timeout);
     const json = await res.json();
 
     const redirects = [];

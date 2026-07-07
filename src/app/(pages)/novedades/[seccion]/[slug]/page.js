@@ -6,7 +6,7 @@ const FotoDefaultNoticias = "/images/noticias.png"
 const bannerDefault = "/images/BannerMicrofonos.webp";
 import useNoticia from '@/hooks/use-noticia';
 import GaleriaClient from "@/components/bloquesPaginas/GaleriaClient";
-import EditorModeProvider from "@/components/editor/EditorModeProvider";
+import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
 import EditorBadge from "@/components/editor/EditorBadge";
 
 export async function generateMetadata({ params }) {
@@ -44,7 +44,8 @@ export default async function PaginasContenido({ params }) {
       : '';
 
   return (
-    <EditorModeProvider documentId={noticia.documentId}>
+    <>
+    <EditorPageRegistrar documentId={noticia.documentId} />
     <PaginaInterior fallback={bannerEtiqueta}
                     titulo={tituloPagina}
     breadcrum={[{ label: "Home", link: "/" }, { label: tituloPagina, link: `/paginas/${seccion}` }, { label: noticia.titulo }]}>
@@ -82,6 +83,6 @@ export default async function PaginasContenido({ params }) {
           )}
         </div>
     </PaginaInterior>
-    </EditorModeProvider>
+    </>
   );
 }

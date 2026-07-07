@@ -1,6 +1,8 @@
 "use client"
 import React from "react"
-import BuscadorAlgolia from "./BuscadorAlgolia"
+import dynamic from "next/dynamic"
+
+const BuscadorAlgolia = dynamic(() => import("./BuscadorAlgolia"), { ssr: false })
 
 const hoverClasses = "hover:!bg-transparent hover:text-azul-dictuc hover:no-underline transition-colors flex flex-col items-center after:block after:h-[2px] after:w-0 after:bg-azul-dictuc after:rounded-full after:transition-all after:duration-300 hover:after:w-[20px]"
 

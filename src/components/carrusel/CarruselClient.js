@@ -38,8 +38,9 @@ const CarruselClient = ({ carruselData }) => {
                         fallback={item.url}
                         alt={item.fraseSuperior || "Imagen Carrusel"}
                         className={`w-full h-auto${i === indiceCarrusel ? "" : " hidden"}`}
-                        priority={true}
-                        unoptimized={true}
+                        priority={i === 0}
+                        fetchPriority={i === 0 ? "high" : "auto"}
+                        loading={i === 0 ? "eager" : "lazy"}
                         blurDataURL={item.blurDataURL}
                     />
                 ))}

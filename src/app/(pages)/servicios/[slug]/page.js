@@ -12,7 +12,7 @@ const iconoPotenciales = "/images/PotencialesClientes.png";
 import { redirect } from "next/navigation";
 import useServicio from "@/hooks/use-servicio";
 import { limpiarTabla } from "@/helpers/limpiar-tabla";
-import EditorModeProvider from "@/components/editor/EditorModeProvider";
+import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
 import EditorBadge from "@/components/editor/EditorBadge";
 
 export async function generateMetadata({ params }) {
@@ -30,7 +30,8 @@ export default async function Servicio({ params }) {
   if (!servicio) redirect("/servicios/todos-los-servicios");
   const strapiApiUrl = process.env.STRAPI_API_URL;
   return (
-    <EditorModeProvider documentId={servicio.documentId}>
+    <>
+    <EditorPageRegistrar documentId={servicio.documentId} />
     <PaginaInterior
       banner={servicio?.banner}
       fallback={bannerLaboratorio}
@@ -117,6 +118,6 @@ export default async function Servicio({ params }) {
 
       </div>
     </PaginaInterior>
-    </EditorModeProvider>
+    </>
   );
 }

@@ -1,4 +1,6 @@
 import { withSentryConfig } from '@sentry/nextjs';
+import withBundleAnalyzer from '@next/bundle-analyzer';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,
@@ -8,6 +10,7 @@ const nextConfig = {
     },
   }),
   images: {
+    formats: ['image/avif', 'image/webp'],
     qualities: [75, 90, 100],
     dangerouslyAllowLocalIP: true,
     remotePatterns: [
@@ -44,7 +47,9 @@ const nextConfig = {
   },
 };
 
-export default withSentryConfig(nextConfig, {
+const configWithAnalyzer = withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })(nextConfig);
+
+export default withSentryConfig(configWithAnalyzer, {
   org: "andes-blockchain",
   project: "javascript-nextjs",
   silent: !process.env.CI,

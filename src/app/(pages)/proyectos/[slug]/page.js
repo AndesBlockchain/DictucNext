@@ -5,7 +5,7 @@ import FranjaAzul from "@/components/FranjaAzul";
 import StrapiImage from "@/components/StrapiImage";
 const FotoDefaultNoticias = "/images/noticias.png"
 import useNoticia from '@/hooks/use-noticia';
-import EditorModeProvider from "@/components/editor/EditorModeProvider";
+import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
 import EditorBadge from "@/components/editor/EditorBadge";
 
 export default async function PaginasContenido({ params })
@@ -27,7 +27,8 @@ export default async function PaginasContenido({ params })
       : '';
 
   return (
-    <EditorModeProvider documentId={noticia.documentId}>
+    <>
+    <EditorPageRegistrar documentId={noticia.documentId} />
     <PaginaInterior fallback={bannerNoticias}
                     titulo="Proyectos"
     breadcrum={[{ label: "Home", link: "/" }, {label:"Proyectos", link:"/paginas/proyactos"}, { label: noticia.titulo, link: "/" }]}>
@@ -52,7 +53,6 @@ export default async function PaginasContenido({ params })
           </div>
         </div>
          </PaginaInterior>
-    </EditorModeProvider>
-
+    </>
   );
 }

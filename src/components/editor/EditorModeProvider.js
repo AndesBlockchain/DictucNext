@@ -1,13 +1,23 @@
 "use client"
-import React, { createContext, useContext, useState, useEffect } from "react"
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react"
 
-const EditorModeContext = createContext({ editorMode: false, toggleEditorMode: () => {} })
+const EditorModeContext = createContext({
+  editorMode: false,
+  toggleEditorMode: () => {},
+  panelOpen: false,
+  setPanelOpen: () => {},
+  bloques: [],
+  documentId: null,
+  registerPageData: () => {},
+})
 
 export const useEditorMode = () => useContext(EditorModeContext)
 
-export default function EditorModeProvider({ children, bloques = [], documentId = null }) {
+export default function EditorModeProvider({ children }) {
   const [editorMode, setEditorMode] = useState(false)
   const [panelOpen, setPanelOpen] = useState(false)
+  const [bloques, setBloques] = useState([])
+  const [documentId, setDocumentId] = useState(null)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -30,8 +40,13 @@ export default function EditorModeProvider({ children, bloques = [], documentId 
     }
   }
 
+  const registerPageData = useCallback((newBloques, newDocumentId) => {
+    setBloques(newBloques || [])
+    setDocumentId(newDocumentId || null)
+  }, [])
+
   return (
-    <EditorModeContext.Provider value={{ editorMode, toggleEditorMode, panelOpen, setPanelOpen, bloques, documentId }}>
+    <EditorModeContext.Provider value={{ editorMode, toggleEditorMode, panelOpen, setPanelOpen, bloques, documentId, registerPageData }}>
       {children}
       {editorMode && (
         <div className="fixed bottom-4 right-4 z-[200] flex gap-2">

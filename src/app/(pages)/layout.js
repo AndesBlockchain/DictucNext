@@ -1,5 +1,7 @@
 import "./globals.css";
-import { Amplitude } from "@/amplitude";
+import AmplitudeLoader from "@/components/AmplitudeLoader";
+import EditorModeProvider from "@/components/editor/EditorModeProvider";
+import EditorPanel from "@/components/editor/EditorPanel";
 
 export const metadata = {
   title: {
@@ -17,8 +19,11 @@ export default function RootLayout({ children }) {
         <link rel="dns-prefetch" href="https://backend-dictuc.andesblockchain.com" />
       </head>
       <body className="antialiased w-full">
-        <Amplitude />
-        {children}
+        <AmplitudeLoader />
+        <EditorModeProvider>
+          {children}
+          <EditorPanel />
+        </EditorModeProvider>
       </body>
     </html>
   );

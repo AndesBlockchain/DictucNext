@@ -7,9 +7,8 @@ import { renderBloque } from "@/helpers/bloque-renderer";
 import usePagina from "@/hooks/use-pagina";
 import useMenuSecundario from "@/hooks/use-menu-secundario";
 import useMenuCajon from "@/hooks/use-menu-cajon";
-import EditorModeProvider from "@/components/editor/EditorModeProvider";
+import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
 import BloqueDebugBadge from "@/components/editor/BloqueDebugBadge";
-import EditorPanel from "@/components/editor/EditorPanel";
 
 
 export async function generateMetadata({ params }) {
@@ -34,7 +33,8 @@ console.log("color",pagina)
 
 
   return (
-    <EditorModeProvider bloques={pagina?.Bloques || []} documentId={pagina?.documentId}>
+    <>
+    <EditorPageRegistrar bloques={pagina?.Bloques || []} documentId={pagina?.documentId} />
     <PaginaInterior
       fallback={process.env.STRAPI_API_URL + pagina.Banner.url}
       titulo = {pagina.titulo}
@@ -66,7 +66,6 @@ console.log("color",pagina)
         </div>
       )}
       </PaginaInterior>
-      <EditorPanel />
-    </EditorModeProvider>
+    </>
   );
   }

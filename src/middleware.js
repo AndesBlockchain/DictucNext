@@ -77,6 +77,8 @@ export async function middleware(request) {
 
   const redirects = await getRedirects();
 
+  const search = request.nextUrl.search;
+
   for (const r of redirects) {
     if (r.prefijo) {
       const prefix = r.origen.slice(0, -1); // quitar el *
@@ -85,11 +87,19 @@ export async function middleware(request) {
         const destino = r.destino.endsWith("*")
           ? r.destino.slice(0, -1) + rest
           : r.destino;
-        const url = r.absoluta ? destino : new URL(destino, request.url);
+        if (r.absoluta) {
+          return NextResponse.redirect(destino, 301);
+        }
+        const url = new URL(destino, request.url);
+        if (search) url.search = search;
         return NextResponse.redirect(url, 301);
       }
     } else if (pathname === r.origen) {
-      const url = r.absoluta ? r.destino : new URL(r.destino, request.url);
+      if (r.absoluta) {
+        return NextResponse.redirect(r.destino, 301);
+      }
+      const url = new URL(r.destino, request.url);
+      if (search) url.search = search;
       return NextResponse.redirect(url, 301);
     }
   }

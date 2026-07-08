@@ -1,7 +1,15 @@
 import "./globals.css";
+import { Montserrat } from "next/font/google";
 import AmplitudeLoader from "@/components/AmplitudeLoader";
 import EditorModeProvider from "@/components/editor/EditorModeProvider";
 import EditorPanel from "@/components/editor/EditorPanel";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const metadata = {
   title: {
@@ -13,7 +21,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es">
+    <html lang="es" className={montserrat.variable}>
       <head>
         <link rel="preconnect" href="https://backend-dictuc.andesblockchain.com" />
         <link rel="dns-prefetch" href="https://backend-dictuc.andesblockchain.com" />

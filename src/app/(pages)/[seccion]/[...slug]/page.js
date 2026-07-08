@@ -10,6 +10,7 @@ import useMenuCajon from "@/hooks/use-menu-cajon";
 import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
 import BloqueDebugBadge from "@/components/editor/BloqueDebugBadge";
 
+export const revalidate = false
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;

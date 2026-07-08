@@ -9,6 +9,8 @@ import GaleriaClient from "@/components/bloquesPaginas/GaleriaClient";
 import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
 import EditorBadge from "@/components/editor/EditorBadge";
 
+export const revalidate = false
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const noticia = await useNoticia(slug);

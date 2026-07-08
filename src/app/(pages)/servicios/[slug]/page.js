@@ -15,6 +15,8 @@ import { limpiarTabla } from "@/helpers/limpiar-tabla";
 import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
 import EditorBadge from "@/components/editor/EditorBadge";
 
+export const revalidate = false
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const servicio = await useServicio(slug);

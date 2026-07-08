@@ -14,8 +14,17 @@ const getImageUrl = (url) => {
   const reescrita = reescribirWpContent(url);
   if (reescrita !== url) return reescrita;
   if (url.startsWith('http')) return url;
-  
+
   return `${baseUrl}${url}`;
+};
+
+// Selecciona el formato de Strapi más pequeño que sea suficientemente grande para el ancho objetivo
+const getBestImageData = (imgData, targetWidth) => {
+  if (!imgData?.formats || !targetWidth) return null;
+  const ordered = ['thumbnail', 'small', 'medium', 'large']
+    .map(key => imgData.formats[key])
+    .filter(f => f?.url && f?.width);
+  return ordered.find(f => f.width >= targetWidth) || null;
 };
 
 /**
@@ -38,8 +47,9 @@ const StrapiImage = ({
   blurDataURL = null
 }) => {
   const imgData = Array.isArray(imagen) ? imagen[0] : imagen;
-  //se usa para manejar las rutas de las imagenes de wordpress antiguas 
-  const imageUrl = getImageUrl(imgData?.url);
+  const targetWidth = width ?? maxWidth ?? null;
+  const selectedData = getBestImageData(imgData, targetWidth);
+  const imageUrl = getImageUrl(selectedData?.url || imgData?.url);
 
   let content = null;
 
@@ -52,7 +62,7 @@ const StrapiImage = ({
           src={imageUrl}
           alt={alt}
           fill
-          quality={100}
+          quality={75}
           className={`${className} object-cover`}
           sizes={sizes}
           priority={priority}
@@ -67,7 +77,7 @@ const StrapiImage = ({
           alt={alt}
           width={width}
           height={height}
-          quality={100}
+          quality={75}
           className={className}
           priority={priority}
           unoptimized={unoptimized}
@@ -88,7 +98,7 @@ const StrapiImage = ({
           alt={alt}
           width={imgWidth}
           height={imgHeight}
-          quality={100}
+          quality={75}
           className={className}
           priority={priority}
           unoptimized={unoptimized}
@@ -102,7 +112,7 @@ const StrapiImage = ({
           alt={alt}
           width={800}
           height={600}
-          quality={100}
+          quality={75}
           className={className}
           priority={priority}
           unoptimized={unoptimized}
@@ -121,14 +131,14 @@ const StrapiImage = ({
           alt={alt}
           width={800}
           height={600}
-          quality={100}
+          quality={75}
           className={className}
           priority={priority}
           unoptimized={unoptimized}
         />
       );
     } else {
-      content = <Image src={fallbackSrc} alt={alt} quality={100} className={className} priority={priority} unoptimized={unoptimized} />;
+      content = <Image src={fallbackSrc} alt={alt} quality={75} className={className} priority={priority} unoptimized={unoptimized} />;
     }
   }
 

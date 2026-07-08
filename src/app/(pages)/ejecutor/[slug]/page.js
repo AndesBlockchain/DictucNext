@@ -6,6 +6,8 @@ import useUnidades from "@/hooks/use-unidades";
 import useServicios from "@/hooks/use-servicios";
 const BannerServicios = "/images/banner_servicios.jpg";
 
+export const revalidate = false
+
 export default async function EjecutorServicios({ params }) {
   const { slug } = await params;
   const [tiposDeServicio, sectoresPais, servicios, unidades] = await Promise.all([

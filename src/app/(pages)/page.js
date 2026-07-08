@@ -14,6 +14,8 @@ import Footer from "@/components/Footer"
 const Agente = dynamic(() => import("@/components/Agente"))
 const ModalContainer = dynamic(() => import("@/components/ModalContainer"))
 
+export const revalidate = false
+
 const IndexPage = async () => {
 
   const [noticias, modals] = await Promise.all([

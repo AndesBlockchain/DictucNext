@@ -6,6 +6,8 @@ import useTipoDeServicioBySlug from "@/hooks/use-tipo-de-servicio-by-slug";
 import useUnidades from "@/hooks/use-unidades";
 import useServicios from "@/hooks/use-servicios";
 
+export const revalidate = false
+
 export default async function HomeServicios({ params })
 {
   const {slug} = await params;

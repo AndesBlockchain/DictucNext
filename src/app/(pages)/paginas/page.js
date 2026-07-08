@@ -7,6 +7,7 @@ import { renderBloque } from "@/helpers/bloque-renderer";
 import usePagina from "@/hooks/use-pagina";
 import useMenuSecundario from "@/hooks/use-menu-secundario";
 
+export const revalidate = false
 
 export default async function PaginasContenido({params}) {
 

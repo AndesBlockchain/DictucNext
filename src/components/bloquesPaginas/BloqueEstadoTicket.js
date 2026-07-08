@@ -1,6 +1,6 @@
 import React from "react";
 import Bloque from "./Bloque";
-import EstadoTicketForm from "@/app/(pages)/estado-ticket/EstadoTicketForm";
+import EstadoTicketForm from "@/components/EstadoTicketForm";
 
 const BloqueEstadoTicket = ({ datosBloque }) => {
   return (

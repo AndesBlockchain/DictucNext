@@ -1,7 +1,7 @@
 import React from "react";
 import StrapiImage from "./StrapiImage";
 
-const BannerInterior = ({ banner, gatsbyImageData, fallback, alt = "Banner", titulo = "", titulo_visible = true, color_titulo = "azul-dictuc", icono_secundario = "" }) => {
+const BannerInterior = ({ banner, gatsbyImageData, fallback, alt = "Banner", titulo = "", titulo_visible = true, color_titulo = "azul-dictuc", icono_secundario = "", blurDataURL = null }) => {
 
   return (
     <div className="w-full pt-2 mb-6 relative">
@@ -19,6 +19,7 @@ const BannerInterior = ({ banner, gatsbyImageData, fallback, alt = "Banner", tit
           maxWidth={1920}
           sizes="100vw"
           className="w-full h-auto object-contain"
+          blurDataURL={blurDataURL}
         />
       </div>
       {titulo_visible && (

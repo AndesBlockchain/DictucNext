@@ -1,3 +1,5 @@
+import sharp from 'sharp';
+
 const cache = new Map();
 
 export async function getBlurDataURL(imagen) {
@@ -14,10 +16,14 @@ export async function getBlurDataURL(imagen) {
     const res = await fetch(fullUrl);
     if (!res.ok) return null;
 
-    const buffer = await res.arrayBuffer();
-    const base64 = Buffer.from(buffer).toString('base64');
-    const mimeType = res.headers.get('content-type') || 'image/jpeg';
-    const dataUrl = `data:${mimeType};base64,${base64}`;
+    const buffer = Buffer.from(await res.arrayBuffer());
+    const blurBuffer = await sharp(buffer)
+      .resize(10, 10, { fit: 'inside' })
+      .blur()
+      .jpeg({ quality: 30 })
+      .toBuffer();
+
+    const dataUrl = `data:image/jpeg;base64,${blurBuffer.toString('base64')}`;
 
     cache.set(fullUrl, dataUrl);
     return dataUrl;

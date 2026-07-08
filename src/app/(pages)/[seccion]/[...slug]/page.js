@@ -80,7 +80,7 @@ export default async function PaginasContenido({params}) {
     <>
     <EditorPageRegistrar bloques={pagina?.Bloques || []} documentId={pagina?.documentId} />
     <PaginaInterior
-      fallback={process.env.STRAPI_API_URL + pagina.Banner.url}
+      banner={pagina.Banner}
       titulo = {pagina.titulo}
       titulo_visible={pagina.TituloVisible}
       color_titulo= {pagina.color_titulo.Codigo}

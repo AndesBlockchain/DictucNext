@@ -68,7 +68,7 @@ export default async function PaginasContenido({ params }) {
   return (
     <>
     <EditorPageRegistrar documentId={noticia.documentId} />
-    <PaginaInterior fallback={bannerEtiqueta}
+    <PaginaInterior banner={etiqueta?.Banner} fallback={bannerDefault}
                     titulo={tituloPagina}
     breadcrum={[{ label: "Home", link: "/" }, { label: tituloPagina, link: `/paginas/${seccion}` }, { label: noticia.titulo }]}>
         <EditorBadge contentType="api::noticia.noticia" documentId={noticia.documentId} label="noticia" />

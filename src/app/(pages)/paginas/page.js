@@ -22,7 +22,7 @@ export default async function PaginasContenido({params}) {
   }
   return (
     <PaginaInterior
-      fallback={pagina.Banner?.url ? process.env.STRAPI_API_URL + pagina.Banner.url : null}
+      banner={pagina.Banner}
       titulo = {pagina.titulo}
       titulo_visible={pagina.TituloVisible}
       color_titulo= {pagina.color_titulo.Codigo}

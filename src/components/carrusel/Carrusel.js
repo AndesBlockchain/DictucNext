@@ -2,6 +2,7 @@ import React from "react";
 import CarruselClient from "./CarruselClient";
 import { fetchFromStrapi, CACHE_PRESETS } from "@/lib/strapi-fetcher";
 import { getBlurDataURL } from "@/lib/get-blur-data-url";
+import { preloadFirstImage } from "./preload-first-image";
 
 const Carrusel = async () => {
   const carruselFetch = await fetchFromStrapi({
@@ -30,6 +31,11 @@ const Carrusel = async () => {
       blurDataURL: await getBlurDataURL(item.imagen),
     }))
   );
+
+  // Estrategia 2: preload de la primera imagen
+  if (carruselData.length > 0) {
+    preloadFirstImage(carruselData[0]);
+  }
 
   return <CarruselClient carruselData={carruselData} />;
 }

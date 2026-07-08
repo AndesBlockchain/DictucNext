@@ -39,8 +39,8 @@ const CarruselClient = ({ carruselData }) => {
                         alt={item.fraseSuperior || "Imagen Carrusel"}
                         className={`w-full h-auto${i === indiceCarrusel ? "" : " hidden"}`}
                         priority={i === 0}
-                        fetchPriority={i === 0 ? "high" : "auto"}
-                        loading={i === 0 ? "eager" : "lazy"}
+                        maxWidth={1920}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
                         blurDataURL={item.blurDataURL}
                     />
                 ))}

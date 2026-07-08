@@ -3,6 +3,15 @@ import { revalidatePath } from "next/cache";
 
 const REVALIDATION_SECRET = process.env.REVALIDATION_SECRET;
 
+// Precalienta una ruta visitándola después de purgar su caché ISR.
+// Se lanza fire-and-forget: no bloquea la respuesta al webhook.
+function warmPath(origin, path) {
+  const url = `${origin}${path}`;
+  fetch(url, { headers: { "x-prerender-revalidate": "1" } }).catch(
+    (err) => console.warn(`[revalidate] warm failed for ${url}:`, err.message)
+  );
+}
+
 // Mapea modelos de Strapi a las rutas Next.js que deben revalidarse
 function getPathsForModel(model, entry) {
   const slug = entry?.slug;
@@ -64,10 +73,12 @@ export async function POST(request) {
       paths = ["/"];
     }
 
+    const origin = new URL(request.url).origin;
     const revalidated = [];
     for (const path of paths) {
       revalidatePath(path, "layout");
       revalidated.push(path);
+      warmPath(origin, path);
     }
 
     return NextResponse.json({

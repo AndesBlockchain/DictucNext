@@ -14,8 +14,18 @@ import useServicio from "@/hooks/use-servicio";
 import { limpiarTabla } from "@/helpers/limpiar-tabla";
 import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
 import EditorBadge from "@/components/editor/EditorBadge";
+import { fetchFromStrapi, CACHE_PRESETS } from "@/lib/strapi-fetcher";
 
 export const revalidate = false
+
+export async function generateStaticParams() {
+  const result = await fetchFromStrapi({
+    endpoint: '/api/servicios?fields[0]=slug&pagination[limit]=1000',
+    fallback: { data: [] },
+    cache: CACHE_PRESETS.FREQUENT,
+  });
+  return (result?.data || []).filter(s => s.slug).map(s => ({ slug: s.slug }));
+}
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;

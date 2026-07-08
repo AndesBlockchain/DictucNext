@@ -13,11 +13,13 @@ export default async function PaginasContenido({params}) {
 
   const {slug} = await params;
 
-  const pagina = await usePagina(slug);
+  const [pagina, menuSecundario] = await Promise.all([
+    usePagina(slug),
+    useMenuSecundario("paginas", slug),
+  ]);
   if (!pagina) {
     return <div className="text-center py-16 text-gray-500">Página no encontrada</div>;
   }
-  const menuSecundario = await useMenuSecundario("paginas", slug);
   return (
     <PaginaInterior
       fallback={pagina.Banner?.url ? process.env.STRAPI_API_URL + pagina.Banner.url : null}

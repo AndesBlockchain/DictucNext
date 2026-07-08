@@ -8,6 +8,11 @@ const BannerServicios = "/images/banner_servicios.jpg";
 
 export const revalidate = false
 
+export async function generateStaticParams() {
+  const { data } = await useUnidades();
+  return data.filter(u => u.slug).map(u => ({ slug: u.slug }));
+}
+
 export default async function EjecutorServicios({ params }) {
   const { slug } = await params;
   const [tiposDeServicio, sectoresPais, servicios, unidades] = await Promise.all([

@@ -8,6 +8,11 @@ import useServicios from "@/hooks/use-servicios";
 
 export const revalidate = false
 
+export async function generateStaticParams() {
+  const result = await useTipoDeServicio();
+  return (result?.data || []).filter(t => t.slug).map(t => ({ slug: t.slug }));
+}
+
 export default async function HomeServicios({ params })
 {
   const {slug} = await params;

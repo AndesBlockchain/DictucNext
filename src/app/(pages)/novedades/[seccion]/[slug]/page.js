@@ -8,8 +8,28 @@ import useNoticia from '@/hooks/use-noticia';
 import GaleriaClient from "@/components/bloquesPaginas/GaleriaClient";
 import EditorPageRegistrar from "@/components/editor/EditorPageRegistrar";
 import EditorBadge from "@/components/editor/EditorBadge";
+import { fetchFromStrapi, CACHE_PRESETS } from "@/lib/strapi-fetcher";
 
 export const revalidate = false
+
+export async function generateStaticParams() {
+  const result = await fetchFromStrapi({
+    endpoint: '/api/noticias?status=published&fields[0]=slug&populate[etiqueta_noticias][fields][0]=slug&pagination[limit]=1000',
+    fallback: { data: [] },
+    cache: CACHE_PRESETS.FREQUENT,
+  });
+
+  const params = [];
+  for (const noticia of (result?.data || [])) {
+    if (!noticia.slug) continue;
+    for (const etiqueta of (noticia.etiqueta_noticias || [])) {
+      if (etiqueta.slug) {
+        params.push({ seccion: etiqueta.slug, slug: noticia.slug });
+      }
+    }
+  }
+  return params;
+}
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;

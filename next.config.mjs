@@ -1,5 +1,4 @@
 import { withSentryConfig } from '@sentry/nextjs';
-import withBundleAnalyzer from '@next/bundle-analyzer';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -43,9 +42,7 @@ const nextConfig = {
   },
 };
 
-const configWithAnalyzer = withBundleAnalyzer({ enabled: process.env.ANALYZE === 'true' })(nextConfig);
-
-export default withSentryConfig(configWithAnalyzer, {
+export default withSentryConfig(nextConfig, {
   org: "andes-blockchain",
   project: "javascript-nextjs",
   silent: !process.env.CI,

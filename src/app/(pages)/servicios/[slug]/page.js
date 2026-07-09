@@ -125,6 +125,7 @@ export default async function Servicio({ params }) {
           servicio={slug}
           strapiApiUrl={strapiApiUrl}
           codigoUnidad={servicio.unidad.CodigoSAPDictuc}
+          nombreServicio={servicio.nombre}
         />
       </div>
 

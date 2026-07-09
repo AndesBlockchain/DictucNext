@@ -3,8 +3,9 @@ import React from "react";
 import FranjaAzul from "./FranjaAzul";
 import {useForm} from 'react-hook-form';
 import { formatearRut, validarRut } from "../helpers/rut-helpers";
+import amplitude from '@/amplitude';
 
-export default function Contacto({ titulo = "¿En qué podemos <span class='text-azul-dictuc'>ayudarte?</span>", border = false, isCotizacion=false, servicio="", tiposDeContacto, strapiApiUrl, codigoUnidad, accionInicial = null}) {
+export default function Contacto({ titulo = "¿En qué podemos <span class='text-azul-dictuc'>ayudarte?</span>", border = false, isCotizacion=false, servicio="", tiposDeContacto, strapiApiUrl, codigoUnidad, accionInicial = null, nombreServicio}) {
 
   // Buscar el documentId del tipo de contacto que coincida con la acción inicial
   const defaultTipoConsulta = React.useMemo(() => {
@@ -30,6 +31,15 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
 
   // Estado para manejar el loading de consulta de RUT
   const [isConsultingRut, setIsConsultingRut] = React.useState(false);
+
+  // Trackear apertura del formulario
+  React.useEffect(() => {
+    amplitude.track('contact_form_opened', {
+      es_cotizacion: isCotizacion,
+      servicio: servicio || null,
+      url: window.location.href,
+    });
+  }, []);
 
   // Limpiar el timeout del toast al desmontar para evitar memory leaks
   React.useEffect(() => {
@@ -101,6 +111,7 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
       formData.append('codigo_unidad', codigoUnidad ?? '');
       formData.append('url_origen', window.location.href);
       formData.append('newsletter', data.newsletter ? '1' : '0');
+      formData.append('nombre_servicio', nombreServicio);
       if (archivo) {
         formData.append('archivo', archivo);
       }
@@ -114,6 +125,13 @@ export default function Contacto({ titulo = "¿En qué podemos <span class='text
       }
 
       const result = await response.json();
+
+      amplitude.track('contact_form_submitted', {
+        tipo: tipoSeleccionado?.Tipo || null,
+        es_cotizacion: isCotizacion || esCotizacionSeleccionada || false,
+        servicio: servicio || null,
+        url: window.location.href,
+      });
 
       // Mostrar toast de éxito
       showToast('Formulario enviado correctamente', 'success');

@@ -21,7 +21,7 @@ const codeStyles = {
   backgroundColor: "#FFF4DB",
   fontSize: "1.25rem",
   borderRadius: 4,
-}
+} 
 
 const NotFoundPage = () => {
   return (

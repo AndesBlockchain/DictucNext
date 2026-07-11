@@ -35,9 +35,9 @@ const SectoresPais = async ({ botonHollow = false }) => {
     return (
         <div id="sectores" className="relative pl-4 pr-4 mt-4 bg-white lg:-mt-8 p-4 pb-4 pt-5 max-w-6xl mx-auto rounded-3xl shadow-lg">
             <FranjaAzul />
-            <div className="text-center mb-4 mt-4 font-semibold uppercase">
-                Encuentra soluciones y servicios según tu <span className="text-azul-dictuc">sector productivo</span>
-            </div>
+            <div className="text-center mb-4 mt-4">
+                <span className="font-semibold uppercase">Laboratorios y servicios de <span className="text-azul-dictuc">Ingeniería</span></span><br />
+                <span className="text-sm font-semibold">Encuentra soluciones según tu sector productivo</span></div>
             {totalCount <= 10 ?
                 <div className={"group/sectores flex flex-row flex-wrap grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 justify-center items-start gap-2"}>
                     {sectores.map((item, index) =>

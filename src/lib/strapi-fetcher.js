@@ -4,6 +4,15 @@
  */
 
 /**
+ * Deriva un cache tag desde el endpoint: '/api/noticias?...' → 'strapi-noticias'
+ * Permite invalidar con revalidateTag() desde /api/revalidate sin tocar los call sites.
+ */
+function tagFromEndpoint(endpoint) {
+  const match = endpoint.match(/^\/api\/([^/?]+)/);
+  return match ? `strapi-${match[1]}` : 'strapi';
+}
+
+/**
  * Fetch genérico a Strapi con manejo de errores y cache
  *
  * @param {Object} options - Opciones de configuración
@@ -11,6 +20,7 @@
  * @param {Object} options.cache - Configuración de cache Next.js
  * @param {number} options.cache.revalidate - Tiempo de revalidación en segundos (default: 3600)
  * @param {string} options.cache.mode - Modo de cache: 'force-cache', 'no-store', etc. (default: 'force-cache')
+ * @param {string[]} options.cache.tags - Cache tags extra además de los derivados del endpoint (opcional)
  * @param {*} options.fallback - Valor por defecto si falla (default: { data: [] })
  * @param {Function} options.transform - Función para transformar la respuesta (opcional)
  * @param {string} options.errorContext - Contexto del error para logs (default: endpoint)
@@ -43,9 +53,16 @@ export async function fetchFromStrapi({
 
   // Configurar opciones de fetch
   // cache y next.revalidate son mutuamente excluyentes en Next.js
+  // El tag global 'strapi' permite el fallback de /api/revalidate para
+  // modelos no mapeados; el tag por endpoint permite invalidación granular.
   const fetchOptions = cache.mode === 'no-store'
     ? { cache: 'no-store' }
-    : { next: { revalidate: cache.revalidate ?? 3600 } };
+    : {
+        next: {
+          revalidate: cache.revalidate ?? 3600,
+          tags: ['strapi', tagFromEndpoint(endpoint), ...(cache.tags ?? [])],
+        },
+      };
 
   try {
 
@@ -162,8 +179,10 @@ export const CACHE_PRESETS = {
   // Revalidar cada hora (default)
   HOURLY: { revalidate: 3600, mode: 'force-cache' },
 
-  // Revalidar cada hora (para datos que cambian frecuentemente)
-  FREQUENT: { revalidate: 3600, mode: 'force-cache' },
+  // Revalidar cada 5 minutos (para datos que cambian frecuentemente).
+  // Red de seguridad si el webhook de Strapi falla o el modelo no está
+  // mapeado; el camino rápido de frescura es /api/revalidate.
+  FREQUENT: { revalidate: 300, mode: 'force-cache' },
 
   // Revalidar cada día
   DAILY: { revalidate: 86400, mode: 'force-cache' },

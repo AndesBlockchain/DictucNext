@@ -109,7 +109,15 @@ export async function middleware(request) {
     }
   }
 
-  return NextResponse.next();
+  // El edge de Azure cachea el HTML según el s-maxage que emite Next
+  // (derivado del revalidate de los fetch), lo que retrasa hasta 5+ min
+  // cambios que el servidor ya regeneró vía /api/revalidate. Forzar que
+  // el edge revalide el HTML en cada request: lo sirve el Full Route
+  // Cache de Next (estático). Los assets (_next/*, imágenes) salen antes
+  // de esta función y conservan su cache de edge.
+  const response = NextResponse.next();
+  response.headers.set("Cache-Control", "public, max-age=0, must-revalidate");
+  return response;
 }
 
 export const config = {

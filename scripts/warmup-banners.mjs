@@ -11,7 +11,7 @@
  */
 
 const SITE_URL = process.argv[2] || process.env.SITE_URL || 'https://www.dictuc.cl';
-const STRAPI_API_URL = process.argv[3] || process.env.STRAPI_API_URL || 'https://backend-dictuc.andesblockchain.com';
+const STRAPI_API_URL = process.argv[3] || process.env.STRAPI_API_URL || 'https://backendweb.dictuc.cl';
 const WIDTHS = [1920, 3840];
 const CONCURRENCY = 6;
 

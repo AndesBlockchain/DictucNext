@@ -23,18 +23,12 @@ const IndexPage = async () => {
     useModals()
   ]);
 
-  // Filtrar modals por fecha vigente en el servidor para evitar problemas de hidratación
+  // Strapi ya filtra por publishedAt; solo mostramos alertas con imagen configurada
   const modalsNodes = modals?.nodes || modals?.data || [];
-  const hoy = new Date();
 
   const modalsFiltrados = modalsNodes.filter(modal => {
-    const publication = modal.Publicacion || modal.attributes?.Publicacion;
-    if (!publication) return false;
-
-    const desde = new Date(publication.fechaDesde);
-    const hasta = new Date(publication.fechaHasta);
-
-    return hoy >= desde && hoy <= hasta;
+    const imagen = modal.imagen || modal.attributes?.imagen;
+    return Boolean(imagen);
   });
 
   return (

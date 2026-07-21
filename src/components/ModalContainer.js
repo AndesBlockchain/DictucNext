@@ -6,7 +6,7 @@ const ModalContainer = ({ modals }) => {
     const [modalAbierto, setModalAbierto] = useState(false);
     const [modalMostrado, setModalMostrado] = useState(false);
 
-    // Los modals ya vienen filtrados por fecha desde el servidor
+    // Los modals ya vienen filtrados (con imagen configurada) desde el servidor
     const modalsNodes = modals?.nodes || modals?.data || [];
 
     // Abrir modal automáticamente
@@ -24,14 +24,14 @@ const ModalContainer = ({ modals }) => {
     if (!modalAbierto || modalsNodes.length === 0) return null;
 
     const currentModal = modalsNodes[0];
-    // Adapt image access to new StrapiImage prop expectation or existing one
     const imagen = currentModal.imagen || currentModal.attributes?.imagen;
+    const nombre = currentModal.Nombre || currentModal.attributes?.Nombre;
 
     return (
         <ModalAlerta
             onClose={cerrarModal}
             imagen={imagen}
-        // gatsbyImageData logic removed as we use StrapiImage with next/image
+            alt={nombre}
         />
     );
 };

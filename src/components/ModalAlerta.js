@@ -1,7 +1,7 @@
 import React from "react";
 import StrapiImage from "./StrapiImage";
 
-const ModalAlerta = ({ onClose, imagen, gatsbyImageData }) => (
+const ModalAlerta = ({ onClose, imagen, alt = "Alerta" }) => (
   <div className="fixed inset-0 flex items-center justify-center z-50">
     <div className="absolute inset-0 bg-black opacity-40" onClick={onClose}></div>
     <div
@@ -11,8 +11,7 @@ const ModalAlerta = ({ onClose, imagen, gatsbyImageData }) => (
       <button className="absolute top-4 right-6 text-2xl text-gray-400 hover:text-gray-700 transition-colors z-10" onClick={onClose}>&times;</button>
       <StrapiImage
         imagen={imagen}
-        gatsbyImageData={gatsbyImageData}
-        alt="Alerta"
+        alt={alt}
         className="object-contain"
         containerClassName="max-w-[500px] h-auto block mx-auto"
       />

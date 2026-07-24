@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Montserrat } from "next/font/google";
+import Script from "next/script";
 import AmplitudeLoader from "@/components/AmplitudeLoader";
 import EditorModeProvider from "@/components/editor/EditorModeProvider";
 import EditorPanel from "@/components/editor/EditorPanel";
@@ -27,6 +28,18 @@ export default function RootLayout({ children }) {
         <link rel="dns-prefetch" href="https://backend-dictuc.andesblockchain.com" />
       </head>
       <body className="antialiased w-full">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-45G6DMGKCB"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-45G6DMGKCB');
+          `}
+        </Script>
         <AmplitudeLoader />
         <EditorModeProvider>
           {children}

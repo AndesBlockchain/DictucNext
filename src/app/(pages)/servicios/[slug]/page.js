@@ -1,4 +1,3 @@
-import React from "react";
 import PaginaInterior from "@/components/PaginaInterior";
 import CardServicio from "@/components/CardServicio";
 import FranjaAzul from "@/components/FranjaAzul";

@@ -1,4 +1,3 @@
-import React from "react";
 import TablaBuscableClient from "./TablaBuscableClient";
 
 const BloqueTablaBuscable = ({ datosBloque }) => {

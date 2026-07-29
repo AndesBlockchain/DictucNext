@@ -1,4 +1,3 @@
-import React from "react";
 
 const FranjaAzul = ({color}) => {
   const colorFinal = color || "azul-dictuc";

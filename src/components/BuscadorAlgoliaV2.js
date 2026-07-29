@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect } from "react"
 import { liteClient as algoliasearch } from "algoliasearch/lite"
 import { InstantSearch, SearchBox, Index, useHits, useInstantSearch } from "react-instantsearch"
 

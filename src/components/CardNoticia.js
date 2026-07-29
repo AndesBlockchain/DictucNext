@@ -1,4 +1,3 @@
-import React from "react"
 import StrapiImage from "./StrapiImage"
 
 export function AcortarNoticia(html, largo = 100) {

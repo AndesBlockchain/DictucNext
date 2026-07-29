@@ -1,5 +1,5 @@
-import * as React from "react"
 import dynamic from "next/dynamic"
+import Link from "next/link"
 
 import Carrusel from "@/components/carrusel/Carrusel"
 import SectoresPais from "@/components/SectoresPais"
@@ -42,7 +42,7 @@ const IndexPage = async () => {
       />
       <TiposDeServicios/>
       <div className="flex justify-center mt-6 mb-10">
-        <a href="/servicios/todos-los-servicios" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver todos</a>
+        <Link href="/servicios/todos-los-servicios" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver todos</Link>
       </div>
       <Noticias noticias={noticias} seccion="noticia-general" titulo='<span class="text-azul-dictuc">NOTICIAS</span> DESTACADAS' />
       <FooterSuperior />

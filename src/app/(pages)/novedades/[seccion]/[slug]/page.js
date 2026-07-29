@@ -1,4 +1,3 @@
-import React from "react";
 import PaginaInterior from "@/components/PaginaInterior";
 import FranjaAzul from "@/components/FranjaAzul";
 import StrapiImage from "@/components/StrapiImage";

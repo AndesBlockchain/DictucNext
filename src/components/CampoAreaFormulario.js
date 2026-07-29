@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function CampoAreaFormulario({ label, name, id, placeholder, value, onChange, required = false, error }) {
   return (

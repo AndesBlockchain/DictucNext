@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import { useState } from "react";
 import Bloque from "./Bloque";
 import CallToActionGroup from "../CallToActionGroup";
 import StrapiImage from "../StrapiImage";

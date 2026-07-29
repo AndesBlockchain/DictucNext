@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect } from "react"
 
 const MenuItemDropdown = ({ item }) => {
   const [isOpen, setIsOpen] = useState(false)

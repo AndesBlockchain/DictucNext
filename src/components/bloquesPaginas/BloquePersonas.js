@@ -1,4 +1,3 @@
-import React from "react";
 import StrapiImage from "../StrapiImage";
 import Bloque from "./Bloque";
 import { invertirSpanStrong } from "@/helpers/invertir-span-strong";

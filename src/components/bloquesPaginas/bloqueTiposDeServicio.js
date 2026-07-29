@@ -1,4 +1,3 @@
-import React from "react"
 import useTipoDeServicio from "@/hooks/use-tipo-de-servicios";
 import StrapiImage from "../StrapiImage";
 import Bloque from "./Bloque";

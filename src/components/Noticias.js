@@ -1,4 +1,4 @@
-import React from "react"
+import Link from "next/link"
 import FranjaAzul from "./FranjaAzul"
 import CardNoticia from "./CardNoticia"
 import Titulo from "./Titulo"
@@ -37,12 +37,12 @@ const Noticias = ({ noticias, titulo, linkFiltroNoticias = false, seccion=null }
       </div>
       {!linkFiltroNoticias && (
         <div className="flex justify-center items-center mt-8">
-          <a href="/paginas/noticia-general" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver más noticias</a>
+          <Link href="/paginas/noticia-general" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Ver más noticias</Link>
         </div>
       )}
       {linkFiltroNoticias && (
         <div className="flex justify-center items-center mt-8">
-          <a href="/paginas/noticia-general" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Más noticias</a>
+          <Link href="/paginas/noticia-general" className="bg-azul-dictuc text-white font-bold px-4 py-2 m-4 text-xs rounded-full hover:bg-azul-dictuc/90 transition-all">Más noticias</Link>
         </div>
       )}
       </div>

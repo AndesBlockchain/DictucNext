@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 /**
  * Componente Cliente para verificar certificados DICTUC

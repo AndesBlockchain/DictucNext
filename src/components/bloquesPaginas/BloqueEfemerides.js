@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import { useState } from "react";
 import Bloque from "./Bloque";
 import ItemEfemerides from "./efemerides/ItemEfemerides";
 import StrapiImage from "../StrapiImage";

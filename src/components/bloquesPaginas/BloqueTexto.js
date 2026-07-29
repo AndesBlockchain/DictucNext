@@ -1,4 +1,3 @@
-import React from "react";
 import Bloque from "./Bloque";
 import CallToAction from "../CallToAction";
 import { oembedToIframe } from "@/helpers/oembed-to-iframe";

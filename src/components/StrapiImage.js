@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 
 const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || process.env.STRAPI_API_URL;

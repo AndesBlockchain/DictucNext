@@ -1,4 +1,3 @@
-import React from "react"
 import clsx from "clsx"
 import CallToAction from "./CallToAction";
 import StrapiImage from "./StrapiImage";

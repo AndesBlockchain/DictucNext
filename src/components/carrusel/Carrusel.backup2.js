@@ -1,4 +1,3 @@
-import React from "react";
 import CarruselClient from "./CarruselClient";
 import { fetchFromStrapi, buildStrapiQuery, CACHE_PRESETS } from '@/lib/strapi-fetcher';
 

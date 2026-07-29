@@ -1,4 +1,3 @@
-import React from "react";
 import CarruselClient from "./CarruselClient";
 import { fetchFromStrapi, CACHE_PRESETS } from "@/lib/strapi-fetcher";
 import { getBlurDataURL } from "@/lib/get-blur-data-url";

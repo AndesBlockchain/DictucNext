@@ -1,4 +1,3 @@
-import React from "react"
 import useSectoresPais from "../../hooks/use-sectores-pais";
 import Bloque from "./Bloque";
 import ItemSectoresPais from "../ItemSectoresPais";

@@ -1,4 +1,3 @@
-import React from "react";
 import StrapiImage from "../../StrapiImage";
 
 const ItemEfemerides = ({ agno, evento, foto, index = 0, isFirst = false, isLast = false, onFotoClick }) => {

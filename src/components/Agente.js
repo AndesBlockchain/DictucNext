@@ -1,4 +1,3 @@
-import React from "react"
 import FranjaAzul from "./FranjaAzul"
 import Titulo from "./Titulo"
 import AgenteForm from "./AgenteForm"

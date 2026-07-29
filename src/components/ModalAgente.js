@@ -1,6 +1,7 @@
 "use client"
-import React, { useState, useEffect, lazy, Suspense } from "react"
+import { useState, useEffect, lazy, Suspense } from "react"
 import { createPortal } from "react-dom"
+import Link from "next/link"
 
 const Markdown = lazy(() => import("react-markdown"))
 
@@ -113,7 +114,7 @@ const ModalAgente = ({ onClose, pregunta }) => {
             )}
             {!isLoading && (
               <p className="text-xs font-bold mt-4">
-                Puedes realizar otra consulta, usar nuestro <a href="/servicios" className="text-azul-dictuc underline hover:text-blue-800">buscador de servicios</a> especializado o comunicarte con nuestros profesionales a través del <a href="/paginas/cotizacion" className="text-azul-dictuc underline hover:text-blue-800">formulario de contacto</a>
+                Puedes realizar otra consulta, usar nuestro <Link href="/servicios" className="text-azul-dictuc underline hover:text-blue-800">buscador de servicios</Link> especializado o comunicarte con nuestros profesionales a través del <Link href="/paginas/cotizacion" className="text-azul-dictuc underline hover:text-blue-800">formulario de contacto</Link>
               </p>
             )}
           </div>

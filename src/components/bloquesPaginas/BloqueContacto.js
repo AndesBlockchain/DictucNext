@@ -1,4 +1,3 @@
-import React from "react";
 import Bloque from "./Bloque";
 import Contacto from "../Contacto";
 import useTipoDeContacto from "@/hooks/use-tipo-de-contacto";

@@ -1,5 +1,5 @@
-import React from "react";
 const logoDictuc = "/images/logo_dictuc_interior.png"
+import Link from "next/link";
 import useSiteMetadata from "../hooks/use-site-metadata";
 import useMenuSuperior from "../hooks/use-menu-superior";
 
@@ -37,7 +37,7 @@ const BarraSuperior = async () => {
 
       {/* Logo */}
       <div id="logo" className="col-span-3">
-        <a href="/"><img src={logoDictuc} alt="Logo Dictuc" className="h-8 pt-2 mt-16 lg:mt-6 mb-6 ml-6" /></a>
+        <Link href="/"><img src={logoDictuc} alt="Logo Dictuc" className="h-8 pt-2 mt-16 lg:mt-6 mb-6 ml-6" /></Link>
       </div>
 
       {/* Menu Area */}
@@ -55,9 +55,9 @@ const BarraSuperior = async () => {
           z-50 lg:z-auto
           text-sm lg:text-xs 
         ">
-          <a href="/" className="w-full lg:w-auto text-center lg:text-left py-2 lg:py-0 hover:text-blue-600 cursor-pointer font-bold lg:font-normal">
+          <Link href="/" className="w-full lg:w-auto text-center lg:text-left py-2 lg:py-0 hover:text-blue-600 cursor-pointer font-bold lg:font-normal">
             HOME
-          </a>
+          </Link>
 
           {data?.data?.map(item => (
             <a

@@ -1,4 +1,3 @@
-import React from "react";
 import Bloque from "./Bloque";
 import EstadoTicketForm from "@/components/EstadoTicketForm";
 

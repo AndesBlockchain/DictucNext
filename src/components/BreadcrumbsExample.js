@@ -1,4 +1,3 @@
-import React from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import { faCog, faChartLine, faNewspaper, faLaptop } from '@fortawesome/free-solid-svg-icons';
 

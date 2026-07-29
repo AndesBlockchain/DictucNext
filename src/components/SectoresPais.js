@@ -1,4 +1,4 @@
-import React from "react"
+import Link from "next/link";
 import FranjaAzul from "./FranjaAzul";
 import ItemSectoresPais from "./ItemSectoresPais";
 import useSectoresPais from "@/hooks/use-sectores-pais";
@@ -81,7 +81,7 @@ const SectoresPais = async ({ botonHollow = false }) => {
             }
 
             <div className="flex justify-center mt-6">
-                <a
+                <Link
                     href="/servicios/todos-los-servicios"
                     className={botonHollow
                         ? "border-2 border-azul-dictuc text-azul-dictuc bg-transparent font-bold rounded-full px-4 py-2 text-xs hover:bg-azul-dictuc hover:text-white transition-all"
@@ -89,7 +89,7 @@ const SectoresPais = async ({ botonHollow = false }) => {
                     }
                 >
                     Ver todos los Servicios
-                </a>
+                </Link>
             </div>
         </div>
 

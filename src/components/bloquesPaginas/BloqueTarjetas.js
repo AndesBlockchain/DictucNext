@@ -1,4 +1,3 @@
-import React from "react";
 import Bloque from "./Bloque";
 import CardServicio from "../CardServicio";
 import CardSmall from "../CardSmall";

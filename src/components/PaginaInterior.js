@@ -1,4 +1,3 @@
-import * as React from "react"
 import BarraSuperior from "./BarraSuperior"
 import Breadcrumbs from "./Breadcrumbs"
 import BannerInterior from "./BannerInterior"

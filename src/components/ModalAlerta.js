@@ -1,4 +1,3 @@
-import React from "react";
 import StrapiImage from "./StrapiImage";
 
 const ModalAlerta = ({ onClose, imagen, alt = "Alerta" }) => (

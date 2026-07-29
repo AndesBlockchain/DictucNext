@@ -1,4 +1,3 @@
-import React from "react"
 import useSectoresPais from "@/hooks/use-sectores-pais";
 import StrapiImage from "./StrapiImage";
 

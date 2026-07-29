@@ -1,4 +1,3 @@
-import React from "react";
 import BloqueTexto from "../components/bloquesPaginas/BloqueTexto";
 import BloqueGaleria from "../components/bloquesPaginas/BloqueGaleria";
 import BloqueNoticias from "../components/bloquesPaginas/BloqueNoticias";

@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import SeparadorHorizontal from "./SeparadorHorizontal";
 import Agente from "./Agente";
 

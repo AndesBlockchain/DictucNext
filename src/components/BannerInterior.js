@@ -1,4 +1,3 @@
-import React from "react";
 import StrapiImage from "./StrapiImage";
 
 const BannerInterior = ({ banner, gatsbyImageData, fallback, alt = "Banner", titulo = "", titulo_visible = true, color_titulo = "azul-dictuc", icono_secundario = "", blurDataURL = null }) => {

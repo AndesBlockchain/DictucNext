@@ -1,4 +1,3 @@
-import React from "react";
 import Badge from "./Badge";
 
 const FilaServicios = ({ nombre_servicio, sectores, unidad, color_fondo = "bg-gray-100", slug }) => {

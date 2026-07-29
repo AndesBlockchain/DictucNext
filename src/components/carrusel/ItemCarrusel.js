@@ -1,4 +1,3 @@
-import React from "react";
 
 const ItemCarrusel =({index, foto, alt}) => {
 

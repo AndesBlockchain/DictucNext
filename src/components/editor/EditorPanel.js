@@ -1,5 +1,4 @@
 "use client"
-import React from "react"
 import { useEditorMode } from "./EditorModeProvider"
 
 const STRAPI_ADMIN_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || process.env.STRAPI_API_URL

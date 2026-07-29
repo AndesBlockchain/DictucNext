@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useMemo } from "react"
+import { useState, useMemo } from "react"
 
 const normalizarTexto = (str) =>
   str?.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() ?? '';

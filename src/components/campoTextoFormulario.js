@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function CampoTextoFormulario({ label, name, id, placeholder, value, onChange, required = false, type = "text", error }) {
   return (

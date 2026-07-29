@@ -1,4 +1,3 @@
-import React from "react";
 import StrapiImage from "./StrapiImage";
 
 const ItemSectoresPais = ({ icono, url_icono, gatsbyImageData, url, nombre }) => {

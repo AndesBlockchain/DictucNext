@@ -1,4 +1,3 @@
-import React from "react";
 
 const SeparadorHorizontal = () => (
   <div style={{ display: "flex", alignItems: "center", margin: "16px 0" }}>

@@ -1,4 +1,3 @@
-import React from "react";
 import CardNoticia from "../CardNoticia";
 import CallToAction from "../CallToAction";
 import Bloque from "./Bloque";

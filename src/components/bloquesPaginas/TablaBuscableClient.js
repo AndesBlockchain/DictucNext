@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useMemo } from "react"
+import { useState, useMemo } from "react"
 import { invertirSpanStrong } from "@/helpers/invertir-span-strong"
 
 const TablaBuscableClient = ({ datos, filasPorPagina = 8 }) => {

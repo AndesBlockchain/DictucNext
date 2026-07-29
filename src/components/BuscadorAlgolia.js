@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useRef, useEffect, useCallback } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
 import { liteClient as algoliasearch } from "algoliasearch/lite"
 
 let searchClient = null

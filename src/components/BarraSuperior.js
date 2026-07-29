@@ -1,4 +1,4 @@
-import React from "react";
+import Link from "next/link";
 import useMenuSuperior from "../hooks/use-menu-superior";
 import NavbarMenu from "./NavbarMenu";
 
@@ -11,9 +11,9 @@ const BarraSuperior = async () => {
     <header className="navbar bg-transparent z-[100] px-6 lg:px-10 pt-6">
       {/* Logo */}
       <div className="shrink-0">
-        <a href="/">
+        <Link href="/">
           <img src={logoDictuc} alt="Logo Dictuc" className="h-8" />
-        </a>
+        </Link>
       </div>
 
       {/* Menu */}

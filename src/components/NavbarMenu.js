@@ -1,6 +1,6 @@
 "use client"
-import React from "react"
 import dynamic from "next/dynamic"
+import Link from "next/link"
 
 const BuscadorAlgolia = dynamic(() => import("./BuscadorAlgolia"), { ssr: false })
 
@@ -74,9 +74,9 @@ const NavbarMenu = ({ items }) => {
           className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[70] mt-3 w-[336px] p-4 shadow-lg uppercase font-semibold text-xs gap-1 [&_a]:!items-start"
         >
           <li>
-            <a href="/" aria-label="Home" className={hoverClasses}>
+            <Link href="/" aria-label="Home" className={hoverClasses}>
               Inicio
-            </a>
+            </Link>
           </li>
           {items?.map(item => (
             <MenuItem key={item.id || item.slug || item.Nombre} item={item} />
@@ -90,9 +90,9 @@ const NavbarMenu = ({ items }) => {
       {/* Desktop: horizontal menu */}
       <ul className="menu menu-horizontal hidden lg:flex flex-nowrap items-center gap-0 uppercase font-semibold text-xs xl:text-sm px-1 whitespace-nowrap">
         <li className="hidden xl:block">
-          <a href="/" aria-label="Home" className={hoverClasses}>
+          <Link href="/" aria-label="Home" className={hoverClasses}>
             <HomeIcon />
-          </a>
+          </Link>
         </li>
         {items?.map(item => (
           <MenuItem key={item.id || item.slug || item.Nombre} item={item} />

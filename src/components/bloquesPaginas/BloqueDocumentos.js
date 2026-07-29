@@ -1,4 +1,3 @@
-import React from "react";
 import Bloque from "./Bloque";
 import StrapiImage from "../StrapiImage";
 import useDocumentosPorEtiqueta from "@/hooks/use-documentos-por-etiqueta";

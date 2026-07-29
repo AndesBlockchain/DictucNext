@@ -1,4 +1,3 @@
-import React from "react";
 
 const CallToAction = ({ url, colorFondo, colorTexto, ComoAbrir, texto }) => {
     // Validación de props requeridas

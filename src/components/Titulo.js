@@ -1,4 +1,3 @@
-import React from "react"
 
 const Titulo = ({ titulo, color }) => {
   if (!titulo) return null;

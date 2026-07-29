@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function CardMini({ titulo, color_fondo, color_texto, callToAction }) {
 

@@ -1,5 +1,4 @@
 
-import React from "react";
 import MenuSecundario from "@/components/MenuSecundario";
 import PaginaInterior from "@/components/PaginaInterior";
 import ScrollSpy from "@/components/ScrollSpy";

@@ -1,7 +1,9 @@
+"use client";
+import { createPortal } from "react-dom";
 import StrapiImage from "./StrapiImage";
 
-const ModalAlerta = ({ onClose, imagen, alt = "Alerta" }) => (
-  <div className="fixed inset-0 flex items-center justify-center z-50">
+const ModalAlerta = ({ onClose, imagen, alt = "Alerta" }) => createPortal(
+  <div className="fixed inset-0 flex items-center justify-center z-[150]">
     <div className="absolute inset-0 bg-black opacity-40" onClick={onClose}></div>
     <div
       className="relative bg-white rounded-2xl shadow-2xl p-0 flex items-center justify-center overflow-hidden"
@@ -15,7 +17,8 @@ const ModalAlerta = ({ onClose, imagen, alt = "Alerta" }) => (
         containerClassName="max-w-[500px] h-auto block mx-auto"
       />
     </div>
-  </div>
+  </div>,
+  document.body
 );
 
 export default ModalAlerta; 

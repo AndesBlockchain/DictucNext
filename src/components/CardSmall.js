@@ -22,7 +22,7 @@ export default function CardSmall({ titulo, callToAction, icono, contenido, colo
 
   if (!tieneImagen) {
     return (
-      <div className={`border rounded-lg shadow-xl p-2 grid grid-cols-1 w-full h-full bg-${color_fondo} ${color_texto}`}>
+      <div className={`border rounded-lg shadow-xl grid grid-cols-1 w-full h-full bg-${color_fondo} ${color_texto}`}>
         <div className="p-4 flex flex-col">
           <h2 className="text-sm text-left font-bold">{titulo}</h2>
           <div className="text-xs text-left flex-grow mr-4 prose prose-xs max-w-none" dangerouslySetInnerHTML={{ __html: contenido }} />
@@ -33,8 +33,8 @@ export default function CardSmall({ titulo, callToAction, icono, contenido, colo
   }
 
   return (
-    <div className={`border rounded-lg shadow-xl p-2 grid grid-cols-3 grid-rows-[auto_1fr] w-full h-full bg-${color_fondo} ${color_texto}`}>
-      <h2 className="col-start-2 col-span-2 row-start-1 text-sm text-left font-bold">
+    <div className={`border rounded-lg shadow-xl grid grid-cols-3 grid-rows-[auto_1fr] w-full h-full bg-${color_fondo} ${color_texto}`}>
+      <h2 className="col-start-2 col-span-2 row-start-1 pt-4 pr-4 text-sm text-left font-bold">
         {titulo}
       </h2>
 
@@ -48,7 +48,7 @@ export default function CardSmall({ titulo, callToAction, icono, contenido, colo
         />
       </div>
 
-      <div className="col-start-2 col-span-2 row-start-2 flex flex-col">
+      <div className="col-start-2 col-span-2 row-start-2 pb-4 flex flex-col">
         <div className="text-xs text-left flex-grow mr-4 prose prose-xs max-w-none" dangerouslySetInnerHTML={{ __html: contenido }} />
         <CtaLink cta={cta} />
       </div>

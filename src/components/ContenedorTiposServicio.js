@@ -1,10 +1,10 @@
 import useTipoDeServicio from "@/hooks/use-tipo-de-servicios";
+import StrapiImage from "./StrapiImage";
+import { LG_GRID_COLS } from "@/helpers/grid-cols";
 
-
-const ContenedorTiposServicio = async ({ useIcono = false }) => {
+const ContenedorTiposServicio = async ({ useIcono = false, itemsPorFila }) => {
 
   const tiposDeServicio = await useTipoDeServicio();
-  const STRAPI_URL = process.env.STRAPI_API_URL;
 
   // Validar que tiposDeServicio y tiposDeServicio.data existan
   const tiposArray = tiposDeServicio?.data || [];
@@ -13,29 +13,29 @@ const ContenedorTiposServicio = async ({ useIcono = false }) => {
     return null; // O mostrar un mensaje de "No hay servicios disponibles"
   }
 
+  const lgGridCols = LG_GRID_COLS[itemsPorFila] ?? LG_GRID_COLS[3];
+
   return (
-    <div id="items-servicios" className="flex flex-wrap gap-4 mt-8 pl-2 pr-2 justify-center">
+    <div id="items-servicios" className={`container max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 ${lgGridCols} gap-8 mt-8 pl-2 pr-2 justify-center`}>
       {tiposArray.map((item) => {
-        // Obtener URL de imagen de forma segura
-        const iconoUrl = item.Icono?.url;
-        const fotoPortadaUrl = item.fotoPortada?.url;
-        const imageUrl = useIcono ? iconoUrl : fotoPortadaUrl;
+        const imagen = useIcono ? item.Icono : item.fotoPortada;
 
         return (
           <div key={item.slug} className="flex">
             <a
               href={"/tipos-de-servicio/" + item.slug}
-              className="justify-center w-[215px] h-[180px] group"
+              className="block w-full max-w-[280px] mx-auto h-auto group"
             >
-              {imageUrl && (
-                <img
-                  src={STRAPI_URL + imageUrl}
+              {imagen && (
+                <StrapiImage
+                  imagen={imagen}
                   alt={item.nombre}
+                  maxWidth={500}
                   className="rounded-xl object-cover shadow-md w-full"
                 />
               )}
-              <div className="bg-gray-700 rounded-b-xl -mt-[40px] py-2 text-center relative z-10">
-                <span className="text-white lg:text-xs xl:text-xs text-xs font-bold">
+              <div className="bg-gray-700 rounded-b-xl -mt-[40px] h-12 px-2 flex items-center justify-center relative z-10">
+                <span className="text-white text-xs font-bold text-center line-clamp-2">
                   {item.nombre}
                 </span>
               </div>

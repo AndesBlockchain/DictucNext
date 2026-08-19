@@ -17,9 +17,9 @@ const MODEL_TO_TAGS = {
   "tipo-de-servicio": ["strapi-tipo-de-servicios"],
   "unidad": ["strapi-unidades"],
   "carrusel": ["strapi-carruseles"],
-  "menu-superior": ["strapi-menu-superiors"],
-  "menu-secundario": ["strapi-menu-secundarios"],
-  "menu-cajon": ["strapi-menu-cajons"],
+  "new-menu-principal": ["strapi-new-menu-principals", "strapi-paginas"],
+  "new-menu-secundario": ["strapi-new-menu-secundarios", "strapi-paginas"],
+  "menu-cajon": ["strapi-menu-cajons", "strapi-paginas"],
   "menu-footer": ["strapi-menu-footers"],
   "menu-footer-superior": ["strapi-menu-footer-superiors"],
   "documento": ["strapi-documentos"],
@@ -73,9 +73,13 @@ function getWarmPathsForModel(model, entry) {
         ...(slug ? [`/ejecutor/${slug}`] : []),
         "/servicios/todos-los-servicios",
       ];
+    case "new-menu-principal":
+    case "new-menu-secundario":
+      return ["/"];
     case "pagina":
-      // La URL real vive bajo [seccion]/[...slug] y se compone desde los
-      // menús, no desde el entry: no es derivable aquí.
+      // La URL real vive bajo [...slug] y se compone desde las relaciones
+      // new_menu_principal/new_menu_secundario/menu_cajon, no desde el
+      // entry: no es derivable aquí.
       return ["/"];
     default:
       // Menús, carrusel, footer, etc.: aparecen en todas las páginas.

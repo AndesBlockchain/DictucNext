@@ -115,7 +115,13 @@ export async function middleware(request) {
   // el edge revalide el HTML en cada request: lo sirve el Full Route
   // Cache de Next (estático). Los assets (_next/*, imágenes) salen antes
   // de esta función y conservan su cache de edge.
-  const response = NextResponse.next();
+  // x-pathname se reenvía como request header para que los Server
+  // Components (ej. BarraSuperior) puedan leer el pathname vía headers(),
+  // ya que el App Router no expone la URL actual directamente en RSC.
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", pathname);
+
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
   response.headers.set("Cache-Control", "public, max-age=0, must-revalidate");
   return response;
 }

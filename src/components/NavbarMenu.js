@@ -12,21 +12,17 @@ const HomeIcon = () => (
   </svg>
 )
 
-const MenuItem = ({ item }) => {
-  const esExterno = item.link?.startsWith("http")
-  const tieneLinks = item.LInks && item.LInks.length > 0
+const MenuItem = ({ item, seccionActiva }) => {
+  const isActive = seccionActiva ? item.url === seccionActiva : false
+  const href = item.url || "/"
+  const tieneItems = item.Links && item.Links.length > 0
 
-  if (!tieneLinks) {
+  if (!tieneItems) {
     return (
       <li>
-        <a
-          href={item.link}
-          target={esExterno ? "_blank" : "_self"}
-          rel={esExterno ? "noopener noreferrer" : undefined}
-          className={hoverClasses}
-        >
-          {item.Nombre}
-        </a>
+        <Link href={href} className={`${hoverClasses} ${isActive ? "text-azul-dictuc" : ""}`}>
+          {item.Texto}
+        </Link>
       </li>
     )
   }
@@ -34,32 +30,29 @@ const MenuItem = ({ item }) => {
   return (
     <li>
       <details>
-        <summary className="hover:!bg-transparent hover:text-azul-dictuc transition-colors lg:-mt-[10px]">
-          {item.Nombre}
+        <summary className={`hover:!bg-transparent hover:text-azul-dictuc transition-colors lg:-mt-[10px] ${isActive ? "text-azul-dictuc" : ""}`}>
+          {item.Texto}
         </summary>
         <ul className="min-w-[280px] rounded-md z-[70] normal-case font-normal">
-          {item.LInks.map((sublink, index) => {
-            const esSubExterno = sublink.url?.startsWith("http")
-            return (
-              <li key={index}>
-                <a
-                  href={sublink.url}
-                  target={esSubExterno ? "_blank" : "_self"}
-                  rel={esSubExterno ? "noopener noreferrer" : undefined}
-                  className="text-xs text-gray-700 hover:!bg-transparent hover:text-azul-dictuc hover:no-underline transition-colors"
-                >
-                  {sublink.texto}
-                </a>
-              </li>
-            )
-          })}
+          {item.Links.map((sublink, index) => (
+            <li key={sublink.id || index}>
+              <a
+                href={sublink.url}
+                target={sublink.ComoAbrir === "Nueva Ventana" ? "_blank" : "_self"}
+                rel={sublink.url?.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="text-xs text-gray-700 hover:!bg-transparent hover:text-azul-dictuc hover:no-underline transition-colors"
+              >
+                {sublink.Texto}
+              </a>
+            </li>
+          ))}
         </ul>
       </details>
     </li>
   )
 }
 
-const NavbarMenu = ({ items }) => {
+const NavbarMenu = ({ items, seccionActiva }) => {
   return (
     <>
       {/* Mobile: hamburger dropdown */}
@@ -79,7 +72,7 @@ const NavbarMenu = ({ items }) => {
             </Link>
           </li>
           {items?.map(item => (
-            <MenuItem key={item.id || item.slug || item.Nombre} item={item} />
+            <MenuItem key={item.id || item.url} item={item} seccionActiva={seccionActiva} />
           ))}
           <li className="mt-2">
             <BuscadorAlgolia />
@@ -95,7 +88,7 @@ const NavbarMenu = ({ items }) => {
           </Link>
         </li>
         {items?.map(item => (
-          <MenuItem key={item.id || item.slug || item.Nombre} item={item} />
+          <MenuItem key={item.id || item.url} item={item} seccionActiva={seccionActiva} />
         ))}
         <li>
           <BuscadorAlgolia />

@@ -6,13 +6,13 @@ import Footer from "./Footer"
 import MenuCajon from "./MenuCajon"
 import { getBlurDataURL } from "@/lib/get-blur-data-url"
 
-export default async function PaginaInterior({children, breadcrum = [], banner, gatsbyImageData, fallback, titulo="", color_titulo="azul-dictuc", titulo_visible=true,icono_secundario="", menuCajon=null}) {
+export default async function PaginaInterior({children, breadcrum = [], banner, gatsbyImageData, fallback, titulo="", color_titulo="azul-dictuc", titulo_visible=true,icono_secundario="", menuCajon=null, seccionActiva=null}) {
 
   const blurDataURL = banner ? await getBlurDataURL(banner) : null;
 
   const contenido = (
     <>
-      <BarraSuperior />
+      <BarraSuperior seccionActiva={seccionActiva} />
       <BannerInterior banner={banner} gatsbyImageData={gatsbyImageData} fallback={fallback} titulo={titulo} titulo_visible={titulo_visible} color_titulo={color_titulo} icono_secundario={icono_secundario} blurDataURL={blurDataURL} />
       <Breadcrumbs items={breadcrum} />
       {children}

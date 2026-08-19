@@ -23,7 +23,7 @@ const MenuSecundarioItem = ({ item, isActive }) => {
   if (!tieneLinks) {
     return (
       <div className={baseClasses}>
-        <a href={item.Link}>{item.Titulo}</a>
+        <a href={item.url} target={item.ComoAbrir === "Nueva Ventana" ? "_blank" : "_self"}>{item.Texto}</a>
       </div>
     )
   }
@@ -39,7 +39,7 @@ const MenuSecundarioItem = ({ item, isActive }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="cursor-pointer flex items-center gap-1"
       >
-        {item.Titulo}
+        {item.Texto}
         <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
@@ -48,14 +48,15 @@ const MenuSecundarioItem = ({ item, isActive }) => {
       {isOpen && (
         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-[70] min-w-[200px]">
           <div className="bg-white border border-gray-200 rounded-md shadow-lg">
-            {item.Links.map((sublink) => (
+            {item.Links.map((sublink, index) => (
               <a
-                key={sublink.id}
+                key={sublink.id || index}
                 href={sublink.url}
+                target={sublink.ComoAbrir === "Nueva Ventana" ? "_blank" : "_self"}
                 className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 hover:text-azul-dictuc transition-colors border-b border-gray-100 last:border-b-0"
                 onClick={() => setIsOpen(false)}
               >
-                {sublink.texto}
+                {sublink.Texto}
               </a>
             ))}
           </div>

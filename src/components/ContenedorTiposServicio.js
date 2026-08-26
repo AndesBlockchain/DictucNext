@@ -13,7 +13,7 @@ const ContenedorTiposServicio = async ({ useIcono = false, itemsPorFila }) => {
     return null; // O mostrar un mensaje de "No hay servicios disponibles"
   }
 
-  const lgGridCols = LG_GRID_COLS[itemsPorFila] ?? LG_GRID_COLS[3];
+  const lgGridCols = LG_GRID_COLS[itemsPorFila] ?? LG_GRID_COLS[5];
 
   return (
     <div id="items-servicios" className={`container max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 ${lgGridCols} gap-8 mt-8 pl-2 pr-2 justify-center`}>

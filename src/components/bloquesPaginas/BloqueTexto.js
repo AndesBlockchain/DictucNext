@@ -4,11 +4,22 @@ import { oembedToIframe } from "@/helpers/oembed-to-iframe";
 import { invertirSpanStrong } from "@/helpers/invertir-span-strong";
 import parse from 'html-react-parser';
 
+const TAMANOS_BAJADA = {
+    'pequeña': 'text-xs',
+    'normal': 'text-sm',
+    'grande': 'text-md',
+    'extra grande': 'text-lg',
+    '2xl': 'text-2xl',
+};
+
 const BloqueTexto = ({ datosBloque }) => {
 
 
     const letra = datosBloque.Texto?.tipografia?.class || "text-sm";
+    const sizeBajada = datosBloque.Bajada?.tipografia?.Size?.trim().toLowerCase();
+    const letraBajada = TAMANOS_BAJADA[sizeBajada] || "text-sm";
     const colorLetra = datosBloque.Texto?.colorTexto?.Codigo || "black";
+    const colorBajada = datosBloque.Bajada?.colorTexto?.Codigo || "black";
     const botones = datosBloque.CallToAction || [];
 
     // Obtener el texto de forma segura y transformar oembeds
@@ -20,8 +31,7 @@ const BloqueTexto = ({ datosBloque }) => {
             <div className="max-w-4xl m-auto">
                 {textoBajada && (
                     <div
-                        className={`${letra} font-semibold mb-2`}
-                        style={{ color: colorLetra }}
+                        className={`${letraBajada} font-semibold mb-8 text-${colorBajada}`}
                         dangerouslySetInnerHTML={{ __html: textoBajada }}
                     />
                 )}

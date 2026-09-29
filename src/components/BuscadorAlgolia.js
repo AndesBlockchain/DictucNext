@@ -29,6 +29,7 @@ const getHitTitle = (hit) =>
   hit.nombre || hit.titulo || hit.title || hit.Titulo || hit.Nombre || "Sin título"
 
 const getHitUrl = (hit, index) => {
+  if (hit.full_url) return hit.full_url
   if (hit.url || hit.path) return hit.url || hit.path
   if (hit.slug) return index.urlPrefix + hit.slug
   return "#"

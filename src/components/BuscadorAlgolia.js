@@ -18,21 +18,45 @@ const getSearchClient = () => {
 
 const INDICES = [
   { name: "sitio_web_ejecutores", label: "Ejecutores", urlPrefix: "/ejecutor/" },
-  { name: "sitio_web_dictuc_pages", label: "Sitio Web", urlPrefix: "/" },
-  { name: "manual-records", label: "Sitio Web", urlPrefix: "/" },
-  { name: "development_api::etiqueta-persona.etiqueta-persona", label: "Personas", urlPrefix: "/" },
   { name: "development_api::servicio.servicio", label: "Servicios", urlPrefix: "/servicios/" },
   { name: "development_api::noticia.noticia", label: "Noticias", urlPrefix: "/noticias/" },
+  { name: "development_api::etiqueta-persona.etiqueta-persona", label: "Personas", urlPrefix: "/" },
+  { name: "sitio_web_dictuc_pages", label: "Sitio Web", urlPrefix: "/" },
+  { name: "manual-records", label: "Sitio Web", urlPrefix: "/" },
 ]
 
-const getHitTitle = (hit) =>
-  hit.nombre || hit.titulo || hit.title || hit.Titulo || hit.Nombre || "Sin título"
+const humanizeSlug = (url) => {
+  const slug = url.replace(/\/$/, "").split("/").pop() || ""
+  return slug
+    .split("-")
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
+}
+
+const getHitTitle = (hit) => {
+  const title = hit.nombre || hit.titulo || hit.title || hit.Titulo || hit.Nombre || "Sin título"
+
+  if (title === "Dictuc" && hit.url) {
+    return humanizeSlug(hit.url)
+  }
+
+  return title
+}
 
 const getHitUrl = (hit, index) => {
   if (hit.full_url) return hit.full_url
   if (hit.url || hit.path) return hit.url || hit.path
   if (hit.slug) return index.urlPrefix + hit.slug
   return "#"
+}
+
+// Clave para detectar si dos hits representan la misma página, incluso si su URL difiere
+// (ej: dominio absoluto vs relativo, o rutas distintas para el mismo slug)
+const getDedupeKey = (hit, index) => {
+  if (hit.slug) return hit.slug.toLowerCase()
+  const url = getHitUrl(hit, index)
+  return url.replace(/^https?:\/\/[^/]+/, "").replace(/\/$/, "").toLowerCase()
 }
 
 const BuscadorAlgolia = () => {
@@ -65,11 +89,34 @@ const BuscadorAlgolia = () => {
         const grouped = searchResults
           .map((result, i) => ({
             index: INDICES[i],
-            hits: result.hits || [],
+            hits: (result.hits || []).map((hit) => ({ hit, index: INDICES[i] })),
+          }))
+          .filter((group) => group.hits.length > 0)
+          .reduce((acc, group) => {
+            const existing = acc.find((g) => g.label === group.index.label)
+            if (existing) {
+              existing.hits.push(...group.hits)
+            } else {
+              acc.push({ label: group.index.label, hits: group.hits })
+            }
+            return acc
+          }, [])
+
+        // Deduplicar por página: se mantiene solo la primera aparición (la más significativa según el orden de índices)
+        const seenKeys = new Set()
+        const deduped = grouped
+          .map((group) => ({
+            ...group,
+            hits: group.hits.filter(({ hit, index }) => {
+              const key = getDedupeKey(hit, index)
+              if (seenKeys.has(key)) return false
+              seenKeys.add(key)
+              return true
+            }),
           }))
           .filter((group) => group.hits.length > 0)
 
-        setResults(grouped)
+        setResults(deduped)
       } catch (error) {
         console.error("Error en búsqueda Algolia:", error)
         setResults([])
@@ -132,14 +179,14 @@ const BuscadorAlgolia = () => {
           )}
 
           {!isLoading && results.map((group) => (
-            <div key={group.index.name}>
+            <div key={group.label}>
               <div className="px-3 py-1.5 bg-gray-50 text-[10px] font-semibold text-gray-500 uppercase tracking-wide border-b">
-                {group.index.label}
+                {group.label}
               </div>
-              {group.hits.map((hit) => (
+              {group.hits.map(({ hit, index }) => (
                 <a
                   key={hit.objectID}
-                  href={getHitUrl(hit, group.index)}
+                  href={getHitUrl(hit, index)}
                   className="block px-3 py-2 text-xs text-gray-700 hover:bg-gray-100 hover:text-azul-dictuc border-b border-gray-100 transition-colors"
                   onClick={() => setIsOpen(false)}
                 >

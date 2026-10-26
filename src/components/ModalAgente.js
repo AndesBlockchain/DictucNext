@@ -16,6 +16,13 @@ const ModalAgente = ({ onClose, pregunta }) => {
     setIsLoading(true)
 
     const llamarAPI = async () => {
+      const cantidadPalabras = pregunta.trim().split(/\s+/).filter(Boolean).length
+      if (cantidadPalabras < 5) {
+        setRespuesta("No puedo procesar una pregunta tan breve. Por favor explícame un poco mejor que necesitas")
+        setIsLoading(false)
+        return
+      }
+
       try {
         const response = await fetch('/api/claude', {
           method: 'POST',

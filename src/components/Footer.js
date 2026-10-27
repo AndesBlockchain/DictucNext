@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXTwitter, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faXTwitter, faInstagram, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faLocationDot, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 import useMenuFooter from "@/hooks/use-menu-footer";
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -47,6 +47,9 @@ const Footer = async () => {
                 </a>
                 <a href="https://www.linkedin.com/company/dictuc-sa/" target="_blank" rel="noopener noreferrer">
                   <FontAwesomeIcon icon={faLinkedin} className="mr-2 w-[20px] h-4" />
+                </a>
+                <a href="https://www.youtube.com/DICTUC" target="_blank" rel="noopener noreferrer">
+                  <FontAwesomeIcon icon={faYoutube} className="mr-2 w-4 h-4" />
                 </a>
               </div>
               <div>

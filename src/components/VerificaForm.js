@@ -1,16 +1,15 @@
 "use client"
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 /**
  * Componente Cliente para verificar certificados DICTUC
- * Maneja el formulario y envío a sistema de verificación externo
+ * Maneja el formulario y envío a la API de verificación del backend
  * Incluye validación avanzada, manejo de errores y feedback visual
  */
-export default function VerificaForm({ verificacionUrl }) {
+export default function VerificaForm() {
   const [codigo, setCodigo] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const formRef = useRef(null);
 
   // Regex para validar formato de código (alfanumérico, 4-20 caracteres)
   const CODIGO_REGEX = /^[a-zA-Z0-9]{4,20}$/;
@@ -76,10 +75,10 @@ export default function VerificaForm({ verificacionUrl }) {
   };
 
   /**
-   * Verifica el certificado usando el formulario HTML nativo
-   * Método mejorado que evita manipulación directa del DOM
+   * Verifica el certificado contra la API del backend
+   * y recién al recibir la respuesta abre la pestaña con el PDF.
    */
-  const verificarCertificado = () => {
+  const verificarCertificado = async () => {
     // Validar código
     const validacion = validarCodigo(codigo);
 
@@ -97,22 +96,24 @@ export default function VerificaForm({ verificacionUrl }) {
     setError("");
 
     try {
-      // Usar el formulario ref para enviar
-      if (formRef.current) {
-        // El formulario se envía automáticamente al target _blank
-        formRef.current.submit();
+      const response = await fetch("/api/verificar-informe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cod_val: validacion.codigoLimpio }),
+      });
 
-        // Limpiar código después de enviar
-        setTimeout(() => {
-          setCodigo("");
-          setIsSubmitting(false);
-        }, 500);
+      const data = await response.json();
+
+      if (response.ok && data.url) {
+        window.open(data.url, "_blank");
+        setCodigo("");
       } else {
-        throw new Error("Formulario no disponible");
+        setError("El informe no pudo ser encontrado. Verifica el código e intenta nuevamente.");
       }
     } catch (error) {
       console.error('[VerificaForm] Error al verificar certificado:', error);
       setError("Ocurrió un error al verificar el certificado. Por favor intenta nuevamente.");
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -137,27 +138,6 @@ export default function VerificaForm({ verificacionUrl }) {
 
   return (
     <div className="pb-2 mt-6 pl-6">
-      {/* Formulario oculto para POST tradicional */}
-      <form
-        ref={formRef}
-        method="POST"
-        action={verificacionUrl}
-        target="_blank"
-        style={{ display: 'none' }}
-        aria-hidden="true"
-      >
-        <input
-          type="hidden"
-          name="cod_val"
-          value={sanitizarCodigo(codigo)}
-        />
-        <input
-          type="hidden"
-          name="btnSubmitFormValidDoc"
-          value="Verificar"
-        />
-      </form>
-
       {/* Formulario visible para el usuario */}
       <form onSubmit={handleSubmit}>
         <fieldset className="fieldset mt-6">
